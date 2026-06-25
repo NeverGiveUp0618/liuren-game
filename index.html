@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大六壬日学</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;background:#F5F0E6;color:#1C0A00;min-height:100vh;display:flex;justify-content:center}
+.app{width:100%;max-width:480px;min-height:100vh}
+@media(min-width:600px){body{background:#EDE7D8;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
+.screen{display:none;flex-direction:column;padding:14px 14px 28px;min-height:100vh}
+.screen.active{display:flex}
+
+/* === TOP BAR === */
+.tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
+.tbk{background:none;border:none;color:#9B8570;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
+.tbk:hover{background:#EDE7D8;color:#6B5040}
+.tbtitle{flex:1;text-align:center;font-size:14px;color:#6B5040;letter-spacing:2px}
+.tbr{font-size:12px;color:#9B8570;white-space:nowrap}
+
+/* === BUTTONS === */
+.btn{width:100%;padding:13px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none;letter-spacing:1px}
+.btn:active{transform:scale(.98)}
+.btn-r{background:#C41230;color:#F5F0E6;letter-spacing:2px}.btn-r:hover{background:#A30F28}
+.btn-g{background:#2E7D5A;color:#F5F0E6}.btn-g:hover{background:#236248}
+.btn-d{background:#EDE7D8;color:#6B5040;border:1px solid #D4C4A0}.btn-d:hover{background:#E0D9C8}
+.btn-a{background:#8B6914;color:#F5F0E6}.btn-a:hover{background:#6E520F}
+.btn-sm{padding:8px 12px;font-size:12px;border-radius:9px;width:auto}
+
+/* === CARD === */
+.card{background:#EDE7D8;border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid #D4C4A0}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1C0A00;color:#F5F0E6;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.toast.show{opacity:1}
+
+/* === HOME === */
+.hlogo{text-align:center;padding:26px 0 12px}
+.hlogo-t{font-size:27px;font-weight:bold;color:#C41230;letter-spacing:8px}
+.hlogo-s{font-size:11px;color:#9B8570;margin-top:6px;letter-spacing:4px}
+.hlogo-dec{font-size:10px;color:#C4B49A;margin-top:3px;letter-spacing:3px}
+.hdate{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:12px;padding:10px 14px;text-align:center;font-size:14px;color:#6B5040;margin:6px 0 10px;letter-spacing:1px}
+.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.hstat{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:12px;padding:11px 6px;text-align:center}
+.hstat-v{font-size:22px;font-weight:bold;color:#C41230}
+.hstat-l{font-size:10px;color:#9B8570;margin-top:2px}
+
+/* Module Cards */
+.mcard{background:#EDE7D8;border-radius:16px;padding:13px 15px;margin-bottom:9px;border:2px solid #D4C4A0;transition:border-color .15s}
+.mcard:hover{border-color:#C41230}
+.mcard-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.mcard-icon{font-size:22px;width:34px;text-align:center;flex-shrink:0}
+.mcard-name{font-size:15px;font-weight:bold;color:#1C0A00}
+.mcard-desc{font-size:11px;color:#9B8570;margin-top:1px}
+.mcard-btns{display:flex;gap:7px;flex-wrap:wrap}
+.mcard-btns .btn{flex:1;min-width:60px;padding:9px 4px;font-size:12px}
+
+/* Quick card (起课速查入口) */
+.qk-entry-card{background:#FDF5EC;border:1px solid #E8D5B0;border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:border-color .15s}
+.qk-entry-card:hover{border-color:#C41230}
+.qk-entry-row{display:flex;align-items:center;gap:10px}
+
+/* Recent log */
+.hhist{font-size:11px;color:#9B8570;margin-bottom:6px}
+.hrow{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #D4C4A0;font-size:12px;color:#6B5040}
+.hrow:last-child{border-bottom:none}
+
+/* 每日语录 */
+.hquote{text-align:center;font-size:12px;color:#9B8570;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:#EDE7D8;border-radius:10px;margin:0 0 8px;border:1px solid #D4C4A0;font-style:italic}
+
+/* === 口诀闪卡 SELECT === */
+.kj-grp{margin-bottom:14px}
+.kj-grp-lbl{font-size:11px;color:#9B8570;letter-spacing:2px;margin-bottom:7px;padding:0 2px;font-weight:bold}
+.kj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.kj-btn{background:#EDE7D8;border:2px solid #D4C4A0;border-radius:12px;cursor:pointer;padding:13px 8px;text-align:center;transition:all .15s}
+.kj-btn:hover{border-color:#C41230}.kj-btn:active{transform:scale(.97)}
+.kj-btn-name{font-size:14px;font-weight:bold;color:#1C0A00}
+.kj-btn-n{font-size:10px;color:#9B8570;margin-top:3px}
+.kj-btn.clr-r{border-color:#C4123040}
+.kj-btn.clr-g{border-color:#2E7D5A40}
+.kj-btn.clr-a{border-color:#8B691440}
+
+/* === 口诀闪卡 GAME === */
+.prog-row{display:flex;align-items:center;gap:8px;padding:2px 0 8px;flex-shrink:0}
+.prog-txt{font-size:12px;color:#9B8570;white-space:nowrap}
+.prog-wrap{flex:1;height:4px;background:#EDE7D8;border-radius:3px;border:1px solid #D4C4A0}
+.prog-bar{height:100%;border-radius:3px;background:#C41230;transition:width .3s}
+
+.fc-card{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #C41230}
+.fc-card:active{transform:scale(.99)}
+.fc-label{font-size:10px;color:#9B8570;letter-spacing:3px;margin-bottom:16px;text-align:center;background:#F5F0E6;padding:3px 12px;border-radius:20px;border:1px solid #D4C4A0}
+.fc-title{font-size:21px;font-weight:bold;color:#C41230;text-align:center;letter-spacing:3px;line-height:1.6;margin-bottom:12px}
+.fc-body{font-size:14px;color:#1C0A00;text-align:left;line-height:2;white-space:pre-wrap;max-width:100%;width:100%;word-break:break-all;background:#F5F0E6;border-radius:10px;padding:12px 14px;border-left:3px solid #C41230}
+.fc-body.hidden{display:none}
+.fc-hint{font-size:11px;color:#C4B49A;text-align:center;margin-top:16px;letter-spacing:2px}
+.fc-reveal{font-size:12px;color:#C41230;text-align:center;margin-top:10px;font-weight:bold;display:none}
+.fc-footer{display:flex;gap:8px;margin-top:12px;flex-shrink:0}
+
+/* === 知识速查 === */
+.m5-sec{margin:4px 0}
+.m5-tog{width:100%;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:10px;padding:9px 14px;color:#6B5040;font-size:13px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.m5-tog.open{color:#C41230;border-color:#C4123050;background:#FDF8F2}
+.m5-tog:active{background:#E0D9C8}
+.m5-tog-arrow{margin-left:auto;font-size:12px;color:#D4C4A0;transition:transform .2s;flex-shrink:0}
+.m5-tog.open .m5-tog-arrow{transform:rotate(90deg);color:#C41230}
+.m5-body{padding:4px 2px 2px;display:none}
+.m5-body.open{display:block}
+.m5-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 8px}
+.m5-tbl{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}
+.m5-tbl th{background:#EDE7D8;color:#9B8570;font-size:10px;padding:6px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #D4C4A0}
+.m5-tbl td{padding:6px 8px;text-align:center;border-bottom:1px solid #EDE7D8;color:#1C0A00}
+.m5-tbl tr:nth-child(even) td{background:#F7F2E8}
+.m5-tbl .c-r{color:#C41230;font-weight:bold}
+.m5-tbl .c-g{color:#2E7D5A;font-weight:bold}
+.m5-tbl .c-a{color:#8B6914;font-weight:bold}
+.m5-sub{font-size:10px;color:#9B8570;letter-spacing:2px;margin:8px 0 4px 2px;font-weight:bold}
+.m5-sub-tog{width:100%;background:#F5F0E6;border:1px solid #D4C4A0;border-radius:8px;padding:7px 12px;color:#9B8570;font-size:12px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:.5px;margin:3px 0;display:block}
+.m5-sub-tog.open{color:#6B5040;border-color:#C4B49A;background:#EDE7D8}
+.m5-sub-body{padding:2px 4px 4px;display:none}
+.m5-sub-body.open{display:block}
+.m5-text{font-size:13px;color:#1C0A00;line-height:1.9;padding:8px 12px;background:#F5F0E6;border-radius:8px;margin:3px 0;border-left:3px solid #D4C4A0}
+.m5-text.red{border-left-color:#C41230;color:#6B5040}
+.m5-placeholder{font-size:12px;color:#C4B49A;text-align:center;padding:24px 0;letter-spacing:2px}
+
+/* === 起课速查 === */
+.qk-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.qk-tab{flex:1;min-width:0;padding:8px 4px;font-size:12px;font-weight:bold;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:9px;cursor:pointer;text-align:center;color:#6B5040;letter-spacing:1px;transition:all .15s}
+.qk-tab:active{transform:scale(.97)}
+.qk-tab.active{background:#C41230;color:#F5F0E6;border-color:#C41230}
+.qk-panel{display:none}
+.qk-panel.active{display:block}
+.qk-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 8px}
+.qk-tbl{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}
+.qk-tbl th{background:#EDE7D8;color:#9B8570;font-size:10px;padding:7px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #D4C4A0}
+.qk-tbl td{padding:7px 8px;text-align:center;border-bottom:1px solid #EDE7D8;color:#1C0A00;font-size:13px}
+.qk-tbl tr:nth-child(even) td{background:#F7F2E8}
+.qk-tbl .c-r{color:#C41230;font-weight:bold;font-size:15px}
+.qk-tbl .c-a{color:#8B6914;font-weight:bold}
+.qk-sec-title{font-size:11px;color:#9B8570;letter-spacing:3px;padding:6px 2px 8px;font-weight:bold;border-bottom:1px solid #D4C4A0;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ======== HOME ======== -->
+<div id="ph" class="screen active">
+  <div class="hlogo">
+    <div class="hlogo-t">大六壬</div>
+    <div class="hlogo-s">壬式神煞 · 日学精进</div>
+    <div class="hlogo-dec">叶飘然《大六壬通解》笔记</div>
+  </div>
+  <div class="hquote">六壬之学，以贵神为主，以天将为辅，以三传为用。</div>
+  <div class="hdate" id="el-date"></div>
+  <div class="hstats">
+    <div class="hstat"><div class="hstat-v" id="el-streak">0</div><div class="hstat-l">连续学习</div></div>
+    <div class="hstat"><div class="hstat-v" id="el-best">0</div><div class="hstat-l">闪卡最高</div></div>
+    <div class="hstat"><div class="hstat-v" id="el-total">0</div><div class="hstat-l">口诀已背</div></div>
+  </div>
+
+  <div class="mcard">
+    <div class="mcard-head">
+      <div class="mcard-icon">📖</div>
+      <div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div>
+    </div>
+    <div class="mcard-btns">
+      <button class="btn btn-r" onclick="show('p5')">进入速查 →</button>
+    </div>
+  </div>
+
+  <div class="mcard">
+    <div class="mcard-head">
+      <div class="mcard-icon">🀄</div>
+      <div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div>
+    </div>
+    <div class="mcard-btns">
+      <button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button>
+    </div>
+  </div>
+
+  <div class="qk-entry-card" onclick="show('pqk')">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🧮</div>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:bold;color:#1C0A00">起课速查</div>
+        <div style="font-size:11px;color:#9B8570;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div>
+      </div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="hhist">近期学习记录</div>
+    <div id="el-hist"><span style="color:#9B8570;font-size:12px">暂无记录</span></div>
+  </div>
+</div>
+
+<!-- ======== 知识速查 ======== -->
+<div id="p5" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">✕</button>
+    <div class="tbtitle">知识速查</div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      一、大六壬概论与历史
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      二、基础干支时间系统
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      三、六壬式盘与起课
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      四、十二天将详解
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      五、十二支神与地盘
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      六、六壬格局汇总
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      七、核心断法总论
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      八、分类占验精要
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      九、重要口诀歌诀汇编
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">
+      十、实战要点与速断法
+      <span class="m5-tog-arrow">›</span>
+    </button>
+    <div class="m5-body">
+      <div class="m5-placeholder">内容即将补充…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 口诀闪卡 选类别 ======== -->
+<div id="pkj-sel" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">✕</button>
+    <div class="tbtitle">口诀闪卡 · 选类别</div>
+  </div>
+
+  <div class="kj-grp">
+    <div class="kj-grp-lbl">🔴 基础神煞</div>
+    <div class="kj-grid">
+      <button class="kj-btn clr-r" onclick="startKJ('月将口诀')">
+        <div class="kj-btn-name">月将口诀</div><div class="kj-btn-n">十二月将</div>
+      </button>
+      <button class="kj-btn clr-r" onclick="startKJ('贵人口诀')">
+        <div class="kj-btn-name">贵人口诀</div><div class="kj-btn-n">昼夜贵人</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="kj-grp">
+    <div class="kj-grp-lbl">🟡 天将断法</div>
+    <div class="kj-grid">
+      <button class="kj-btn clr-a" onclick="startKJ('十二天将')">
+        <div class="kj-btn-name">十二天将</div><div class="kj-btn-n">贵蛇朱六…</div>
+      </button>
+      <button class="kj-btn clr-a" onclick="startKJ('遁干口诀')">
+        <div class="kj-btn-name">遁干口诀</div><div class="kj-btn-n">旬首起法</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="kj-grp">
+    <div class="kj-grp-lbl">🟢 课体格局</div>
+    <div class="kj-grid">
+      <button class="kj-btn clr-g" onclick="startKJ('九宗门')">
+        <div class="kj-btn-name">九宗门</div><div class="kj-btn-n">课体九式</div>
+      </button>
+      <button class="kj-btn clr-g" onclick="startKJ('格局口诀')">
+        <div class="kj-btn-name">格局口诀</div><div class="kj-btn-n">吉凶格局</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="kj-grp">
+    <div class="kj-grp-lbl">📜 综合占断</div>
+    <div class="kj-grid">
+      <button class="kj-btn" onclick="startKJ('三传断法')">
+        <div class="kj-btn-name">三传断法</div><div class="kj-btn-n">初中末传</div>
+      </button>
+      <button class="kj-btn" onclick="startKJ('行年法')">
+        <div class="kj-btn-name">行年法</div><div class="kj-btn-n">流年推算</div>
+      </button>
+    </div>
+  </div>
+
+  <button class="btn btn-d" onclick="goHome()" style="margin-top:8px">← 首页</button>
+</div>
+
+<!-- ======== 口诀闪卡 游戏 ======== -->
+<div id="pkj-g" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="show('pkj-sel')">←</button>
+    <div class="tbtitle" id="kj-lbl">口诀闪卡</div>
+    <div class="tbr" id="kj-prog-r">1/1</div>
+  </div>
+  <div class="prog-row">
+    <span class="prog-txt" id="el-kj-prog">1/10</span>
+    <div class="prog-wrap"><div class="prog-bar" id="el-kj-pb" style="width:10%"></div></div>
+  </div>
+  <div class="fc-card" id="kj-card" onclick="toggleReveal()">
+    <div class="fc-label" id="kj-cat-lbl">月将口诀</div>
+    <div class="fc-title" id="kj-title">—</div>
+    <div class="fc-body hidden" id="kj-body"></div>
+    <div class="fc-hint" id="kj-hint">点击卡片查看口诀内容</div>
+    <div class="fc-reveal" id="kj-reveal">▼ 已展开 · 再点收起</div>
+  </div>
+  <div class="fc-footer">
+    <button class="btn btn-d" onclick="kjMove(-1)" style="flex:1;font-size:13px">◀ 上一条</button>
+    <button class="btn btn-r" onclick="kjMove(1)" style="flex:1;font-size:13px">下一条 ▶</button>
+  </div>
+  <div style="margin-top:8px">
+    <button class="btn btn-d" style="font-size:12px" onclick="show('pkj-sel')">← 返回选择</button>
+  </div>
+</div>
+
+<!-- ======== 起课速查 ======== -->
+<div id="pqk" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">✕</button>
+    <div class="tbtitle">起课速查</div>
+  </div>
+
+  <div class="qk-tabs">
+    <button class="qk-tab active" onclick="switchQKTab(this,'tab-yj')">月将表</button>
+    <button class="qk-tab" onclick="switchQKTab(this,'tab-gr')">贵人表</button>
+    <button class="qk-tab" onclick="switchQKTab(this,'tab-xk')">旬空表</button>
+    <button class="qk-tab" onclick="switchQKTab(this,'tab-jg')">十干寄宫</button>
+  </div>
+
+  <!-- 月将表 -->
+  <div class="qk-panel active" id="tab-yj">
+    <div class="qk-sec-title">月将对照表（太阳过宫）</div>
+    <div class="qk-tbl-wrap">
+      <table class="qk-tbl">
+        <tr><th>月份</th><th>节气（后）</th><th>月将</th><th>将名</th></tr>
+        <tr><td>正月</td><td>雨水</td><td class="c-r">亥</td><td>登明</td></tr>
+        <tr><td>二月</td><td>春分</td><td class="c-r">戌</td><td>河魁</td></tr>
+        <tr><td>三月</td><td>谷雨</td><td class="c-r">酉</td><td>从魁</td></tr>
+        <tr><td>四月</td><td>小满</td><td class="c-r">申</td><td>传送</td></tr>
+        <tr><td>五月</td><td>夏至</td><td class="c-r">未</td><td>小吉</td></tr>
+        <tr><td>六月</td><td>大暑</td><td class="c-r">午</td><td>胜光</td></tr>
+        <tr><td>七月</td><td>处暑</td><td class="c-r">巳</td><td>太乙</td></tr>
+        <tr><td>八月</td><td>秋分</td><td class="c-r">辰</td><td>天罡</td></tr>
+        <tr><td>九月</td><td>霜降</td><td class="c-r">卯</td><td>太冲</td></tr>
+        <tr><td>十月</td><td>小雪</td><td class="c-r">寅</td><td>功曹</td></tr>
+        <tr><td>十一月</td><td>冬至</td><td class="c-r">丑</td><td>大吉</td></tr>
+        <tr><td>十二月</td><td>大寒</td><td class="c-r">子</td><td>神后</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 贵人表 -->
+  <div class="qk-panel" id="tab-gr">
+    <div class="qk-sec-title">天乙贵人表（昼夜分阴阳）</div>
+    <div class="qk-tbl-wrap">
+      <table class="qk-tbl">
+        <tr><th>日干</th><th>昼贵（阳贵）</th><th>夜贵（阴贵）</th></tr>
+        <tr><td class="c-a">甲戊庚</td><td class="c-r">丑</td><td class="c-r">未</td></tr>
+        <tr><td class="c-a">乙己</td><td class="c-r">子</td><td class="c-r">申</td></tr>
+        <tr><td class="c-a">丙丁</td><td class="c-r">亥</td><td class="c-r">酉</td></tr>
+        <tr><td class="c-a">壬癸</td><td class="c-r">卯</td><td class="c-r">巳</td></tr>
+        <tr><td class="c-a">辛</td><td class="c-r">午</td><td class="c-r">寅</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 旬空表 -->
+  <div class="qk-panel" id="tab-xk">
+    <div class="qk-sec-title">六旬旬空表</div>
+    <div class="qk-tbl-wrap">
+      <table class="qk-tbl">
+        <tr><th>旬首（甲子）</th><th>旬空二支</th></tr>
+        <tr><td class="c-a">甲子旬</td><td class="c-r">戌 亥</td></tr>
+        <tr><td class="c-a">甲戌旬</td><td class="c-r">申 酉</td></tr>
+        <tr><td class="c-a">甲申旬</td><td class="c-r">午 未</td></tr>
+        <tr><td class="c-a">甲午旬</td><td class="c-r">辰 巳</td></tr>
+        <tr><td class="c-a">甲辰旬</td><td class="c-r">寅 卯</td></tr>
+        <tr><td class="c-a">甲寅旬</td><td class="c-r">子 丑</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 十干寄宫 -->
+  <div class="qk-panel" id="tab-jg">
+    <div class="qk-sec-title">十干寄宫（天干对应地盘之宫）</div>
+    <div class="qk-tbl-wrap">
+      <table class="qk-tbl">
+        <tr><th>天干</th><th>寄宫</th><th>五行</th></tr>
+        <tr><td class="c-a">甲</td><td class="c-r">寅</td><td>木</td></tr>
+        <tr><td class="c-a">乙</td><td class="c-r">卯</td><td>木</td></tr>
+        <tr><td class="c-a">丙</td><td class="c-r">巳</td><td>火</td></tr>
+        <tr><td class="c-a">丁</td><td class="c-r">午</td><td>火</td></tr>
+        <tr><td class="c-a">戊</td><td class="c-r">巳</td><td>土</td></tr>
+        <tr><td class="c-a">己</td><td class="c-r">午</td><td>土</td></tr>
+        <tr><td class="c-a">庚</td><td class="c-r">申</td><td>金</td></tr>
+        <tr><td class="c-a">辛</td><td class="c-r">酉</td><td>金</td></tr>
+        <tr><td class="c-a">壬</td><td class="c-r">亥</td><td>水</td></tr>
+        <tr><td class="c-a">癸</td><td class="c-r">子</td><td>水</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+</div><!-- .app -->
+<script>
+const _scrollPos = {};
+
+function show(id) {
+  const cur = document.querySelector('.screen.active');
+  if (cur) { _scrollPos[cur.id] = window.scrollY; cur.classList.remove('active'); }
+  const nxt = document.getElementById(id);
+  if (!nxt) return;
+  nxt.classList.add('active');
+  window.scrollTo(0, _scrollPos[id] || 0);
+}
+
+function goHome() { show('ph'); }
+
+(function() {
+  const d = new Date();
+  const days = ['日','一','二','三','四','五','六'];
+  document.getElementById('el-date').textContent =
+    `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${days[d.getDay()]}`;
+})();
+
+function m5Toggle(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+function m5SubToggle(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+function switchQKTab(btn, panelId) {
+  document.querySelectorAll('.qk-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.qk-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+const KJ_DATA = {};
+
+let kjState = { cat: '', items: [], idx: 0, revealed: false };
+
+function startKJ(cat) {
+  const items = KJ_DATA[cat] || [];
+  if (!items.length) { showToast('该类别口诀内容即将补充…'); return; }
+  kjState = { cat, items, idx: 0, revealed: false };
+  updateKJCard();
+  show('pkj-g');
+}
+
+function updateKJCard() {
+  const { cat, items, idx } = kjState;
+  const item = items[idx] || {};
+  const total = items.length;
+  document.getElementById('kj-lbl').textContent = cat;
+  document.getElementById('kj-prog-r').textContent = `${idx+1}/${total}`;
+  document.getElementById('el-kj-prog').textContent = `${idx+1}/${total}`;
+  document.getElementById('el-kj-pb').style.width = `${(idx+1)/total*100}%`;
+  document.getElementById('kj-cat-lbl').textContent = cat;
+  document.getElementById('kj-title').textContent = item.title || '—';
+  document.getElementById('kj-body').textContent = item.body || '';
+  kjState.revealed = false;
+  document.getElementById('kj-body').classList.add('hidden');
+  document.getElementById('kj-hint').style.display = '';
+  document.getElementById('kj-reveal').style.display = 'none';
+}
+
+function toggleReveal() {
+  kjState.revealed = !kjState.revealed;
+  document.getElementById('kj-body').classList.toggle('hidden', !kjState.revealed);
+  document.getElementById('kj-hint').style.display = kjState.revealed ? 'none' : '';
+  document.getElementById('kj-reveal').style.display = kjState.revealed ? '' : 'none';
+}
+
+function kjMove(dir) {
+  const len = kjState.items.length;
+  kjState.idx = Math.max(0, Math.min(len - 1, kjState.idx + dir));
+  updateKJCard();
+}
+
+let _toastT;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(_toastT);
+  _toastT = setTimeout(() => t.classList.remove('show'), 2200);
+}
+</script>
+</body>
+</html>
