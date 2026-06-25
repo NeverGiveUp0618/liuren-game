@@ -11,29 +11,20 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 @media(min-width:600px){body{background:#EDE7D8;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
 .screen{display:none;flex-direction:column;padding:14px 14px 28px;min-height:100vh}
 .screen.active{display:flex}
-
-/* === TOP BAR === */
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
 .tbk{background:none;border:none;color:#9B8570;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
 .tbk:hover{background:#EDE7D8;color:#6B5040}
 .tbtitle{flex:1;text-align:center;font-size:14px;color:#6B5040;letter-spacing:2px}
 .tbr{font-size:12px;color:#9B8570;white-space:nowrap}
-
-/* === BUTTONS === */
 .btn{width:100%;padding:13px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none;letter-spacing:1px}
 .btn:active{transform:scale(.98)}
 .btn-r{background:#C41230;color:#F5F0E6;letter-spacing:2px}.btn-r:hover{background:#A30F28}
 .btn-g{background:#2E7D5A;color:#F5F0E6}.btn-g:hover{background:#236248}
 .btn-d{background:#EDE7D8;color:#6B5040;border:1px solid #D4C4A0}.btn-d:hover{background:#E0D9C8}
 .btn-a{background:#8B6914;color:#F5F0E6}.btn-a:hover{background:#6E520F}
-.btn-sm{padding:8px 12px;font-size:12px;border-radius:9px;width:auto}
-
-/* === CARD === */
 .card{background:#EDE7D8;border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid #D4C4A0}
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1C0A00;color:#F5F0E6;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .toast.show{opacity:1}
-
-/* === HOME === */
 .hlogo{text-align:center;padding:26px 0 12px}
 .hlogo-t{font-size:27px;font-weight:bold;color:#C41230;letter-spacing:8px}
 .hlogo-s{font-size:11px;color:#9B8570;margin-top:6px;letter-spacing:4px}
@@ -43,8 +34,6 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .hstat{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:12px;padding:11px 6px;text-align:center}
 .hstat-v{font-size:22px;font-weight:bold;color:#C41230}
 .hstat-l{font-size:10px;color:#9B8570;margin-top:2px}
-
-/* Module Cards */
 .mcard{background:#EDE7D8;border-radius:16px;padding:13px 15px;margin-bottom:9px;border:2px solid #D4C4A0;transition:border-color .15s}
 .mcard:hover{border-color:#C41230}
 .mcard-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}
@@ -53,21 +42,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .mcard-desc{font-size:11px;color:#9B8570;margin-top:1px}
 .mcard-btns{display:flex;gap:7px;flex-wrap:wrap}
 .mcard-btns .btn{flex:1;min-width:60px;padding:9px 4px;font-size:12px}
-
-/* Quick card (起课速查入口) */
 .qk-entry-card{background:#FDF5EC;border:1px solid #E8D5B0;border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:border-color .15s}
 .qk-entry-card:hover{border-color:#C41230}
 .qk-entry-row{display:flex;align-items:center;gap:10px}
-
-/* Recent log */
 .hhist{font-size:11px;color:#9B8570;margin-bottom:6px}
-.hrow{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #D4C4A0;font-size:12px;color:#6B5040}
-.hrow:last-child{border-bottom:none}
-
-/* 每日语录 */
 .hquote{text-align:center;font-size:12px;color:#9B8570;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:#EDE7D8;border-radius:10px;margin:0 0 8px;border:1px solid #D4C4A0;font-style:italic}
-
-/* === 口诀闪卡 SELECT === */
 .kj-grp{margin-bottom:14px}
 .kj-grp-lbl{font-size:11px;color:#9B8570;letter-spacing:2px;margin-bottom:7px;padding:0 2px;font-weight:bold}
 .kj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
@@ -78,13 +57,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .kj-btn.clr-r{border-color:#C4123040}
 .kj-btn.clr-g{border-color:#2E7D5A40}
 .kj-btn.clr-a{border-color:#8B691440}
-
-/* === 口诀闪卡 GAME === */
 .prog-row{display:flex;align-items:center;gap:8px;padding:2px 0 8px;flex-shrink:0}
 .prog-txt{font-size:12px;color:#9B8570;white-space:nowrap}
 .prog-wrap{flex:1;height:4px;background:#EDE7D8;border-radius:3px;border:1px solid #D4C4A0}
 .prog-bar{height:100%;border-radius:3px;background:#C41230;transition:width .3s}
-
 .fc-card{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #C41230}
 .fc-card:active{transform:scale(.99)}
 .fc-label{font-size:10px;color:#9B8570;letter-spacing:3px;margin-bottom:16px;text-align:center;background:#F5F0E6;padding:3px 12px;border-radius:20px;border:1px solid #D4C4A0}
@@ -94,8 +70,6 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .fc-hint{font-size:11px;color:#C4B49A;text-align:center;margin-top:16px;letter-spacing:2px}
 .fc-reveal{font-size:12px;color:#C41230;text-align:center;margin-top:10px;font-weight:bold;display:none}
 .fc-footer{display:flex;gap:8px;margin-top:12px;flex-shrink:0}
-
-/* === 知识速查 === */
 .m5-sec{margin:4px 0}
 .m5-tog{width:100%;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:10px;padding:9px 14px;color:#6B5040;font-size:13px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:1px;display:flex;align-items:center;gap:6px}
 .m5-tog.open{color:#C41230;border-color:#C4123050;background:#FDF8F2}
@@ -117,11 +91,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .m5-sub-tog.open{color:#6B5040;border-color:#C4B49A;background:#EDE7D8}
 .m5-sub-body{padding:2px 4px 4px;display:none}
 .m5-sub-body.open{display:block}
-.m5-text{font-size:13px;color:#1C0A00;line-height:1.9;padding:8px 12px;background:#F5F0E6;border-radius:8px;margin:3px 0;border-left:3px solid #D4C4A0}
-.m5-text.red{border-left-color:#C41230;color:#6B5040}
-.m5-placeholder{font-size:12px;color:#C4B49A;text-align:center;padding:24px 0;letter-spacing:2px}
-
-/* === 起课速查 === */
+.m5-text{font-size:13px;color:#1C0A00;line-height:1.9;padding:7px 12px;background:#F5F0E6;border-radius:8px;margin:3px 0;border-left:3px solid #D4C4A0}
+.m5-text.red{border-left-color:#C41230}
+.m5-text.gold{border-left-color:#8B6914}
+.m5-jue{font-size:13px;color:#6B5040;line-height:2.2;padding:10px 14px;background:#FDF8F2;border-radius:10px;margin:4px 0;border:1px solid #E8D5B0;white-space:pre-line;letter-spacing:.5px}
 .qk-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
 .qk-tab{flex:1;min-width:0;padding:8px 4px;font-size:12px;font-weight:bold;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:9px;cursor:pointer;text-align:center;color:#6B5040;letter-spacing:1px;transition:all .15s}
 .qk-tab:active{transform:scale(.97)}
@@ -151,211 +124,440 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="hquote">六壬之学，以贵神为主，以天将为辅，以三传为用。</div>
   <div class="hdate" id="el-date"></div>
   <div class="hstats">
-    <div class="hstat"><div class="hstat-v" id="el-streak">0</div><div class="hstat-l">连续学习</div></div>
-    <div class="hstat"><div class="hstat-v" id="el-best">0</div><div class="hstat-l">闪卡最高</div></div>
-    <div class="hstat"><div class="hstat-v" id="el-total">0</div><div class="hstat-l">口诀已背</div></div>
+    <div class="hstat"><div class="hstat-v">—</div><div class="hstat-l">连续学习</div></div>
+    <div class="hstat"><div class="hstat-v">—</div><div class="hstat-l">闪卡最高</div></div>
+    <div class="hstat"><div class="hstat-v">—</div><div class="hstat-l">口诀已背</div></div>
   </div>
-
   <div class="mcard">
-    <div class="mcard-head">
-      <div class="mcard-icon">🀄</div>
-      <div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div>
-    </div>
-    <div class="mcard-btns">
-      <button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button>
-    </div>
+    <div class="mcard-head"><div class="mcard-icon">🀄</div><div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div></div>
+    <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
   </div>
-
   <div class="qk-entry-card" onclick="show('pqk')">
     <div class="qk-entry-row">
       <div style="font-size:22px">🧮</div>
-      <div style="flex:1">
-        <div style="font-size:15px;font-weight:bold;color:#1C0A00">起课速查</div>
-        <div style="font-size:11px;color:#9B8570;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div>
-      </div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课速查</div><div style="font-size:11px;color:#9B8570;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div></div>
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
   </div>
-
   <div class="mcard">
-    <div class="mcard-head">
-      <div class="mcard-icon">📖</div>
-      <div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div>
-    </div>
-    <div class="mcard-btns">
-      <button class="btn btn-r" onclick="show('p5')">进入速查 →</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="hhist">近期学习记录</div>
-    <div id="el-hist"><span style="color:#9B8570;font-size:12px">暂无记录</span></div>
+    <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div></div>
+    <div class="mcard-btns"><button class="btn btn-r" onclick="show('p5')">进入速查 →</button></div>
   </div>
 </div>
 
 <!-- ======== 知识速查 ======== -->
 <div id="p5" class="screen">
-  <div class="tbar">
-    <button class="tbk" onclick="goHome()">✕</button>
-    <div class="tbtitle">知识速查</div>
-  </div>
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">知识速查</div></div>
 
+  <!-- 第一章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      一、大六壬概论与历史
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">一、大六壬概论与历史<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">历史渊源与三式定位</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">起源：黄帝战蚩尤，风后作六壬；或传九天玄女授黄帝。汉代出土式盘佐证，六壬为汉前学术。六壬最先出，奇门次之，太乙晚出。</div>
+        <div class="m5-text">三式对比：太乙主<b>天道国运</b>，奇门主<b>地道兵事</b>，六壬主<b>人道人事</b>。六壬唐代未被禁传，流传最广，誉为"人事之王""占卜之王"。</div>
+        <div class="m5-text">历史沿革：唐代盛行 → 宋代完善（邵彦和、凌福之）→ 明清郭御青辑《六壬大全》入《四库全书》。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">理论基础与核心架构</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">核心逻辑：月将加时 → 排天地盘 → 立四课 → 发三传 → 配天将神煞 → 断吉凶。</div>
+        <div class="m5-text">天文依据：月将即太阳，随中气换宫，主宰天盘。古云"月将为误，然后凡事不误"。式盘：天盘（圆，动）嵌地盘（方，静）。</div>
+        <div class="m5-text">四课三传：四课体现日干支阴阳神关系（两仪生四象）；三传（初、中、末）示事态始、中、终。九宗门（贼克·比用·涉害·遥克·昴星·别责·八专·伏吟·返吟）。</div>
+        <div class="m5-text">神将体系：十二天将赋予地支社会属性。贵人分昼夜，昼贵顺行，夜贵逆行，主宰吉凶。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">主要古籍与学习路径</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">核心书目：《大六壬心镜》《大六壬断案》（邵彦和）、《六壬大全》（郭御青）、《六壬毕法赋》（凌福之）、《壬归》、《大六壬会纂占验指南》。</div>
+        <div class="m5-text red">起课流程：定月将 → 排地盘 → 月将加时起天盘 → 排十二天将 → 起四课 → 定三传 → 配遁干 → 列六亲。</div>
+        <div class="m5-text gold">判断流程：审格局 → 析四课 → 推三传 → 看六亲类神 → 查神煞空亡 → 参本命行年。</div>
+        <div class="m5-text">心法三要：①类神思维（凡有其象必有其事）②旺相休囚（凶神吉将不可一例而推）③阴阳辩证（日干为阳我，日支为阴彼）。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">关键术语与断课法则</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">太岁：年柱，司一年吉凶。月建：月柱，主节气旺衰。先锋门：时柱，断课切入点。本命：出生年干支，为体。行年：流年，男顺女逆，为用。</div>
+        <div class="m5-text red">四大断则：①生克为体（日干为我，生我吉克我凶）②旺相为用（旺相力大，休囚力微，空亡不成）③动静迟速（驿马主动速，伏吟墓合主静迟）④去伪存真（聚焦天将三传，活断结合情境）。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第二章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      二、基础干支时间系统
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">二、基础干支时间系统<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">干支阴阳与五行基础</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">阳干：甲丙戊庚壬；阴干：乙丁己辛癸。阳支：子寅辰午申戌；阴支：丑卯巳未酉亥。天干为阳主动，地支为阴主静。</div>
+        <div class="m5-text red">五行属性：木（甲乙寅卯）火（丙丁巳午）土（戊己辰戌丑未）金（庚辛申酉）水（壬癸亥子）。顺生逆克。</div>
+        <div class="m5-text">旺相休囚死（以月令定）：当令为旺，我生为相，生我为休，克我为囚，我克为死。</div>
+        <div class="m5-text">纳音五行：六十甲子每两组配一纳音（如甲子乙丑海中金）。干主禄，支主命，纳音主身/寿。高层断课综合三者生克。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">节气、月建与月将</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">节气换月：六壬以"节"为月令界限（非农历初一）。立春后寅月，惊蛰后卯月……小寒后丑月。</div>
+        <div class="m5-text red">月建：正月建寅，顺推至十二月建丑。月将（太阳）取中气后太阳所躔之宫，与月建相冲。</div>
+        <div class="m5-jue">雨水后亥（登明）　春分后戌（河魁）
+谷雨后酉（从魁）　小满后申（传送）
+夏至后未（小吉）　大暑后午（胜光）
+处暑后巳（太乙）　秋分后辰（天罡）
+霜降后卯（太冲）　小雪后寅（功曹）
+冬至后丑（大吉）　大寒后子（神后）</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">四柱排盘与遁干法</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">年柱：以立春交节时刻为界。日柱：以子时（23:00）为界，23:00后属次日。</div>
+        <div class="m5-text red">五虎遁月（年上起月天干）：</div>
+        <div class="m5-jue">甲己之年丙作首　乙庚之岁戊为头
+丙辛之岁寻庚上　丁壬壬位顺行流
+若问戊癸何方发　甲寅之上好追求</div>
+        <div class="m5-text red">五鼠遁时（日上起时天干）：</div>
+        <div class="m5-jue">甲己还加甲　乙庚丙作初
+丙辛从戊起　丁壬庚子居
+戊癸何方发　壬子是真途</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">旬空与日干寄宫</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">旬空（空亡）：甲子旬戌亥空，甲戌旬申酉空，甲申旬午未空，甲午旬辰巳空，甲辰旬寅卯空，甲寅旬子丑空。</div>
+        <div class="m5-text">空亡断诀：空亡主虚无落空。吉神空亡减半，凶神空亡解灾或无力。需察填实、冲实之应。</div>
+        <div class="m5-text red">日干寄宫口诀：</div>
+        <div class="m5-jue">甲课寅兮乙课辰　丙戊课巳不需论
+丁己课未庚申上　辛戌壬亥是其真
+癸课原来丑宫坐　分明不用四正神</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第三章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      三、六壬式盘与起课
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">三、六壬式盘与起课<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">式盘结构与基础要素</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">式盘：地盘（方，千古不变，刻十二地支）+ 天盘（圆，随月将加时顺行）+ 人盘（十二天将，随贵人顺逆排布）。</div>
+        <div class="m5-text red">十二天将顺序：贵（天乙）蛇（螣蛇）雀（朱雀）合（六合）勾（勾陈）龙（青龙）空（天空）虎（白虎）常（太常）玄（玄武）阴（太阴）后（天后）。</div>
+        <div class="m5-text">贵人起法：昼贵（卯至申时）顺行；夜贵（酉至寅时）逆行。贵人在亥子丑寅卯辰顺行，在巳午未申酉戌逆行。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">四课结构</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">四课含义：第一课（日阳）= 日干上神；第二课（日阴）= 第一课上神之地盘上神；第三课（辰阳）= 日支上神；第四课（辰阴）= 第三课上神之地盘上神。</div>
+        <div class="m5-text">记忆：一二课看天（干），三四课看地（支）。上克下为"克"，下克上为"贼"。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">九宗门发用规则</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">①克贼法：先取下克上（贼），无贼取上克下（克）。一上克下→元首课；一下克上→重审课。</div>
+        <div class="m5-text">②比用法：多课相克，取与日干阴阳相比者发用。二下贼→比用；二上克→知一。</div>
+        <div class="m5-text">③涉害法：多克阴阳不比，顺数至本家统计克害，取深者。相等则：有孟取孟（见机）→ 有仲取仲（察微）→ 复等：阳日取干上、阴日取辰上（复等）。</div>
+        <div class="m5-text">④遥克法：四课无正克。日干遥克上神→蒿矢（取初传）；上神遥克日干→弹射。</div>
+        <div class="m5-text">⑤昴星法：无克无遥克。阳日取冲时之支（天门）上神，阴日取地户上神。</div>
+        <div class="m5-text">⑥别责法：柔日无克无遥克，二三课同。初传取日支前三合，中末均取日上神。</div>
+        <div class="m5-text">⑦八专法：干支同位，仅两课。有克按克法；无克刚日顺数、柔日逆数三位发用，中末取日上神。</div>
+        <div class="m5-text">⑧伏吟法：天地盘重合。有克按克贼；无克阳日取日干刑神，阴日取日支刑神。刑序：寅巳申、丑戌未、子卯、辰午酉亥自刑。</div>
+        <div class="m5-text">⑨返吟法：天地盘对冲。有克按克贼；无克（井栏射）取日驿马，中传取支上神，末传取干上神。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">遁干、六亲与断诀</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">六亲（以日干为我）：生我→父母，我生→子孙，克我→官鬼，我克→妻财，同我→兄弟。</div>
+        <div class="m5-text">三传：初传为事始，中传为事变，末传为事终。</div>
+        <div class="m5-text">伏吟：主静、迟、内忧。自任格（阳日）宜静，自信格（阴日）潜藏。</div>
+        <div class="m5-text">返吟：主动、速、反复。无依格主祸自外来，无亲格主速成易破。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第四章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      四、十二天将详解
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">四、十二天将详解<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">总论：排布规则与贵人起法</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">阳日顺行：贵→蛇→雀→合→勾→龙→空→虎→常→玄→阴→后。阴日逆行（顺序反转）。</div>
+        <div class="m5-text">昼贵（卯至申）：甲戊庚→丑，乙己→子，丙丁→亥，辛→午，壬癸→巳。</div>
+        <div class="m5-text">夜贵（酉至寅）：甲戊庚→未，乙己→申，丙丁→酉，辛→寅，壬癸→卯。</div>
+        <div class="m5-text gold">贵人在亥子丑寅卯辰→顺行；在巳午未申酉戌→逆行。原理：亥为天门，巳为地户。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">十二天将类象速查</button>
+      <div class="m5-sub-body">
+        <div class="m5-wrap"><table class="m5-tbl">
+          <tr><th>天将</th><th>五行</th><th>核心类象</th><th>空亡断诀</th></tr>
+          <tr><td class="c-r">天乙贵人</td><td>土</td><td>官贵、文书、解厄</td><td>求助无门</td></tr>
+          <tr><td>螣蛇</td><td>火</td><td>惊恐、梦魇、缠绕</td><td>诸凶可免</td></tr>
+          <tr><td>朱雀</td><td>火</td><td>口舌、文书、诉讼</td><td>口舌消散</td></tr>
+          <tr><td>六合</td><td>木</td><td>婚姻、交易、和合</td><td>婚约不成</td></tr>
+          <tr><td>勾陈</td><td>土</td><td>田土、牢狱、迟滞</td><td>纠纷可解</td></tr>
+          <tr><td class="c-g">青龙</td><td>木</td><td>财帛、喜庆、升迁</td><td>财喜减半</td></tr>
+          <tr><td>天空</td><td>土</td><td>虚诈、落空、僧道</td><td>空上加空</td></tr>
+          <tr><td class="c-r">白虎</td><td>金</td><td>血光、疾病、丧事</td><td>见凶不凶</td></tr>
+          <tr><td>太常</td><td>土</td><td>酒食、服饰、官职</td><td>喜事减半</td></tr>
+          <tr><td>玄武</td><td>水</td><td>盗贼、欺诈、暧昧</td><td>谋害不凶</td></tr>
+          <tr><td>太阴</td><td>金</td><td>阴私、隐匿、妇女</td><td>隐事败露</td></tr>
+          <tr><td>天后</td><td>水</td><td>妇女、婚姻、生育</td><td>婚事不顺</td></tr>
+        </table></div>
+        <div class="m5-text gold">总纲："凶神吉将，不可一例而推；旺相休囚，不可一途而泥。"天将吉凶需结合五行旺衰、神煞、空亡综合判断。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第五章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      五、十二支神与地盘
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">五、十二支神与地盘<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">十二支神名称与类象</button>
+      <div class="m5-sub-body">
+        <div class="m5-wrap"><table class="m5-tbl">
+          <tr><th>地支</th><th>支神</th><th>方位</th><th>核心类象</th></tr>
+          <tr><td class="c-r">子</td><td>神后</td><td>正北</td><td>水源、阴私、北方</td></tr>
+          <tr><td class="c-r">丑</td><td>大吉</td><td>东北</td><td>田宅、牛畜、富贵</td></tr>
+          <tr><td class="c-r">寅</td><td>功曹</td><td>东北</td><td>文书、道路、山林</td></tr>
+          <tr><td class="c-r">卯</td><td>太冲</td><td>正东</td><td>门户、车船、草木</td></tr>
+          <tr><td class="c-r">辰</td><td>天罡</td><td>东南</td><td>官府、牢狱、土库</td></tr>
+          <tr><td class="c-r">巳</td><td>太乙</td><td>东南</td><td>文书、炉冶、蛇虫</td></tr>
+          <tr><td class="c-r">午</td><td>胜光</td><td>正南</td><td>文章、光明、马匹</td></tr>
+          <tr><td class="c-r">未</td><td>小吉</td><td>西南</td><td>饮食、草木、妇女</td></tr>
+          <tr><td class="c-r">申</td><td>传送</td><td>西南</td><td>道路、书信、金属</td></tr>
+          <tr><td class="c-r">酉</td><td>从魁</td><td>正西</td><td>酒食、金银、城郭</td></tr>
+          <tr><td class="c-r">戌</td><td>河魁</td><td>西北</td><td>坟墓、终结、田土</td></tr>
+          <tr><td class="c-r">亥</td><td>登明</td><td>西北</td><td>江河、雨水、文书</td></tr>
+        </table></div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">支神特殊断诀</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">关键节点：子午为天关（阴阳交替）；卯酉为日月门（门户变动）；寅申为道路神（主出行）；辰戌为牢狱地（主刑狱）；丑未为天厨（主富贵）；巳亥为堂庙（主征召）。</div>
+        <div class="m5-text red">天罡（辰）加干：主变动官非。河魁（戌）：主终结坟墓。功曹（寅）与传送（申）逢冲主动，逢合主止。神后（子）逢玄武主盗，逢天后主婚。</div>
+        <div class="m5-text">地形地貌：亥子江湖，寅卯山林，丑田，未井，午市，巳窑，申园场，戌营寨，辰衙庭，酉城郭。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">支神与天将组合断法</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">基本逻辑：支神为体（事类），天将为用（吉凶）。吉神吉将相生则成，凶神凶将无克战则平。</div>
+        <div class="m5-text red">青龙+寅卯：升迁文书吉。白虎+申酉：血光官司丧。玄武+子亥：盗贼遗失。朱雀+巳午：口舌火灾。勾陈+辰戌：田土牢狱。螣蛇+巳寅：惊恐虚诈。天后+子未：婚姻阴私。六合+卯未：婚姻交易。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第六章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      六、六壬格局汇总
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">六、六壬格局汇总<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">基本课体逻辑</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">取课优先级：克贼（元首/重审）→ 比用 → 涉害 → 遥克（蒿矢/弹射）→ 昴星 → 别责 → 八专 → 伏吟 → 返吟。</div>
+        <div class="m5-text">伏吟：神将归位，主静迟阻滞。刚日自任（干上发），柔日自信（辰上发），自刑为杜传。</div>
+        <div class="m5-text">返吟：神将对冲，主动反复。有克依贼克，无克（井栏射）驿马发用。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">重要吉格</button>
+      <div class="m5-sub-body">
+        <div class="m5-text gold">三光格：日德、日禄、日马入传，无刑冲破害。主光明正大，百事亨通。</div>
+        <div class="m5-text gold">三阳格：三传皆阳神，或贵人在阳位。主阳气旺盛，利进取求官。</div>
+        <div class="m5-text gold">龙德格：青龙乘德神加临或发用。主恩泽降临，仕途顺遂，解诸灾厄。</div>
+        <div class="m5-text gold">铸印格：干上克支上（铸印，掌权）；斫轮：支上克干上（受制）。</div>
+        <div class="m5-text gold">引从格：三传顺逆相生。合欢格：三传皆合或干支相合，主合作顺利，婚姻和谐。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">重要凶格</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">斩关格：初传为日干冲神，或辰戌加干支。主冲破阻碍，险中求胜，亦主逃亡官非。</div>
+        <div class="m5-text red">闭口格：初传为日干墓神，或逢空墓。主口舌是非，言语受阻，事多隐晦。</div>
+        <div class="m5-text red">天网格：三传皆空，或辰戌加临。天狱格：三传皆刑，或墓神加日。主牢狱虚无。</div>
+        <div class="m5-text red">天寇格：三传皆贼克日干，或初传鬼乘白虎。主盗贼侵扰，意外灾祸。</div>
+        <div class="m5-text red">魄化格：白虎乘死神加临。主死亡血光，六壬最凶之格。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">格局断法要点</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">吉凶互见：吉格见白虎玄武则吉中有凶；凶格见青龙贵人则凶中有吉。德神化凶，合神成事。</div>
+        <div class="m5-text red">空亡影响：空亡初传斩首，中传折腰，末传刖足。吉格逢空减半，凶格逢空可免。</div>
+        <div class="m5-text">动静之机：伏吟主静，返吟主动；斩关主破，闭口主藏。初传定基调，中传看过程，末传定结果。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第七章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      七、核心断法总论
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">七、核心断法总论<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">宾主内外与日辰关系</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">日干为"我/内/主/男/阳"，日支为"彼/外/客/女/阴"。干上神克支上神→主胜客；支上神克干上神→客胜主。</div>
+        <div class="m5-text">日上生日→百事吉；日上克日→百不利；日生上神→主耗财；日克上神→事抑塞。</div>
+        <div class="m5-text">干支交生→"脱体"主信任；交克→"无涉"主猜忌。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">发用与课体核心</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">三传逻辑：初传为事始（先锋），中传为事变（转折），末传为事终（归宿）。三传顺生→吉，逆克→凶，回头克→始吉终凶。</div>
+        <div class="m5-text">课体吉凶：元首课（上克下）吉，事从外来；重审课（下贼上）凶，事从内起。伏吟静迟，返吟动荡。</div>
+        <div class="m5-jue">日干神克命上神，今日求财明日成。
+命上神克日上神，官符灾讼不康宁。
+日上神合命上神，此年喜事自生春。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">旺相休囚与刑冲合害</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">五行旺衰以月令定。旺者力强，死者力弱。长生帝旺为吉，死墓绝为凶。墓主暗昧（喜冲忌合），绝主断绝（亦主绝处逢生）。</div>
+        <div class="m5-text red">刑冲合害：三合主聚（事成），六冲主散（事败），刑主伤残官非，冲主变动倾覆（凶冲则散），合主和合羁绊（合中带煞），害主阻隔不顺。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">类神取用与虚实聚散</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">类神取用：财取青龙/妻财，官取白虎/官鬼。类神落空、入墓、被克则事不成；得地、逢生、合助则事可成。</div>
+        <div class="m5-text red">虚实聚散：空亡为虚，填实为实；三合六合为聚（主事成），六冲破害为散（主事败）。</div>
+        <div class="m5-text">动静进退：初传生末传→进（事速成），克末传→退（事迟滞）。天盘动地盘静，初传动末传静。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第八章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      八、分类占验精要
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">八、分类占验精要<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">通用原则与空亡断诀</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">以类神为核心，结合干支、神将、六亲、神煞综合判断。课传生合为吉，克害冲刑为凶。</div>
+        <div class="m5-text red">空亡断诀：妻财入空先难后成；子孙入空初年难为子；贵人入空求名虚声；凶将入空（蛇虎玄）凶事可免；吉将入空（龙常合）财喜减半。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">天时与地理</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">天时：青龙主晴，太常主雨，朱雀主雷火。亥为雨师，巳为火神。勾陈制玄武主晴，玄武制勾陈主雨。</div>
+        <div class="m5-text">阳宅：干上神（宅）与支上神（人）。干生支吉，支生干亦吉；干克支主宅逼人，支克干主人逼宅。忌白虎玄武临支。</div>
+        <div class="m5-text">阴地：看龙德、官爵等吉格。忌白虎死气临支。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">婚姻孕产与疾病生死</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">婚姻：男看干上神，女看支上神。干支相合、六合、天后临干支为吉；干支相克、玄武螣蛇临之则凶。九丑卦主夫妻反目。</div>
+        <div class="m5-text">孕产：看子孙及天后。子孙旺相、天后生合则顺产；白虎死气临之则难产。胎坐空不受，遇冲小产。</div>
+        <div class="m5-text">疾病：白虎克日干主病重；日干生白虎主病退。生死：日干入墓逢空被克无救主死；得贵人德神生合主生。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">出行求职与财运官讼</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">出行：马星动、干上神生合主行；伏吟、闭口课主不行。行人：干上神克支上神主未归，生合主将归。</div>
+        <div class="m5-text">趋谒：贵人临干、官星生合主见贵成功；贵人落空被克主不见或无功。</div>
+        <div class="m5-text red">求财：财星生合日干、青龙临财主得财；财星空亡被克主破财。买卖：干生支主卖，支生干主买，干支比和主交易成。</div>
+        <div class="m5-text">官讼：朱雀主口舌，勾陈主牢狱。官鬼生合日干主胜，克日干主败。失物：玄武临干支主被盗；财星空亡主难寻；得合主可找回。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第九章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      九、重要口诀歌诀汇编
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">九、重要口诀歌诀汇编<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">起课排盘核心口诀</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">月将加时（十二月将）：</div>
+        <div class="m5-jue">雨水后亥（登明）　春分后戌（河魁）
+谷雨后酉（从魁）　小满后申（传送）
+夏至后未（小吉）　大暑后午（胜光）
+处暑后巳（太乙）　秋分后辰（天罡）
+霜降后卯（太冲）　小雪后寅（功曹）
+冬至后丑（大吉）　大寒后子（神后）</div>
+        <div class="m5-text red">天乙贵人：</div>
+        <div class="m5-jue">甲戊庚日：昼丑夜未　乙己日：昼子夜申
+丙丁日：昼亥夜酉　辛日：昼午夜寅
+壬癸日：昼巳夜卯</div>
+        <div class="m5-text red">十干寄宫：</div>
+        <div class="m5-jue">甲课寅兮乙课辰　丙戊课巳不需论
+丁己课未庚申上　辛戌壬亥是其真
+癸课原来丑宫坐　分明不用四正神</div>
+        <div class="m5-text red">遁干起法：</div>
+        <div class="m5-jue">甲己还甲子　乙庚还丙子　丙辛还戊子
+丁壬还庚子　戊癸还壬子（每旬以甲+子时干顺推）</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">宗门九课取用口诀</button>
+      <div class="m5-sub-body">
+        <div class="m5-jue">取课先从下克呼，若无下克上为初。
+初中本位明中次，中上因加是末居。（贼克法）
+
+二三或四交相克，择其比者做均分。
+常将天日比神用，阳日用阳阴用阴。（比用法）
+
+涉害由来是本家，路途多克最堪夸。
+孟深仲浅季无取，复寻柔辰刚日查。（涉害法）
+
+阴阳上下无相克，其中择取遥相贼。
+贼日之神为用神，弃日之克切需知。（遥克法）</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">十二天将加临歌</button>
+      <div class="m5-sub-body">
+        <div class="m5-text gold">天乙贵人：子解息，丑升堂，寅案几，卯登车，辰戌怀怒，巳午受生，申移途，未列席，亥还绛宫，酉入私室。</div>
+        <div class="m5-text">螣蛇：子掩目，丑盘龟，寅生角，卯当门，辰象龙，巳乘雾，午飞空，未入林，申衔剑，酉露齿，戌入冢，亥坠水。</div>
+        <div class="m5-text">朱雀：子投书，午焚身，主文书口舌。</div>
+        <div class="m5-text">六合：寅乘轩，申结发，辰违礼，戌亡羞，午升堂，卯入室，未纳采，丑丽妆。</div>
+        <div class="m5-text">勾陈：丑受钺，子沉戟，寅遭囚，巳捧印，卯临门，酉被刃，辰升堂，午反目，未入驿，戌下狱，申趋户，亥褰衣。</div>
+        <div class="m5-text">青龙：未在陆，丑蟠泥，戌登魁，辰飞天，寅乘云，卯驱雷，申伤鳞，酉摧角，午烧身，巳掩目，子入海，亥游江。</div>
+        <div class="m5-text">玄武：子散发，丑升堂，寅入林，辰失路，卯窥户，巳反顾，亥伏藏，未不戒，午截路，酉拔剑，申折足，戌遭囚。</div>
+        <div class="m5-text">白虎：子溺水，午焚身，卯临门，酉临门，丑在野，未在野，寅登山，戌落阱，申衔牒，辰咥人。</div>
+        <div class="m5-text">太常：子荷项，寅侧目，卯遗冠，戌逆命，申衔杯，丑受爵，巳铸印，未捧觞，午乘轩，辰佩印，亥征召，酉券书。</div>
+        <div class="m5-text">天后：子守闺，亥治事，酉倚户，卯临门，戌褰帷，午伏枕，巳裸体，辰毁妆，寅理发，申修容，丑偷窥，未沐浴。</div>
+        <div class="m5-text">太阴：子垂帘，丑入内，戌被察，辰造庭，寅跣足，午脱巾，亥裸形，巳伏枕，酉闭户，未观书，卯微行，申执政。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">神煞、空亡与断诀</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">八煞九宝：刑冲破害墓鬼败空为八煞；德合奇仪禄马生旺贵为九宝。德能化鬼，合主和顺。</div>
+        <div class="m5-text">空亡速断：贵人空→求名虚；螣蛇空→免惊恐；朱雀空→口舌免；六合空→婚姻不合；白虎空→见凶不凶；玄武空→谋害不凶。</div>
+        <div class="m5-text">五行局：稼穑（辰戌丑未）、曲直（亥卯未）、从革（巳酉丑）、炎上（寅午戌）、润下（申子辰）。</div>
+        <div class="m5-jue">吉神吉将不相生，事事比和总不成；
+凶神凶将无克战，灾迍不作永和平。</div>
+      </div>
     </div>
   </div>
 
+  <!-- 第十章 -->
   <div class="m5-sec">
-    <button class="m5-tog" onclick="m5Toggle(this)">
-      十、实战要点与速断法
-      <span class="m5-tog-arrow">›</span>
-    </button>
+    <button class="m5-tog" onclick="m5Toggle(this)">十、实战要点与速断法<span class="m5-tog-arrow">›</span></button>
     <div class="m5-body">
-      <div class="m5-placeholder">内容即将补充…</div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">核心心法与判断流程</button>
+      <div class="m5-sub-body">
+        <div class="m5-text red">判断流程：审格局 → 析四课干支阴阳神 → 推三传发展 → 定六亲关系 → 取类神 → 参神煞/空亡/禄马 → 合本命行年。</div>
+        <div class="m5-text">体用原则：干主禄（外事/主动），支主命（内事/被动），纳音主身（寿元/本质）。</div>
+        <div class="m5-text gold">本命行年断诀：日上神克命上神→求财速成；命上神克日上神→官符灾讼；日上神合命上神→喜事自生；日克年神→行人病中途；年神克日→骨肉灾伤；贵带吉神临命→解忧转运。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">发用简断精要</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">元首课（上克下）：名正言顺，宜进取。重审课（下贼上）：慎重，发难之端。</div>
+        <div class="m5-text">见机格（涉害等取孟）：机会在前，宜把握。察微格（取仲）：细察微妙变化。复等格（阳取干，阴取辰）：势均力敌，看自身立场。</div>
+        <div class="m5-text red">蒿矢格（遥克干）：利小不利大，初凶后休。弹射格（干遥克）：利客不利主，宜先发制人。</div>
+        <div class="m5-text">伏吟课：隐伏屈伸难，静中求静。返吟课：动荡反复，近快远慢。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">速断特殊技法</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">天罡诀：以辰（天罡）为枢纽，判断方位与动静。天罡主变动、争斗、牢狱。</div>
+        <div class="m5-text gold">三才法：天（月将、天将、神煞）+ 地（地盘、地支、类神）+ 人（日干、本命、行年）。三才相生相合为吉，相克相冲为凶。</div>
+        <div class="m5-text">小六壬速断：大安、留连、速喜、赤口、小吉、空亡。用于极简即时性占断，侧重吉凶定性。</div>
+      </div>
+      <button class="m5-sub-tog" onclick="m5SubToggle(this)">关键术语定义</button>
+      <div class="m5-sub-body">
+        <div class="m5-text">先锋门：占时课体未出吉凶已露，断来意关键。月将：太阳之明证，天盘主宰，中气后换将。</div>
+        <div class="m5-text red">空亡：旬空之位，无干，主事体虚无落空不实。禄马：禄为财禄职位，马为驿马变动。带喜神为吉。</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ======== 口诀闪卡 选类别 ======== -->
 <div id="pkj-sel" class="screen">
-  <div class="tbar">
-    <button class="tbk" onclick="goHome()">✕</button>
-    <div class="tbtitle">口诀闪卡 · 选类别</div>
-  </div>
-
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">口诀闪卡 · 选类别</div></div>
   <div class="kj-grp">
     <div class="kj-grp-lbl">🔴 基础神煞</div>
     <div class="kj-grid">
-      <button class="kj-btn clr-r" onclick="startKJ('月将口诀')">
-        <div class="kj-btn-name">月将口诀</div><div class="kj-btn-n">十二月将</div>
-      </button>
-      <button class="kj-btn clr-r" onclick="startKJ('贵人口诀')">
-        <div class="kj-btn-name">贵人口诀</div><div class="kj-btn-n">昼夜贵人</div>
-      </button>
+      <button class="kj-btn clr-r" onclick="startKJ('月将口诀')"><div class="kj-btn-name">月将口诀</div><div class="kj-btn-n">十二月将 · 12条</div></button>
+      <button class="kj-btn clr-r" onclick="startKJ('贵人口诀')"><div class="kj-btn-name">贵人口诀</div><div class="kj-btn-n">昼夜贵人 · 5条</div></button>
     </div>
   </div>
-
   <div class="kj-grp">
     <div class="kj-grp-lbl">🟡 天将断法</div>
     <div class="kj-grid">
-      <button class="kj-btn clr-a" onclick="startKJ('十二天将')">
-        <div class="kj-btn-name">十二天将</div><div class="kj-btn-n">贵蛇朱六…</div>
-      </button>
-      <button class="kj-btn clr-a" onclick="startKJ('遁干口诀')">
-        <div class="kj-btn-name">遁干口诀</div><div class="kj-btn-n">旬首起法</div>
-      </button>
+      <button class="kj-btn clr-a" onclick="startKJ('十二天将')"><div class="kj-btn-name">十二天将</div><div class="kj-btn-n">类象断法 · 12条</div></button>
+      <button class="kj-btn clr-a" onclick="startKJ('遁干口诀')"><div class="kj-btn-name">遁干口诀</div><div class="kj-btn-n">起法歌诀 · 4条</div></button>
     </div>
   </div>
-
   <div class="kj-grp">
     <div class="kj-grp-lbl">🟢 课体格局</div>
     <div class="kj-grid">
-      <button class="kj-btn clr-g" onclick="startKJ('九宗门')">
-        <div class="kj-btn-name">九宗门</div><div class="kj-btn-n">课体九式</div>
-      </button>
-      <button class="kj-btn clr-g" onclick="startKJ('格局口诀')">
-        <div class="kj-btn-name">格局口诀</div><div class="kj-btn-n">吉凶格局</div>
-      </button>
+      <button class="kj-btn clr-g" onclick="startKJ('九宗门')"><div class="kj-btn-name">九宗门</div><div class="kj-btn-n">发用规则 · 9条</div></button>
+      <button class="kj-btn clr-g" onclick="startKJ('格局口诀')"><div class="kj-btn-name">格局口诀</div><div class="kj-btn-n">吉凶格局 · 10条</div></button>
     </div>
   </div>
-
   <div class="kj-grp">
     <div class="kj-grp-lbl">📜 综合占断</div>
     <div class="kj-grid">
-      <button class="kj-btn" onclick="startKJ('三传断法')">
-        <div class="kj-btn-name">三传断法</div><div class="kj-btn-n">初中末传</div>
-      </button>
-      <button class="kj-btn" onclick="startKJ('行年法')">
-        <div class="kj-btn-name">行年法</div><div class="kj-btn-n">流年推算</div>
-      </button>
+      <button class="kj-btn" onclick="startKJ('三传断法')"><div class="kj-btn-name">三传断法</div><div class="kj-btn-n">初中末传 · 6条</div></button>
+      <button class="kj-btn" onclick="startKJ('行年法')"><div class="kj-btn-name">行年法</div><div class="kj-btn-n">流年推算 · 4条</div></button>
     </div>
   </div>
-
   <button class="btn btn-d" onclick="goHome()" style="margin-top:8px">← 首页</button>
 </div>
 
@@ -374,7 +576,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="fc-label" id="kj-cat-lbl">月将口诀</div>
     <div class="fc-title" id="kj-title">—</div>
     <div class="fc-body hidden" id="kj-body"></div>
-    <div class="fc-hint" id="kj-hint">点击卡片查看口诀内容</div>
+    <div class="fc-hint" id="kj-hint">点击卡片查看内容</div>
     <div class="fc-reveal" id="kj-reveal">▼ 已展开 · 再点收起</div>
   </div>
   <div class="fc-footer">
@@ -388,183 +590,167 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <!-- ======== 起课速查 ======== -->
 <div id="pqk" class="screen">
-  <div class="tbar">
-    <button class="tbk" onclick="goHome()">✕</button>
-    <div class="tbtitle">起课速查</div>
-  </div>
-
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">起课速查</div></div>
   <div class="qk-tabs">
     <button class="qk-tab active" onclick="switchQKTab(this,'tab-yj')">月将表</button>
     <button class="qk-tab" onclick="switchQKTab(this,'tab-gr')">贵人表</button>
     <button class="qk-tab" onclick="switchQKTab(this,'tab-xk')">旬空表</button>
     <button class="qk-tab" onclick="switchQKTab(this,'tab-jg')">十干寄宫</button>
   </div>
-
-  <!-- 月将表 -->
   <div class="qk-panel active" id="tab-yj">
-    <div class="qk-sec-title">月将对照表（太阳过宫）</div>
-    <div class="qk-tbl-wrap">
-      <table class="qk-tbl">
-        <tr><th>月份</th><th>节气（后）</th><th>月将</th><th>将名</th></tr>
-        <tr><td>正月</td><td>雨水</td><td class="c-r">亥</td><td>登明</td></tr>
-        <tr><td>二月</td><td>春分</td><td class="c-r">戌</td><td>河魁</td></tr>
-        <tr><td>三月</td><td>谷雨</td><td class="c-r">酉</td><td>从魁</td></tr>
-        <tr><td>四月</td><td>小满</td><td class="c-r">申</td><td>传送</td></tr>
-        <tr><td>五月</td><td>夏至</td><td class="c-r">未</td><td>小吉</td></tr>
-        <tr><td>六月</td><td>大暑</td><td class="c-r">午</td><td>胜光</td></tr>
-        <tr><td>七月</td><td>处暑</td><td class="c-r">巳</td><td>太乙</td></tr>
-        <tr><td>八月</td><td>秋分</td><td class="c-r">辰</td><td>天罡</td></tr>
-        <tr><td>九月</td><td>霜降</td><td class="c-r">卯</td><td>太冲</td></tr>
-        <tr><td>十月</td><td>小雪</td><td class="c-r">寅</td><td>功曹</td></tr>
-        <tr><td>十一月</td><td>冬至</td><td class="c-r">丑</td><td>大吉</td></tr>
-        <tr><td>十二月</td><td>大寒</td><td class="c-r">子</td><td>神后</td></tr>
-      </table>
-    </div>
+    <div class="qk-sec-title">月将对照表（中气后换将，与月建相冲）</div>
+    <div class="qk-tbl-wrap"><table class="qk-tbl">
+      <tr><th>月份</th><th>中气</th><th>月将</th><th>将名</th><th>月建</th></tr>
+      <tr><td>正月</td><td>雨水</td><td class="c-r">亥</td><td>登明</td><td>寅</td></tr>
+      <tr><td>二月</td><td>春分</td><td class="c-r">戌</td><td>河魁</td><td>卯</td></tr>
+      <tr><td>三月</td><td>谷雨</td><td class="c-r">酉</td><td>从魁</td><td>辰</td></tr>
+      <tr><td>四月</td><td>小满</td><td class="c-r">申</td><td>传送</td><td>巳</td></tr>
+      <tr><td>五月</td><td>夏至</td><td class="c-r">未</td><td>小吉</td><td>午</td></tr>
+      <tr><td>六月</td><td>大暑</td><td class="c-r">午</td><td>胜光</td><td>未</td></tr>
+      <tr><td>七月</td><td>处暑</td><td class="c-r">巳</td><td>太乙</td><td>申</td></tr>
+      <tr><td>八月</td><td>秋分</td><td class="c-r">辰</td><td>天罡</td><td>酉</td></tr>
+      <tr><td>九月</td><td>霜降</td><td class="c-r">卯</td><td>太冲</td><td>戌</td></tr>
+      <tr><td>十月</td><td>小雪</td><td class="c-r">寅</td><td>功曹</td><td>亥</td></tr>
+      <tr><td>十一月</td><td>冬至</td><td class="c-r">丑</td><td>大吉</td><td>子</td></tr>
+      <tr><td>十二月</td><td>大寒</td><td class="c-r">子</td><td>神后</td><td>丑</td></tr>
+    </table></div>
   </div>
-
-  <!-- 贵人表 -->
   <div class="qk-panel" id="tab-gr">
-    <div class="qk-sec-title">天乙贵人表（昼夜分阴阳）</div>
-    <div class="qk-tbl-wrap">
-      <table class="qk-tbl">
-        <tr><th>日干</th><th>昼贵（阳贵）</th><th>夜贵（阴贵）</th></tr>
-        <tr><td class="c-a">甲戊庚</td><td class="c-r">丑</td><td class="c-r">未</td></tr>
-        <tr><td class="c-a">乙己</td><td class="c-r">子</td><td class="c-r">申</td></tr>
-        <tr><td class="c-a">丙丁</td><td class="c-r">亥</td><td class="c-r">酉</td></tr>
-        <tr><td class="c-a">壬癸</td><td class="c-r">卯</td><td class="c-r">巳</td></tr>
-        <tr><td class="c-a">辛</td><td class="c-r">午</td><td class="c-r">寅</td></tr>
-      </table>
-    </div>
+    <div class="qk-sec-title">天乙贵人表（昼卯至申·夜酉至寅）</div>
+    <div class="qk-tbl-wrap"><table class="qk-tbl">
+      <tr><th>日干</th><th>昼贵（阳贵）</th><th>夜贵（阴贵）</th></tr>
+      <tr><td class="c-a">甲 戊 庚</td><td class="c-r">丑（大吉）</td><td class="c-r">未（小吉）</td></tr>
+      <tr><td class="c-a">乙 己</td><td class="c-r">子（神后）</td><td class="c-r">申（传送）</td></tr>
+      <tr><td class="c-a">丙 丁</td><td class="c-r">亥（登明）</td><td class="c-r">酉（从魁）</td></tr>
+      <tr><td class="c-a">辛</td><td class="c-r">午（胜光）</td><td class="c-r">寅（功曹）</td></tr>
+      <tr><td class="c-a">壬 癸</td><td class="c-r">巳（太乙）</td><td class="c-r">卯（太冲）</td></tr>
+    </table></div>
+    <div style="font-size:11px;color:#9B8570;padding:6px 4px;line-height:1.8">口诀：甲戊庚牛羊（丑未）· 乙己鼠猴乡（子申）· 丙丁猪鸡位（亥酉）· 辛马虎相当（午寅）· 壬癸蛇兔藏（巳卯）</div>
   </div>
-
-  <!-- 旬空表 -->
   <div class="qk-panel" id="tab-xk">
     <div class="qk-sec-title">六旬旬空表</div>
-    <div class="qk-tbl-wrap">
-      <table class="qk-tbl">
-        <tr><th>旬首（甲子）</th><th>旬空二支</th></tr>
-        <tr><td class="c-a">甲子旬</td><td class="c-r">戌 亥</td></tr>
-        <tr><td class="c-a">甲戌旬</td><td class="c-r">申 酉</td></tr>
-        <tr><td class="c-a">甲申旬</td><td class="c-r">午 未</td></tr>
-        <tr><td class="c-a">甲午旬</td><td class="c-r">辰 巳</td></tr>
-        <tr><td class="c-a">甲辰旬</td><td class="c-r">寅 卯</td></tr>
-        <tr><td class="c-a">甲寅旬</td><td class="c-r">子 丑</td></tr>
-      </table>
-    </div>
+    <div class="qk-tbl-wrap"><table class="qk-tbl">
+      <tr><th>旬首</th><th>旬空二支</th><th>记忆</th></tr>
+      <tr><td class="c-a">甲子旬</td><td class="c-r">戌 亥</td><td>子→戌亥空</td></tr>
+      <tr><td class="c-a">甲戌旬</td><td class="c-r">申 酉</td><td>戌→申酉空</td></tr>
+      <tr><td class="c-a">甲申旬</td><td class="c-r">午 未</td><td>申→午未空</td></tr>
+      <tr><td class="c-a">甲午旬</td><td class="c-r">辰 巳</td><td>午→辰巳空</td></tr>
+      <tr><td class="c-a">甲辰旬</td><td class="c-r">寅 卯</td><td>辰→寅卯空</td></tr>
+      <tr><td class="c-a">甲寅旬</td><td class="c-r">子 丑</td><td>寅→子丑空</td></tr>
+    </table></div>
   </div>
-
-  <!-- 十干寄宫 -->
   <div class="qk-panel" id="tab-jg">
-    <div class="qk-sec-title">十干寄宫（天干对应地盘之宫）</div>
-    <div class="qk-tbl-wrap">
-      <table class="qk-tbl">
-        <tr><th>天干</th><th>寄宫</th><th>五行</th></tr>
-        <tr><td class="c-a">甲</td><td class="c-r">寅</td><td>木</td></tr>
-        <tr><td class="c-a">乙</td><td class="c-r">卯</td><td>木</td></tr>
-        <tr><td class="c-a">丙</td><td class="c-r">巳</td><td>火</td></tr>
-        <tr><td class="c-a">丁</td><td class="c-r">午</td><td>火</td></tr>
-        <tr><td class="c-a">戊</td><td class="c-r">巳</td><td>土</td></tr>
-        <tr><td class="c-a">己</td><td class="c-r">午</td><td>土</td></tr>
-        <tr><td class="c-a">庚</td><td class="c-r">申</td><td>金</td></tr>
-        <tr><td class="c-a">辛</td><td class="c-r">酉</td><td>金</td></tr>
-        <tr><td class="c-a">壬</td><td class="c-r">亥</td><td>水</td></tr>
-        <tr><td class="c-a">癸</td><td class="c-r">子</td><td>水</td></tr>
-      </table>
-    </div>
+    <div class="qk-sec-title">十干寄宫（避四正，寄于禄位）</div>
+    <div class="qk-tbl-wrap"><table class="qk-tbl">
+      <tr><th>天干</th><th>寄宫</th><th>五行</th><th>天干</th><th>寄宫</th><th>五行</th></tr>
+      <tr><td class="c-a">甲</td><td class="c-r">寅</td><td>木</td><td class="c-a">己</td><td class="c-r">未</td><td>土</td></tr>
+      <tr><td class="c-a">乙</td><td class="c-r">辰</td><td>木</td><td class="c-a">庚</td><td class="c-r">申</td><td>金</td></tr>
+      <tr><td class="c-a">丙</td><td class="c-r">巳</td><td>火</td><td class="c-a">辛</td><td class="c-r">戌</td><td>金</td></tr>
+      <tr><td class="c-a">丁</td><td class="c-r">未</td><td>火</td><td class="c-a">壬</td><td class="c-r">亥</td><td>水</td></tr>
+      <tr><td class="c-a">戊</td><td class="c-r">巳</td><td>土</td><td class="c-a">癸</td><td class="c-r">丑</td><td>水</td></tr>
+    </table></div>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
+</div>
 
-</div><!-- .app -->
 <script>
 const _scrollPos = {};
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0)}
+function goHome(){show('ph')}
+(function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;})();
+function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
 
-function show(id) {
-  const cur = document.querySelector('.screen.active');
-  if (cur) { _scrollPos[cur.id] = window.scrollY; cur.classList.remove('active'); }
-  const nxt = document.getElementById(id);
-  if (!nxt) return;
-  nxt.classList.add('active');
-  window.scrollTo(0, _scrollPos[id] || 0);
-}
+const KJ_DATA = {
+'月将口诀':[
+  {title:'正月·雨水后',body:'月将：亥 · 将名：登明\n五行：水 · 方位：北方\n月建：寅（月将与月建相冲）\n象意：登明者，光照开朗。主文书、雨水、江河之事。'},
+  {title:'二月·春分后',body:'月将：戌 · 将名：河魁\n五行：土 · 方位：西北\n月建：卯\n象意：河魁者，魁首之意。主官司、田土、争执之事。'},
+  {title:'三月·谷雨后',body:'月将：酉 · 将名：从魁\n五行：金 · 方位：西方\n月建：辰\n象意：从魁者，从属魁首。主金银、酒食、城郭之事。'},
+  {title:'四月·小满后',body:'月将：申 · 将名：传送\n五行：金 · 方位：西南\n月建：巳\n象意：传送者，传信送达。主道路、书信、出行之事。'},
+  {title:'五月·夏至后',body:'月将：未 · 将名：小吉\n五行：土 · 方位：西南\n月建：午\n象意：小吉者，小有吉祥。主饮食、草木、妇女之事。'},
+  {title:'六月·大暑后',body:'月将：午 · 将名：胜光\n五行：火 · 方位：南方\n月建：未\n象意：胜光者，光明胜利。主文章、光明、马匹之事。'},
+  {title:'七月·处暑后',body:'月将：巳 · 将名：太乙\n五行：火 · 方位：东南\n月建：申\n象意：太乙者，至尊之神。主文书、炉冶、贵人之事。'},
+  {title:'八月·秋分后',body:'月将：辰 · 将名：天罡\n五行：土 · 方位：东南\n月建：酉\n象意：天罡者，枢纽变动。主官府、牢狱、变动之事。'},
+  {title:'九月·霜降后',body:'月将：卯 · 将名：太冲\n五行：木 · 方位：正东\n月建：戌\n象意：太冲者，冲决奔涌。主门户、车船、草木之事。'},
+  {title:'十月·小雪后',body:'月将：寅 · 将名：功曹\n五行：木 · 方位：东北\n月建：亥\n象意：功曹者，功勋记录。主文书、道路、山林之事。'},
+  {title:'十一月·冬至后',body:'月将：丑 · 将名：大吉\n五行：土 · 方位：东北\n月建：子\n象意：大吉者，大吉大利。主田宅、牛畜、富贵之事。'},
+  {title:'十二月·大寒后',body:'月将：子 · 将名：神后\n五行：水 · 方位：正北\n月建：丑\n象意：神后者，后宫之神。主水源、阴私、婚姻之事。'},
+],
+'贵人口诀':[
+  {title:'甲 戊 庚 日',body:'昼贵（卯至申时）：丑 · 大吉\n夜贵（酉至寅时）：未 · 小吉\n\n口诀：甲戊庚，牛羊贵\n（丑为牛，未为羊）'},
+  {title:'乙 己 日',body:'昼贵（卯至申时）：子 · 神后\n夜贵（酉至寅时）：申 · 传送\n\n口诀：乙己，鼠猴乡\n（子为鼠，申为猴）'},
+  {title:'丙 丁 日',body:'昼贵（卯至申时）：亥 · 登明\n夜贵（酉至寅时）：酉 · 从魁\n\n口诀：丙丁，猪鸡位\n（亥为猪，酉为鸡）'},
+  {title:'辛 日',body:'昼贵（卯至申时）：午 · 胜光\n夜贵（酉至寅时）：寅 · 功曹\n\n口诀：辛，马虎相当\n（午为马，寅为虎）'},
+  {title:'壬 癸 日',body:'昼贵（卯至申时）：巳 · 太乙\n夜贵（酉至寅时）：卯 · 太冲\n\n口诀：壬癸，蛇兔藏\n（巳为蛇，卯为兔）'},
+],
+'十二天将':[
+  {title:'天乙贵人',body:'五行：土\n类象：官贵、文书、解厄、贵人扶持\n断法：临身最吉；空亡或受克则无力\n昼主公开阳事，夜主隐秘阴情\n地位：十二天将之首，以贵人定顺逆行序'},
+  {title:'螣蛇',body:'五行：火\n类象：惊恐、怪异、火灾、缠绕、梦魇\n断法：逢吉神吉中带扰；逢凶神灾祸缠身\n空亡：螣蛇空，诸凶可免\n特征：主心神不宁，事多反复纠缠'},
+  {title:'朱雀',body:'五行：火\n类象：口舌、文书、信息、诉讼、官司\n断法：临日干主口舌；临财官主文书喜庆\n空亡：朱雀空，口舌消散\n特征：南方火鸟，主言语文字一切信息传递'},
+  {title:'六合',body:'五行：木\n类象：婚姻、交易、中介、合作、和合\n断法：占婚最喜；占失物主被藏匿或交易所得\n空亡：六合空，婚约不成\n特征：主和合成交，事事喜六合临'},
+  {title:'勾陈',body:'五行：土\n类象：田土、牢狱、争斗、迟滞\n断法：主田产纠纷、官司牢狱、事体拖延\n空亡：纠纷可解，事不成\n特征：勾连纠缠，主延误与争讼'},
+  {title:'青龙',body:'五行：木\n类象：财帛、喜庆、升迁、酒食\n断法：大吉之神，主财利升官嫁娶\n空亡：青龙空，财喜减半\n特征：六壬最吉之将，临则百事顺遂'},
+  {title:'天空',body:'五行：土\n类象：虚诈、空亡、僧道、遗失\n断法：主事体落空、虚诈不实；占财谋事多不成\n特征：天空者虚无落空，遇之防欺诈'},
+  {title:'白虎',body:'五行：金\n类象：血光、死亡、疾病、丧事\n断法：大凶之神，主伤灾疾病丧亡\n空亡：白虎空，见凶不凶\n特征：六壬最凶之将，逢吉神可解，逢凶加剧'},
+  {title:'太常',body:'五行：土\n类象：酒食、宴饮、服饰、官职\n断法：主饮食喜庆官职；占婚主婚礼\n空亡：太常空，喜事减半\n特征：礼仪之神，主官场礼遇与饮食之事'},
+  {title:'玄武',body:'五行：水\n类象：盗窃、欺诈、暧昧、遗失\n断法：主失窃被骗暧昧；占失物主被盗\n空亡：玄武空，谋害不凶\n特征：北方水神，主阴暗隐秘，盗诈之事'},
+  {title:'太阴',body:'五行：金\n类象：阴私、隐匿、妇女、阴谋\n断法：主暗中谋划、阴私之事；占婚主私情\n特征：月亮之神，主隐秘幽暗，女性阴私之象'},
+  {title:'天后',body:'五行：水\n类象：妇女、婚姻、生育、雨水\n断法：主妇女之事婚姻生育；占婚主女方\n特征：后宫之主，主婚姻生育，占孕产最重此将'},
+],
+'遁干口诀':[
+  {title:'五虎遁月（年上起月干）',body:'甲己之年丙作首\n乙庚之岁戊为头\n丙辛之岁寻庚上\n丁壬壬位顺行流\n若问戊癸何方发\n甲寅之上好追求\n\n用法：以年干查得寅月天干，顺推至所求月份'},
+  {title:'五鼠遁时（日上起时干）',body:'甲己还加甲\n乙庚丙作初\n丙辛从戊起\n丁壬庚子居\n戊癸何方发\n壬子是真途\n\n用法：以日干查得子时天干，顺推至所求时辰'},
+  {title:'十干寄宫口诀',body:'甲课寅兮乙课辰\n丙戊课巳不需论\n丁己课未庚申上\n辛戌壬亥是其真\n癸课原来丑宫坐\n分明不用四正神\n\n用法：排四课时，以此确定日干在地盘的寄宫位置'},
+  {title:'遁干分布（六旬起法）',body:'甲子旬起甲子（子时甲）\n甲戌旬起甲子→实为壬子（差两位）\n速记：五旬对应五鼠遁\n甲己→甲子起\n乙庚→丙子起\n丙辛→戊子起\n丁壬→庚子起\n戊癸→壬子起'},
+],
+'九宗门':[
+  {title:'元首课',body:'特征：一上克下（天克地）\n发用：取克下之上神为初传\n象意：天象，君驭臣，名正言顺，九宗之首\n断法：事从外来，宜进取，吉多于凶'},
+  {title:'重审课',body:'特征：一下克上（地贼天）\n发用：取受克之下神为初传\n象意：地象，臣谏君，宜审慎\n断法：事从内起，主慎重，发难之端'},
+  {title:'比用课',body:'特征：二或四课交相克\n发用：取与日干阴阳相比者（阳日取阳，阴日取阴）\n二下贼上→比用；二上克下→知一\n断法：事多纠纷，阴阳有别，需明辨立场'},
+  {title:'涉害课',body:'特征：多克且阴阳不比，顺数本家统计克害\n发用：取克害次数最深者\n相等取法：有孟取孟（见机）→ 有仲取仲（察微）→ 复等：阳日取干上，阴日取辰上\n断法：涉险而过，步步为营'},
+  {title:'遥克·蒿矢',body:'特征：四课无正克，日干遥克他课上神\n发用：取被日干遥克之上神为初传\n象意：蒿矢者，以草作箭，力微\n断法：利小不利大，初凶后休，主动则吉'},
+  {title:'遥克·弹射',body:'特征：四课无正克，他课上神遥克日干\n发用：取遥克日干之上神为初传\n象意：弹射者，被动受击\n断法：利客不利主，宜先发制人'},
+  {title:'昴星课',body:'特征：无克无遥克\n发用：阳日取冲所占时之支（天门）的上神；阴日取地户上神\n断法：一切茫然，无迹可寻，凭感觉行事，宜问神'},
+  {title:'别责课',body:'特征：柔日（阴日），四课无克无遥克，二三课相同\n发用：初传取日支前三合之神；中末传均取日上神\n断法：主事不全，责任不清，宜分工明确'},
+  {title:'八专课',body:'特征：干支同位，仅两课\n发用：有克按克法；无克刚日顺数三位，柔日逆数三位；中末取日上神\n断法：主混杂宣淫，一人独断，事体偏颇'},
+],
+'格局口诀':[
+  {title:'三光格（吉）',body:'特征：日德、日禄、日马入传，或干支上神相生，无刑冲破害\n断法：光明正大，百事亨通，所谋皆成\n口诀：三光并临，主大吉大利'},
+  {title:'三阳格（吉）',body:'特征：三传皆阳神（子寅辰午申戌），或贵人在阳位\n断法：阳气旺盛，事体公开，利进取求官\n特点：主动进取，公开阳刚之事'},
+  {title:'龙德格（吉）',body:'特征：青龙乘德神（日德、天德）加临或发用\n断法：恩泽降临，仕途顺遂，可解诸灾厄\n口诀：龙德双临，百凶皆化'},
+  {title:'铸印格（吉）',body:'特征：干上克支上\n断法：掌权印信，主权威，宜求官进职\n对应：斫轮格—支上克干上，主受制守成'},
+  {title:'引从格（吉）',body:'特征：三传顺逆相生；合欢格：三传皆合\n断法：引从—事体顺遂，一引皆从；合欢—合作顺利，婚姻和谐\n特点：主诸事配合，贵人相助'},
+  {title:'斩关格（凶）',body:'特征：初传为日干冲神，或辰戌加干支\n断法：冲破阻碍，险中求胜，亦主逃亡、官非\n注意：有险有机，勇进则吉'},
+  {title:'闭口格（凶）',body:'特征：初传为日干墓神，或干上克干/逢空墓\n断法：口舌是非，言语受阻，事多隐晦\n口诀：闭口藏舌，不宜开口争论'},
+  {title:'天网格（凶）',body:'特征：三传皆空，或辰戌加临\n天狱格：三传皆刑，或墓神加日\n天网：虚无落空，百事成空\n天狱：牢狱官司，身陷囹圄'},
+  {title:'天寇格（凶）',body:'特征：三传皆贼克日干，或初传为鬼乘白虎\n断法：盗贼侵扰，意外灾祸，外来之凶\n注意：主防盗防灾，不宜出行'},
+  {title:'魄化格（凶）',body:'特征：白虎乘死神（绝神）加临\n断法：主死亡丧亡，血光之灾\n地位：六壬最重凶格之一，白虎与死气同临'},
+],
+'三传断法':[
+  {title:'初传',body:'象意：事之始，发端，来意\n别名：先锋门\n断法：定事件起点与来因；断来意关键\n生日干→事吉，主动有利\n克日干→事凶，被动不利\n入空→事无头绪，虚头'},
+  {title:'中传',body:'象意：事之变，转折，过程\n断法：看事情发展中的变化\n初生中→吉转吉，顺利推进\n初克中→受阻，发生转变\n中克初→过程生波折\n入空→中途落空，转机难寻'},
+  {title:'末传',body:'象意：事之终，结果，归宿\n断法：定最终结果\n末生日干→结果吉，事终成\n末克日干→结果凶，事终败\n末入空亡→虎头蛇尾，终不成\n末合日干→和合收场'},
+  {title:'三传顺生',body:'特征：初→中→末依次相生\n断法：事体顺遂，一帆风顺，吉上加吉\n口诀：三传如链，节节相生，所谋皆成\n注意：三传顺生为六壬最吉之象之一'},
+  {title:'三传逆克',body:'特征：初→中→末依次相克\n断法：阻碍重重，节节受制，凶上加凶\n口诀：三传克制，须防反复受损\n注意：逆克与逆生（倒生）不同，需仔细辨别'},
+  {title:'回头生克',body:'回头生：末传生初传\n→首尾呼应，始终有成，到底成事\n回头克：末传克初传\n→虽起点好，终受克制，始吉终凶\n断诀：回头生，到底成；回头克，始吉终凶'},
+],
+'行年法':[
+  {title:'行年定义',body:'行年：流年运程，以本命年支为起点，每年推进一步\n本命：出生年干支，为体（静）\n行年：当年行至之支，为用（动）\n作用：参行年可知当年运势走向，与课传结合断吉凶轻重'},
+  {title:'男命行年（顺数）',body:'男命行年顺数（顺时针）：\n从本命年支起，每年向前推一步\n例：本命戌年\n当年行亥，次年行子，后年行丑……\n口诀：男命顺行，岁岁向前'},
+  {title:'女命行年（逆数）',body:'女命行年逆数（逆时针）：\n从本命年支起，每年向后退一步\n例：本命戌年\n当年行酉，次年行申，后年行未……\n口诀：女命逆行，周而复始'},
+  {title:'行年断诀',body:'日上神克命上神→求财速成，带喜马德禄主功名\n命上神克日上神→官符灾讼，病厄临身\n日上神合命上神→喜事自生，好事连连\n日克年神→行人病在中途\n年神克日→诸事受阻，骨肉灾伤\n贵带吉神临命→解忧转运，否极泰来\n螣蛇生年→有人扶翼；克年→惊恐多'},
+],
+};
 
-function goHome() { show('ph'); }
-
-(function() {
-  const d = new Date();
-  const days = ['日','一','二','三','四','五','六'];
-  document.getElementById('el-date').textContent =
-    `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${days[d.getDay()]}`;
-})();
-
-function m5Toggle(btn) {
-  btn.classList.toggle('open');
-  btn.nextElementSibling.classList.toggle('open');
-}
-function m5SubToggle(btn) {
-  btn.classList.toggle('open');
-  btn.nextElementSibling.classList.toggle('open');
-}
-
-function switchQKTab(btn, panelId) {
-  document.querySelectorAll('.qk-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.qk-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(panelId).classList.add('active');
-}
-
-const KJ_DATA = {};
-
-let kjState = { cat: '', items: [], idx: 0, revealed: false };
-
-function startKJ(cat) {
-  const items = KJ_DATA[cat] || [];
-  if (!items.length) { showToast('该类别口诀内容即将补充…'); return; }
-  kjState = { cat, items, idx: 0, revealed: false };
-  updateKJCard();
-  show('pkj-g');
-}
-
-function updateKJCard() {
-  const { cat, items, idx } = kjState;
-  const item = items[idx] || {};
-  const total = items.length;
-  document.getElementById('kj-lbl').textContent = cat;
-  document.getElementById('kj-prog-r').textContent = `${idx+1}/${total}`;
-  document.getElementById('el-kj-prog').textContent = `${idx+1}/${total}`;
-  document.getElementById('el-kj-pb').style.width = `${(idx+1)/total*100}%`;
-  document.getElementById('kj-cat-lbl').textContent = cat;
-  document.getElementById('kj-title').textContent = item.title || '—';
-  document.getElementById('kj-body').textContent = item.body || '';
-  kjState.revealed = false;
-  document.getElementById('kj-body').classList.add('hidden');
-  document.getElementById('kj-hint').style.display = '';
-  document.getElementById('kj-reveal').style.display = 'none';
-}
-
-function toggleReveal() {
-  kjState.revealed = !kjState.revealed;
-  document.getElementById('kj-body').classList.toggle('hidden', !kjState.revealed);
-  document.getElementById('kj-hint').style.display = kjState.revealed ? 'none' : '';
-  document.getElementById('kj-reveal').style.display = kjState.revealed ? '' : 'none';
-}
-
-function kjMove(dir) {
-  const len = kjState.items.length;
-  kjState.idx = Math.max(0, Math.min(len - 1, kjState.idx + dir));
-  updateKJCard();
-}
-
-let _toastT;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(_toastT);
-  _toastT = setTimeout(() => t.classList.remove('show'), 2200);
-}
+let kjState={cat:'',items:[],idx:0,revealed:false};
+function startKJ(cat){const items=KJ_DATA[cat]||[];if(!items.length){showToast('内容即将补充…');return}kjState={cat,items,idx:0,revealed:false};updateKJCard();show('pkj-g')}
+function updateKJCard(){const{cat,items,idx}=kjState,item=items[idx]||{},total=items.length;document.getElementById('kj-lbl').textContent=cat;document.getElementById('kj-prog-r').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-prog').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-pb').style.width=`${(idx+1)/total*100}%`;document.getElementById('kj-cat-lbl').textContent=cat;document.getElementById('kj-title').textContent=item.title||'—';document.getElementById('kj-body').textContent=item.body||'';kjState.revealed=false;document.getElementById('kj-body').classList.add('hidden');document.getElementById('kj-hint').style.display='';document.getElementById('kj-reveal').style.display='none'}
+function toggleReveal(){kjState.revealed=!kjState.revealed;document.getElementById('kj-body').classList.toggle('hidden',!kjState.revealed);document.getElementById('kj-hint').style.display=kjState.revealed?'none':'';document.getElementById('kj-reveal').style.display=kjState.revealed?'':'none'}
+function kjMove(dir){const len=kjState.items.length;kjState.idx=Math.max(0,Math.min(len-1,kjState.idx+dir));updateKJCard()}
+let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
 </script>
 </body>
 </html>
