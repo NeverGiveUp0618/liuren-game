@@ -61,7 +61,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .prog-txt{font-size:12px;color:#9B8570;white-space:nowrap}
 .prog-wrap{flex:1;height:4px;background:#EDE7D8;border-radius:3px;border:1px solid #D4C4A0}
 .prog-bar{height:100%;border-radius:3px;background:#C41230;transition:width .3s}
-.fc-card{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #C41230}
+.fc-card{background:#EDE7D8;border:1px solid #D4C4A0;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #C41230;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .fc-card:active{transform:scale(.99)}
 .fc-label{font-size:10px;color:#9B8570;letter-spacing:3px;margin-bottom:16px;text-align:center;background:#F5F0E6;padding:3px 12px;border-radius:20px;border:1px solid #D4C4A0}
 .fc-title{font-size:21px;font-weight:bold;color:#C41230;text-align:center;letter-spacing:3px;line-height:1.6;margin-bottom:12px}
@@ -1519,9 +1519,9 @@ function importBackup(){
 
 // ══ 口诀闪卡 ══
 let kjState={cat:'',items:[],idx:0,revealed:false};
-function startKJ(cat){const items=KJ_DATA[cat]||[];if(!items.length){showToast('内容即将补充…');return}kjState={cat,items,idx:0,revealed:false};recordStudySession(cat);updateKJCard();show('pkj-g')}
+function startKJ(cat){const items=KJ_DATA[cat]||[];if(!items.length){showToast('内容即将补充…');return}kjState={cat,items,idx:0,revealed:false};try{recordStudySession(cat);}catch(e){}updateKJCard();_scrollPos['pkj-g']=0;show('pkj-g')}
 function updateKJCard(){const{cat,items,idx}=kjState,item=items[idx]||{},total=items.length;document.getElementById('kj-lbl').textContent=cat;document.getElementById('kj-prog-r').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-prog').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-pb').style.width=`${(idx+1)/total*100}%`;document.getElementById('kj-cat-lbl').textContent=cat;document.getElementById('kj-title').textContent=item.title||'—';document.getElementById('kj-body').textContent=item.body||'';kjState.revealed=false;document.getElementById('kj-body').classList.add('hidden');document.getElementById('kj-hint').style.display='';document.getElementById('kj-reveal').style.display='none'}
-function toggleReveal(){kjState.revealed=!kjState.revealed;document.getElementById('kj-body').classList.toggle('hidden',!kjState.revealed);document.getElementById('kj-hint').style.display=kjState.revealed?'none':'';document.getElementById('kj-reveal').style.display=kjState.revealed?'':'none'}
+function toggleReveal(){kjState.revealed=!kjState.revealed;document.getElementById('kj-body').classList.toggle('hidden',!kjState.revealed);document.getElementById('kj-hint').style.display=kjState.revealed?'none':'';document.getElementById('kj-reveal').style.display=kjState.revealed?'block':'none'}
 function kjMove(dir){const len=kjState.items.length;kjState.idx=Math.max(0,Math.min(len-1,kjState.idx+dir));updateKJCard()}
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
 </script>
