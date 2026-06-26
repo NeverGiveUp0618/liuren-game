@@ -109,6 +109,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .qk-tbl .c-r{color:#C41230;font-weight:bold;font-size:15px}
 .qk-tbl .c-a{color:#8B6914;font-weight:bold}
 .qk-sec-title{font-size:11px;color:#9B8570;letter-spacing:3px;padding:6px 2px 8px;font-weight:bold;border-bottom:1px solid #D4C4A0;margin-bottom:10px}
+.bk-banner{background:#FDF8F2;border:1px solid #C4123050;border-radius:12px;padding:10px 14px;margin:0 0 9px;display:none;align-items:center;gap:10px}
+.bk-banner.show{display:flex}
+.bk-banner-txt{flex:1;font-size:12px;color:#6B5040;line-height:1.4}
+.bk-banner-btn{background:#C41230;color:#F5F0E6;border:none;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.bk-row{display:flex;gap:8px;margin:0 0 6px}
+.bk-btn{flex:1;background:#EDE7D8;color:#6B5040;border:1px solid #D4C4A0;border-radius:10px;padding:9px 6px;font-size:12px;cursor:pointer;text-align:center}
+.bk-btn:active{background:#D4C4A0}
 </style>
 </head>
 <body>
@@ -124,9 +131,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="hquote">六壬之学，以贵神为主，以天将为辅，以三传为用。</div>
   <div class="hdate" id="el-date"></div>
   <div class="hstats">
-    <div class="hstat"><div class="hstat-v">—</div><div class="hstat-l">连续学习</div></div>
-    <div class="hstat"><div class="hstat-v">—</div><div class="hstat-l">闪卡最高</div></div>
-    <div class="hstat"><div class="hstat-v">—</div><div class="hstat-l">口诀已背</div></div>
+    <div class="hstat"><div class="hstat-v" id="hs-streak">—</div><div class="hstat-l">连续学习</div></div>
+    <div class="hstat"><div class="hstat-v" id="hs-best">—</div><div class="hstat-l">闪卡最高</div></div>
+    <div class="hstat"><div class="hstat-v" id="hs-studied">—</div><div class="hstat-l">口诀已背</div></div>
   </div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">🀄</div><div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div></div>
@@ -142,6 +149,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('p5')">进入速查 →</button></div>
+  </div>
+  <div class="bk-banner" id="bk-remind">
+    <div class="bk-banner-txt">💾 <b id="bk-remind-days">15天</b>未备份，换手机前记得导出！</div>
+    <button class="bk-banner-btn" onclick="exportBackup()">立即备份</button>
+  </div>
+  <div class="bk-row">
+    <button class="bk-btn" onclick="exportBackup()">📦 导出备份</button>
+    <button class="bk-btn" onclick="importBackup()">📂 导入恢复</button>
   </div>
 </div>
 
@@ -1315,9 +1330,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <script>
 const _scrollPos = {};
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0)}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();}}
 function goHome(){show('ph')}
-(function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;})();
+(function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;updateHomeStats();checkBkRemind();})();
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
@@ -1431,8 +1446,80 @@ const KJ_DATA = {
 ],
 };
 
+// ══ 数据存储 ══
+const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
+function getLRData(){try{return JSON.parse(localStorage.getItem(LR_KEY)||'{}')}catch{return{}}}
+function saveLRData(d){localStorage.setItem(LR_KEY,JSON.stringify(d))}
+function todayStr(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`}
+
+// ══ 学习记录 ══
+function recordStudySession(cat){
+  const d=getLRData(),today=todayStr();
+  const cats=new Set(d.studiedCats||[]);cats.add(cat);
+  const streak=d.lastDate===today?d.streak||(1):(d.lastDate===getPrevDay(today)?((d.streak||0)+1):1);
+  const todayCats=d.lastDate===today?(d.todayCats||0)+1:1;
+  const best=Math.max(d.best||0,todayCats);
+  saveLRData({...d,studiedCats:[...cats],lastDate:today,streak,todayCats,best});
+  updateHomeStats();
+}
+function getPrevDay(s){const d=new Date(s);d.setDate(d.getDate()-1);return d.toISOString().slice(0,10)}
+
+// ══ 首页统计 ══
+function updateHomeStats(){
+  const d=getLRData(),today=todayStr();
+  const streak=d.lastDate===today||(d.lastDate===getPrevDay(today))?d.streak||0:0;
+  document.getElementById('hs-streak').textContent=(streak||0)+'天';
+  document.getElementById('hs-best').textContent=(d.best||0)+'次';
+  document.getElementById('hs-studied').textContent=(d.studiedCats||[]).length+'类';
+}
+
+// ══ 备份提醒 ══
+const BK_DATE_KEY=LR_BK_KEY;
+function checkBkRemind(){
+  const last=localStorage.getItem(BK_DATE_KEY);
+  const banner=document.getElementById('bk-remind');if(!banner)return;
+  const days=last?Math.floor((Date.now()-new Date(last).getTime())/86400000):999;
+  if(days>=15){document.getElementById('bk-remind-days').textContent=last?days+'天':'从未';banner.classList.add('show');}
+  else banner.classList.remove('show');
+}
+
+// ══ 导出备份 ══
+function exportBackup(){
+  const data={v:1,date:todayStr(),lr:getLRData()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download=`大六壬备份_${todayStr()}.json`;a.click();
+  URL.revokeObjectURL(url);
+  localStorage.setItem(BK_DATE_KEY,todayStr());
+  checkBkRemind();
+  showToast('备份已下载，妥善保存！');
+}
+
+// ══ 导入恢复 ══
+function importBackup(){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const d=JSON.parse(ev.target.result);
+        if(!d.v||!d.lr)throw new Error();
+        saveLRData(d.lr);
+        localStorage.setItem(BK_DATE_KEY,todayStr());
+        showToast('数据已恢复！');
+        updateHomeStats();checkBkRemind();
+      }catch{showToast('文件格式错误，导入失败');}
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
+// ══ 口诀闪卡 ══
 let kjState={cat:'',items:[],idx:0,revealed:false};
-function startKJ(cat){const items=KJ_DATA[cat]||[];if(!items.length){showToast('内容即将补充…');return}kjState={cat,items,idx:0,revealed:false};updateKJCard();show('pkj-g')}
+function startKJ(cat){const items=KJ_DATA[cat]||[];if(!items.length){showToast('内容即将补充…');return}kjState={cat,items,idx:0,revealed:false};recordStudySession(cat);updateKJCard();show('pkj-g')}
 function updateKJCard(){const{cat,items,idx}=kjState,item=items[idx]||{},total=items.length;document.getElementById('kj-lbl').textContent=cat;document.getElementById('kj-prog-r').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-prog').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-pb').style.width=`${(idx+1)/total*100}%`;document.getElementById('kj-cat-lbl').textContent=cat;document.getElementById('kj-title').textContent=item.title||'—';document.getElementById('kj-body').textContent=item.body||'';kjState.revealed=false;document.getElementById('kj-body').classList.add('hidden');document.getElementById('kj-hint').style.display='';document.getElementById('kj-reveal').style.display='none'}
 function toggleReveal(){kjState.revealed=!kjState.revealed;document.getElementById('kj-body').classList.toggle('hidden',!kjState.revealed);document.getElementById('kj-hint').style.display=kjState.revealed?'none':'';document.getElementById('kj-reveal').style.display=kjState.revealed?'':'none'}
 function kjMove(dir){const len=kjState.items.length;kjState.idx=Math.max(0,Math.min(len-1,kjState.idx+dir));updateKJCard()}
