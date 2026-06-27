@@ -143,6 +143,24 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:12px}
 .p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:#F5F0E6;border:1px solid #D4C4A0;border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
 .p5-nav-btn:active{background:#D4C4A0;color:#C41230}
+/* 三传发用·九宗门 */
+.z9-step{background:#FDF8F2;border:1px solid #D4C4A0;border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start}
+.z9-num{background:#C41230;color:#fff;border-radius:50%;width:20px;height:20px;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;margin-top:2px;flex-shrink:0}
+.z9-sc{flex:1;font-size:12px;color:#6B5040;line-height:1.8}
+.z9-sc .hit{color:#C41230;font-weight:bold}
+.z9-sc .sub{color:#9B8570;font-size:11px}
+.z9-card{background:#FDF8F2;border:1px solid #D4C4A0;border-radius:12px;margin-bottom:8px;overflow:hidden}
+.z9-hdr{padding:11px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.z9-hname{font-size:14px;font-weight:bold;color:#1C0A00;flex:1}
+.z9-htag{font-size:10px;color:#9B8570}
+.z9-arr{color:#D4C4A0;font-size:14px;transition:transform .2s;flex-shrink:0}
+.z9-hdr.open .z9-arr{transform:rotate(90deg)}
+.z9-body{display:none;padding:10px 14px 13px;border-top:1px solid #EDE7D8;font-size:12px;color:#6B5040;line-height:1.9}
+.z9-body.open{display:block}
+.z9-row{margin-bottom:3px}
+.z9-row b{color:#1C0A00}
+.z9-row .hit{color:#C41230;font-weight:bold}
+.z9-mn{margin-top:8px;background:#EDE7D8;border-radius:7px;padding:7px 10px;font-size:11px;color:#8B6914;line-height:1.7;border-left:3px solid #C41230}
 /* 起课排盘 */
 .lupan{width:100%;border-collapse:collapse;margin:4px 0}
 .lupan td{border:1px solid #D4C4A0;text-align:center;vertical-align:middle;padding:4px 2px}
@@ -223,6 +241,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="qk-entry-row">
       <div style="font-size:22px">🗺</div>
       <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课排盘</div><div style="font-size:11px;color:#9B8570;margin-top:1px">式盘·天将·遁干·三传·四课 全盘展示</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div class="qk-entry-card" onclick="show('p9z')">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🧭</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">三传发用·九宗门</div><div style="font-size:11px;color:#9B8570;margin-top:1px">判断流程 + 九门详解，白话讲透规则</div></div>
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
   </div>
@@ -1501,6 +1526,235 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 三传发用·九宗门 ======== -->
+<div id="p9z" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">三传发用·九宗门</div></div>
+
+  <div class="sec-t" style="margin-top:4px">判断流程（按顺序逐步检查）</div>
+
+  <div class="z9-step">
+    <div class="z9-num">1</div>
+    <div class="z9-sc">
+      <b>先看是否特殊课型</b><br>
+      · 日干支同宫（如甲寅/壬子）→ 四课变两课 → <span class="hit">八专课</span><br>
+      · 月将 = 占时支 → 天地盘完全重合 → <span class="hit">伏吟课</span><br>
+      · 天地盘各居对冲（子午换位…） → <span class="hit">返吟课</span>
+    </div>
+  </div>
+
+  <div class="z9-step">
+    <div class="z9-num">2</div>
+    <div class="z9-sc">
+      <b>四课有直接克吗？</b>（上下神五行相克）<br>
+      · 只有1处「上克下」，无下克上 → <span class="hit">元首课</span><br>
+      · 只有1处「下克上」，无上克下 → <span class="hit">重审课</span><br>
+      · 多处克，且都是同方向（全上克下 or 全下克上）→ <span class="hit">知一课</span><br>
+      · 既有上克下，又有下克上（混合）→ <span class="hit">涉害课</span>
+    </div>
+  </div>
+
+  <div class="z9-step">
+    <div class="z9-num">3</div>
+    <div class="z9-sc">
+      <b>无直接克 → 四课完整（没有重复）？</b><br>
+      · 有「上神克日干」或「日干克上神」→ <span class="hit">遥克课</span><br>
+      · 完全没有遥克 → <span class="hit">昴星课</span>（取地盘酉位上神）
+    </div>
+  </div>
+
+  <div class="z9-step">
+    <div class="z9-num">4</div>
+    <div class="z9-sc">
+      <b>四课有重复（实为三课）？</b><br>
+      · 无克无遥克，且四课中出现重复 → <span class="hit">别责课</span>
+    </div>
+  </div>
+
+  <div class="sec-t">九宗门详解</div>
+
+  <!-- 元首 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">元首课</div>
+        <div class="z9-htag">有克 · 唯一上克下</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课中只有一处「上神克下神」，没有下克上</div>
+      <div class="z9-row"><b>取法：</b>那个克处的<span class="hit">上神</span>就是初传；中传=初传落地盘上的天盘；末传同理</div>
+      <div class="z9-row"><b>象意：</b>上克下如君令臣，顺正之象，事多顺遂</div>
+      <div class="z9-mn">记：唯一一个上神胜出，当仁不让发用</div>
+    </div>
+  </div>
+
+  <!-- 重审 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">重审课</div>
+        <div class="z9-htag">有克 · 唯一下克上</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课中只有一处「下神克上神」，没有上克下</div>
+      <div class="z9-row"><b>取法：</b>那个克处的<span class="hit">下神</span>为初传；若下神是天干（日干），取日干寄宫地支</div>
+      <div class="z9-row"><b>象意：</b>臣克君，需重新审视，事多反复、情况复杂</div>
+      <div class="z9-mn">记：下神爬上来发用，事情有点反常</div>
+    </div>
+  </div>
+
+  <!-- 知一 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">知一课</div>
+        <div class="z9-htag">有克 · 多处同类克</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课中有多处「上克下」（无下克上），或多处「下克上」（无上克下）</div>
+      <div class="z9-row"><b>取法（上克下多处）：</b>阳日取<span class="hit">第一课上神</span>（干上），阴日取<span class="hit">第三课上神</span>（支上）</div>
+      <div class="z9-row"><b>取法（下克上多处）：</b>阳日取<span class="hit">第一课下神</span>，阴日取<span class="hit">第三课下神</span></div>
+      <div class="z9-row" style="color:#9B8570;font-size:11px">阳日：甲丙戊庚壬；阴日：乙丁己辛癸</div>
+      <div class="z9-mn">记：多中取一，阳干跟着日干走，阴日跟着日支走</div>
+    </div>
+  </div>
+
+  <!-- 涉害 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">涉害课</div>
+        <div class="z9-htag">有克 · 上下混合克</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课中既有「上克下」又有「下克上」（或知一相等无法直接取）</div>
+      <div class="z9-row"><b>取法：</b>从各克处出发，沿地盘顺序往前数，统计路途经过多少「被克地支」，<span class="hit">经过克最多</span>的那条路的起点上神为初传</div>
+      <div class="z9-row"><b>深浅规则：</b>孟（寅申巳亥）> 仲（子午卯酉）> 季（辰戌丑未），深者优先</div>
+      <div class="z9-row"><b>相等时：</b>见机格（孟上神）> 察微格（仲上神），或阳日取干上/阴日取支上</div>
+      <div class="z9-mn">记：走得越远、克得越多，说明你涉险越深，取最深那条路</div>
+    </div>
+  </div>
+
+  <!-- 遥克 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">遥克课</div>
+        <div class="z9-htag">无克 · 日干与上神隔空克</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课上下神之间无直接克，但日干与第2/3/4课上神之间存在克</div>
+      <div class="z9-row"><b>蒿矢（上神克日干）：</b>「上神主动打日干」→ 取<span class="hit">那个上神</span>为初传，优先</div>
+      <div class="z9-row"><b>弹射（日干克上神）：</b>「日干打出去」→ 取<span class="hit">被克的上神</span>为初传</div>
+      <div class="z9-row"><b>多处遥克：</b>按知一/涉害的比用法处理</div>
+      <div class="z9-mn">记：没打到面前，隔空喊话——蒿矢是被人打，弹射是自己射出去</div>
+    </div>
+  </div>
+
+  <!-- 昴星 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">昴星课</div>
+        <div class="z9-htag">无克无遥克 · 四课完整</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课（完整）既无直接克，也无遥克</div>
+      <div class="z9-row"><b>取法：</b>取<span class="hit">地盘酉位</span>上的天盘地支为初传（酉=从魁，昴星宿所在）</div>
+      <div class="z9-row"><b>刚日（阳干）：</b>从酉上取，祸从外起；<b>柔日（阴干）：</b>从酉上取，祸从内起</div>
+      <div class="z9-row"><b>象意：</b>四课死气沉沉，让西方肃杀之神出面决断</div>
+      <div class="z9-mn">记：实在没得选，就让酉位（从魁）出来担大旗</div>
+    </div>
+  </div>
+
+  <!-- 别责 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">别责课</div>
+        <div class="z9-htag">无克无遥克 · 三课（四课有重复）</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>四课中有重复（实际只有三课），且无克无遥克</div>
+      <div class="z9-row"><b>阳日取法：</b>找日干的<span class="hit">天干六合</span>地支（甲合己→找己所在支/乙合庚→找庚所在支…），取该地支天盘为初传</div>
+      <div class="z9-row"><b>阴日取法：</b>找日支三合局的<span class="hit">中间一支</span>（如日支巳→巳酉丑三合，取酉），取其地盘地支为初传；中末传取干上神</div>
+      <div class="z9-row" style="color:#9B8570;font-size:11px">六合：甲己·乙庚·丙辛·丁壬·戊癸；三合：寅午戌·申子辰·巳酉丑·亥卯未</div>
+      <div class="z9-mn">记：四课残缺，靠「合」字来牵线找初传</div>
+    </div>
+  </div>
+
+  <!-- 八专 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">八专课</div>
+        <div class="z9-htag">特殊 · 干支同宫，两课</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>日干寄宫与日支同一地支（如甲寅日、壬子日、庚申日等），四课中第一二课相同、第三四课相同，实为两课</div>
+      <div class="z9-row"><b>有克：</b>仍按贼克法（元首/重审/涉害）取初传</div>
+      <div class="z9-row"><b>无克：</b>阳日从<span class="hit">日上神顺数3位</span>取初传；阴日从<span class="hit">支上神逆数3位</span>取初传</div>
+      <div class="z9-row"><b>中末传：</b>均取日上神（不管有没有克）</div>
+      <div class="z9-row"><b>象意：</b>干支混杂同位，阴阳不分，主私秘淫乱、事情不清</div>
+      <div class="z9-mn">记：两课局面，没克就顺（阳）逆（阴）数三个找初传</div>
+    </div>
+  </div>
+
+  <!-- 伏吟 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">伏吟课</div>
+        <div class="z9-htag">特殊 · 天地盘完全重合</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>月将 = 占时支，天地盘各支都在本位（子还在子，丑还在丑…）</div>
+      <div class="z9-row"><b>有克：</b>按贼克法取初传；中传=初传所刑，末传=中传所刑</div>
+      <div class="z9-row"><b>无克：</b>阳日取<span class="hit">日上神</span>，阴日取<span class="hit">支上神</span>为初传；中末依刑推</div>
+      <div class="z9-row"><b>刑序：</b>寅刑巳→巳刑申→申刑寅；丑刑戌→戌刑未→未刑丑；子刑卯→卯刑子；辰午酉亥<b>自刑</b>（遇自刑则取日辰并用）</div>
+      <div class="z9-row"><b>象意：</b>万物潜伏不动，主隐匿、事不明、静中难动</div>
+      <div class="z9-mn">记：天地合体不动，只能靠「刑」来撬动三传</div>
+    </div>
+  </div>
+
+  <!-- 返吟 -->
+  <div class="z9-card">
+    <div class="z9-hdr" onclick="z9Tog(this)">
+      <div>
+        <div class="z9-hname">返吟课</div>
+        <div class="z9-htag">特殊 · 天地盘各居对冲</div>
+      </div>
+      <span class="z9-arr">›</span>
+    </div>
+    <div class="z9-body">
+      <div class="z9-row"><b>判断：</b>天地盘各支居于对冲位（子在午位、午在子位……十二支全部如此）</div>
+      <div class="z9-row"><b>有克：</b>按贼克/涉害法取初传；中传=初传冲位，末传=中传冲位（即回到初传）</div>
+      <div class="z9-row"><b>无克（井栏射，丁己辛+丑未日）：</b>取<span class="hit">支上神所刑地支</span>为初传；中传=初传冲，末传=中传刑</div>
+      <div class="z9-row"><b>象意：</b>来去相冲，反复无常，主事情不定、往返变化</div>
+      <div class="z9-mn">记：天地对冲，三传也跟着「冲来冲去」反复</div>
+    </div>
+  </div>
+
+  <div style="height:12px"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 </div>
 
@@ -2103,6 +2357,7 @@ function _kcResult(){
   saveSessionRecord('起课步骤',total,score);
 }
 
+function z9Tog(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
 
 // ══ 键盘快捷键 ══
