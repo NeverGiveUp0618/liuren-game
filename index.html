@@ -2623,8 +2623,7 @@ function zmRender(){
   document.getElementById('zm-info').innerHTML=`日干支：<b style="color:#C41230">${q.rg}${q.rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C41230">${q.yj.yj}</b>（${q.yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#C41230">${q.zs}</b>时`;
   // 四课表
   const tbl=document.getElementById('zm-sk-tbl');
-  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
-  tbl.innerHTML+=_skTableHTML(q.sk,q.tp);
+  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`+_skTableHTML(q.sk,q.tp);
   // 四选一
   const pool=ZM_METHODS.filter(m=>m!==q.method);
   const opts=shuffleArr([q.method,...shuffleArr(pool).slice(0,3)]);
@@ -2695,8 +2694,7 @@ function scRender(){
   document.getElementById('sc-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C41230">${yj.yj}</b> &nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时`;
   // 四课（含克贼标记）
   const tbl=document.getElementById('sc-sk-tbl');
-  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
-  tbl.innerHTML+=_skTableHTML(sk,tp);
+  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`+_skTableHTML(sk,tp);
   // 步骤标题 + 提示
   const labels=['推初传（发用）','推中传','推末传'];
   const hints=[
@@ -2838,8 +2836,7 @@ function startZL(){
   const{rg,rz,yj,zs,day,sk,tp}=kcState;
   document.getElementById('zl-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C41230">${yj.yj}</b>（${yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时（${day?'昼':'夜'}）`;
   const tbl=document.getElementById('zl-sk-tbl');
-  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
-  tbl.innerHTML+=_skTableHTML(sk,tp);
+  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`+_skTableHTML(sk,tp);
   // 事实摘要
   const ske=sk.filter(k=>_isKe(k.s,k.x)),xke=sk.filter(k=>_isKe(k.x,k.s));
   const isYinYang=GAN_JI[rg]===rz;
