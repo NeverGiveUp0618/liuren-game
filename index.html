@@ -6,211 +6,211 @@
 <title>大六壬日学</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;background:#0a0f1a;color:#c8d4f0;min-height:100vh;display:flex;justify-content:center}
+body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;background:#100808;color:#d8b8a0;min-height:100vh;display:flex;justify-content:center}
 .app{width:100%;max-width:480px;min-height:100vh}
 @media(min-width:600px){body{background:#060b14;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
 .screen{display:none;flex-direction:column;padding:14px 14px 28px;min-height:100vh}
 .screen.active{display:flex}
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
-.tbk{background:none;border:none;color:#4A5A7A;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
-.tbk:hover{background:#101828;color:#7A8CB0}
-.tbtitle{flex:1;text-align:center;font-size:14px;color:#7A8CB0;letter-spacing:2px}
-.tbr{font-size:12px;color:#4A5A7A;white-space:nowrap}
+.tbk{background:none;border:none;color:#6a4840;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
+.tbk:hover{background:#1c1010;color:#9a7870}
+.tbtitle{flex:1;text-align:center;font-size:14px;color:#9a7870;letter-spacing:2px}
+.tbr{font-size:12px;color:#6a4840;white-space:nowrap}
 .btn{width:100%;padding:13px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none;letter-spacing:1px}
 .btn:active{transform:scale(.98)}
-.btn-r{background:#4A7CF5;color:#e0e8fc;letter-spacing:2px}.btn-r:hover{background:#3A6CE0}
-.btn-g{background:#2E7D5A;color:#e0e8fc}.btn-g:hover{background:#236248}
-.btn-d{background:#101828;color:#7A8CB0;border:1px solid #1e2a42}.btn-d:hover{background:#1a2640}
-.btn-a{background:#5A8CD4;color:#e0e8fc}.btn-a:hover{background:#4A6CC8}
-.card{background:#101828;border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid #1e2a42}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#050810;color:#e0e8fc;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.btn-r{background:#C84B30;color:#e8c8b8;letter-spacing:2px}.btn-r:hover{background:#A83828}
+.btn-g{background:#8B3B20;color:#e8c8b8}.btn-g:hover{background:#236248}
+.btn-d{background:#1c1010;color:#9a7870;border:1px solid #201010}.btn-d:hover{background:#1e1010}
+.btn-a{background:#D46040;color:#e8c8b8}.btn-a:hover{background:#4A6CC8}
+.card{background:#1c1010;border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid #201010}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#050810;color:#e8c8b8;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .toast.show{opacity:1}
 .hlogo{text-align:center;padding:26px 0 12px}
-.hlogo-t{font-size:27px;font-weight:bold;color:#4A7CF5;letter-spacing:8px}
-.hlogo-s{font-size:11px;color:#4A5A7A;margin-top:6px;letter-spacing:4px}
-.hlogo-dec{font-size:10px;color:#3A4A6A;margin-top:3px;letter-spacing:3px}
-.hdate{background:#101828;border:1px solid #1e2a42;border-radius:12px;padding:10px 14px;text-align:center;font-size:14px;color:#7A8CB0;margin:6px 0 10px;letter-spacing:1px}
+.hlogo-t{font-size:27px;font-weight:bold;color:#C84B30;letter-spacing:8px}
+.hlogo-s{font-size:11px;color:#6a4840;margin-top:6px;letter-spacing:4px}
+.hlogo-dec{font-size:10px;color:#5A2020;margin-top:3px;letter-spacing:3px}
+.hdate{background:#1c1010;border:1px solid #201010;border-radius:12px;padding:10px 14px;text-align:center;font-size:14px;color:#9a7870;margin:6px 0 10px;letter-spacing:1px}
 .hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
-.hstat{background:#101828;border:1px solid #1e2a42;border-radius:12px;padding:11px 6px;text-align:center}
-.hstat-v{font-size:22px;font-weight:bold;color:#4A7CF5}
-.hstat-l{font-size:10px;color:#4A5A7A;margin-top:2px}
-.mcard{background:#101828;border-radius:16px;padding:13px 15px;margin-bottom:9px;border:2px solid #1e2a42;transition:border-color .15s}
-.mcard:hover{border-color:#4A7CF5}
+.hstat{background:#1c1010;border:1px solid #201010;border-radius:12px;padding:11px 6px;text-align:center}
+.hstat-v{font-size:22px;font-weight:bold;color:#C84B30}
+.hstat-l{font-size:10px;color:#6a4840;margin-top:2px}
+.mcard{background:#1c1010;border-radius:16px;padding:13px 15px;margin-bottom:9px;border:2px solid #201010;transition:border-color .15s}
+.mcard:hover{border-color:#C84B30}
 .mcard-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}
 .mcard-icon{font-size:22px;width:34px;text-align:center;flex-shrink:0}
-.mcard-name{font-size:15px;font-weight:bold;color:#c8d4f0}
-.mcard-desc{font-size:11px;color:#4A5A7A;margin-top:1px}
+.mcard-name{font-size:15px;font-weight:bold;color:#d8b8a0}
+.mcard-desc{font-size:11px;color:#6a4840;margin-top:1px}
 .mcard-btns{display:flex;gap:7px;flex-wrap:wrap}
 .mcard-btns .btn{flex:1;min-width:60px;padding:9px 4px;font-size:12px}
-.qk-entry-card{background:#0c1820;border:1px solid #1a2838;border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:border-color .15s}
-.qk-entry-card:hover{border-color:#4A7CF5}
+.qk-entry-card{background:#0c1820;border:1px solid #1e1010;border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:border-color .15s}
+.qk-entry-card:hover{border-color:#C84B30}
 .qk-entry-row{display:flex;align-items:center;gap:10px}
-.hhist{font-size:11px;color:#4A5A7A;margin-bottom:6px}
-.hquote{text-align:center;font-size:12px;color:#4A5A7A;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:#101828;border-radius:10px;margin:0 0 8px;border:1px solid #1e2a42;font-style:italic}
+.hhist{font-size:11px;color:#6a4840;margin-bottom:6px}
+.hquote{text-align:center;font-size:12px;color:#6a4840;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:#1c1010;border-radius:10px;margin:0 0 8px;border:1px solid #201010;font-style:italic}
 .update-bar{display:flex;align-items:center;gap:8px;padding:5px 2px;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#4A7CF5;flex-shrink:0}
-.update-bar-text{font-size:12px;color:#4A5A7A;flex:1;letter-spacing:.5px}
-.update-bar-btn{font-size:12px;color:#4A7CF5;white-space:nowrap}
+.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#C84B30;flex-shrink:0}
+.update-bar-text{font-size:12px;color:#6a4840;flex:1;letter-spacing:.5px}
+.update-bar-btn{font-size:12px;color:#C84B30;white-space:nowrap}
 .update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
 .kj-grp{margin-bottom:14px}
-.kj-grp-lbl{font-size:11px;color:#4A5A7A;letter-spacing:2px;margin-bottom:7px;padding:0 2px;font-weight:bold}
+.kj-grp-lbl{font-size:11px;color:#6a4840;letter-spacing:2px;margin-bottom:7px;padding:0 2px;font-weight:bold}
 .kj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
-.kj-btn{background:#101828;border:2px solid #1e2a42;border-radius:12px;cursor:pointer;padding:13px 8px;text-align:center;transition:all .15s}
-.kj-btn:hover{border-color:#4A7CF5}.kj-btn:active{transform:scale(.97)}
-.kj-btn-name{font-size:14px;font-weight:bold;color:#c8d4f0}
-.kj-btn-n{font-size:10px;color:#4A5A7A;margin-top:3px}
-.kj-btn.clr-r{border-color:#4A7CF540}
-.kj-btn.clr-g{border-color:#2E7D5A40}
-.kj-btn.clr-a{border-color:#5A8CD440}
+.kj-btn{background:#1c1010;border:2px solid #201010;border-radius:12px;cursor:pointer;padding:13px 8px;text-align:center;transition:all .15s}
+.kj-btn:hover{border-color:#C84B30}.kj-btn:active{transform:scale(.97)}
+.kj-btn-name{font-size:14px;font-weight:bold;color:#d8b8a0}
+.kj-btn-n{font-size:10px;color:#6a4840;margin-top:3px}
+.kj-btn.clr-r{border-color:#C84B3040}
+.kj-btn.clr-g{border-color:#8B3B2040}
+.kj-btn.clr-a{border-color:#D4604040}
 .prog-row{display:flex;align-items:center;gap:8px;padding:2px 0 8px;flex-shrink:0}
-.prog-txt{font-size:12px;color:#4A5A7A;white-space:nowrap}
-.prog-wrap{flex:1;height:4px;background:#101828;border-radius:3px;border:1px solid #1e2a42}
-.prog-bar{height:100%;border-radius:3px;background:#4A7CF5;transition:width .3s}
-.fc-card{background:#101828;border:1px solid #1e2a42;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #4A7CF5;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.prog-txt{font-size:12px;color:#6a4840;white-space:nowrap}
+.prog-wrap{flex:1;height:4px;background:#1c1010;border-radius:3px;border:1px solid #201010}
+.prog-bar{height:100%;border-radius:3px;background:#C84B30;transition:width .3s}
+.fc-card{background:#1c1010;border:1px solid #201010;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #C84B30;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .fc-card:active{transform:scale(.99)}
-.fc-label{font-size:10px;color:#4A5A7A;letter-spacing:3px;margin-bottom:16px;text-align:center;background:#0d1525;padding:3px 12px;border-radius:20px;border:1px solid #1e2a42}
-.fc-title{font-size:21px;font-weight:bold;color:#4A7CF5;text-align:center;letter-spacing:3px;line-height:1.6;margin-bottom:12px}
-.fc-body{font-size:14px;color:#c8d4f0;text-align:left;line-height:2;white-space:pre-wrap;max-width:100%;width:100%;word-break:break-all;background:#0d1525;border-radius:10px;padding:12px 14px;border-left:3px solid #4A7CF5}
+.fc-label{font-size:10px;color:#6a4840;letter-spacing:3px;margin-bottom:16px;text-align:center;background:#120808;padding:3px 12px;border-radius:20px;border:1px solid #201010}
+.fc-title{font-size:21px;font-weight:bold;color:#C84B30;text-align:center;letter-spacing:3px;line-height:1.6;margin-bottom:12px}
+.fc-body{font-size:14px;color:#d8b8a0;text-align:left;line-height:2;white-space:pre-wrap;max-width:100%;width:100%;word-break:break-all;background:#120808;border-radius:10px;padding:12px 14px;border-left:3px solid #C84B30}
 .fc-body.hidden{display:none}
-.fc-hint{font-size:11px;color:#3A4A6A;text-align:center;margin-top:16px;letter-spacing:2px}
-.fc-reveal{font-size:12px;color:#4A7CF5;text-align:center;margin-top:10px;font-weight:bold;display:none}
+.fc-hint{font-size:11px;color:#5A2020;text-align:center;margin-top:16px;letter-spacing:2px}
+.fc-reveal{font-size:12px;color:#C84B30;text-align:center;margin-top:10px;font-weight:bold;display:none}
 .fc-footer{display:flex;gap:8px;margin-top:12px;flex-shrink:0}
 .m5-sec{margin:4px 0}
-.m5-tog{width:100%;background:#101828;border:1px solid #1e2a42;border-radius:10px;padding:9px 14px;color:#7A8CB0;font-size:13px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:1px;display:flex;align-items:center;gap:6px}
-.m5-tog.open{color:#4A7CF5;border-color:#4A7CF550;background:#0f1e30}
-.m5-tog:active{background:#1a2640}
-.m5-tog-arrow{margin-left:auto;font-size:12px;color:#1e2a42;transition:transform .2s;flex-shrink:0}
-.m5-tog.open .m5-tog-arrow{transform:rotate(90deg);color:#4A7CF5}
+.m5-tog{width:100%;background:#1c1010;border:1px solid #201010;border-radius:10px;padding:9px 14px;color:#9a7870;font-size:13px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.m5-tog.open{color:#C84B30;border-color:#C84B3055;background:#180808}
+.m5-tog:active{background:#1e1010}
+.m5-tog-arrow{margin-left:auto;font-size:12px;color:#201010;transition:transform .2s;flex-shrink:0}
+.m5-tog.open .m5-tog-arrow{transform:rotate(90deg);color:#C84B30}
 .m5-body{padding:4px 2px 2px;display:none}
 .m5-body.open{display:block}
 .m5-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 8px}
 .m5-tbl{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}
-.m5-tbl th{background:#101828;color:#4A5A7A;font-size:10px;padding:6px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #1e2a42}
-.m5-tbl td{padding:6px 8px;text-align:center;border-bottom:1px solid #1a2640;color:#c8d4f0}
-.m5-tbl tr:nth-child(even) td{background:#0e1a28}
-.m5-tbl .c-r{color:#4A7CF5;font-weight:bold}
-.m5-tbl .c-g{color:#2E7D5A;font-weight:bold}
-.m5-tbl .c-a{color:#5A8CD4;font-weight:bold}
-.m5-sub{font-size:10px;color:#4A5A7A;letter-spacing:2px;margin:8px 0 4px 2px;font-weight:bold}
-.m5-sub-tog{width:100%;background:#0d1525;border:1px solid #1e2a42;border-radius:8px;padding:7px 12px;color:#4A5A7A;font-size:12px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:.5px;margin:3px 0;display:block}
-.m5-sub-tog.open{color:#7A8CB0;border-color:#3A4A6A;background:#101828}
+.m5-tbl th{background:#1c1010;color:#6a4840;font-size:10px;padding:6px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #201010}
+.m5-tbl td{padding:6px 8px;text-align:center;border-bottom:1px solid #1e1010;color:#d8b8a0}
+.m5-tbl tr:nth-child(even) td{background:#160808}
+.m5-tbl .c-r{color:#C84B30;font-weight:bold}
+.m5-tbl .c-g{color:#8B3B20;font-weight:bold}
+.m5-tbl .c-a{color:#D46040;font-weight:bold}
+.m5-sub{font-size:10px;color:#6a4840;letter-spacing:2px;margin:8px 0 4px 2px;font-weight:bold}
+.m5-sub-tog{width:100%;background:#120808;border:1px solid #201010;border-radius:8px;padding:7px 12px;color:#6a4840;font-size:12px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:.5px;margin:3px 0;display:block}
+.m5-sub-tog.open{color:#9a7870;border-color:#5A2020;background:#1c1010}
 .m5-sub-body{padding:2px 4px 4px;display:none}
 .m5-sub-body.open{display:block}
-.m5-text{font-size:13px;color:#c8d4f0;line-height:1.9;padding:7px 12px;background:#0d1525;border-radius:8px;margin:3px 0;border-left:3px solid #1e2a42}
-.m5-text.red{border-left-color:#4A7CF5}
-.m5-text.gold{border-left-color:#5A8CD4}
-.m5-jue{font-size:13px;color:#7A8CB0;line-height:2.2;padding:10px 14px;background:#0f1e30;border-radius:10px;margin:4px 0;border:1px solid #1a2838;white-space:pre-line;letter-spacing:.5px}
+.m5-text{font-size:13px;color:#d8b8a0;line-height:1.9;padding:7px 12px;background:#120808;border-radius:8px;margin:3px 0;border-left:3px solid #201010}
+.m5-text.red{border-left-color:#C84B30}
+.m5-text.gold{border-left-color:#D46040}
+.m5-jue{font-size:13px;color:#9a7870;line-height:2.2;padding:10px 14px;background:#180808;border-radius:10px;margin:4px 0;border:1px solid #1e1010;white-space:pre-line;letter-spacing:.5px}
 .qk-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.qk-tab{flex:1;min-width:0;padding:8px 4px;font-size:12px;font-weight:bold;background:#101828;border:1px solid #1e2a42;border-radius:9px;cursor:pointer;text-align:center;color:#7A8CB0;letter-spacing:1px;transition:all .15s}
+.qk-tab{flex:1;min-width:0;padding:8px 4px;font-size:12px;font-weight:bold;background:#1c1010;border:1px solid #201010;border-radius:9px;cursor:pointer;text-align:center;color:#9a7870;letter-spacing:1px;transition:all .15s}
 .qk-tab:active{transform:scale(.97)}
-.qk-tab.active{background:#4A7CF5;color:#e0e8fc;border-color:#4A7CF5}
+.qk-tab.active{background:#C84B30;color:#e8c8b8;border-color:#C84B30}
 .qk-panel{display:none}
 .qk-panel.active{display:block}
 .qk-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 8px}
 .qk-tbl{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}
-.qk-tbl th{background:#101828;color:#4A5A7A;font-size:10px;padding:7px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #1e2a42}
-.qk-tbl td{padding:7px 8px;text-align:center;border-bottom:1px solid #1a2640;color:#c8d4f0;font-size:13px}
-.qk-tbl tr:nth-child(even) td{background:#0e1a28}
-.qk-tbl .c-r{color:#4A7CF5;font-weight:bold;font-size:15px}
-.qk-tbl .c-a{color:#5A8CD4;font-weight:bold}
-.qk-sec-title{font-size:11px;color:#4A5A7A;letter-spacing:3px;padding:6px 2px 8px;font-weight:bold;border-bottom:1px solid #1e2a42;margin-bottom:10px}
-.bk-banner{background:#0f1e30;border:1px solid #4A7CF550;border-radius:12px;padding:10px 14px;margin:0 0 9px;display:none;align-items:center;gap:10px}
+.qk-tbl th{background:#1c1010;color:#6a4840;font-size:10px;padding:7px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #201010}
+.qk-tbl td{padding:7px 8px;text-align:center;border-bottom:1px solid #1e1010;color:#d8b8a0;font-size:13px}
+.qk-tbl tr:nth-child(even) td{background:#160808}
+.qk-tbl .c-r{color:#C84B30;font-weight:bold;font-size:15px}
+.qk-tbl .c-a{color:#D46040;font-weight:bold}
+.qk-sec-title{font-size:11px;color:#6a4840;letter-spacing:3px;padding:6px 2px 8px;font-weight:bold;border-bottom:1px solid #201010;margin-bottom:10px}
+.bk-banner{background:#180808;border:1px solid #C84B3055;border-radius:12px;padding:10px 14px;margin:0 0 9px;display:none;align-items:center;gap:10px}
 .bk-banner.show{display:flex}
-.bk-banner-txt{flex:1;font-size:12px;color:#7A8CB0;line-height:1.4}
-.bk-banner-btn{background:#4A7CF5;color:#e0e8fc;border:none;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.bk-banner-txt{flex:1;font-size:12px;color:#9a7870;line-height:1.4}
+.bk-banner-btn{background:#C84B30;color:#e8c8b8;border:none;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .bk-row{display:flex;gap:8px;margin:0 0 6px}
-.bk-btn{flex:1;background:#101828;color:#7A8CB0;border:1px solid #1e2a42;border-radius:10px;padding:9px 6px;font-size:12px;cursor:pointer;text-align:center}
-.bk-btn:active{background:#1e2a42}
+.bk-btn{flex:1;background:#1c1010;color:#9a7870;border:1px solid #201010;border-radius:10px;padding:9px 6px;font-size:12px;cursor:pointer;text-align:center}
+.bk-btn:active{background:#201010}
 /* deck mark buttons */
 .fc-mark-row{display:flex;gap:8px;margin-top:10px;flex-shrink:0}
-.fc-mk-kn{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#2E7D5A;color:#e0e8fc;border:none;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.fc-mk-kn{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#8B3B20;color:#e8c8b8;border:none;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
 .fc-mk-kn:active{transform:scale(.98)}
-.fc-mk-rv{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#101828;color:#7A8CB0;border:1px solid #1e2a42;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.fc-mk-rv{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#1c1010;color:#9a7870;border:1px solid #201010;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
 .fc-mk-rv:active{transform:scale(.98)}
 /* heatmap */
-.hmap-label{font-size:10px;color:#4A5A7A;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
+.hmap-label{font-size:10px;color:#6a4840;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
 .hmap{display:grid;grid-template-columns:repeat(35,1fr);gap:2px;margin-bottom:10px}
-.hmap-cell{height:10px;border-radius:2px;background:#101828;border:1px solid #1e2a42}
-.hmap-cell.lv1{background:#4A7CF540;border-color:#4A7CF580}
-.hmap-cell.lv2{background:#4A7CF580;border-color:#4A7CF5}
-.hmap-cell.lv3{background:#4A7CF5B0;border-color:#3A6CE0}
-.hmap-cell.lv4{background:#4A7CF5;border-color:#2A5CE0}
-.hmap-cell.today{outline:2px solid #5A8CD4;outline-offset:1px}
+.hmap-cell{height:10px;border-radius:2px;background:#1c1010;border:1px solid #201010}
+.hmap-cell.lv1{background:#C84B3040;border-color:#C84B3080}
+.hmap-cell.lv2{background:#C84B3080;border-color:#C84B30}
+.hmap-cell.lv3{background:#C84B30B0;border-color:#A83828}
+.hmap-cell.lv4{background:#C84B30;border-color:#2A5CE0}
+.hmap-cell.today{outline:2px solid #D46040;outline-offset:1px}
 /* quiz */
-.qz-opt{width:100%;padding:12px 14px;font-size:18px;font-weight:bold;border:2px solid #1e2a42;border-radius:12px;cursor:pointer;background:#101828;color:#c8d4f0;margin:6px 0;text-align:center;transition:all .15s;letter-spacing:3px;display:block}
+.qz-opt{width:100%;padding:12px 14px;font-size:18px;font-weight:bold;border:2px solid #201010;border-radius:12px;cursor:pointer;background:#1c1010;color:#d8b8a0;margin:6px 0;text-align:center;transition:all .15s;letter-spacing:3px;display:block}
 .qz-opt:active{transform:scale(.98)}
-.qz-opt.correct{background:#2E7D5A20;border-color:#2E7D5A;color:#2E7D5A}
-.qz-opt.wrong{background:#4A7CF520;border-color:#4A7CF5;color:#4A7CF5}
+.qz-opt.correct{background:#8B3B2020;border-color:#8B3B20;color:#8B3B20}
+.qz-opt.wrong{background:#C84B3020;border-color:#C84B30;color:#C84B30}
 .qz-opt:disabled{cursor:default;opacity:1}
-.qz-score{text-align:center;font-size:36px;font-weight:bold;color:#4A7CF5;margin:24px 0 4px;letter-spacing:4px}
-.qz-lv{text-align:center;font-size:14px;color:#7A8CB0;margin-bottom:20px;letter-spacing:3px}
+.qz-score{text-align:center;font-size:36px;font-weight:bold;color:#C84B30;margin:24px 0 4px;letter-spacing:4px}
+.qz-lv{text-align:center;font-size:14px;color:#9a7870;margin-bottom:20px;letter-spacing:3px}
 /* p5 chapter nav */
-.p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:#101828;border:1px solid #1e2a42;border-radius:12px}
-.p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:#0d1525;border:1px solid #1e2a42;border-radius:7px;cursor:pointer;color:#7A8CB0;text-align:center;font-weight:bold}
-.p5-nav-btn:active{background:#1e2a42;color:#4A7CF5}
+.p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:#1c1010;border:1px solid #201010;border-radius:12px}
+.p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:#120808;border:1px solid #201010;border-radius:7px;cursor:pointer;color:#9a7870;text-align:center;font-weight:bold}
+.p5-nav-btn:active{background:#201010;color:#C84B30}
 /* 三传发用·九宗门 */
-.z9-step{background:#0f1e30;border:1px solid #1e2a42;border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start}
-.z9-num{background:#4A7CF5;color:#fff;border-radius:50%;width:20px;height:20px;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;margin-top:2px;flex-shrink:0}
-.z9-sc{flex:1;font-size:12px;color:#7A8CB0;line-height:1.8}
-.z9-sc .hit{color:#4A7CF5;font-weight:bold}
-.z9-sc .sub{color:#4A5A7A;font-size:11px}
-.z9-card{background:#0f1e30;border:1px solid #1e2a42;border-radius:12px;margin-bottom:8px;overflow:hidden}
+.z9-step{background:#180808;border:1px solid #201010;border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start}
+.z9-num{background:#C84B30;color:#fff;border-radius:50%;width:20px;height:20px;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;margin-top:2px;flex-shrink:0}
+.z9-sc{flex:1;font-size:12px;color:#9a7870;line-height:1.8}
+.z9-sc .hit{color:#C84B30;font-weight:bold}
+.z9-sc .sub{color:#6a4840;font-size:11px}
+.z9-card{background:#180808;border:1px solid #201010;border-radius:12px;margin-bottom:8px;overflow:hidden}
 .z9-hdr{padding:11px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
-.z9-hname{font-size:14px;font-weight:bold;color:#c8d4f0;flex:1}
-.z9-htag{font-size:10px;color:#4A5A7A}
-.z9-arr{color:#1e2a42;font-size:14px;transition:transform .2s;flex-shrink:0}
+.z9-hname{font-size:14px;font-weight:bold;color:#d8b8a0;flex:1}
+.z9-htag{font-size:10px;color:#6a4840}
+.z9-arr{color:#201010;font-size:14px;transition:transform .2s;flex-shrink:0}
 .z9-hdr.open .z9-arr{transform:rotate(90deg)}
-.z9-body{display:none;padding:10px 14px 13px;border-top:1px solid #1a2640;font-size:12px;color:#7A8CB0;line-height:1.9}
+.z9-body{display:none;padding:10px 14px 13px;border-top:1px solid #1e1010;font-size:12px;color:#9a7870;line-height:1.9}
 .z9-body.open{display:block}
 .z9-row{margin-bottom:3px}
-.z9-row b{color:#c8d4f0}
-.z9-row .hit{color:#4A7CF5;font-weight:bold}
-.z9-mn{margin-top:8px;background:#101828;border-radius:7px;padding:7px 10px;font-size:11px;color:#5A8CD4;line-height:1.7;border-left:3px solid #4A7CF5}
-.z9-ex{margin-top:10px;border-top:1px solid #1a2640;padding-top:10px}
-.z9-ex-hd{font-size:11px;color:#4A5A7A;text-align:center;margin-bottom:4px}
-.z9-ex-mt{font-size:11px;color:#5A8CD4;text-align:center;margin-bottom:8px;padding:4px 8px;background:#101828;border-radius:6px}
+.z9-row b{color:#d8b8a0}
+.z9-row .hit{color:#C84B30;font-weight:bold}
+.z9-mn{margin-top:8px;background:#1c1010;border-radius:7px;padding:7px 10px;font-size:11px;color:#D46040;line-height:1.7;border-left:3px solid #C84B30}
+.z9-ex{margin-top:10px;border-top:1px solid #1e1010;padding-top:10px}
+.z9-ex-hd{font-size:11px;color:#6a4840;text-align:center;margin-bottom:4px}
+.z9-ex-mt{font-size:11px;color:#D46040;text-align:center;margin-bottom:8px;padding:4px 8px;background:#1c1010;border-radius:6px}
 /* 起课排盘 */
 .lupan{width:100%;border-collapse:collapse;margin:4px 0}
-.lupan td{border:1px solid #1e2a42;text-align:center;vertical-align:middle;padding:4px 2px}
-.lp-cell{background:#101828}
-.lp-cell.lp-sc{background:#0a1428;border-color:#4A7CF580!important}
-.lp-center{background:#0f1e30;font-size:12px;font-weight:bold;color:#4A7CF5;line-height:1.9;border:2px solid #4A7CF5!important}
-.lp-tj{font-size:10px;color:#5A8CD4;font-weight:bold}
-.lp-dg{font-size:10px;color:#4A5A7A}
-.lp-di{font-size:9px;color:#3A4A6A;margin-top:1px}
-.lp-scl{display:inline-block;font-size:8px;background:#4A7CF5;color:#fff;border-radius:2px;padding:0 2px;margin-left:1px;vertical-align:middle}
+.lupan td{border:1px solid #201010;text-align:center;vertical-align:middle;padding:4px 2px}
+.lp-cell{background:#1c1010}
+.lp-cell.lp-sc{background:#0a1428;border-color:#C84B3080!important}
+.lp-center{background:#180808;font-size:12px;font-weight:bold;color:#C84B30;line-height:1.9;border:2px solid #C84B30!important}
+.lp-tj{font-size:10px;color:#D46040;font-weight:bold}
+.lp-dg{font-size:10px;color:#6a4840}
+.lp-di{font-size:9px;color:#5A2020;margin-top:1px}
+.lp-scl{display:inline-block;font-size:8px;background:#C84B30;color:#fff;border-radius:2px;padding:0 2px;margin-left:1px;vertical-align:middle}
 .sc-block{padding:2px 0 4px}
-.sc-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:5px 0;border-bottom:1px solid #1a2640}
+.sc-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:5px 0;border-bottom:1px solid #1e1010}
 .sc-row:last-child{border:none}
-.sc-lq{font-size:11px;color:#4A5A7A;width:18px;text-align:right}
-.sc-dg{font-size:11px;color:#4A5A7A;width:16px;text-align:center}
-.sc-zhi{font-size:24px;font-weight:bold;color:#4A7CF5;width:28px;text-align:center;flex-shrink:0}
-.sc-ko{width:12px;font-size:9px;color:#4A7CF5;flex-shrink:0;text-align:left}
-.sc-tj{font-size:11px;color:#5A8CD4;width:16px;text-align:center;flex-shrink:0}
-.sc-pos{font-size:11px;color:#4A7CF5;font-weight:bold;width:28px;flex-shrink:0}
+.sc-lq{font-size:11px;color:#6a4840;width:18px;text-align:right}
+.sc-dg{font-size:11px;color:#6a4840;width:16px;text-align:center}
+.sc-zhi{font-size:24px;font-weight:bold;color:#C84B30;width:28px;text-align:center;flex-shrink:0}
+.sc-ko{width:12px;font-size:9px;color:#C84B30;flex-shrink:0;text-align:left}
+.sc-tj{font-size:11px;color:#D46040;width:16px;text-align:center;flex-shrink:0}
+.sc-pos{font-size:11px;color:#C84B30;font-weight:bold;width:28px;flex-shrink:0}
 .ske-tbl{width:100%;border-collapse:collapse}
-.ske-tbl td{border:1px solid #1e2a42;text-align:center;padding:4px 1px}
-.ske-hdr td{background:#101828;font-size:10px;color:#5A8CD4;font-weight:bold;padding:3px 1px}
-.sec-t{font-size:10px;color:#4A5A7A;letter-spacing:2px;margin:10px 0 4px 2px;font-weight:bold}
+.ske-tbl td{border:1px solid #201010;text-align:center;padding:4px 1px}
+.ske-hdr td{background:#1c1010;font-size:10px;color:#D46040;font-weight:bold;padding:3px 1px}
+.sec-t{font-size:10px;color:#6a4840;letter-spacing:2px;margin:10px 0 4px 2px;font-weight:bold}
 
 .zmq-sk{width:100%;border-collapse:collapse;margin:8px 0}
-.zmq-sk td{border:1px solid #1e2a42;text-align:center;padding:5px 2px;font-size:13px}
-.zmq-hdr td{background:#101828;font-size:10px;color:#5A8CD4;font-weight:bold;padding:3px 1px}
-.zmq-ke{display:block;font-size:9px;color:#4A7CF5;font-weight:bold;line-height:1.3}
-.zmq-xke{display:block;font-size:9px;color:#2E7D5A;font-weight:bold;line-height:1.3}
-.tj-card{background:#0f1e30;border:2px solid #4A7CF540;border-radius:14px;padding:16px;text-align:center;margin-bottom:12px}
-.tj-name{font-size:30px;font-weight:bold;color:#4A7CF5;letter-spacing:4px;margin-bottom:6px}
-.tj-attr{font-size:12px;color:#4A5A7A;letter-spacing:1px;margin-bottom:8px}
-.tj-sx{font-size:13px;color:#c8d4f0;font-weight:bold;padding:10px 16px;background:#101828;border-radius:8px;line-height:1.8}
-.zl-fact{font-size:12px;color:#7A8CB0;background:#101828;border-radius:8px;padding:8px 12px;margin-bottom:8px;line-height:1.8}
-.zl-step{border:2px solid #1e2a42;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#0f1e30}
+.zmq-sk td{border:1px solid #201010;text-align:center;padding:5px 2px;font-size:13px}
+.zmq-hdr td{background:#1c1010;font-size:10px;color:#D46040;font-weight:bold;padding:3px 1px}
+.zmq-ke{display:block;font-size:9px;color:#C84B30;font-weight:bold;line-height:1.3}
+.zmq-xke{display:block;font-size:9px;color:#8B3B20;font-weight:bold;line-height:1.3}
+.tj-card{background:#180808;border:2px solid #C84B3040;border-radius:14px;padding:16px;text-align:center;margin-bottom:12px}
+.tj-name{font-size:30px;font-weight:bold;color:#C84B30;letter-spacing:4px;margin-bottom:6px}
+.tj-attr{font-size:12px;color:#6a4840;letter-spacing:1px;margin-bottom:8px}
+.tj-sx{font-size:13px;color:#d8b8a0;font-weight:bold;padding:10px 16px;background:#1c1010;border-radius:8px;line-height:1.8}
+.zl-fact{font-size:12px;color:#9a7870;background:#1c1010;border-radius:8px;padding:8px 12px;margin-bottom:8px;line-height:1.8}
+.zl-step{border:2px solid #201010;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#180808}
 .zl-step.done{opacity:.7}
-.zl-q{font-size:13px;color:#c8d4f0;font-weight:bold;margin-bottom:8px;line-height:1.6}
+.zl-q{font-size:13px;color:#d8b8a0;font-weight:bold;margin-bottom:8px;line-height:1.6}
 .zl-btns{display:flex;gap:8px}
-.zl-btn{flex:1;padding:10px;font-size:13px;font-weight:bold;border:2px solid #1e2a42;border-radius:10px;cursor:pointer;background:#101828;color:#c8d4f0;transition:all .15s}
+.zl-btn{flex:1;padding:10px;font-size:13px;font-weight:bold;border:2px solid #201010;border-radius:10px;cursor:pointer;background:#1c1010;color:#d8b8a0;transition:all .15s}
 .zl-btn:active{transform:scale(.97)}
-.zl-ans{font-size:11px;color:#7A8CB0;margin-top:5px;line-height:1.6;padding:4px 8px;background:#0d1525;border-radius:6px}
-.hw-weak{font-size:11px;color:#4A7CF5;text-align:center;padding:5px 0 2px;letter-spacing:.5px}
+.zl-ans{font-size:11px;color:#9a7870;margin-top:5px;line-height:1.6;padding:4px 8px;background:#120808;border-radius:6px}
+.hw-weak{font-size:11px;color:#C84B30;text-align:center;padding:5px 0 2px;letter-spacing:.5px}
 
 </style>
 </head>
@@ -245,70 +245,70 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="qk-entry-card" onclick="show('pqk')">
     <div class="qk-entry-row">
       <div style="font-size:22px">🧮</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">起课速查</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">起课速查</div><div style="font-size:11px;color:#6a4840;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startQZ('yj')">
     <div class="qk-entry-row">
       <div style="font-size:22px">🎯</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">月将练习</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">雨水→大寒 · 十二月将 · 四选一</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">月将练习</div><div style="font-size:11px;color:#6a4840;margin-top:1px">雨水→大寒 · 十二月将 · 四选一</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startQZ('gr')">
     <div class="qk-entry-row">
       <div style="font-size:22px">⭐</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">贵人练习</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">昼夜贵人 · 五日干 · 四选一</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">贵人练习</div><div style="font-size:11px;color:#6a4840;margin-top:1px">昼夜贵人 · 五日干 · 四选一</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startKC()">
     <div class="qk-entry-row">
       <div style="font-size:22px">🔮</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">起课步骤练习</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">月将→天地盘→四课→三传→贵人→空亡</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">起课步骤练习</div><div style="font-size:11px;color:#6a4840;margin-top:1px">月将→天地盘→四课→三传→贵人→空亡</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startKCBoard()">
     <div class="qk-entry-row">
       <div style="font-size:22px">🗺</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">起课排盘</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">式盘·天将·遁干·三传·四课 全盘展示</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">起课排盘</div><div style="font-size:11px;color:#6a4840;margin-top:1px">式盘·天将·遁干·三传·四课 全盘展示</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="show('p9z')">
     <div class="qk-entry-row">
       <div style="font-size:22px">🧭</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">三传发用·九宗门</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">判断流程 + 九门详解，白话讲透规则</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">三传发用·九宗门</div><div style="font-size:11px;color:#6a4840;margin-top:1px">判断流程 + 九门详解，白话讲透规则</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   <div class="qk-entry-card" onclick="startZM()">
     <div class="qk-entry-row">
       <div style="font-size:22px">🎲</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">宗门识别测验</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">见四课·判宗门·10题四选一</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">宗门识别测验</div><div style="font-size:11px;color:#6a4840;margin-top:1px">见四课·判宗门·10题四选一</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startSC()">
     <div class="qk-entry-row">
       <div style="font-size:22px">🔗</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">三传推演练习</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">见四课·推初中末传·三步验证</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">三传推演练习</div><div style="font-size:11px;color:#6a4840;margin-top:1px">见四课·推初中末传·三步验证</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startTJ()">
     <div class="qk-entry-row">
       <div style="font-size:22px">🌟</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">天将联想测验</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">十二天将主象·四选一·名象互猜</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">天将联想测验</div><div style="font-size:11px;color:#6a4840;margin-top:1px">十二天将主象·四选一·名象互猜</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div class="qk-entry-card" onclick="startZL()">
     <div class="qk-entry-row">
       <div style="font-size:22px">🧩</div>
-      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#c8d4f0">宗门流程互动</div><div style="font-size:11px;color:#4A5A7A;margin-top:1px">随机盘面·4步判断·交互演练</div></div>
-      <div style="color:#1e2a42;font-size:18px">›</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#d8b8a0">宗门流程互动</div><div style="font-size:11px;color:#6a4840;margin-top:1px">随机盘面·4步判断·交互演练</div></div>
+      <div style="color:#201010;font-size:18px">›</div>
     </div>
   </div>
   <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
@@ -321,11 +321,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#7A8CB0;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#4A5A7A;font-size:12px">🎲 宗门识别/三传推演/天将联想/流程互动·薄弱点追踪</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#7A8CB0;font-size:11px;flex-shrink:0">26.6.27</span><span style="color:#4A5A7A;font-size:12px">🧭 九宗门详解+随机案例·起课排盘·起课步骤练习</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#7A8CB0;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#4A5A7A;font-size:12px">📚 十章知识速查·八类闪卡·天将/支神/空亡全面填充</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#7A8CB0;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#4A5A7A;font-size:12px">💾 备份导出/导入·学习统计·连续学习热力图</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#7A8CB0;font-size:11px;flex-shrink:0">26.6.25</span><span style="color:#4A5A7A;font-size:12px">🏗 项目初始化，大六壬日学正式上线</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#9a7870;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#6a4840;font-size:12px">🎲 宗门识别/三传推演/天将联想/流程互动·薄弱点追踪</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#9a7870;font-size:11px;flex-shrink:0">26.6.27</span><span style="color:#6a4840;font-size:12px">🧭 九宗门详解+随机案例·起课排盘·起课步骤练习</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#9a7870;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6a4840;font-size:12px">📚 十章知识速查·八类闪卡·天将/支神/空亡全面填充</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#9a7870;font-size:11px;flex-shrink:0">26.6.26</span><span style="color:#6a4840;font-size:12px">💾 备份导出/导入·学习统计·连续学习热力图</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#9a7870;font-size:11px;flex-shrink:0">26.6.25</span><span style="color:#6a4840;font-size:12px">🏗 项目初始化，大六壬日学正式上线</span></div>
     </div>
   </div>
   <div class="bk-banner" id="bk-remind">
@@ -1462,7 +1462,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
     <div class="qz-score" id="kj-res-score">—</div>
     <div class="qz-lv" id="kj-res-lv">—</div>
-    <div class="card" style="margin:8px 0;text-align:center;font-size:13px;color:#7A8CB0;line-height:2" id="kj-res-detail"></div>
+    <div class="card" style="margin:8px 0;text-align:center;font-size:13px;color:#9a7870;line-height:2" id="kj-res-detail"></div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
       <button class="btn btn-r" id="kj-redo-btn" onclick="kjRedoReview()" style="display:none">↩ 重练未记住的</button>
       <button class="btn btn-d" onclick="show('pkj-sel')">← 返回选择</button>
@@ -1507,7 +1507,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <tr><td class="c-a">辛</td><td class="c-r">午（胜光）</td><td class="c-r">寅（功曹）</td></tr>
       <tr><td class="c-a">壬 癸</td><td class="c-r">巳（太乙）</td><td class="c-r">卯（太冲）</td></tr>
     </table></div>
-    <div style="font-size:11px;color:#4A5A7A;padding:6px 4px;line-height:1.8">口诀：甲戊庚牛羊（丑未）· 乙己鼠猴乡（子申）· 丙丁猪鸡位（亥酉）· 辛马虎相当（午寅）· 壬癸蛇兔藏（巳卯）</div>
+    <div style="font-size:11px;color:#6a4840;padding:6px 4px;line-height:1.8">口诀：甲戊庚牛羊（丑未）· 乙己鼠猴乡（子申）· 丙丁猪鸡位（亥酉）· 辛马虎相当（午寅）· 壬癸蛇兔藏（巳卯）</div>
   </div>
   <div class="qk-panel" id="tab-xk">
     <div class="qk-sec-title">六旬旬空表</div>
@@ -1547,15 +1547,15 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="prog-wrap"><div class="prog-bar" id="el-qz-pb" style="width:0%"></div></div>
     </div>
     <div class="card" style="text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;margin-bottom:14px">
-      <div style="font-size:16px;font-weight:bold;color:#c8d4f0;letter-spacing:1px;line-height:2" id="qz-q">—</div>
+      <div style="font-size:16px;font-weight:bold;color:#d8b8a0;letter-spacing:1px;line-height:2" id="qz-q">—</div>
     </div>
     <div id="qz-opts"></div>
-    <div id="qz-explain" style="display:none;font-size:12px;color:#4A5A7A;text-align:center;margin-top:8px;padding:7px 10px;background:#101828;border-radius:8px;letter-spacing:1px;border:1px solid #1e2a42"></div>
+    <div id="qz-explain" style="display:none;font-size:12px;color:#6a4840;text-align:center;margin-top:8px;padding:7px 10px;background:#1c1010;border-radius:8px;letter-spacing:1px;border:1px solid #201010"></div>
   </div>
   <div id="pqz-result" style="display:none;flex-direction:column;align-items:center;padding-top:16px">
     <div class="qz-score" id="qz-res-score">—</div>
     <div class="qz-lv" id="qz-res-lv">—</div>
-    <div class="card" style="width:100%;text-align:center;font-size:13px;color:#7A8CB0;line-height:2;margin-bottom:16px" id="qz-res-detail"></div>
+    <div class="card" style="width:100%;text-align:center;font-size:13px;color:#9a7870;line-height:2;margin-bottom:16px" id="qz-res-detail"></div>
     <button class="btn btn-r" onclick="startQZ(qzState.type)" style="margin-bottom:8px;width:100%">再来一次 ↺</button>
     <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回首页</button>
   </div>
@@ -1568,18 +1568,18 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="tbtitle">起课步骤练习</div>
     <div class="tbr" id="kc-step-r">第1步/共6步</div>
   </div>
-  <div class="card" id="kc-info" style="margin-bottom:10px;font-size:13px;line-height:2;color:#7A8CB0;text-align:center"></div>
+  <div class="card" id="kc-info" style="margin-bottom:10px;font-size:13px;line-height:2;color:#9a7870;text-align:center"></div>
   <div id="kc-main">
-    <div style="font-size:10px;color:#4A5A7A;letter-spacing:2px;margin-bottom:5px;font-weight:bold" id="kc-step-label">第一步·定月将</div>
-    <div class="card" style="margin-bottom:10px;font-size:15px;font-weight:bold;text-align:center;line-height:2;color:#c8d4f0;min-height:60px;display:flex;align-items:center;justify-content:center;white-space:pre-line" id="kc-q">—</div>
+    <div style="font-size:10px;color:#6a4840;letter-spacing:2px;margin-bottom:5px;font-weight:bold" id="kc-step-label">第一步·定月将</div>
+    <div class="card" style="margin-bottom:10px;font-size:15px;font-weight:bold;text-align:center;line-height:2;color:#d8b8a0;min-height:60px;display:flex;align-items:center;justify-content:center;white-space:pre-line" id="kc-q">—</div>
     <div id="kc-opts" style="margin-bottom:8px"></div>
-    <div id="kc-explain" style="display:none;font-size:12px;color:#7A8CB0;margin-top:6px;padding:10px 12px;background:#101828;border-radius:10px;line-height:2;border:1px solid #1e2a42;white-space:pre-line"></div>
+    <div id="kc-explain" style="display:none;font-size:12px;color:#9a7870;margin-top:6px;padding:10px 12px;background:#1c1010;border-radius:10px;line-height:2;border:1px solid #201010;white-space:pre-line"></div>
     <button class="btn btn-r" id="kc-next-btn" style="display:none;margin-top:10px" onclick="kcNextStep()">下一步 →</button>
   </div>
   <div id="kc-result" style="display:none;flex-direction:column;align-items:center;padding-top:20px">
     <div class="qz-score" id="kc-res-score">—</div>
     <div class="qz-lv" id="kc-res-lv">—</div>
-    <div class="card" style="width:100%;font-size:13px;color:#7A8CB0;line-height:2;margin-bottom:16px;text-align:center" id="kc-res-detail"></div>
+    <div class="card" style="width:100%;font-size:13px;color:#9a7870;line-height:2;margin-bottom:16px;text-align:center" id="kc-res-detail"></div>
     <button class="btn btn-r" onclick="showKCBoard()" style="margin-bottom:8px;width:100%">查看全盘 →</button>
     <button class="btn btn-r" onclick="startKC()" style="margin-bottom:8px;width:100%">换一局再练 ↺</button>
     <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回首页</button>
@@ -1591,7 +1591,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <button class="tbk" onclick="goHome()">✕</button>
     <div class="tbtitle" id="pkb-title">起课排盘</div>
   </div>
-  <div class="card" id="pkb-mt" style="font-size:12px;color:#4A5A7A;text-align:center;margin-bottom:10px;padding:8px 12px"></div>
+  <div class="card" id="pkb-mt" style="font-size:12px;color:#6a4840;text-align:center;margin-bottom:10px;padding:8px 12px"></div>
   <div id="pkb-content"></div>
   <div style="margin-top:16px;display:flex;gap:8px">
     <button class="btn btn-r" onclick="startKCBoard()" style="flex:1">换一局 ↺</button>
@@ -1692,7 +1692,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>判断：</b>四课中有多处「上克下」（无下克上），或多处「下克上」（无上克下）</div>
       <div class="z9-row"><b>取法（上克下多处）：</b>阳日取<span class="hit">第一课上神</span>（干上），阴日取<span class="hit">第三课上神</span>（支上）</div>
       <div class="z9-row"><b>取法（下克上多处）：</b>阳日取<span class="hit">第一课下神</span>，阴日取<span class="hit">第三课下神</span></div>
-      <div class="z9-row" style="color:#4A5A7A;font-size:11px">阳日：甲丙戊庚壬；阴日：乙丁己辛癸</div>
+      <div class="z9-row" style="color:#6a4840;font-size:11px">阳日：甲丙戊庚壬；阴日：乙丁己辛癸</div>
       <div class="z9-mn">记：多中取一，阳干跟着日干走，阴日跟着日支走</div>
     </div>
   </div>
@@ -1764,7 +1764,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>判断：</b>四课中有重复（实际只有三课），且无克无遥克</div>
       <div class="z9-row"><b>阳日取法：</b>找日干的<span class="hit">天干六合</span>地支（甲合己→找己所在支/乙合庚→找庚所在支…），取该地支天盘为初传</div>
       <div class="z9-row"><b>阴日取法：</b>找日支三合局的<span class="hit">中间一支</span>（如日支巳→巳酉丑三合，取酉），取其地盘地支为初传；中末传取干上神</div>
-      <div class="z9-row" style="color:#4A5A7A;font-size:11px">六合：甲己·乙庚·丙辛·丁壬·戊癸；三合：寅午戌·申子辰·巳酉丑·亥卯未</div>
+      <div class="z9-row" style="color:#6a4840;font-size:11px">六合：甲己·乙庚·丙辛·丁壬·戊癸；三合：寅午戌·申子辰·巳酉丑·亥卯未</div>
       <div class="z9-mn">记：四课残缺，靠「合」字来牵线找初传</div>
     </div>
   </div>
@@ -1833,18 +1833,18 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <div id="pzm" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">宗门识别测验</div><div class="tbr" id="zm-prog-r"></div></div>
   <div id="pzm-main">
-    <div class="card" id="zm-info" style="font-size:12px;color:#4A5A7A;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
+    <div class="card" id="zm-info" style="font-size:12px;color:#6a4840;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
     <div class="sec-t">四 课</div>
     <table class="zmq-sk" id="zm-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
     <div id="zm-opts" style="margin-top:12px"></div>
-    <div id="zm-explain" style="display:none;margin-top:8px;font-size:12px;color:#7A8CB0;background:#0f1e30;border-radius:8px;padding:10px 12px;border-left:3px solid #4A7CF5;line-height:1.8"></div>
+    <div id="zm-explain" style="display:none;margin-top:8px;font-size:12px;color:#9a7870;background:#180808;border-radius:8px;padding:10px 12px;border-left:3px solid #C84B30;line-height:1.8"></div>
     <button id="zm-board-btn" onclick="zmShowBoard()" class="btn btn-d" style="display:none;margin-top:8px;font-size:12px">查看全盘 →</button>
     <button id="zm-next-btn" onclick="zmNext()" class="btn btn-r" style="display:none;margin-top:10px">下一题 →</button>
   </div>
   <div id="pzm-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
     <div class="qz-score" id="zm-res-score"></div>
     <div class="qz-lv" id="zm-res-lv"></div>
-    <div style="font-size:13px;color:#7A8CB0;text-align:center;margin-bottom:20px" id="zm-res-detail"></div>
+    <div style="font-size:13px;color:#9a7870;text-align:center;margin-bottom:20px" id="zm-res-detail"></div>
     <button class="btn btn-r" onclick="startZM()" style="margin-bottom:10px">再来一轮 ↺</button>
     <button class="btn btn-d" onclick="goHome()">← 首页</button>
   </div>
@@ -1854,20 +1854,20 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <div id="psc" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">三传推演练习</div><div class="tbr" id="sc-prog-r"></div></div>
   <div id="psc-main">
-    <div class="card" id="sc-info" style="font-size:12px;color:#4A5A7A;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
+    <div class="card" id="sc-info" style="font-size:12px;color:#6a4840;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
     <div class="sec-t">四 课（含克贼关系）</div>
     <table class="zmq-sk" id="sc-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
-    <div id="sc-step-label" style="font-size:13px;font-weight:bold;color:#4A7CF5;margin:12px 0 6px;letter-spacing:1px"></div>
-    <div id="sc-step-hint" style="font-size:11px;color:#4A5A7A;margin-bottom:8px;line-height:1.6"></div>
+    <div id="sc-step-label" style="font-size:13px;font-weight:bold;color:#C84B30;margin:12px 0 6px;letter-spacing:1px"></div>
+    <div id="sc-step-hint" style="font-size:11px;color:#6a4840;margin-bottom:8px;line-height:1.6"></div>
     <div id="sc-opts"></div>
-    <div id="sc-explain" style="display:none;margin-top:8px;font-size:12px;color:#7A8CB0;background:#0f1e30;border-radius:8px;padding:10px 12px;border-left:3px solid #4A7CF5;line-height:1.8"></div>
+    <div id="sc-explain" style="display:none;margin-top:8px;font-size:12px;color:#9a7870;background:#180808;border-radius:8px;padding:10px 12px;border-left:3px solid #C84B30;line-height:1.8"></div>
     <button id="sc-next-btn" onclick="scNext()" class="btn btn-r" style="display:none;margin-top:10px">继续 →</button>
     <button id="sc-board-btn" onclick="scShowBoard()" class="btn btn-d" style="display:none;margin-top:8px;font-size:12px">查看全盘</button>
   </div>
   <div id="psc-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
     <div class="qz-score" id="sc-res-score"></div>
     <div class="qz-lv" id="sc-res-lv"></div>
-    <div style="font-size:13px;color:#7A8CB0;text-align:center;margin-bottom:20px" id="sc-res-detail"></div>
+    <div style="font-size:13px;color:#9a7870;text-align:center;margin-bottom:20px" id="sc-res-detail"></div>
     <button class="btn btn-r" onclick="startSC()" style="margin-bottom:10px">再来一局 ↺</button>
     <button class="btn btn-d" onclick="goHome()">← 首页</button>
   </div>
@@ -1880,12 +1880,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="prog-row"><span class="prog-txt" id="el-tj-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-tj-pb" style="width:0%"></div></div></div>
     <div class="tj-card" id="tj-card"></div>
     <div id="tj-opts"></div>
-    <div id="tj-explain" style="display:none;margin-top:8px;font-size:12px;color:#7A8CB0;background:#0f1e30;border-radius:8px;padding:10px 12px;border-left:3px solid #4A7CF5;line-height:1.8"></div>
+    <div id="tj-explain" style="display:none;margin-top:8px;font-size:12px;color:#9a7870;background:#180808;border-radius:8px;padding:10px 12px;border-left:3px solid #C84B30;line-height:1.8"></div>
   </div>
   <div id="ptj-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
     <div class="qz-score" id="tj-res-score"></div>
     <div class="qz-lv" id="tj-res-lv"></div>
-    <div style="font-size:13px;color:#7A8CB0;text-align:center;margin-bottom:20px" id="tj-res-detail"></div>
+    <div style="font-size:13px;color:#9a7870;text-align:center;margin-bottom:20px" id="tj-res-detail"></div>
     <button class="btn btn-r" onclick="startTJ()" style="margin-bottom:10px">再来一轮 ↺</button>
     <button class="btn btn-d" onclick="goHome()">← 首页</button>
   </div>
@@ -1895,7 +1895,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <div id="pzl" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">宗门流程互动</div></div>
   <div id="pzl-main">
-    <div class="card" id="zl-info" style="font-size:12px;color:#4A5A7A;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
+    <div class="card" id="zl-info" style="font-size:12px;color:#6a4840;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
     <div class="sec-t">四 课</div>
     <table class="zmq-sk" id="zl-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
     <div class="zl-fact" id="zl-fact" style="margin-top:8px"></div>
@@ -2367,7 +2367,7 @@ function _genKC(){
 function startKC(){
   _genKC();
   const{rg,rz,zs,day}=kcState;
-  document.getElementById('kc-info').innerHTML=`日干支：<b style="color:#4A7CF5">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:#4A7CF5">${zs}</b>时（${day?'昼':'夜'}）`;
+  document.getElementById('kc-info').innerHTML=`日干支：<b style="color:#C84B30">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:#C84B30">${zs}</b>时（${day?'昼':'夜'}）`;
   document.getElementById('kc-main').style.display='';
   document.getElementById('kc-result').style.display='none';
   _scrollPos['pkc']=0;show('pkc');kcShowStep();
@@ -2399,15 +2399,15 @@ function _renderBoard(targetEl){
   // 式盘：○和传位标记单独一行，地支行始终纯净
   const ch=c=>{
     const mark=c.kong||c.scPos
-      ?`<div style="font-size:9px;color:#4A7CF5;line-height:1.2;min-height:11px">${c.kong?'○':''}${c.scPos?`<b>${c.scPos}</b>`:''}</div>`
+      ?`<div style="font-size:9px;color:#C84B30;line-height:1.2;min-height:11px">${c.kong?'○':''}${c.scPos?`<b>${c.scPos}</b>`:''}</div>`
       :`<div style="min-height:11px"></div>`;
     return `<td class="lp-cell${c.scPos?' lp-sc':''}">
       <div class="lp-tj">${c.tj}</div>
-      <div><span class="lp-dg">${c.dg}</span><b style="font-size:15px;color:#c8d4f0"> ${c.tz}</b></div>
+      <div><span class="lp-dg">${c.dg}</span><b style="font-size:15px;color:#d8b8a0"> ${c.tz}</b></div>
       ${mark}
       <div class="lp-di">${c.ez}</div></td>`;
   };
-  const ctr=`<td class="lp-center" colspan="2" rowspan="2">${rg}${rz}<br>${yj.yj}将<br>${zs}时<br><span style="font-size:10px;color:#5A8CD4;font-weight:normal">${day?'昼':'夜'}·${xi.xun}</span></td>`;
+  const ctr=`<td class="lp-center" colspan="2" rowspan="2">${rg}${rz}<br>${yj.yj}将<br>${zs}时<br><span style="font-size:10px;color:#D46040;font-weight:normal">${day?'昼':'夜'}·${xi.xun}</span></td>`;
   const lpH=`<div class="sec-t">式 盘</div><table class="lupan">
     <tr>${[0,1,2,3].map(i=>ch(cells[i])).join('')}</tr>
     <tr>${ch(cells[11])}${ctr}${ch(cells[4])}</tr>
@@ -2421,8 +2421,8 @@ function _renderBoard(targetEl){
   const skR=[...sk].reverse();
   const skH=`<div class="sec-t">四 课</div><table class="ske-tbl">
     <tr class="ske-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>
-    <tr>${skR.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#4A7CF5"> ${k.s}</b><br><span style="font-size:9px;color:#4A7CF5;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
-    <tr>${skR.map(k=>`<td style="font-size:13px;color:#c8d4f0">${k.x}</td>`).join('')}</tr>
+    <tr>${skR.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#C84B30"> ${k.s}</b><br><span style="font-size:9px;color:#C84B30;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
+    <tr>${skR.map(k=>`<td style="font-size:13px;color:#d8b8a0">${k.x}</td>`).join('')}</tr>
   </table>`;
   if(targetEl){
     targetEl.innerHTML=`<div class="z9-ex-hd">${rg}${rz}日 · ${yj.yj}将（${yj.zq}）· ${zs}时</div><div class="z9-ex-mt">${kcState.mt}</div>`+lpH+scH+skH;
@@ -2551,11 +2551,11 @@ function z9Example(key,btn){
   const body=btn.closest('.z9-body');
   let ex=body.querySelector('.z9-ex');
   if(!ex){ex=document.createElement('div');ex.className='z9-ex';body.insertBefore(ex,btn);}
-  ex.innerHTML='<div style="text-align:center;font-size:11px;color:#4A5A7A;padding:8px 0">搜索匹配案例…</div>';
+  ex.innerHTML='<div style="text-align:center;font-size:11px;color:#6a4840;padding:8px 0">搜索匹配案例…</div>';
   setTimeout(()=>{
     let found=false;
     for(let i=0;i<3000;i++){_genKC();if(_detectMethod(kcState)===key){found=true;break;}}
-    if(!found){ex.innerHTML='<div style="text-align:center;font-size:11px;color:#4A5A7A;padding:8px 0">未找到，请重试</div>';return;}
+    if(!found){ex.innerHTML='<div style="text-align:center;font-size:11px;color:#6a4840;padding:8px 0">未找到，请重试</div>';return;}
     _renderBoard(ex);
   },0);
 }
@@ -2597,7 +2597,7 @@ function _skTableHTML(sk,tp){
   const rows=skR.map(k=>{
     const keUp=_isKe(k.s,k.x),keDown=_isKe(k.x,k.s);
     const mark=keUp?'<span class="zmq-ke">↑克</span>':keDown?'<span class="zmq-xke">↓贼</span>':'';
-    return`<td><b style="font-size:15px;color:#4A7CF5">${k.s}</b>${mark}<hr style="border:none;border-top:1px solid #1e2a42;margin:3px 0"><span style="font-size:13px;color:#c8d4f0">${typeof k.x==='string'&&k.x.length===1?k.x:k.x}</span></td>`;
+    return`<td><b style="font-size:15px;color:#C84B30">${k.s}</b>${mark}<hr style="border:none;border-top:1px solid #201010;margin:3px 0"><span style="font-size:13px;color:#d8b8a0">${typeof k.x==='string'&&k.x.length===1?k.x:k.x}</span></td>`;
   });
   return`<tr>${rows.join('')}</tr>`;
 }
@@ -2619,7 +2619,7 @@ function startZM(){
 function zmRender(){
   const{qs,idx}=zmState,q=qs[idx];
   document.getElementById('zm-prog-r').textContent=`${idx+1}/10`;
-  document.getElementById('zm-info').innerHTML=`日干支：<b style="color:#4A7CF5">${q.rg}${q.rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#4A7CF5">${q.yj.yj}</b>（${q.yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#4A7CF5">${q.zs}</b>时`;
+  document.getElementById('zm-info').innerHTML=`日干支：<b style="color:#C84B30">${q.rg}${q.rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C84B30">${q.yj.yj}</b>（${q.yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#C84B30">${q.zs}</b>时`;
   // 四课表
   const tbl=document.getElementById('zm-sk-tbl');
   tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
@@ -2691,7 +2691,7 @@ function startSC(){
 function scRender(){
   const{rg,rz,yj,zs,sk,cc,zc,mc,tp,mt}=kcState;
   document.getElementById('sc-prog-r').textContent=`步骤 ${scState.step+1}/3`;
-  document.getElementById('sc-info').innerHTML=`日干支：<b style="color:#4A7CF5">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#4A7CF5">${yj.yj}</b> &nbsp;·&nbsp; 占时：<b style="color:#4A7CF5">${zs}</b>时`;
+  document.getElementById('sc-info').innerHTML=`日干支：<b style="color:#C84B30">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C84B30">${yj.yj}</b> &nbsp;·&nbsp; 占时：<b style="color:#C84B30">${zs}</b>时`;
   // 四课（含克贼标记）
   const tbl=document.getElementById('sc-sk-tbl');
   tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
@@ -2787,7 +2787,7 @@ function tjRender(){
   let opts,ans;
   if(q.typeA){
     // 见将名猜主象
-    card.innerHTML=`<div class="tj-name">${q.name}</div><div class="tj-attr">五行：${q.wx} &nbsp;|&nbsp; ${q.ji==='吉'?'<span style="color:#2E7D5A">吉将</span>':q.ji==='凶'?'<span style="color:#4A7CF5">凶将</span>':'中性将'}</div><div class="tj-attr" style="margin-top:4px">主象是？</div>`;
+    card.innerHTML=`<div class="tj-name">${q.name}</div><div class="tj-attr">五行：${q.wx} &nbsp;|&nbsp; ${q.ji==='吉'?'<span style="color:#8B3B20">吉将</span>':q.ji==='凶'?'<span style="color:#C84B30">凶将</span>':'中性将'}</div><div class="tj-attr" style="margin-top:4px">主象是？</div>`;
     ans=q.sx;
     const pool=shuffleArr(TJ_QUIZ.filter(t=>t.name!==q.name)).slice(0,3).map(t=>t.sx);
     opts=shuffleArr([ans,...pool]);
@@ -2835,7 +2835,7 @@ function startZL(){
   _genKC();
   zlState={answers:[],done:false};
   const{rg,rz,yj,zs,day,sk,tp}=kcState;
-  document.getElementById('zl-info').innerHTML=`日干支：<b style="color:#4A7CF5">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#4A7CF5">${yj.yj}</b>（${yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#4A7CF5">${zs}</b>时（${day?'昼':'夜'}）`;
+  document.getElementById('zl-info').innerHTML=`日干支：<b style="color:#C84B30">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C84B30">${yj.yj}</b>（${yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#C84B30">${zs}</b>时（${day?'昼':'夜'}）`;
   const tbl=document.getElementById('zl-sk-tbl');
   tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
   tbl.innerHTML+=_skTableHTML(sk,tp);
@@ -2921,9 +2921,9 @@ function zlFinish(){
   const wrong=zlState.answers.filter(a=>!a.correct).length;
   const conc=document.getElementById('zl-conclusion');
   conc.style.display='block';
-  conc.style.background=wrong===0?'#2E7D5A20':'#4A7CF520';
-  conc.style.color=wrong===0?'#2E7D5A':'#4A7CF5';
-  conc.style.border=`2px solid ${wrong===0?'#2E7D5A':'#4A7CF5'}`;
+  conc.style.background=wrong===0?'#8B3B2020':'#C84B3020';
+  conc.style.color=wrong===0?'#8B3B20':'#C84B30';
+  conc.style.border=`2px solid ${wrong===0?'#8B3B20':'#C84B30'}`;
   conc.innerHTML=`判断结果：<b>${method}课</b><br>${wrong===0?'流程完全正确 🎉':`${wrong}步判断有误，对照上方解析复习`}`;
   document.getElementById('zl-board-btn').style.display='';
   saveWeakRecord('宗门流程',4,wrong);
