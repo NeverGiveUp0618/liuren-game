@@ -47,6 +47,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .qk-entry-row{display:flex;align-items:center;gap:10px}
 .hhist{font-size:11px;color:#9B8570;margin-bottom:6px}
 .hquote{text-align:center;font-size:12px;color:#9B8570;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:#EDE7D8;border-radius:10px;margin:0 0 8px;border:1px solid #D4C4A0;font-style:italic}
+.update-bar{display:flex;align-items:center;gap:8px;padding:5px 2px;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#C41230;flex-shrink:0}
+.update-bar-text{font-size:12px;color:#9B8570;flex:1;letter-spacing:.5px}
+.update-bar-btn{font-size:12px;color:#C41230;white-space:nowrap}
+.update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
 .kj-grp{margin-bottom:14px}
 .kj-grp-lbl{font-size:11px;color:#9B8570;letter-spacing:2px;margin-bottom:7px;padding:0 2px;font-weight:bold}
 .kj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
@@ -218,6 +223,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="hlogo-t">大六壬</div>
     <div class="hlogo-s">壬式神煞 · 日学精进</div>
     <div class="hlogo-dec"></div>
+  </div>
+  <div class="update-bar" onclick="location.href=location.pathname+'?r='+Date.now()">
+    <div class="update-bar-dot"></div>
+    <span class="update-bar-text">近期有更新</span>
+    <span class="update-bar-btn">点击刷新 ↻</span>
   </div>
   <div class="hquote">六壬之学，以贵神为主，以天将为辅，以三传为用。</div>
   <div class="hdate" id="el-date"></div>
