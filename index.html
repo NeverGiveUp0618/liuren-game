@@ -312,6 +312,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
   </div>
+  <div class="qk-entry-card" onclick="startZS()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🌿</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">支神意象测验</div><div style="font-size:11px;color:#9B8570;margin-top:1px">十二支神主象·四选一·名象互猜</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
   <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
     </div>
   <div class="mcard">
@@ -1907,6 +1914,26 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <button id="zl-board-btn" onclick="zlShowBoard()" class="btn btn-d" style="flex:1;display:none">查看全盘</button>
     </div>
   </div>
+
+
+<!-- ======== 支神意象测验 ======== -->
+<div id="pzs" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">支神意象测验</div><div class="tbr" id="zs-prog-r"></div></div>
+  <div id="pzs-main">
+    <div class="prog-row"><span class="prog-txt" id="el-zs-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-zs-pb" style="width:0%"></div></div></div>
+    <div class="tj-card" id="zs-card"></div>
+    <div id="zs-opts"></div>
+    <div id="zs-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#FDF8F2;border-radius:8px;padding:10px 12px;border-left:3px solid #C41230;line-height:1.8"></div>
+  </div>
+  <div id="pzs-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="zs-res-score"></div>
+    <div class="qz-lv" id="zs-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="zs-res-detail"></div>
+    <button class="btn btn-r" onclick="startZS()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
 </div>
 
 <div class="toast" id="toast"></div>
@@ -2825,6 +2852,76 @@ function _tjEnd(){
   document.getElementById('tj-res-score').textContent=`${correct}/${total}`;
   document.getElementById('tj-res-lv').textContent=pct>=90?'天将已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
   document.getElementById('tj-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 支神意象测验 ══
+const ZS_QUIZ=[
+  {name:'神后',zhi:'子',wx:'水',sx:'女性·暗昧·险阻',ex:'子水之神，主阴谋险境、女性事、暗中之事；临贵人方则吉中有险'},
+  {name:'大吉',zhi:'丑',wx:'土',sx:'田宅·积蓄·迟缓',ex:'丑土之神，主土地田宅、财物积累；临之事多迟缓但终有结果'},
+  {name:'功曹',zhi:'寅',wx:'木',sx:'文书·进行·贵助',ex:'寅木之神，主文书公文、事情顺进、有贵人相助；占行人动静皆宜'},
+  {name:'太冲',zhi:'卯',wx:'木',sx:'争讼·车马·交易',ex:'卯木之神，主动荡争讼、车马出行、买卖交易；主动中求财'},
+  {name:'天罡',zhi:'辰',wx:'土',sx:'魁罡·强梁·阻隔',ex:'辰土之神，刚强有力主阻隔困难；居四课初传则有强力推动'},
+  {name:'天空',zhi:'巳',wx:'火',sx:'虚诈·落空·遗失',ex:'巳火之神，主空虚诈欺、遗失落空；临事多落空，防被骗'},
+  {name:'胜光',zhi:'午',wx:'火',sx:'文明·显贵·光明',ex:'午火之神，主光明显贵、文明礼仪；临官职事多吉，主名誉外显'},
+  {name:'小吉',zhi:'未',wx:'土',sx:'和合·女性·喜庆',ex:'未土之神，主和合喜庆、女性婚姻；临之事多顺遂，婚嫁占最喜'},
+  {name:'传送',zhi:'申',wx:'金',sx:'驿马·行人·传递',ex:'申金之神，主出行驿动、消息传递、行人动向；占动静宜动'},
+  {name:'从魁',zhi:'酉',wx:'金',sx:'酒食·阴私·女色',ex:'酉金之神，主酒食享乐、阴私秘密、女色之事；临之多主享乐或隐秘'},
+  {name:'河魁',zhi:'戌',wx:'土',sx:'魁罡·阻隔·凶险',ex:'戌土之神，性同天罡更加凶险，主障碍重重、凶险之事'},
+  {name:'登明',zhi:'亥',wx:'水',sx:'阴暗·深藏·幽微',ex:'亥水之神，主阴暗深藏之事、水险、隐秘幽微；夜占尤验'},
+];
+let zsState={qs:[],idx:0,correct:0,answered:false};
+function startZS(){
+  const pool=shuffleArr([...ZS_QUIZ]);
+  const qs=pool.map((t,i)=>({...t,typeA:i%2===0}));
+  zsState={qs,idx:0,correct:0,answered:false};
+  document.getElementById('pzs-main').style.display='';
+  document.getElementById('pzs-result').style.display='none';
+  _scrollPos['pzs']=0;show('pzs');zsRender();
+}
+function zsRender(){
+  const{qs,idx}=zsState,q=qs[idx],total=qs.length;
+  document.getElementById('zs-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-zs-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-zs-pb').style.width=`${idx/total*100}%`;
+  const card=document.getElementById('zs-card');
+  let opts,ans;
+  if(q.typeA){
+    card.innerHTML=`<div class="tj-name">${q.name}</div><div class="tj-attr">地支：${q.zhi} &nbsp;|&nbsp; 五行：${q.wx}</div><div class="tj-attr" style="margin-top:4px">主象是？</div>`;
+    ans=q.sx;
+    opts=shuffleArr([ans,...shuffleArr(ZS_QUIZ.filter(t=>t.name!==q.name)).slice(0,3).map(t=>t.sx)]);
+  } else {
+    card.innerHTML=`<div class="tj-attr" style="margin-top:8px;font-size:11px">主象：</div><div class="tj-sx">${q.sx}</div><div class="tj-attr" style="margin-top:10px">这是哪位支神？</div>`;
+    ans=q.name;
+    opts=shuffleArr([ans,...shuffleArr(ZS_QUIZ.filter(t=>t.name!==q.name)).slice(0,3).map(t=>t.name)]);
+  }
+  document.getElementById('zs-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="zsAnswer(this)" style="font-size:15px;letter-spacing:2px">${o}</button>`).join('');
+  document.getElementById('zs-explain').style.display='none';
+  zsState.answered=false;
+}
+function zsAnswer(btn){
+  if(zsState.answered)return;
+  zsState.answered=true;
+  const q=zsState.qs[zsState.idx];
+  const ans=q.typeA?q.sx:q.name,chosen=btn.dataset.opt;
+  document.querySelectorAll('#zs-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
+  if(chosen===ans)zsState.correct++;else btn.classList.add('wrong');
+  const ex=document.getElementById('zs-explain');
+  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.name}</b>（${q.zhi}，${q.wx}行）<br>主象：${q.sx}<br>${q.ex}`;
+  ex.style.display='block';
+  setTimeout(()=>{
+    zsState.idx++;
+    if(zsState.idx>=zsState.qs.length){_zsEnd();return;}
+    zsRender();window.scrollTo(0,0);
+  },1600);
+}
+function _zsEnd(){
+  const{correct,qs}=zsState,total=qs.length,pct=Math.round(correct/total*100);
+  saveWeakRecord('支神意象',total,total-correct);
+  document.getElementById('pzs-main').style.display='none';
+  document.getElementById('pzs-result').style.display='flex';
+  document.getElementById('zs-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('zs-res-lv').textContent=pct>=90?'支神已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
+  document.getElementById('zs-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
 }
 
 // ══ 宗门流程互动 ══
