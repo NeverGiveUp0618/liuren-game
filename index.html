@@ -212,6 +212,29 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .zl-ans{font-size:11px;color:#6B5040;margin-top:5px;line-height:1.6;padding:4px 8px;background:#F5F0E6;border-radius:6px}
 .hw-weak{font-size:11px;color:#C41230;text-align:center;padding:5px 0 2px;letter-spacing:.5px}
 
+
+/* ── 壬学心法 ── */
+.xf-wrap{padding:14px 16px 50px;overflow-y:auto;flex:1}
+.xf-title{font-size:18px;font-weight:bold;color:#1C0A00;text-align:center;line-height:1.6;margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid #C41230}
+.xf-lead{font-size:15px;color:#3D2010;line-height:1.85;margin-bottom:10px}
+.xf-part{font-size:17px;font-weight:bold;color:#C41230;margin:20px 0 12px;padding:6px 12px;border-left:4px solid #C41230;background:#FDF5EC;border-radius:0 8px 8px 0}
+.xf-step{font-size:15px;font-weight:bold;color:#1C0A00;margin:14px 0 6px;padding:7px 12px;background:#EDE7D8;border-radius:8px}
+.xf-p{font-size:15px;color:#3D2010;line-height:1.85;margin-bottom:8px}
+.xf-ul{font-size:15px;color:#3D2010;line-height:1.85;padding-left:6px;margin-bottom:10px;list-style:none}
+.xf-ul li{margin-bottom:6px;padding-left:16px;position:relative}
+.xf-ul li::before{content:"· ";position:absolute;left:0;color:#C41230;font-weight:bold}
+.xf-ol{font-size:15px;color:#3D2010;line-height:1.85;padding-left:6px;margin-bottom:10px;list-style:none;counter-reset:xf-cnt}
+.xf-ol li{margin-bottom:8px;padding-left:22px;position:relative;counter-increment:xf-cnt}
+.xf-ol li::before{content:counter(xf-cnt)". ";position:absolute;left:0;color:#C41230;font-weight:bold}
+.xf-tbl-wrap{overflow-x:auto;margin:10px 0 14px;border-radius:10px;box-shadow:0 1px 4px #0001}
+.xf-tbl{border-collapse:collapse;font-size:13px;white-space:nowrap}
+.xf-tbl th{background:#C41230;color:#FDF5EC;padding:7px 10px;text-align:center;font-weight:bold;font-size:13px}
+.xf-tbl td{padding:7px 10px;text-align:center;border:1px solid #D4C4A0;color:#1C0A00;background:#FDF5EC}
+.xf-tbl tr:last-child td{background:#EDE7D8}
+.xf-result{font-size:14px;color:#3D2010;background:#EDE7D8;border-radius:8px;padding:10px 12px;margin:8px 0 12px;line-height:1.9}
+.xf-result strong{color:#C41230}
+.xf-summary{font-size:15px;color:#1C0A00;background:#EDE7D8;border-radius:10px;padding:14px 16px;line-height:1.85;margin-top:20px;border-left:4px solid #C41230}
+.xf-hr{height:1px;background:#D4C4A0;margin:18px 0}
 </style>
 </head>
 <body>
@@ -242,7 +265,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="mcard-head"><div class="mcard-icon">🀄</div><div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
   </div>
-  <div class="qk-entry-card" onclick="show('pqk')">
+  <div class="qk-entry-card" onclick="show('p-xf')">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">📜</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">壬学心法</div><div style="font-size:11px;color:#9B8570;margin-top:1px">排盘推演七步 · 四课三传底层逻辑解析</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+    <div class="qk-entry-card" onclick="show('pqk')">
     <div class="qk-entry-row">
       <div style="font-size:22px">🧮</div>
       <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课速查</div><div style="font-size:11px;color:#9B8570;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div></div>
@@ -1934,6 +1964,135 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 </div>
 
 </div>
+
+<!-- ======== 壬学心法 ======== -->
+<div id="p-xf" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">壬学心法</div></div>
+  <div class="xf-wrap">
+
+    <div class="xf-title">大六壬排盘推演与底层逻辑全解</div>
+
+    <p class="xf-lead">大六壬是中国古代最高层次的预测学之一，其排盘过程逻辑严密，本质是一套基于时间和空间坐标的数据建模与状态机演化系统。</p>
+    <p class="xf-lead">以下通过案例（公历 2026年06月25日 19时51分）为您完整拆解起盘的七大步骤及核心算法逻辑。</p>
+
+    <div class="xf-hr"></div>
+
+    <div class="xf-part">第一部分：起盘七步推演全过程</div>
+
+    <div class="xf-step">第一步：定四柱与占时（提取核心基准）</div>
+    <p class="xf-p">起盘系统首先抓取的是当前的时间坐标，进行干支转换。</p>
+    <ul class="xf-ul">
+      <li><strong>排四柱：</strong>2026年06月25日 19时51分，对应的四柱为<strong>丙午年 甲午月 庚午日 丙戌时</strong>。大六壬算法中，最核心提取的参数是日干支：<strong>庚午</strong>。</li>
+      <li><strong>定占时：</strong>19时51分属于"戌时"（19:00 - 21:00）。本局的占时是：<strong>戌</strong>。</li>
+    </ul>
+
+    <div class="xf-step">第二步：定月将（计算太阳过宫）</div>
+    <p class="xf-p">确定空间上太阳的位置，按二十四节气中的"中气"来划分。</p>
+    <ul class="xf-ul">
+      <li><strong>定位中气：</strong>该时间处于"夏至（06.21）"与"小暑"之间。</li>
+      <li><strong>匹配月将：</strong>夏至对应的月将是"小吉"，即地支：<strong>未</strong>。</li>
+    </ul>
+
+    <div class="xf-step">第三步：排地盘与天盘（天地叠加矩阵）</div>
+    <p class="xf-p">利用"占时"和"月将"构建天盘与地盘的对应关系（天动地静）。</p>
+    <ul class="xf-ul">
+      <li><strong>地盘（静止）：</strong>永恒不变的十二方位盘。</li>
+      <li><strong>天盘（旋转）：</strong>将月将（未）加在占时（戌）之上，顺时针排布其余十一支。</li>
+    </ul>
+    <p class="xf-p" style="font-weight:bold;color:#1C0A00">天地盘水平对照表：</p>
+    <div class="xf-tbl-wrap">
+      <table class="xf-tbl">
+        <tr><th>地盘方位（固定）</th><th>戌</th><th>亥</th><th>子</th><th>丑</th><th>寅</th><th>卯</th><th>辰</th><th>巳</th><th>午</th><th>未</th><th>申</th><th>酉</th></tr>
+        <tr><td style="font-weight:bold;background:#EDE7D8">天盘落子（旋转）</td><td><strong>未</strong></td><td><strong>申</strong></td><td><strong>酉</strong></td><td><strong>戌</strong></td><td><strong>亥</strong></td><td><strong>子</strong></td><td><strong>丑</strong></td><td><strong>寅</strong></td><td><strong>卯</strong></td><td><strong>辰</strong></td><td><strong>巳</strong></td><td><strong>午</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="xf-step">第四步：演四课（提取主客关系）</div>
+    <p class="xf-p">利用天地盘矩阵与日干支（庚午）生成四课。天干需要通过"十干寄宫"规则转换为地支（庚寄申）。</p>
+    <ol class="xf-ol">
+      <li><strong>第一课（日课）：</strong>找日干"庚"的寄宫（地盘申）。地盘"申"上顶着天盘<strong>"巳"</strong>。得：<strong>上巳 下庚</strong>。</li>
+      <li><strong>第二课（日阴课）：</strong>将第一课的天盘"巳"作地盘。地盘"巳"上顶着天盘<strong>"寅"</strong>。得：<strong>上寅 下巳</strong>。</li>
+      <li><strong>第三课（辰课）：</strong>找日支（地盘午）。地盘"午"上顶着天盘<strong>"卯"</strong>。得：<strong>上卯 下午</strong>。</li>
+      <li><strong>第四课（辰阴课）：</strong>将第三课的天盘"卯"作地盘。地盘"卯"上顶着天盘<strong>"子"</strong>。得：<strong>上子 下卯</strong>。</li>
+    </ol>
+    <p class="xf-p" style="font-weight:bold;color:#1C0A00">四课水平对照表（从右至左阅读）：</p>
+    <div class="xf-tbl-wrap">
+      <table class="xf-tbl">
+        <tr><th>第四课（辰阴）</th><th>第三课（辰课）</th><th>第二课（日阴）</th><th>第一课（日课）</th></tr>
+        <tr><td><strong>子</strong></td><td><strong>卯</strong></td><td><strong>寅</strong></td><td><strong>巳</strong></td></tr>
+        <tr><td><strong>卯</strong></td><td><strong>午</strong></td><td><strong>巳</strong></td><td><strong>庚</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="xf-step">第五步：发三传（九宗门算法运算）</div>
+    <p class="xf-p">通过九大算法分支（九宗门）寻找四课中的矛盾点（克），以此推导事物的起因、经过、结果（初、中、末传）。</p>
+    <ul class="xf-ul">
+      <li><strong>寻找初传（贼克法）：</strong>扫描四课上下五行生克。本案中，第四课（水生木）、第三课（木生火）、第二课（木生火）均无克。仅第一课上"巳"（火）克下"庚"（金）。出现唯一的"上克下"，取受克者的天盘地支为初传。得出：<strong>巳</strong>。</li>
+      <li><strong>寻找中传：</strong>查天地盘，地盘"巳"位上顶着的天盘是"寅"。得出：<strong>寅</strong>。</li>
+      <li><strong>寻找末传：</strong>查天地盘，地盘"寅"位上顶着的天盘是"亥"。得出：<strong>亥</strong>。</li>
+    </ul>
+    <div class="xf-result">三传输出结果：初传 <strong>巳</strong> · 中传 <strong>寅</strong> · 末传 <strong>亥</strong></div>
+
+    <div class="xf-step">第六步：布十二天将（挂载神煞属性）</div>
+    <p class="xf-p">天将赋予四课和三传具体的吉凶象意，固定顺序为：贵人、螣蛇、朱雀、六合、勾陈、青龙、天空、白虎、太常、玄武、太阴、天后。</p>
+    <ol class="xf-ol">
+      <li><strong>定贵人起点：</strong>日干"庚"配合戌时（夜晚），口诀"甲戊庚牛羊"，夜贵人为<strong>"未"</strong>。</li>
+      <li><strong>定顺逆方向：</strong>天盘贵人"未"落在地盘阴区"戌"位，故天将排布方向为<strong>逆行</strong>。</li>
+      <li><strong>排布天将：</strong>从天盘"未"开始，逆时针排布十二天将。</li>
+    </ol>
+    <div class="xf-tbl-wrap">
+      <table class="xf-tbl">
+        <tr><th>天将</th><th>贵人</th><th>天后</th><th>太阴</th><th>玄武</th><th>太常</th><th>白虎</th><th>天空</th><th>青龙</th><th>勾陈</th><th>六合</th><th>朱雀</th><th>螣蛇</th></tr>
+        <tr><td style="font-weight:bold;background:#EDE7D8">天盘地支</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td></tr>
+      </table>
+    </div>
+
+    <div class="xf-step">第七步：标空亡与遁干（完善盘面细节）</div>
+    <ul class="xf-ul">
+      <li><strong>标空亡：</strong>庚午日属于"甲子旬"，该旬轮空的地支为<strong>戌、亥</strong>。故盘面中遇到戌、亥即为空亡（如本案末传亥为空亡）。</li>
+      <li><strong>标遁干：</strong>将"甲子旬"的天干按顺序附着在天盘地支上（甲配子，乙配丑，丙配寅…己配巳…等）。初传巳配"己"，中传寅配"丙"。</li>
+    </ul>
+
+    <div class="xf-hr"></div>
+
+    <div class="xf-part">第二部分：四课与三传的底层逻辑深度解析</div>
+    <p class="xf-p">剥开玄学外衣，大六壬是一套严密的数据建模与状态机系统。</p>
+
+    <div class="xf-step">一、四课的底层逻辑：建立"主客"对象模型</div>
+    <p class="xf-p">四课的本质是从庞杂的天地盘数据库中，实例化出参与事件的核心对象，并读取它们的静态初始数据（State）。</p>
+    <ol class="xf-ol">
+      <li><strong>十干寄宫（类型转换）：</strong>天干代表求测者，但无法直接代入地支矩阵。寄宫等同于将天干"类型转换"并分配到地支矩阵的合法内存地址中。</li>
+      <li><strong>四象架构：</strong>
+        <ul class="xf-ul" style="margin-top:6px;margin-bottom:0">
+          <li><strong>第一课（日课）：</strong>主体表象（我方现状）</li>
+          <li><strong>第二课（日阴课）：</strong>主体潜意识/后台（我方底牌、隐情）</li>
+          <li><strong>第三课（辰课）：</strong>客体表象（对方/事件的现状）</li>
+          <li><strong>第四课（辰阴课）：</strong>客体潜意识/后台（对方/事件的底牌、暗流）</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="xf-step">二、三传的底层逻辑：触发"异常"与状态流转</div>
+    <p class="xf-p">三传是动态的执行流水线（Execution Pipeline），代表事物从起因到结果的演化。</p>
+    <ol class="xf-ol">
+      <li><strong>"克"为触发器：</strong>系统的和谐态是静止的。只有出现"克"（五行失衡），才相当于程序抛出了"异常（Exception）"。九宗门算法就是一套优先级明确的 if…else 分支，用于捕获引发系统失衡的"第一矛盾点"。</li>
+      <li><strong>状态演化链条：</strong>
+        <ul class="xf-ul" style="margin-top:6px;margin-bottom:0">
+          <li><strong>初传（发端）：</strong>捕获的异常本身（Input），决定事件因何而起。</li>
+          <li><strong>中传（过渡）：</strong>初传落地后的环境牵扯（Process），运行时状态。</li>
+          <li><strong>末传（归宿）：</strong>事件链条走完后的最终输出（Return Value）。</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="xf-summary">
+      <strong>核心总结：</strong><br>
+      大六壬通过时间与空间的叠加（天地盘），实例化出主客双方的明暗状态（四课），进而捕获系统内部的五行矛盾（克）作为触发器，最终推演出事件完整生命周期（三传）的数据模型。
+    </div>
+
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
