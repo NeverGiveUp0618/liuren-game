@@ -161,6 +161,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .z9-row b{color:#1C0A00}
 .z9-row .hit{color:#C41230;font-weight:bold}
 .z9-mn{margin-top:8px;background:#EDE7D8;border-radius:7px;padding:7px 10px;font-size:11px;color:#8B6914;line-height:1.7;border-left:3px solid #C41230}
+.z9-ex{margin-top:10px;border-top:1px solid #EDE7D8;padding-top:10px}
+.z9-ex-hd{font-size:11px;color:#9B8570;text-align:center;margin-bottom:4px}
+.z9-ex-mt{font-size:11px;color:#8B6914;text-align:center;margin-bottom:8px;padding:4px 8px;background:#EDE7D8;border-radius:6px}
 /* 起课排盘 */
 .lupan{width:100%;border-collapse:collapse;margin:4px 0}
 .lupan td{border:1px solid #D4C4A0;text-align:center;vertical-align:middle;padding:4px 2px}
@@ -2222,7 +2225,7 @@ function startKC(){
 function startKCBoard(){_genKC();_renderBoard();_scrollPos['pkb']=0;show('pkb');}
 function showKCBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
 
-function _renderBoard(){
+function _renderBoard(targetEl){
   const{rg,rz,ri,yj,zs,day,tp,sk,cc,zc,mc,gr,xi}=kcState;
   const grIdx=ZHI_ALL.indexOf(gr);
   const grEi=tp.indexOf(gr);
@@ -2270,9 +2273,13 @@ function _renderBoard(){
     <tr>${sk.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#C41230"> ${k.s}</b><br><span style="font-size:9px;color:#C41230;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
     <tr>${sk.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
   </table>`;
-  document.getElementById('pkb-title').textContent=`${rg}${rz}日 · ${yj.yj}将 · ${zs}时`;
-  document.getElementById('pkb-mt').textContent=`发传法：${kcState.mt}`;
-  document.getElementById('pkb-content').innerHTML=lpH+scH+skH;
+  if(targetEl){
+    targetEl.innerHTML=`<div class="z9-ex-hd">${rg}${rz}日 · ${yj.yj}将（${yj.zq}）· ${zs}时</div><div class="z9-ex-mt">${kcState.mt}</div>`+lpH+scH+skH;
+  }else{
+    document.getElementById('pkb-title').textContent=`${rg}${rz}日 · ${yj.yj}将 · ${zs}时`;
+    document.getElementById('pkb-mt').textContent=`发传法：${kcState.mt}`;
+    document.getElementById('pkb-content').innerHTML=lpH+scH+skH;
+  }
 }
 
 function _kcSteps(){
@@ -2357,7 +2364,50 @@ function _kcResult(){
   saveSessionRecord('起课步骤',total,score);
 }
 
-function z9Tog(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
+function z9Tog(h){
+  h.classList.toggle('open');
+  const body=h.nextElementSibling;
+  body.classList.toggle('open');
+  if(body.classList.contains('open')&&!body.querySelector('.z9-ex-btn')){
+    const key=(h.querySelector('.z9-hname')?.textContent||'').replace(/课$/,'');
+    if(key){
+      const btn=document.createElement('button');
+      btn.className='btn btn-d z9-ex-btn';
+      btn.style.cssText='width:100%;margin-top:10px;font-size:12px';
+      btn.textContent='随机案例 ↺';
+      btn.onclick=()=>z9Example(key,btn);
+      body.appendChild(btn);
+    }
+  }
+}
+function _detectMethod(st){
+  const{rg,rz,yj,zs,tp,sk}=st;
+  if(yj.yj===zs)return '伏吟';
+  if(ZHI_ALL.indexOf(yj.yj)===(ZHI_ALL.indexOf(zs)+6)%12)return '返吟';
+  if(GAN_JI[rg]===rz)return '八专';
+  const ske=sk.filter(k=>_isKe(k.s,k.x)),xke=sk.filter(k=>_isKe(k.x,k.s));
+  if(ske.length===1&&xke.length===0)return '元首';
+  if(xke.length===1&&ske.length===0)return '重审';
+  if(ske.length>0||xke.length>0){
+    if(xke.length===0||ske.length===0)return '知一';
+    return '涉害';
+  }
+  if(new Set(sk.map(k=>k.s+'|'+k.x)).size<4)return '别责';
+  if([sk[1].s,sk[2].s,sk[3].s].some(s=>_isKe(s,rg)||_isKe(rg,s)))return '遥克';
+  return '昴星';
+}
+function z9Example(key,btn){
+  const body=btn.closest('.z9-body');
+  let ex=body.querySelector('.z9-ex');
+  if(!ex){ex=document.createElement('div');ex.className='z9-ex';body.insertBefore(ex,btn);}
+  ex.innerHTML='<div style="text-align:center;font-size:11px;color:#9B8570;padding:8px 0">搜索匹配案例…</div>';
+  setTimeout(()=>{
+    let found=false;
+    for(let i=0;i<3000;i++){_genKC();if(_detectMethod(kcState)===key){found=true;break;}}
+    if(!found){ex.innerHTML='<div style="text-align:center;font-size:11px;color:#9B8570;padding:8px 0">未找到，请重试</div>';return;}
+    _renderBoard(ex);
+  },0);
+}
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
 
 // ══ 键盘快捷键 ══
