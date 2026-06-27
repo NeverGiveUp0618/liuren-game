@@ -143,6 +143,28 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:12px}
 .p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:#F5F0E6;border:1px solid #D4C4A0;border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
 .p5-nav-btn:active{background:#D4C4A0;color:#C41230}
+/* 起课排盘 */
+.lupan{width:100%;border-collapse:collapse;margin:4px 0}
+.lupan td{border:1px solid #D4C4A0;text-align:center;vertical-align:middle;padding:4px 2px}
+.lp-cell{background:#EDE7D8}
+.lp-cell.lp-sc{background:#FFF3F0;border-color:#C4123080!important}
+.lp-center{background:#FDF8F2;font-size:12px;font-weight:bold;color:#C41230;line-height:1.9;border:2px solid #C41230!important}
+.lp-tj{font-size:10px;color:#8B6914;font-weight:bold}
+.lp-dg{font-size:10px;color:#9B8570}
+.lp-di{font-size:9px;color:#C4B49A;margin-top:1px}
+.lp-scl{display:inline-block;font-size:8px;background:#C41230;color:#fff;border-radius:2px;padding:0 2px;margin-left:1px;vertical-align:middle}
+.sc-block{padding:2px 0 4px}
+.sc-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:5px 0;border-bottom:1px solid #EDE7D8}
+.sc-row:last-child{border:none}
+.sc-lq{font-size:11px;color:#9B8570;width:18px;text-align:right}
+.sc-dg{font-size:11px;color:#9B8570;width:16px;text-align:center}
+.sc-zhi{font-size:24px;font-weight:bold;color:#C41230;width:28px;text-align:center}
+.sc-tj{font-size:11px;color:#8B6914;width:16px;text-align:center}
+.sc-pos{font-size:11px;color:#C41230;font-weight:bold;width:18px}
+.ske-tbl{width:100%;border-collapse:collapse}
+.ske-tbl td{border:1px solid #D4C4A0;text-align:center;padding:4px 1px}
+.ske-hdr td{background:#EDE7D8;font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
+.sec-t{font-size:10px;color:#9B8570;letter-spacing:2px;margin:10px 0 4px 2px;font-weight:bold}
 </style>
 </head>
 <body>
@@ -193,6 +215,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="qk-entry-row">
       <div style="font-size:22px">🔮</div>
       <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课步骤练习</div><div style="font-size:11px;color:#9B8570;margin-top:1px">月将→天地盘→四课→三传→贵人→空亡</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div class="qk-entry-card" onclick="startKCBoard()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🗺</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课排盘</div><div style="font-size:11px;color:#9B8570;margin-top:1px">式盘·天将·遁干·三传·四课 全盘展示</div></div>
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
   </div>
@@ -1452,8 +1481,22 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="qz-score" id="kc-res-score">—</div>
     <div class="qz-lv" id="kc-res-lv">—</div>
     <div class="card" style="width:100%;font-size:13px;color:#6B5040;line-height:2;margin-bottom:16px;text-align:center" id="kc-res-detail"></div>
+    <button class="btn btn-r" onclick="showKCBoard()" style="margin-bottom:8px;width:100%">查看全盘 →</button>
     <button class="btn btn-r" onclick="startKC()" style="margin-bottom:8px;width:100%">换一局再练 ↺</button>
     <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回首页</button>
+  </div>
+</div>
+
+<div id="pkb" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">✕</button>
+    <div class="tbtitle" id="pkb-title">起课排盘</div>
+  </div>
+  <div class="card" id="pkb-mt" style="font-size:12px;color:#9B8570;text-align:center;margin-bottom:10px;padding:8px 12px"></div>
+  <div id="pkb-content"></div>
+  <div style="margin-top:16px;display:flex;gap:8px">
+    <button class="btn btn-r" onclick="startKCBoard()" style="flex:1">换一局 ↺</button>
+    <button class="btn btn-d" onclick="goHome()" style="flex:1">← 首页</button>
   </div>
 </div>
 
@@ -1883,46 +1926,99 @@ function _isKe(a,b){return KE_M[_wxOf(a)]===_wxOf(b);}
 
 let kcState={};
 
-function startKC(){
+const TJ_NAMES=['贵','蛇','朱','合','勾','龙','空','虎','常','玄','阴','后'];
+const SHENG_M={0:1,1:2,2:4,4:3,3:0};
+const LP_ORDER=[5,6,7,8,9,10,11,0,1,2,3,4];
+
+function _genKC(){
   const ri=Math.floor(Math.random()*60);
   const rg=GAN_ALL[ri%10],rz=ZHI_ALL[ri%12];
   const yi=Math.floor(Math.random()*12),yj=YJ_TBL[yi];
   const zsi=Math.floor(Math.random()*12),zs=ZHI_ALL[zsi];
   const day=ZHU_SHI.includes(zs);
-  // 天地盘
   const yi2=ZHI_ALL.indexOf(yj.yj);
   const tp=ZHI_ALL.map((_,i)=>ZHI_ALL[(yi2+(i-zsi+12)%12)%12]);
-  // 四课
   const jg=GAN_JI[rg],ji=ZHI_ALL.indexOf(jg);
-  const k1s=tp[ji];
-  const k2s=tp[ZHI_ALL.indexOf(k1s)];
-  const rzi=ZHI_ALL.indexOf(rz);
-  const k3s=tp[rzi];
-  const k4s=tp[ZHI_ALL.indexOf(k3s)];
+  const k1s=tp[ji],k2s=tp[ZHI_ALL.indexOf(k1s)];
+  const rzi=ZHI_ALL.indexOf(rz),k3s=tp[rzi],k4s=tp[ZHI_ALL.indexOf(k3s)];
   const sk=[{s:k1s,x:rg,n:'第一课'},{s:k2s,x:k1s,n:'第二课'},{s:k3s,x:rz,n:'第三课'},{s:k4s,x:k3s,n:'第四课'}];
-  // 三传（贼克法）
-  const ske=sk.filter(k=>_isKe(k.s,k.x));
-  const xke=sk.filter(k=>_isKe(k.x,k.s));
+  const ske=sk.filter(k=>_isKe(k.s,k.x)),xke=sk.filter(k=>_isKe(k.x,k.s));
   let cc,mt;
   if(ske.length===1&&xke.length===0){cc=ske[0].s;mt='元首课（上克下）→取上神';}
-  else if(xke.length===1&&ske.length===0){
-    let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='重审课（下克上）→取下神';
-  } else if(ske.length>0){cc=ske[0].s;mt='比用/涉害→取首克上神';}
+  else if(xke.length===1&&ske.length===0){let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='重审课（下克上）→取下神';}
+  else if(ske.length>0){cc=ske[0].s;mt='比用/涉害→取首克上神';}
   else if(xke.length>0){let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='比用/涉害→取首克下神';}
   else{cc=tp[zsi];mt='昴星课（四课无克）→取占时天盘';}
   if(!cc||!ZHI_ALL.includes(cc))cc=tp[zsi];
-  const zc=tp[ZHI_ALL.indexOf(cc)];
-  const mc=tp[ZHI_ALL.indexOf(zc)];
-  // 贵人
+  const zc=tp[ZHI_ALL.indexOf(cc)],mc=tp[ZHI_ALL.indexOf(zc)];
   const gr=day?GR_Z[rg]:GR_Y[rg];
-  // 空亡
   const xi=KONG_TBL[Math.floor(ri/10)];
   kcState={rg,rz,ri,yj,yi2,zsi,zs,day,tp,sk,jg,cc,zc,mc,mt,gr,xi,step:0,score:0,total:6};
   kcState.steps=_kcSteps();
+}
+function startKC(){
+  _genKC();
+  const{rg,rz,zs,day}=kcState;
   document.getElementById('kc-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时（${day?'昼':'夜'}）`;
   document.getElementById('kc-main').style.display='';
   document.getElementById('kc-result').style.display='none';
   _scrollPos['pkc']=0;show('pkc');kcShowStep();
+}
+function startKCBoard(){_genKC();_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+function showKCBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+
+function _renderBoard(){
+  const{rg,rz,ri,yj,zs,day,tp,sk,cc,zc,mc,gr,xi}=kcState;
+  const grIdx=ZHI_ALL.indexOf(gr);
+  const grEi=tp.indexOf(gr);
+  const isShun=[11,0,1,2,3,4].includes(grEi);
+  const dir=isShun?1:-1;
+  const tjMap={};
+  TJ_NAMES.forEach((t,i)=>{const idx=((grIdx+i*dir)%12+12)%12;tjMap[ZHI_ALL[idx]]=t;});
+  const xunSt=[0,10,8,6,4,2][Math.floor(ri/10)];
+  const getDG=z=>{const off=(ZHI_ALL.indexOf(z)-xunSt+12)%12;return off>=10?'':GAN_ALL[off];};
+  const getLQ=z=>{
+    const rw=WX_GAN[rg],zw=WX_ZHI_M[z];
+    if(rw===zw)return '兄';if(KE_M[rw]===zw)return '财';if(KE_M[zw]===rw)return '官';
+    if(SHENG_M[rw]===zw)return '子';if(SHENG_M[zw]===rw)return '父';return '';
+  };
+  const kong=new Set(xi.k);
+  const cells=LP_ORDER.map(ei=>{
+    const tz=tp[ei],ez=ZHI_ALL[ei];
+    const scPos=tz===cc?'初':tz===zc?'中':tz===mc?'末':'';
+    return{tz,ez,tj:tjMap[tz]||'',dg:getDG(tz),kong:kong.has(tz),scPos};
+  });
+  // 式盘
+  const ch=c=>{
+    const sc=c.scPos?`<span class="lp-scl">${c.scPos}</span>`:'';
+    const ko=c.kong?`<span style="font-size:10px;color:#C41230">○</span>`:'';
+    return `<td class="lp-cell${c.scPos?' lp-sc':''}">
+      <div class="lp-tj">${c.tj}</div>
+      <div><span class="lp-dg">${c.dg}</span><b style="font-size:15px;color:#1C0A00"> ${c.tz}</b>${ko}${sc}</div>
+      <div class="lp-di">${c.ez}</div></td>`;
+  };
+  const ctr=`<td class="lp-center" colspan="2" rowspan="2">${rg}${rz}<br>${yj.yj}将<br>${zs}时<br><span style="font-size:10px;color:#8B6914;font-weight:normal">${day?'昼':'夜'}·${xi.xun}</span></td>`;
+  const lpH=`<div class="sec-t">式 盘</div><table class="lupan">
+    <tr>${[0,1,2,3].map(i=>ch(cells[i])).join('')}</tr>
+    <tr>${ch(cells[11])}${ctr}${ch(cells[4])}</tr>
+    <tr>${ch(cells[10])}${ch(cells[5])}</tr>
+    <tr>${[9,8,7,6].map(i=>ch(cells[i])).join('')}</tr>
+  </table>`;
+  // 三传
+  const scArr=[{z:cc,lb:'初传'},{z:zc,lb:'中传'},{z:mc,lb:'末传'}];
+  const scH=`<div class="sec-t">三 传</div><div class="sc-block">${scArr.map(s=>{
+    const ko=kong.has(s.z)?`<span style="font-size:10px;color:#C41230">○</span>`:'';
+    return `<div class="sc-row"><span class="sc-lq">${getLQ(s.z)}</span><span class="sc-dg">${getDG(s.z)}</span><b class="sc-zhi">${s.z}</b>${ko}<span class="sc-tj">${tjMap[s.z]||''}</span><span class="sc-pos">${s.lb}</span></div>`;
+  }).join('')}</div>`;
+  // 四课
+  const skH=`<div class="sec-t">四 课</div><table class="ske-tbl">
+    <tr class="ske-hdr"><td>第一课</td><td>第二课</td><td>第三课</td><td>第四课</td></tr>
+    <tr>${sk.map(k=>{const dg=getDG(k.s);const ko=kong.has(k.s)?'○':'';return `<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${dg}</span><b style="font-size:15px;color:#C41230"> ${k.s}${ko}</b></td>`}).join('')}</tr>
+    <tr>${sk.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
+  </table>`;
+  document.getElementById('pkb-title').textContent=`${rg}${rz}日 · ${yj.yj}将 · ${zs}时`;
+  document.getElementById('pkb-mt').textContent=`发传法：${kcState.mt}`;
+  document.getElementById('pkb-content').innerHTML=lpH+scH+skH;
 }
 
 function _kcSteps(){
