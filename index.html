@@ -187,6 +187,26 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .ske-tbl td{border:1px solid #D4C4A0;text-align:center;padding:4px 1px}
 .ske-hdr td{background:#EDE7D8;font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
 .sec-t{font-size:10px;color:#9B8570;letter-spacing:2px;margin:10px 0 4px 2px;font-weight:bold}
+
+.zmq-sk{width:100%;border-collapse:collapse;margin:8px 0}
+.zmq-sk td{border:1px solid #D4C4A0;text-align:center;padding:5px 2px;font-size:13px}
+.zmq-hdr td{background:#EDE7D8;font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
+.zmq-ke{display:block;font-size:9px;color:#C41230;font-weight:bold;line-height:1.3}
+.zmq-xke{display:block;font-size:9px;color:#2E7D5A;font-weight:bold;line-height:1.3}
+.tj-card{background:#FDF8F2;border:2px solid #C4123040;border-radius:14px;padding:16px;text-align:center;margin-bottom:12px}
+.tj-name{font-size:30px;font-weight:bold;color:#C41230;letter-spacing:4px;margin-bottom:6px}
+.tj-attr{font-size:12px;color:#9B8570;letter-spacing:1px;margin-bottom:8px}
+.tj-sx{font-size:13px;color:#1C0A00;font-weight:bold;padding:10px 16px;background:#EDE7D8;border-radius:8px;line-height:1.8}
+.zl-fact{font-size:12px;color:#6B5040;background:#EDE7D8;border-radius:8px;padding:8px 12px;margin-bottom:8px;line-height:1.8}
+.zl-step{border:2px solid #D4C4A0;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#FDF8F2}
+.zl-step.done{opacity:.7}
+.zl-q{font-size:13px;color:#1C0A00;font-weight:bold;margin-bottom:8px;line-height:1.6}
+.zl-btns{display:flex;gap:8px}
+.zl-btn{flex:1;padding:10px;font-size:13px;font-weight:bold;border:2px solid #D4C4A0;border-radius:10px;cursor:pointer;background:#EDE7D8;color:#1C0A00;transition:all .15s}
+.zl-btn:active{transform:scale(.97)}
+.zl-ans{font-size:11px;color:#6B5040;margin-top:5px;line-height:1.6;padding:4px 8px;background:#F5F0E6;border-radius:6px}
+.hw-weak{font-size:11px;color:#C41230;text-align:center;padding:5px 0 2px;letter-spacing:.5px}
+
 </style>
 </head>
 <body>
@@ -253,7 +273,36 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">三传发用·九宗门</div><div style="font-size:11px;color:#9B8570;margin-top:1px">判断流程 + 九门详解，白话讲透规则</div></div>
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
+  <div class="qk-entry-card" onclick="startZM()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🎲</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">宗门识别测验</div><div style="font-size:11px;color:#9B8570;margin-top:1px">见四课·判宗门·10题四选一</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
   </div>
+  <div class="qk-entry-card" onclick="startSC()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🔗</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">三传推演练习</div><div style="font-size:11px;color:#9B8570;margin-top:1px">见四课·推初中末传·三步验证</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div class="qk-entry-card" onclick="startTJ()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🌟</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">天将联想测验</div><div style="font-size:11px;color:#9B8570;margin-top:1px">十二天将主象·四选一·名象互猜</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div class="qk-entry-card" onclick="startZL()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🧩</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">宗门流程互动</div><div style="font-size:11px;color:#9B8570;margin-top:1px">随机盘面·4步判断·交互演练</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
+    </div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('p5')">进入速查 →</button></div>
@@ -1758,6 +1807,86 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div style="height:12px"></div>
 </div>
 
+
+<!-- ======== 宗门识别测验 ======== -->
+<div id="pzm" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">宗门识别测验</div><div class="tbr" id="zm-prog-r"></div></div>
+  <div id="pzm-main">
+    <div class="card" id="zm-info" style="font-size:12px;color:#9B8570;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
+    <div class="sec-t">四 课</div>
+    <table class="zmq-sk" id="zm-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
+    <div id="zm-opts" style="margin-top:12px"></div>
+    <div id="zm-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#FDF8F2;border-radius:8px;padding:10px 12px;border-left:3px solid #C41230;line-height:1.8"></div>
+    <button id="zm-board-btn" onclick="zmShowBoard()" class="btn btn-d" style="display:none;margin-top:8px;font-size:12px">查看全盘 →</button>
+    <button id="zm-next-btn" onclick="zmNext()" class="btn btn-r" style="display:none;margin-top:10px">下一题 →</button>
+  </div>
+  <div id="pzm-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="zm-res-score"></div>
+    <div class="qz-lv" id="zm-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="zm-res-detail"></div>
+    <button class="btn btn-r" onclick="startZM()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
+<!-- ======== 三传推演练习 ======== -->
+<div id="psc" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">三传推演练习</div><div class="tbr" id="sc-prog-r"></div></div>
+  <div id="psc-main">
+    <div class="card" id="sc-info" style="font-size:12px;color:#9B8570;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
+    <div class="sec-t">四 课（含克贼关系）</div>
+    <table class="zmq-sk" id="sc-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
+    <div id="sc-step-label" style="font-size:13px;font-weight:bold;color:#C41230;margin:12px 0 6px;letter-spacing:1px"></div>
+    <div id="sc-step-hint" style="font-size:11px;color:#9B8570;margin-bottom:8px;line-height:1.6"></div>
+    <div id="sc-opts"></div>
+    <div id="sc-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#FDF8F2;border-radius:8px;padding:10px 12px;border-left:3px solid #C41230;line-height:1.8"></div>
+    <button id="sc-next-btn" onclick="scNext()" class="btn btn-r" style="display:none;margin-top:10px">继续 →</button>
+    <button id="sc-board-btn" onclick="scShowBoard()" class="btn btn-d" style="display:none;margin-top:8px;font-size:12px">查看全盘</button>
+  </div>
+  <div id="psc-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="sc-res-score"></div>
+    <div class="qz-lv" id="sc-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="sc-res-detail"></div>
+    <button class="btn btn-r" onclick="startSC()" style="margin-bottom:10px">再来一局 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
+<!-- ======== 天将联想测验 ======== -->
+<div id="ptj" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">天将联想测验</div><div class="tbr" id="tj-prog-r"></div></div>
+  <div id="ptj-main">
+    <div class="prog-row"><span class="prog-txt" id="el-tj-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-tj-pb" style="width:0%"></div></div></div>
+    <div class="tj-card" id="tj-card"></div>
+    <div id="tj-opts"></div>
+    <div id="tj-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#FDF8F2;border-radius:8px;padding:10px 12px;border-left:3px solid #C41230;line-height:1.8"></div>
+  </div>
+  <div id="ptj-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="tj-res-score"></div>
+    <div class="qz-lv" id="tj-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="tj-res-detail"></div>
+    <button class="btn btn-r" onclick="startTJ()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
+<!-- ======== 宗门流程互动 ======== -->
+<div id="pzl" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">宗门流程互动</div></div>
+  <div id="pzl-main">
+    <div class="card" id="zl-info" style="font-size:12px;color:#9B8570;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
+    <div class="sec-t">四 课</div>
+    <table class="zmq-sk" id="zl-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
+    <div class="zl-fact" id="zl-fact" style="margin-top:8px"></div>
+    <div id="zl-steps" style="margin-top:8px"></div>
+    <div id="zl-conclusion" style="display:none;margin-top:10px;padding:12px;border-radius:10px;font-size:14px;font-weight:bold;text-align:center"></div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-r" onclick="startZL()" style="flex:1">换一局 ↺</button>
+      <button id="zl-board-btn" onclick="zlShowBoard()" class="btn btn-d" style="flex:1;display:none">查看全盘</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 </div>
 
@@ -1766,9 +1895,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();}}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}}
 function goHome(){show('ph')}
-(function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;updateHomeStats();checkBkRemind();})();
+(function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;updateHomeStats();checkBkRemind();updateWeakTip();})();
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
@@ -2410,6 +2539,375 @@ function z9Example(key,btn){
   },0);
 }
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
+
+
+// ══ 薄弱点追踪 ══
+const WEAK_KEY='lr_weak';
+function saveWeakRecord(cat,asked,wrong){
+  if(!asked)return;
+  try{
+    const d=JSON.parse(localStorage.getItem(WEAK_KEY)||'{}');
+    const r=d[cat]||{q:0,w:0};
+    r.q+=asked;r.w+=wrong;
+    d[cat]=r;
+    localStorage.setItem(WEAK_KEY,JSON.stringify(d));
+  }catch{}
+  updateWeakTip();
+}
+function getWeakSpot(){
+  try{
+    const d=JSON.parse(localStorage.getItem(WEAK_KEY)||'{}');
+    let best=null,bestRate=-1;
+    Object.entries(d).forEach(([k,v])=>{if(v.q>=5){const r=v.w/v.q;if(r>bestRate){bestRate=r;best=k;}}});
+    return best?{cat:best,rate:Math.round((d[best].w/d[best].q)*100)}:null;
+  }catch{return null;}
+}
+function updateWeakTip(){
+  const el=document.getElementById('hw-weak-tip');if(!el)return;
+  const w=getWeakSpot();
+  if(w&&w.rate>=20){el.style.display='';el.textContent=`薄弱项：${w.cat}（错误率 ${w.rate}%），建议重点练习`;}
+  else el.style.display='none';
+}
+
+// ══ 四课表格辅助 ══
+function _skTableHTML(sk,tp){
+  // 从右到左: 第四→三→二→一课
+  const skR=[...sk].reverse();
+  const rows=skR.map(k=>{
+    const keUp=_isKe(k.s,k.x),keDown=_isKe(k.x,k.s);
+    const mark=keUp?'<span class="zmq-ke">↑克</span>':keDown?'<span class="zmq-xke">↓贼</span>':'';
+    return`<td><b style="font-size:15px;color:#C41230">${k.s}</b>${mark}<hr style="border:none;border-top:1px solid #D4C4A0;margin:3px 0"><span style="font-size:13px;color:#1C0A00">${typeof k.x==='string'&&k.x.length===1?k.x:k.x}</span></td>`;
+  });
+  return`<tr>${rows.join('')}</tr>`;
+}
+
+// ══ 宗门识别测验 ══
+const ZM_METHODS=['元首','重审','知一','涉害','遥克','昴星','别责','八专','伏吟','返吟'];
+let zmState={qs:[],idx:0,correct:0,answered:false};
+
+function startZM(){
+  // 生成10个随机局
+  const qs=[];
+  for(let i=0;i<10;i++){_genKC();qs.push({...kcState,method:_detectMethod(kcState)});}
+  zmState={qs,idx:0,correct:0,answered:false};
+  document.getElementById('pzm-main').style.display='';
+  document.getElementById('pzm-result').style.display='none';
+  _scrollPos['pzm']=0;show('pzm');
+  zmRender();
+}
+function zmRender(){
+  const{qs,idx}=zmState,q=qs[idx];
+  document.getElementById('zm-prog-r').textContent=`${idx+1}/10`;
+  document.getElementById('zm-info').innerHTML=`日干支：<b style="color:#C41230">${q.rg}${q.rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C41230">${q.yj.yj}</b>（${q.yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#C41230">${q.zs}</b>时`;
+  // 四课表
+  const tbl=document.getElementById('zm-sk-tbl');
+  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
+  tbl.innerHTML+=_skTableHTML(q.sk,q.tp);
+  // 四选一
+  const pool=ZM_METHODS.filter(m=>m!==q.method);
+  const opts=shuffleArr([q.method,...shuffleArr(pool).slice(0,3)]);
+  document.getElementById('zm-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="zmAnswer(this)" style="font-size:15px;letter-spacing:2px">${o}课</button>`).join('');
+  document.getElementById('zm-explain').style.display='none';
+  document.getElementById('zm-board-btn').style.display='none';
+  document.getElementById('zm-next-btn').style.display='none';
+  zmState.answered=false;
+  // 保存当前局到kcState供查看全盘
+  Object.assign(kcState,q);
+}
+function zmAnswer(btn){
+  if(zmState.answered)return;
+  zmState.answered=true;
+  const q=zmState.qs[zmState.idx],chosen=btn.dataset.opt;
+  document.querySelectorAll('#zm-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===q.method)b.classList.add('correct');});
+  if(chosen===q.method)zmState.correct++;else btn.classList.add('wrong');
+  // 说明
+  const ex=document.getElementById('zm-explain');
+  const methodEx={
+    '元首':'唯一上克下 → 取克处上神为初传',
+    '重审':'唯一下克上 → 取克处下神为初传',
+    '知一':'多处同向克（全上克或全下克）→ 按涉害顺数',
+    '涉害':'上克下与下克上并存 → 顺数本家统计克害深浅',
+    '遥克':'无直接克，日干与2/3/4课上神存在遥克',
+    '昴星':'四课无克无遥克（取占时天盘为初传）',
+    '别责':'柔日，四课无克，二三课同神（取日支三合）',
+    '八专':'日干寄宫与日支同位，四课仅两课',
+    '伏吟':'月将 = 占时，天地盘重合（日神在各自宫位不动）',
+    '返吟':'天地盘各支对冲（子午相换、丑未相换……）',
+  };
+  ex.innerHTML=`<b>${chosen===q.method?'✓ 正确':'✗ 正确答案：'+q.method+'课'}</b><br>${methodEx[q.method]||''}<br>发传法：${q.mt}`;
+  ex.style.display='block';
+  document.getElementById('zm-board-btn').style.display='';
+  document.getElementById('zm-next-btn').textContent=zmState.idx>=9?'查看结果 ✓':'下一题 →';
+  document.getElementById('zm-next-btn').style.display='';
+}
+function zmNext(){
+  zmState.idx++;
+  if(zmState.idx>=10){_zmEnd();return;}
+  zmRender();window.scrollTo(0,0);
+}
+function _zmEnd(){
+  const{correct}=zmState,total=10,pct=Math.round(correct/total*100);
+  saveWeakRecord('宗门识别',total,total-correct);
+  document.getElementById('pzm-main').style.display='none';
+  document.getElementById('pzm-result').style.display='flex';
+  document.getElementById('zm-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('zm-res-lv').textContent=pct>=90?'宗门已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续练习 💪':'需多练习 📚';
+  document.getElementById('zm-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+function zmShowBoard(){Object.assign(kcState,zmState.qs[zmState.idx]);_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+
+// ══ 三传推演练习 ══
+let scState={step:0,correct:0,answered:false};
+
+function startSC(){
+  _genKC();
+  scState={step:0,correct:0,answered:false};
+  document.getElementById('psc-main').style.display='';
+  document.getElementById('psc-result').style.display='none';
+  _scrollPos['psc']=0;show('psc');
+  scRender();
+}
+function scRender(){
+  const{rg,rz,yj,zs,sk,cc,zc,mc,tp,mt}=kcState;
+  document.getElementById('sc-prog-r').textContent=`步骤 ${scState.step+1}/3`;
+  document.getElementById('sc-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C41230">${yj.yj}</b> &nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时`;
+  // 四课（含克贼标记）
+  const tbl=document.getElementById('sc-sk-tbl');
+  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
+  tbl.innerHTML+=_skTableHTML(sk,tp);
+  // 步骤标题 + 提示
+  const labels=['推初传（发用）','推中传','推末传'];
+  const hints=[
+    `提示：按「${mt}」确定初传`,
+    `提示：初传「${cc}」在地盘的位置，其上方天盘神即中传`,
+    `提示：中传「${zc}」在地盘的位置，其上方天盘神即末传`,
+  ];
+  document.getElementById('sc-step-label').textContent=`第${scState.step+1}步 · ${labels[scState.step]}`;
+  document.getElementById('sc-step-hint').textContent=hints[scState.step];
+  // 选项
+  const ans=[cc,zc,mc][scState.step];
+  const pool=shuffleArr(ZHI_ALL.filter(z=>z!==ans)).slice(0,3);
+  const opts=shuffleArr([ans,...pool]);
+  document.getElementById('sc-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="scAnswer(this)" style="font-size:18px;letter-spacing:3px">${o}</button>`).join('');
+  document.getElementById('sc-explain').style.display='none';
+  document.getElementById('sc-next-btn').style.display='none';
+  document.getElementById('sc-board-btn').style.display='none';
+  scState.answered=false;
+}
+function scAnswer(btn){
+  if(scState.answered)return;
+  scState.answered=true;
+  const{cc,zc,mc,mt,tp}=kcState,ans=[cc,zc,mc][scState.step];
+  const chosen=btn.dataset.opt;
+  document.querySelectorAll('#sc-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
+  if(chosen===ans)scState.correct++;else btn.classList.add('wrong');
+  const exArr=[
+    `初传「${cc}」—— 发用：${mt}`,
+    `中传「${zc}」—— 初传${cc}在地盘处，其天盘上神即「${zc}」`,
+    `末传「${mc}」—— 中传${zc}在地盘处，其天盘上神即「${mc}」\n三传完整：初${cc} · 中${zc} · 末${mc}`,
+  ];
+  const ex=document.getElementById('sc-explain');
+  ex.textContent=(chosen===ans?'✓ ':' ✗ ')+exArr[scState.step];
+  ex.style.display='block';
+  const nb=document.getElementById('sc-next-btn');
+  if(scState.step<2){nb.textContent='下一步 →';nb.style.display='';}
+  else{nb.textContent='查看结果 ✓';nb.style.display='';document.getElementById('sc-board-btn').style.display='';}
+}
+function scNext(){
+  scState.step++;
+  if(scState.step>=3){_scEnd();return;}
+  scRender();window.scrollTo(0,0);
+}
+function _scEnd(){
+  const{correct}=scState,total=3,pct=Math.round(correct/total*100);
+  saveWeakRecord('三传推演',total,total-correct);
+  document.getElementById('psc-main').style.display='none';
+  document.getElementById('psc-result').style.display='flex';
+  document.getElementById('sc-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('sc-res-lv').textContent=pct>=100?'三传推演满分 🎉':pct>=67?'推演基本正确 👍':'需巩固天地盘 📚';
+  const{cc,zc,mc,mt}=kcState;
+  document.getElementById('sc-res-detail').innerHTML=`三传：初<b>${cc}</b> · 中<b>${zc}</b> · 末<b>${mc}</b><br>发用：${mt}<br>答对 <b>${correct}</b>/3`;
+}
+function scShowBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+
+// ══ 天将联想测验 ══
+const TJ_QUIZ=[
+  {name:'贵人',wx:'土',ji:'吉',sx:'官贵·文书·解厄',ex:'十二天将之首，临身最吉；空亡或受克则无力'},
+  {name:'螣蛇',wx:'火',ji:'凶',sx:'惊恐·缠绕·怪异',ex:'逢吉神吉中带扰；空亡诸凶可免'},
+  {name:'朱雀',wx:'火',ji:'凶',sx:'口舌·信息·诉讼',ex:'南方火鸟，主言语文字；空亡口舌消散'},
+  {name:'六合',wx:'木',ji:'吉',sx:'婚姻·和合·交易',ex:'主和合成交，占婚最喜；空亡婚约不成'},
+  {name:'勾陈',wx:'土',ji:'凶',sx:'田土·争讼·迟滞',ex:'勾连纠缠，主延误争讼；空亡纠纷可解'},
+  {name:'青龙',wx:'木',ji:'吉',sx:'财帛·喜庆·升迁',ex:'六壬最吉之将，临则百事顺遂；空亡财喜减半'},
+  {name:'天空',wx:'土',ji:'凶',sx:'虚诈·落空·遗失',ex:'天空者虚无落空，遇之防欺诈'},
+  {name:'白虎',wx:'金',ji:'凶',sx:'血光·疾病·死丧',ex:'六壬最凶之将；空亡见凶不凶'},
+  {name:'太常',wx:'土',ji:'吉',sx:'酒食·宴饮·官职',ex:'礼仪之神，主官场礼遇；空亡喜事减半'},
+  {name:'玄武',wx:'水',ji:'凶',sx:'盗窃·欺诈·暧昧',ex:'北方水神，主阴暗隐秘；空亡谋害不凶'},
+  {name:'太阴',wx:'金',ji:'中',sx:'阴私·隐匿·妇女',ex:'月亮之神，主隐秘幽暗女性之象'},
+  {name:'天后',wx:'水',ji:'吉',sx:'妇女·婚姻·生育',ex:'后宫之主，占孕产最重此将'},
+];
+let tjState={qs:[],idx:0,correct:0,answered:false};
+
+function startTJ(){
+  // 生成12题：每将出现一次，随机正反
+  const pool=shuffleArr([...TJ_QUIZ]);
+  const qs=pool.map((t,i)=>({...t,typeA:i%2===0}));
+  tjState={qs,idx:0,correct:0,answered:false};
+  document.getElementById('ptj-main').style.display='';
+  document.getElementById('ptj-result').style.display='none';
+  _scrollPos['ptj']=0;show('ptj');
+  tjRender();
+}
+function tjRender(){
+  const{qs,idx}=tjState,q=qs[idx],total=qs.length;
+  document.getElementById('tj-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-tj-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-tj-pb').style.width=`${idx/total*100}%`;
+  const card=document.getElementById('tj-card');
+  let opts,ans;
+  if(q.typeA){
+    // 见将名猜主象
+    card.innerHTML=`<div class="tj-name">${q.name}</div><div class="tj-attr">五行：${q.wx} &nbsp;|&nbsp; ${q.ji==='吉'?'<span style="color:#2E7D5A">吉将</span>':q.ji==='凶'?'<span style="color:#C41230">凶将</span>':'中性将'}</div><div class="tj-attr" style="margin-top:4px">主象是？</div>`;
+    ans=q.sx;
+    const pool=shuffleArr(TJ_QUIZ.filter(t=>t.name!==q.name)).slice(0,3).map(t=>t.sx);
+    opts=shuffleArr([ans,...pool]);
+  } else {
+    // 见主象猜将名
+    card.innerHTML=`<div class="tj-attr" style="margin-top:8px;font-size:11px">主象：</div><div class="tj-sx">${q.sx}</div><div class="tj-attr" style="margin-top:10px">这是哪位天将？</div>`;
+    ans=q.name;
+    const pool=shuffleArr(TJ_QUIZ.filter(t=>t.name!==q.name)).slice(0,3).map(t=>t.name);
+    opts=shuffleArr([ans,...pool]);
+  }
+  document.getElementById('tj-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="tjAnswer(this)" style="font-size:15px;letter-spacing:2px">${o}</button>`).join('');
+  document.getElementById('tj-explain').style.display='none';
+  tjState.answered=false;
+}
+function tjAnswer(btn){
+  if(tjState.answered)return;
+  tjState.answered=true;
+  const q=tjState.qs[tjState.idx];
+  const ans=q.typeA?q.sx:q.name,chosen=btn.dataset.opt;
+  document.querySelectorAll('#tj-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
+  if(chosen===ans)tjState.correct++;else btn.classList.add('wrong');
+  const ex=document.getElementById('tj-explain');
+  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.name}</b>（${q.wx}，${q.ji}）<br>主象：${q.sx}<br>${q.ex}`;
+  ex.style.display='block';
+  setTimeout(()=>{
+    tjState.idx++;
+    if(tjState.idx>=tjState.qs.length){_tjEnd();return;}
+    tjRender();window.scrollTo(0,0);
+  },1600);
+}
+function _tjEnd(){
+  const{correct,qs}=tjState,total=qs.length,pct=Math.round(correct/total*100);
+  saveWeakRecord('天将联想',total,total-correct);
+  document.getElementById('ptj-main').style.display='none';
+  document.getElementById('ptj-result').style.display='flex';
+  document.getElementById('tj-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('tj-res-lv').textContent=pct>=90?'天将已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
+  document.getElementById('tj-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 宗门流程互动 ══
+let zlState={answers:[],done:false};
+
+function startZL(){
+  _genKC();
+  zlState={answers:[],done:false};
+  const{rg,rz,yj,zs,day,sk,tp}=kcState;
+  document.getElementById('zl-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#C41230">${yj.yj}</b>（${yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时（${day?'昼':'夜'}）`;
+  const tbl=document.getElementById('zl-sk-tbl');
+  tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`;
+  tbl.innerHTML+=_skTableHTML(sk,tp);
+  // 事实摘要
+  const ske=sk.filter(k=>_isKe(k.s,k.x)),xke=sk.filter(k=>_isKe(k.x,k.s));
+  const isYinYang=GAN_JI[rg]===rz;
+  const isFuYin=yj.yj===zs;
+  const isFanYin=ZHI_ALL.indexOf(yj.yj)===(ZHI_ALL.indexOf(zs)+6)%12;
+  const hasRepeat=new Set(sk.map(k=>k.s+'|'+k.x)).size<sk.length;
+  const hasYaoKe=[sk[1].s,sk[2].s,sk[3].s].some(s=>_isKe(s,rg)||_isKe(rg,s));
+  const facts=[
+    `月将${yj.yj}${isFuYin?'= 占时（伏吟）':isFanYin?'与占时对冲（返吟）':'≠ 占时'}`,
+    `日干「${rg}」寄宫「${GAN_JI[rg]}」${isYinYang?'= 日支（八专）':'≠ 日支'}`,
+    ske.length+xke.length===0?'四课无直接克':`直接克：上克${ske.length}处，下克${xke.length}处`,
+    !ske.length&&!xke.length?(hasYaoKe?'有遥克':'无遥克'):'',
+    !ske.length&&!xke.length&&!hasYaoKe?(hasRepeat?'四课有重复':'四课无重复'):'',
+  ].filter(Boolean);
+  document.getElementById('zl-fact').innerHTML=facts.join('<br>');
+  // 生成4步判断
+  const method=_detectMethod(kcState);
+  const steps=[
+    {
+      q:'第1步：有特殊课型吗？（八专/伏吟/返吟）',
+      real:['八专','伏吟','返吟'].includes(method),
+      hint:isFuYin?'月将=占时 → 伏吟':isFanYin?'月将与占时对冲 → 返吟':isYinYang?'日干寄宫=日支 → 八专':'月将≠占时，寄宫≠日支 → 无特殊课型',
+      conclusion:['八专','伏吟','返吟'].includes(method)?`是 → ${method}课`:'否 → 继续判断',
+    },
+    {
+      q:'第2步：四课有直接克吗？（上下神五行相克）',
+      real:ske.length+xke.length>0,
+      hint:ske.length+xke.length===0?'四课无任何直接克':`上克下${ske.length}处，下克上${xke.length}处`,
+      conclusion:ske.length+xke.length>0?`有克 → ${['元首','重审','知一','涉害'].includes(method)?method+'课':'按克法'}`:'无直接克 → 继续判断',
+    },
+    {
+      q:'第3步：（无直接克）有遥克吗？（日干与2/3/4课上神）',
+      real:hasYaoKe,
+      hint:hasYaoKe?'存在遥克关系':'日干与各课上神均无遥克',
+      conclusion:hasYaoKe?'有遥克 → 遥克课':'无遥克 → 继续判断',
+    },
+    {
+      q:'第4步：（无克无遥克）四课有重复吗？',
+      real:hasRepeat,
+      hint:hasRepeat?'四课中出现重复（实为三课）':'四课完整，无重复',
+      conclusion:hasRepeat?'有重复 → 别责课':'无重复 → 昴星课',
+    },
+  ];
+  let stepsHTML='';
+  steps.forEach((s,i)=>{
+    stepsHTML+=`<div class="zl-step" id="zl-s${i}">
+      <div class="zl-q">${s.q}</div>
+      <div class="zl-btns">
+        <button class="zl-btn" onclick="zlAnswer(${i},true,this)">是</button>
+        <button class="zl-btn" onclick="zlAnswer(${i},false,this)">否</button>
+      </div>
+      <div class="zl-ans" id="zl-ans${i}" style="display:none">${s.hint}<br><b>${s.conclusion}</b></div>
+    </div>`;
+  });
+  document.getElementById('zl-steps').innerHTML=stepsHTML;
+  document.getElementById('zl-conclusion').style.display='none';
+  document.getElementById('zl-board-btn').style.display='none';
+  zlState={steps,method,answers:[],done:false};
+  _scrollPos['pzl']=0;show('pzl');
+}
+function zlAnswer(idx,chosen,btn){
+  const s=zlState.steps[idx];
+  const stepEl=document.getElementById(`zl-s${idx}`);
+  const ansEl=document.getElementById(`zl-ans${idx}`);
+  // 锁定按钮
+  stepEl.querySelectorAll('.zl-btn').forEach(b=>b.disabled=true);
+  // 标色
+  if(chosen===s.real){btn.classList.add('yes');}
+  else{btn.classList.add('no');stepEl.querySelectorAll('.zl-btn').forEach(b=>{if(b!==btn)b.classList.add('yes');});}
+  ansEl.style.display='block';
+  zlState.answers.push({idx,chosen,correct:chosen===s.real});
+  stepEl.classList.add('done');
+  // 检查是否全部完成
+  if(zlState.answers.length===4||(idx===0&&s.real)||(idx===1&&s.real&&chosen)){
+    setTimeout(zlFinish,400);
+  }
+}
+function zlFinish(){
+  const{method}=zlState;
+  const wrong=zlState.answers.filter(a=>!a.correct).length;
+  const conc=document.getElementById('zl-conclusion');
+  conc.style.display='block';
+  conc.style.background=wrong===0?'#2E7D5A20':'#C4123020';
+  conc.style.color=wrong===0?'#2E7D5A':'#C41230';
+  conc.style.border=`2px solid ${wrong===0?'#2E7D5A':'#C41230'}`;
+  conc.innerHTML=`判断结果：<b>${method}课</b><br>${wrong===0?'流程完全正确 🎉':`${wrong}步判断有误，对照上方解析复习`}`;
+  document.getElementById('zl-board-btn').style.display='';
+  saveWeakRecord('宗门流程',4,wrong);
+}
+function zlShowBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
 
 // ══ 键盘快捷键 ══
 document.addEventListener('keydown',e=>{
