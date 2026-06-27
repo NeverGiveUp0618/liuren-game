@@ -158,9 +158,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .sc-row:last-child{border:none}
 .sc-lq{font-size:11px;color:#9B8570;width:18px;text-align:right}
 .sc-dg{font-size:11px;color:#9B8570;width:16px;text-align:center}
-.sc-zhi{font-size:24px;font-weight:bold;color:#C41230;width:28px;text-align:center}
-.sc-tj{font-size:11px;color:#8B6914;width:16px;text-align:center}
-.sc-pos{font-size:11px;color:#C41230;font-weight:bold;width:18px}
+.sc-zhi{font-size:24px;font-weight:bold;color:#C41230;width:28px;text-align:center;flex-shrink:0}
+.sc-ko{width:12px;font-size:9px;color:#C41230;flex-shrink:0;text-align:left}
+.sc-tj{font-size:11px;color:#8B6914;width:16px;text-align:center;flex-shrink:0}
+.sc-pos{font-size:11px;color:#C41230;font-weight:bold;width:28px;flex-shrink:0}
 .ske-tbl{width:100%;border-collapse:collapse}
 .ske-tbl td{border:1px solid #D4C4A0;text-align:center;padding:4px 1px}
 .ske-hdr td{background:#EDE7D8;font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
@@ -1988,13 +1989,15 @@ function _renderBoard(){
     const scPos=tz===cc?'初':tz===zc?'中':tz===mc?'末':'';
     return{tz,ez,tj:tjMap[tz]||'',dg:getDG(tz),kong:kong.has(tz),scPos};
   });
-  // 式盘
+  // 式盘：○和传位标记单独一行，地支行始终纯净
   const ch=c=>{
-    const sc=c.scPos?`<span class="lp-scl">${c.scPos}</span>`:'';
-    const ko=c.kong?`<span style="font-size:10px;color:#C41230">○</span>`:'';
+    const mark=c.kong||c.scPos
+      ?`<div style="font-size:9px;color:#C41230;line-height:1.2;min-height:11px">${c.kong?'○':''}${c.scPos?`<b>${c.scPos}</b>`:''}</div>`
+      :`<div style="min-height:11px"></div>`;
     return `<td class="lp-cell${c.scPos?' lp-sc':''}">
       <div class="lp-tj">${c.tj}</div>
-      <div><span class="lp-dg">${c.dg}</span><b style="font-size:15px;color:#1C0A00"> ${c.tz}</b>${ko}${sc}</div>
+      <div><span class="lp-dg">${c.dg}</span><b style="font-size:15px;color:#1C0A00"> ${c.tz}</b></div>
+      ${mark}
       <div class="lp-di">${c.ez}</div></td>`;
   };
   const ctr=`<td class="lp-center" colspan="2" rowspan="2">${rg}${rz}<br>${yj.yj}将<br>${zs}时<br><span style="font-size:10px;color:#8B6914;font-weight:normal">${day?'昼':'夜'}·${xi.xun}</span></td>`;
@@ -2004,16 +2007,13 @@ function _renderBoard(){
     <tr>${ch(cells[10])}${ch(cells[5])}</tr>
     <tr>${[9,8,7,6].map(i=>ch(cells[i])).join('')}</tr>
   </table>`;
-  // 三传
+  // 三传：sc-ko 固定宽度列承接○，其余列不受影响
   const scArr=[{z:cc,lb:'初传'},{z:zc,lb:'中传'},{z:mc,lb:'末传'}];
-  const scH=`<div class="sec-t">三 传</div><div class="sc-block">${scArr.map(s=>{
-    const ko=kong.has(s.z)?`<span style="font-size:10px;color:#C41230">○</span>`:'';
-    return `<div class="sc-row"><span class="sc-lq">${getLQ(s.z)}</span><span class="sc-dg">${getDG(s.z)}</span><b class="sc-zhi">${s.z}</b>${ko}<span class="sc-tj">${tjMap[s.z]||''}</span><span class="sc-pos">${s.lb}</span></div>`;
-  }).join('')}</div>`;
-  // 四课
+  const scH=`<div class="sec-t">三 传</div><div class="sc-block">${scArr.map(s=>`<div class="sc-row"><span class="sc-lq">${getLQ(s.z)}</span><span class="sc-dg">${getDG(s.z)}</span><b class="sc-zhi">${s.z}</b><span class="sc-ko">${kong.has(s.z)?'○':''}</span><span class="sc-tj">${tjMap[s.z]||''}</span><span class="sc-pos">${s.lb}</span></div>`).join('')}</div>`;
+  // 四课：○单独一行，上神行始终居中
   const skH=`<div class="sec-t">四 课</div><table class="ske-tbl">
     <tr class="ske-hdr"><td>第一课</td><td>第二课</td><td>第三课</td><td>第四课</td></tr>
-    <tr>${sk.map(k=>{const dg=getDG(k.s);const ko=kong.has(k.s)?'○':'';return `<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${dg}</span><b style="font-size:15px;color:#C41230"> ${k.s}${ko}</b></td>`}).join('')}</tr>
+    <tr>${sk.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#C41230"> ${k.s}</b><br><span style="font-size:9px;color:#C41230;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
     <tr>${sk.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
   </table>`;
   document.getElementById('pkb-title').textContent=`${rg}${rz}日 · ${yj.yj}将 · ${zs}时`;
