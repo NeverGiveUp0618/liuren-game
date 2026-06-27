@@ -189,6 +189,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
   </div>
+  <div class="qk-entry-card" onclick="startKC()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🔮</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课步骤练习</div><div style="font-size:11px;color:#9B8570;margin-top:1px">月将→天地盘→四课→三传→贵人→空亡</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('p5')">进入速查 →</button></div>
@@ -1426,6 +1433,30 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 起课步骤练习 ======== -->
+<div id="pkc" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">✕</button>
+    <div class="tbtitle">起课步骤练习</div>
+    <div class="tbr" id="kc-step-r">第1步/共6步</div>
+  </div>
+  <div class="card" id="kc-info" style="margin-bottom:10px;font-size:13px;line-height:2;color:#6B5040;text-align:center"></div>
+  <div id="kc-main">
+    <div style="font-size:10px;color:#9B8570;letter-spacing:2px;margin-bottom:5px;font-weight:bold" id="kc-step-label">第一步·定月将</div>
+    <div class="card" style="margin-bottom:10px;font-size:15px;font-weight:bold;text-align:center;line-height:2;color:#1C0A00;min-height:60px;display:flex;align-items:center;justify-content:center;white-space:pre-line" id="kc-q">—</div>
+    <div id="kc-opts" style="margin-bottom:8px"></div>
+    <div id="kc-explain" style="display:none;font-size:12px;color:#6B5040;margin-top:6px;padding:10px 12px;background:#EDE7D8;border-radius:10px;line-height:2;border:1px solid #D4C4A0;white-space:pre-line"></div>
+    <button class="btn btn-r" id="kc-next-btn" style="display:none;margin-top:10px" onclick="kcNextStep()">下一步 →</button>
+  </div>
+  <div id="kc-result" style="display:none;flex-direction:column;align-items:center;padding-top:20px">
+    <div class="qz-score" id="kc-res-score">—</div>
+    <div class="qz-lv" id="kc-res-lv">—</div>
+    <div class="card" style="width:100%;font-size:13px;color:#6B5040;line-height:2;margin-bottom:16px;text-align:center" id="kc-res-detail"></div>
+    <button class="btn btn-r" onclick="startKC()" style="margin-bottom:8px;width:100%">换一局再练 ↺</button>
+    <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回首页</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 </div>
 
@@ -1821,6 +1852,159 @@ function qzEndSession(){
   const lv=pct>=90?'掌握扎实 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'多加练习 📚';
   document.getElementById('qz-res-lv').textContent=lv;
   document.getElementById('qz-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 起课步骤练习 ══
+const GAN_ALL=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const WX_GAN={'甲':1,'乙':1,'丙':2,'丁':2,'戊':4,'己':4,'庚':3,'辛':3,'壬':0,'癸':0};
+const WX_ZHI_M={'子':0,'亥':0,'寅':1,'卯':1,'巳':2,'午':2,'申':3,'酉':3,'丑':4,'辰':4,'未':4,'戌':4};
+const WX_N=['水','木','火','金','土'];
+const KE_M={0:2,2:3,3:1,1:4,4:0}; // 水克火,火克金,金克木,木克土,土克水
+const GAN_JI={'甲':'寅','乙':'辰','丙':'巳','戊':'巳','丁':'未','己':'未','庚':'申','辛':'戌','壬':'亥','癸':'丑'};
+const YJ_TBL=[
+  {zq:'雨水后',yj:'亥',jn:'登明'},{zq:'春分后',yj:'戌',jn:'河魁'},
+  {zq:'谷雨后',yj:'酉',jn:'从魁'},{zq:'小满后',yj:'申',jn:'传送'},
+  {zq:'夏至后',yj:'未',jn:'小吉'},{zq:'大暑后',yj:'午',jn:'胜光'},
+  {zq:'处暑后',yj:'巳',jn:'太乙'},{zq:'秋分后',yj:'辰',jn:'天罡'},
+  {zq:'霜降后',yj:'卯',jn:'太冲'},{zq:'小雪后',yj:'寅',jn:'功曹'},
+  {zq:'冬至后',yj:'丑',jn:'大吉'},{zq:'大寒后',yj:'子',jn:'神后'},
+];
+const KONG_TBL=[
+  {xun:'甲子旬',k:['戌','亥']},{xun:'甲戌旬',k:['申','酉']},
+  {xun:'甲申旬',k:['午','未']},{xun:'甲午旬',k:['辰','巳']},
+  {xun:'甲辰旬',k:['寅','卯']},{xun:'甲寅旬',k:['子','丑']},
+];
+const GR_Z={'甲':'丑','戊':'丑','庚':'丑','乙':'子','己':'子','丙':'亥','丁':'亥','辛':'午','壬':'巳','癸':'巳'};
+const GR_Y={'甲':'未','戊':'未','庚':'未','乙':'申','己':'申','丙':'酉','丁':'酉','辛':'寅','壬':'卯','癸':'卯'};
+const ZHU_SHI=['卯','辰','巳','午','未','申'];
+
+function _wxOf(x){return WX_ZHI_M[x]!==undefined?WX_ZHI_M[x]:WX_GAN[x];}
+function _isKe(a,b){return KE_M[_wxOf(a)]===_wxOf(b);}
+
+let kcState={};
+
+function startKC(){
+  const ri=Math.floor(Math.random()*60);
+  const rg=GAN_ALL[ri%10],rz=ZHI_ALL[ri%12];
+  const yi=Math.floor(Math.random()*12),yj=YJ_TBL[yi];
+  const zsi=Math.floor(Math.random()*12),zs=ZHI_ALL[zsi];
+  const day=ZHU_SHI.includes(zs);
+  // 天地盘
+  const yi2=ZHI_ALL.indexOf(yj.yj);
+  const tp=ZHI_ALL.map((_,i)=>ZHI_ALL[(yi2+(i-zsi+12)%12)%12]);
+  // 四课
+  const jg=GAN_JI[rg],ji=ZHI_ALL.indexOf(jg);
+  const k1s=tp[ji];
+  const k2s=tp[ZHI_ALL.indexOf(k1s)];
+  const rzi=ZHI_ALL.indexOf(rz);
+  const k3s=tp[rzi];
+  const k4s=tp[ZHI_ALL.indexOf(k3s)];
+  const sk=[{s:k1s,x:rg,n:'第一课'},{s:k2s,x:k1s,n:'第二课'},{s:k3s,x:rz,n:'第三课'},{s:k4s,x:k3s,n:'第四课'}];
+  // 三传（贼克法）
+  const ske=sk.filter(k=>_isKe(k.s,k.x));
+  const xke=sk.filter(k=>_isKe(k.x,k.s));
+  let cc,mt;
+  if(ske.length===1&&xke.length===0){cc=ske[0].s;mt='元首课（上克下）→取上神';}
+  else if(xke.length===1&&ske.length===0){
+    let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='重审课（下克上）→取下神';
+  } else if(ske.length>0){cc=ske[0].s;mt='比用/涉害→取首克上神';}
+  else if(xke.length>0){let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='比用/涉害→取首克下神';}
+  else{cc=tp[zsi];mt='昴星课（四课无克）→取占时天盘';}
+  if(!cc||!ZHI_ALL.includes(cc))cc=tp[zsi];
+  const zc=tp[ZHI_ALL.indexOf(cc)];
+  const mc=tp[ZHI_ALL.indexOf(zc)];
+  // 贵人
+  const gr=day?GR_Z[rg]:GR_Y[rg];
+  // 空亡
+  const xi=KONG_TBL[Math.floor(ri/10)];
+  kcState={rg,rz,ri,yj,yi2,zsi,zs,day,tp,sk,jg,cc,zc,mc,mt,gr,xi,step:0,score:0,total:6};
+  kcState.steps=_kcSteps();
+  document.getElementById('kc-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时（${day?'昼':'夜'}）`;
+  document.getElementById('kc-main').style.display='';
+  document.getElementById('kc-result').style.display='none';
+  _scrollPos['pkc']=0;show('pkc');kcShowStep();
+}
+
+function _kcSteps(){
+  const{rg,rz,yj,zs,day,tp,zsi,sk,jg,cc,zc,mc,mt,gr,xi}=kcState;
+  const rnd3=(ex)=>shuffleArr(ZHI_ALL.filter(z=>z!==ex)).slice(0,3);
+  // S1 月将
+  const s1={lb:'第一步 · 定月将',
+    q:`当前节气「${yj.zq}」\n月将是哪个地支？`,a:yj.yj,
+    ex:`${yj.zq}月将：${yj.yj}（${yj.jn}）\n口诀：雨水亥·春分戌·谷雨酉·小满申·夏至未·大暑午\n处暑巳·秋分辰·霜降卯·小雪寅·冬至丑·大寒子`,
+    opts:shuffleArr([yj.yj,...rnd3(yj.yj)])};
+  // S2 天地盘
+  const ec=ZHI_ALL.filter((_,i)=>i!==zsi);
+  const ae=ec[Math.floor(Math.random()*ec.length)];
+  const ai=ZHI_ALL.indexOf(ae),asky=tp[ai];
+  const s2={lb:'第二步 · 排天地盘',
+    q:`月将「${yj.yj}」加占时「${zs}」位，\n地盘「${ae}」位上，天盘是？`,a:asky,
+    ex:`天地盘：月将${yj.yj}置于地盘${zs}位，顺时针布十二支\n地盘「${ae}」→天盘「${asky}」`,
+    opts:shuffleArr([asky,...rnd3(asky)])};
+  // S3 第一课
+  const s3={lb:'第三步 · 演四课（第一课）',
+    q:`日干「${rg}」寄宫在「${jg}」，\n地盘${jg}上，第一课上神是？`,a:sk[0].s,
+    ex:`十干寄宫：${rg}寄${jg}（地盘位）\n地盘${jg}上天盘：「${sk[0].s}」\n第一课：上${sk[0].s} ／ 下${rg}`,
+    opts:shuffleArr([sk[0].s,...rnd3(sk[0].s)])};
+  // S4 初传
+  let kd='四课扫克：';
+  sk.forEach(k=>{const sa=_wxOf(k.s),xa=_wxOf(k.x);
+    if(KE_M[sa]===xa)kd+=`\n${k.n} 上${k.s}(${WX_N[sa]})克下${k.x}(${WX_N[xa]}) ✓`;
+    else if(KE_M[xa]===sa)kd+=`\n${k.n} 下${k.x}(${WX_N[xa]})克上${k.s}(${WX_N[sa]}) ✓`;
+  });
+  if(kd==='四课扫克：')kd='四课无克→昴星课';
+  const s4={lb:'第四步 · 发三传（初传）',
+    q:`${kd}\n按${mt}，初传是？`,a:cc,
+    ex:`初传「${cc}」→中传「${zc}」→末传「${mc}」\n（中末传：依次在天地盘查地盘对应天盘）`,
+    opts:shuffleArr([cc,...rnd3(cc)])};
+  // S5 贵人
+  const gl=day?'昼':'夜';
+  const s5={lb:'第五步 · 布天将（贵人）',
+    q:`日干「${rg}」，占时「${zs}」（${gl}），\n${gl}贵人地支是？`,a:gr,
+    ex:`口诀：甲戊庚→昼丑夜未；乙己→昼子夜申；丙丁→昼亥夜酉\n辛→昼午夜寅；壬癸→昼巳夜卯\n${rg}日${gl}贵人：「${gr}」`,
+    opts:shuffleArr([gr,...rnd3(gr)])};
+  // S6 空亡
+  const ks=xi.k.join('、');
+  const allk=KONG_TBL.map(k=>k.k.join('、'));
+  const s6={lb:'第六步 · 定空亡',
+    q:`日干支「${rg}${rz}」属「${xi.xun}」，\n该旬空亡哪两支？`,a:ks,
+    ex:`${xi.xun}空亡：${ks}\n六旬歌：甲子旬戌亥，甲戌旬申酉，甲申旬午未\n甲午旬辰巳，甲辰旬寅卯，甲寅旬子丑`,
+    opts:shuffleArr([ks,...shuffleArr(allk.filter(k=>k!==ks)).slice(0,3)])};
+  return[s1,s2,s3,s4,s5,s6];
+}
+
+function kcShowStep(){
+  const st=kcState.steps[kcState.step],n=kcState.step+1,t=kcState.total;
+  document.getElementById('kc-step-r').textContent=`第${n}步/共${t}步`;
+  document.getElementById('kc-step-label').textContent=st.lb;
+  document.getElementById('kc-q').textContent=st.q;
+  document.getElementById('kc-explain').style.display='none';
+  document.getElementById('kc-next-btn').style.display='none';
+  document.getElementById('kc-opts').innerHTML=st.opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="kcAnswer(this)">${o}</button>`).join('');
+}
+function kcAnswer(btn){
+  const st=kcState.steps[kcState.step],chosen=btn.dataset.opt;
+  document.querySelectorAll('#kc-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===st.a)b.classList.add('correct');});
+  if(chosen===st.a)kcState.score++;else btn.classList.add('wrong');
+  const ex=document.getElementById('kc-explain');ex.textContent=st.ex;ex.style.display='block';
+  const nb=document.getElementById('kc-next-btn');
+  nb.textContent=kcState.step>=kcState.total-1?'查看结果 ✓':'下一步 →';nb.style.display='block';
+}
+function kcNextStep(){
+  kcState.step++;
+  if(kcState.step>=kcState.total){_kcResult();return;}
+  kcShowStep();window.scrollTo(0,0);
+}
+function _kcResult(){
+  const{score,total,rg,rz,yj,zs,cc,zc,mc,gr,xi}=kcState;
+  document.getElementById('kc-main').style.display='none';
+  document.getElementById('kc-result').style.display='flex';
+  const pct=Math.round(score/total*100);
+  document.getElementById('kc-res-score').textContent=`${score}/${total}`;
+  const lv=pct>=90?'起课娴熟 🎉':pct>=70?'流程基本掌握 👍':pct>=50?'继续练习 💪':'需多加熟练 📚';
+  document.getElementById('kc-res-lv').textContent=lv;
+  document.getElementById('kc-res-detail').innerHTML=`本局：${rg}${rz}日 · ${yj.yj}将（${yj.zq}）· ${zs}时<br>三传：初<b>${cc}</b> · 中<b>${zc}</b> · 末<b>${mc}</b><br>贵人：<b>${gr}</b> · 空亡：<b>${xi.k.join('、')}</b>`;
+  saveSessionRecord('起课步骤',total,score);
 }
 
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
