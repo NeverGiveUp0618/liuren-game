@@ -214,7 +214,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 
 /* ── 壬学心法 ── */
-.xf-wrap{padding:14px 16px 50px;overflow-y:auto;flex:1}
+.xf-wrap{padding:14px 16px 50px;overflow-y:auto;overflow-x:hidden;flex:1;min-width:0}
 .xf-title{font-size:18px;font-weight:bold;color:#1C0A00;text-align:center;line-height:1.6;margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid #C41230}
 .xf-lead{font-size:15px;color:#3D2010;line-height:1.85;margin-bottom:10px}
 .xf-part{font-size:17px;font-weight:bold;color:#C41230;margin:20px 0 12px;padding:6px 12px;border-left:4px solid #C41230;background:#FDF5EC;border-radius:0 8px 8px 0}
@@ -226,7 +226,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .xf-ol{font-size:15px;color:#3D2010;line-height:1.85;padding-left:6px;margin-bottom:10px;list-style:none;counter-reset:xf-cnt}
 .xf-ol li{margin-bottom:8px;padding-left:22px;position:relative;counter-increment:xf-cnt}
 .xf-ol li::before{content:counter(xf-cnt)". ";position:absolute;left:0;color:#C41230;font-weight:bold}
-.xf-tbl-wrap{overflow-x:auto;margin:10px 0 14px;border-radius:10px;box-shadow:0 1px 4px #0001}
+.xf-tbl-wrap{overflow-x:auto;width:100%;margin:10px 0 14px;border-radius:10px;box-shadow:0 1px 4px #0001}
 .xf-tbl{border-collapse:collapse;font-size:13px;white-space:nowrap}
 .xf-tbl th{background:#C41230;color:#FDF5EC;padding:7px 10px;text-align:center;font-weight:bold;font-size:13px}
 .xf-tbl td{padding:7px 10px;text-align:center;border:1px solid #D4C4A0;color:#1C0A00;background:#FDF5EC}
