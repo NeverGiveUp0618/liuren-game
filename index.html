@@ -116,6 +116,33 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .bk-row{display:flex;gap:8px;margin:0 0 6px}
 .bk-btn{flex:1;background:#EDE7D8;color:#6B5040;border:1px solid #D4C4A0;border-radius:10px;padding:9px 6px;font-size:12px;cursor:pointer;text-align:center}
 .bk-btn:active{background:#D4C4A0}
+/* deck mark buttons */
+.fc-mark-row{display:flex;gap:8px;margin-top:10px;flex-shrink:0}
+.fc-mk-kn{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#2E7D5A;color:#F5F0E6;border:none;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.fc-mk-kn:active{transform:scale(.98)}
+.fc-mk-rv{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#EDE7D8;color:#6B5040;border:1px solid #D4C4A0;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.fc-mk-rv:active{transform:scale(.98)}
+/* heatmap */
+.hmap-label{font-size:10px;color:#9B8570;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
+.hmap{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:10px}
+.hmap-cell{aspect-ratio:1;border-radius:3px;background:#EDE7D8;border:1px solid #D4C4A0}
+.hmap-cell.lv1{background:#C4123040;border-color:#C4123080}
+.hmap-cell.lv2{background:#C4123080;border-color:#C41230}
+.hmap-cell.lv3{background:#C41230B0;border-color:#A30F28}
+.hmap-cell.lv4{background:#C41230;border-color:#8B0020}
+.hmap-cell.today{outline:2px solid #8B6914;outline-offset:1px}
+/* quiz */
+.qz-opt{width:100%;padding:12px 14px;font-size:18px;font-weight:bold;border:2px solid #D4C4A0;border-radius:12px;cursor:pointer;background:#EDE7D8;color:#1C0A00;margin:6px 0;text-align:center;transition:all .15s;letter-spacing:3px;display:block}
+.qz-opt:active{transform:scale(.98)}
+.qz-opt.correct{background:#2E7D5A20;border-color:#2E7D5A;color:#2E7D5A}
+.qz-opt.wrong{background:#C4123020;border-color:#C41230;color:#C41230}
+.qz-opt:disabled{cursor:default;opacity:1}
+.qz-score{text-align:center;font-size:36px;font-weight:bold;color:#C41230;margin:24px 0 4px;letter-spacing:4px}
+.qz-lv{text-align:center;font-size:14px;color:#6B5040;margin-bottom:20px;letter-spacing:3px}
+/* p5 chapter nav */
+.p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:#EDE7D8;border:1px solid #D4C4A0;border-radius:12px}
+.p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:#F5F0E6;border:1px solid #D4C4A0;border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
+.p5-nav-btn:active{background:#D4C4A0;color:#C41230}
 </style>
 </head>
 <body>
@@ -132,9 +159,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="hdate" id="el-date"></div>
   <div class="hstats">
     <div class="hstat"><div class="hstat-v" id="hs-streak">—</div><div class="hstat-l">连续学习</div></div>
-    <div class="hstat"><div class="hstat-v" id="hs-best">—</div><div class="hstat-l">闪卡最高</div></div>
-    <div class="hstat"><div class="hstat-v" id="hs-studied">—</div><div class="hstat-l">口诀已背</div></div>
+    <div class="hstat"><div class="hstat-v" id="hs-today">—</div><div class="hstat-l">今日已背</div></div>
+    <div class="hstat"><div class="hstat-v" id="hs-total">—</div><div class="hstat-l">累计已背</div></div>
   </div>
+  <div class="hmap-label">近35天练习记录</div>
+  <div class="hmap" id="el-hmap"></div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">🀄</div><div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
@@ -144,6 +173,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="font-size:22px">🧮</div>
       <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">起课速查</div><div style="font-size:11px;color:#9B8570;margin-top:1px">月将表 · 贵人表 · 旬空表 · 十干寄宫</div></div>
       <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div class="mcard">
+    <div class="mcard-head"><div class="mcard-icon">🎯</div><div><div class="mcard-name">起课练习</div><div class="mcard-desc">月将 · 贵人 四选一随机测试</div></div></div>
+    <div class="mcard-btns">
+      <button class="btn btn-a" onclick="startQZ('yj')">月将练习</button>
+      <button class="btn btn-a" onclick="startQZ('gr')">贵人练习</button>
     </div>
   </div>
   <div class="mcard">
@@ -163,6 +199,18 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <!-- ======== 知识速查 ======== -->
 <div id="p5" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">知识速查</div></div>
+  <div class="p5-nav">
+    <button class="p5-nav-btn" onclick="p5GoChap(0)">一</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(1)">二</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(2)">三</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(3)">四</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(4)">五</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(5)">六</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(6)">七</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(7)">八</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(8)">九</button>
+    <button class="p5-nav-btn" onclick="p5GoChap(9)">十</button>
+  </div>
 
   <!-- 第一章 -->
   <div class="m5-sec">
@@ -1231,33 +1279,52 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <button class="kj-btn" onclick="startKJ('空亡断诀')"><div class="kj-btn-name">空亡断诀</div><div class="kj-btn-n">逐将空亡 · 12条</div></button>
     </div>
   </div>
+  <div class="kj-grp" style="margin-top:4px">
+    <div class="kj-grp-lbl">⚡ 混合练习</div>
+    <div class="kj-grid">
+      <button class="kj-btn" onclick="startKJAll(false)"><div class="kj-btn-name">全部顺序</div><div class="kj-btn-n">共86条 · 顺序</div></button>
+      <button class="kj-btn clr-r" onclick="startKJAll(true)"><div class="kj-btn-name">全部随机</div><div class="kj-btn-n">共86条 · 打乱</div></button>
+    </div>
+  </div>
   <button class="btn btn-d" onclick="goHome()" style="margin-top:8px">← 首页</button>
 </div>
 
 <!-- ======== 口诀闪卡 游戏 ======== -->
 <div id="pkj-g" class="screen">
-  <div class="tbar">
-    <button class="tbk" onclick="show('pkj-sel')">←</button>
-    <div class="tbtitle" id="kj-lbl">口诀闪卡</div>
-    <div class="tbr" id="kj-prog-r">1/1</div>
+  <div id="pkj-main" style="display:flex;flex-direction:column;flex:1">
+    <div class="tbar">
+      <button class="tbk" onclick="kjExit()">←</button>
+      <div class="tbtitle" id="kj-lbl">口诀闪卡</div>
+      <div class="tbr" id="kj-prog-r">1/1</div>
+    </div>
+    <div class="prog-row">
+      <span class="prog-txt" id="el-kj-prog">1/10</span>
+      <div class="prog-wrap"><div class="prog-bar" id="el-kj-pb" style="width:0%"></div></div>
+    </div>
+    <div class="fc-card" id="kj-card" onclick="toggleReveal()">
+      <div class="fc-label" id="kj-cat-lbl">月将口诀</div>
+      <div class="fc-title" id="kj-title">—</div>
+      <div class="fc-body hidden" id="kj-body"></div>
+      <div class="fc-hint" id="kj-hint">点击卡片 · Space 查看内容</div>
+      <div class="fc-reveal" id="kj-reveal">▼ 已展开 · 再点收起</div>
+    </div>
+    <div class="fc-mark-row" id="kj-mark-row" style="display:none">
+      <button class="fc-mk-rv" onclick="kjMark(false)">↩ 再背 [1]</button>
+      <button class="fc-mk-kn" onclick="kjMark(true)">✓ 记住了 [2]</button>
+    </div>
   </div>
-  <div class="prog-row">
-    <span class="prog-txt" id="el-kj-prog">1/10</span>
-    <div class="prog-wrap"><div class="prog-bar" id="el-kj-pb" style="width:10%"></div></div>
-  </div>
-  <div class="fc-card" id="kj-card" onclick="toggleReveal()">
-    <div class="fc-label" id="kj-cat-lbl">月将口诀</div>
-    <div class="fc-title" id="kj-title">—</div>
-    <div class="fc-body hidden" id="kj-body"></div>
-    <div class="fc-hint" id="kj-hint">点击卡片查看内容</div>
-    <div class="fc-reveal" id="kj-reveal">▼ 已展开 · 再点收起</div>
-  </div>
-  <div class="fc-footer">
-    <button class="btn btn-d" onclick="kjMove(-1)" style="flex:1;font-size:13px">◀ 上一条</button>
-    <button class="btn btn-r" onclick="kjMove(1)" style="flex:1;font-size:13px">下一条 ▶</button>
-  </div>
-  <div style="margin-top:8px">
-    <button class="btn btn-d" style="font-size:12px" onclick="show('pkj-sel')">← 返回选择</button>
+  <div id="pkj-result" style="display:none;flex-direction:column;flex:1">
+    <div class="tbar">
+      <button class="tbk" onclick="show('pkj-sel')">✕</button>
+      <div class="tbtitle">练习完成</div>
+    </div>
+    <div class="qz-score" id="kj-res-score">—</div>
+    <div class="qz-lv" id="kj-res-lv">—</div>
+    <div class="card" style="margin:8px 0;text-align:center;font-size:13px;color:#6B5040;line-height:2" id="kj-res-detail"></div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+      <button class="btn btn-r" id="kj-redo-btn" onclick="kjRedoReview()" style="display:none">↩ 重练未记住的</button>
+      <button class="btn btn-d" onclick="show('pkj-sel')">← 返回选择</button>
+    </div>
   </div>
 </div>
 
@@ -1325,10 +1392,38 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 起课练习 ======== -->
+<div id="pqz" class="screen">
+  <div class="tbar">
+    <button class="tbk" onclick="goHome()">✕</button>
+    <div class="tbtitle" id="qz-title">起课练习</div>
+    <div class="tbr" id="qz-prog-r"></div>
+  </div>
+  <div id="pqz-main">
+    <div class="prog-row">
+      <span class="prog-txt" id="el-qz-prog"></span>
+      <div class="prog-wrap"><div class="prog-bar" id="el-qz-pb" style="width:0%"></div></div>
+    </div>
+    <div class="card" style="text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;margin-bottom:14px">
+      <div style="font-size:16px;font-weight:bold;color:#1C0A00;letter-spacing:1px;line-height:2" id="qz-q">—</div>
+    </div>
+    <div id="qz-opts"></div>
+    <div id="qz-explain" style="display:none;font-size:12px;color:#9B8570;text-align:center;margin-top:8px;padding:7px 10px;background:#EDE7D8;border-radius:8px;letter-spacing:1px;border:1px solid #D4C4A0"></div>
+  </div>
+  <div id="pqz-result" style="display:none;flex-direction:column;align-items:center;padding-top:16px">
+    <div class="qz-score" id="qz-res-score">—</div>
+    <div class="qz-lv" id="qz-res-lv">—</div>
+    <div class="card" style="width:100%;text-align:center;font-size:13px;color:#6B5040;line-height:2;margin-bottom:16px" id="qz-res-detail"></div>
+    <button class="btn btn-r" onclick="startQZ(qzState.type)" style="margin-bottom:8px;width:100%">再来一次 ↺</button>
+    <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回首页</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 </div>
 
 <script>
+// ══ Navigation ══
 const _scrollPos = {};
 function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();}}
 function goHome(){show('ph')}
@@ -1336,6 +1431,8 @@ function goHome(){show('ph')}
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
+function p5GoChap(n){const secs=document.querySelectorAll('#p5 .m5-sec');if(secs[n])secs[n].scrollIntoView({behavior:'smooth',block:'start'})}
+function shuffleArr(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 
 const KJ_DATA = {
 '月将口诀':[
@@ -1451,26 +1548,50 @@ const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 function getLRData(){try{return JSON.parse(localStorage.getItem(LR_KEY)||'{}')}catch{return{}}}
 function saveLRData(d){localStorage.setItem(LR_KEY,JSON.stringify(d))}
 function todayStr(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`}
-
-// ══ 学习记录 ══
-function recordStudySession(cat){
-  const d=getLRData(),today=todayStr();
-  const cats=new Set(d.studiedCats||[]);cats.add(cat);
-  const streak=d.lastDate===today?d.streak||(1):(d.lastDate===getPrevDay(today)?((d.streak||0)+1):1);
-  const todayCats=d.lastDate===today?(d.todayCats||0)+1:1;
-  const best=Math.max(d.best||0,todayCats);
-  saveLRData({...d,studiedCats:[...cats],lastDate:today,streak,todayCats,best});
-  updateHomeStats();
-}
 function getPrevDay(s){const d=new Date(s);d.setDate(d.getDate()-1);return d.toISOString().slice(0,10)}
 
-// ══ 首页统计 ══
+// ══ 保存练习记录 ══
+function saveSessionRecord(cat,cards,known){
+  if(!cards)return;
+  const d=getLRData(),today=todayStr();
+  const hist=d.history||[];
+  hist.push({date:today,cat,cards,known});
+  if(hist.length>180)hist.splice(0,hist.length-180);
+  const todayCards=(d.lastDate===today?d.todayCards||0:0)+cards;
+  const totalCards=(d.totalCards||0)+cards;
+  const streak=d.lastDate===today?d.streak||(1):(d.lastDate===getPrevDay(today)?((d.streak||0)+1):1);
+  const cats=new Set(d.studiedCats||[]);cats.add(cat);
+  saveLRData({...d,studiedCats:[...cats],lastDate:today,streak,todayCards,totalCards,history:hist});
+  updateHomeStats();
+}
+
+// ══ 首页统计 + 热力图 ══
 function updateHomeStats(){
   const d=getLRData(),today=todayStr();
-  const streak=d.lastDate===today||(d.lastDate===getPrevDay(today))?d.streak||0:0;
+  const streak=(d.lastDate===today||(d.lastDate===getPrevDay(today)))?d.streak||0:0;
   document.getElementById('hs-streak').textContent=(streak||0)+'天';
-  document.getElementById('hs-best').textContent=(d.best||0)+'次';
-  document.getElementById('hs-studied').textContent=(d.studiedCats||[]).length+'类';
+  const todayCards=d.lastDate===today?d.todayCards||0:0;
+  document.getElementById('hs-today').textContent=todayCards+'条';
+  document.getElementById('hs-total').textContent=(d.totalCards||0)+'条';
+  renderHeatmap(d);
+}
+function renderHeatmap(d){
+  const hmap=document.getElementById('el-hmap');if(!hmap)return;
+  const hist=(d||getLRData()).history||[];
+  const today=new Date();
+  const todayKey=todayStr();
+  const dayMap={};
+  hist.forEach(h=>{dayMap[h.date]=(dayMap[h.date]||0)+(h.cards||0);});
+  let cells='';
+  for(let i=34;i>=0;i--){
+    const dt=new Date(today);dt.setDate(dt.getDate()-i);
+    const k=dt.toISOString().slice(0,10);
+    const v=dayMap[k]||0;
+    const lv=v===0?'':v<5?'lv1':v<15?'lv2':v<30?'lv3':'lv4';
+    const td=k===todayKey?'today':'';
+    cells+=`<div class="hmap-cell ${lv} ${td}" title="${k}：${v}条"></div>`;
+  }
+  hmap.innerHTML=cells;
 }
 
 // ══ 备份提醒 ══
@@ -1518,12 +1639,194 @@ function importBackup(){
 }
 
 // ══ 口诀闪卡 ══
-let kjState={cat:'',items:[],idx:0,revealed:false};
-function startKJ(cat){const items=KJ_DATA[cat]||[];if(!items.length){showToast('内容即将补充…');return}kjState={cat,items,idx:0,revealed:false};try{recordStudySession(cat);}catch(e){}updateKJCard();_scrollPos['pkj-g']=0;show('pkj-g')}
-function updateKJCard(){const{cat,items,idx}=kjState,item=items[idx]||{},total=items.length;document.getElementById('kj-lbl').textContent=cat;document.getElementById('kj-prog-r').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-prog').textContent=`${idx+1}/${total}`;document.getElementById('el-kj-pb').style.width=`${(idx+1)/total*100}%`;document.getElementById('kj-cat-lbl').textContent=cat;document.getElementById('kj-title').textContent=item.title||'—';document.getElementById('kj-body').textContent=item.body||'';kjState.revealed=false;document.getElementById('kj-body').classList.add('hidden');document.getElementById('kj-hint').style.display='';document.getElementById('kj-reveal').style.display='none'}
-function toggleReveal(){kjState.revealed=!kjState.revealed;document.getElementById('kj-body').classList.toggle('hidden',!kjState.revealed);document.getElementById('kj-hint').style.display=kjState.revealed?'none':'';document.getElementById('kj-reveal').style.display=kjState.revealed?'block':'none'}
-function kjMove(dir){const len=kjState.items.length;kjState.idx=Math.max(0,Math.min(len-1,kjState.idx+dir));updateKJCard()}
+let kjState={cat:'',allItems:[],deck:[],knownList:[],deckIdx:0,revealed:false};
+
+function _kjLaunch(){
+  document.getElementById('pkj-main').style.display='flex';
+  document.getElementById('pkj-result').style.display='none';
+  _scrollPos['pkj-g']=0;
+  show('pkj-g');
+  updateKJCard();
+}
+function startKJ(cat){
+  const raw=KJ_DATA[cat]||[];
+  if(!raw.length){showToast('内容即将补充…');return}
+  const items=[...raw];
+  kjState={cat,allItems:items,deck:[...items],knownList:[],deckIdx:0,revealed:false};
+  _kjLaunch();
+}
+function startKJAll(shuffle){
+  const all=[];
+  Object.entries(KJ_DATA).forEach(([cat,items])=>items.forEach(item=>all.push({...item,_cat:cat})));
+  if(shuffle)shuffleArr(all);
+  const cat=shuffle?'全部随机':'全部顺序';
+  kjState={cat,allItems:[...all],deck:[...all],knownList:[],deckIdx:0,revealed:false};
+  _kjLaunch();
+}
+function updateKJCard(){
+  const{cat,deck,deckIdx,allItems,knownList}=kjState;
+  const item=deck[deckIdx]||{};
+  const total=allItems.length;
+  const done=knownList.length;
+  document.getElementById('kj-lbl').textContent=cat;
+  document.getElementById('kj-prog-r').textContent=`${deckIdx+1}/${deck.length}`;
+  document.getElementById('el-kj-prog').textContent=`已记 ${done} · 剩余 ${deck.length}`;
+  document.getElementById('el-kj-pb').style.width=`${done/total*100}%`;
+  document.getElementById('kj-cat-lbl').textContent=item._cat||cat;
+  document.getElementById('kj-title').textContent=item.title||'—';
+  document.getElementById('kj-body').textContent=item.body||'';
+  kjState.revealed=false;
+  document.getElementById('kj-body').classList.add('hidden');
+  document.getElementById('kj-hint').style.display='';
+  document.getElementById('kj-reveal').style.display='none';
+  document.getElementById('kj-mark-row').style.display='none';
+}
+function toggleReveal(){
+  kjState.revealed=!kjState.revealed;
+  document.getElementById('kj-body').classList.toggle('hidden',!kjState.revealed);
+  document.getElementById('kj-hint').style.display=kjState.revealed?'none':'';
+  document.getElementById('kj-reveal').style.display=kjState.revealed?'block':'none';
+  if(kjState.revealed)document.getElementById('kj-mark-row').style.display='flex';
+}
+function kjMark(known){
+  if(!kjState.revealed)return;
+  const deck=kjState.deck;
+  const card=deck[kjState.deckIdx];
+  if(known){
+    kjState.knownList.push(card);
+    deck.splice(kjState.deckIdx,1);
+  } else {
+    deck.splice(kjState.deckIdx,1);
+    deck.push(card);
+  }
+  if(deck.length===0){kjEndSession();return;}
+  if(kjState.deckIdx>=deck.length)kjState.deckIdx=0;
+  updateKJCard();
+}
+function kjEndSession(){
+  const{cat,allItems,knownList}=kjState;
+  const total=allItems.length,known=knownList.length;
+  saveSessionRecord(cat,total,known);
+  document.getElementById('pkj-main').style.display='none';
+  document.getElementById('pkj-result').style.display='flex';
+  const pct=Math.round(known/total*100);
+  document.getElementById('kj-res-score').textContent=`${known}/${total}`;
+  const lv=pct>=90?'掌握扎实 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'多加练习 📚';
+  document.getElementById('kj-res-lv').textContent=lv;
+  document.getElementById('kj-res-detail').innerHTML=`记住了 <b>${known}</b> 条 / 共 <b>${total}</b> 条<br>正确率 <b>${pct}%</b>`;
+  const notKnown=total-known;
+  const rb=document.getElementById('kj-redo-btn');
+  if(notKnown>0){rb.style.display='';rb.textContent=`↩ 重练未记住的（${notKnown}条）`;}
+  else rb.style.display='none';
+}
+function kjRedoReview(){
+  const knownTitles=new Set(kjState.knownList.map(x=>x.title));
+  const unknowns=kjState.allItems.filter(x=>!knownTitles.has(x.title));
+  if(!unknowns.length){showToast('全部已记住！');return;}
+  kjState.deck=[...unknowns];
+  kjState.deckIdx=0;
+  kjState.revealed=false;
+  document.getElementById('pkj-main').style.display='flex';
+  document.getElementById('pkj-result').style.display='none';
+  updateKJCard();
+}
+function kjExit(){
+  const practiced=kjState.knownList.length+(kjState.allItems.length-kjState.deck.length-kjState.knownList.length);
+  if(practiced>0) saveSessionRecord(kjState.cat,practiced,kjState.knownList.length);
+  show('pkj-sel');
+}
+
+// ══ 起课练习 ══
+const QZ_YJ=[
+  {q:'正月（雨水后）月将是？',a:'亥',hint:'亥 · 登明'},
+  {q:'二月（春分后）月将是？',a:'戌',hint:'戌 · 河魁'},
+  {q:'三月（谷雨后）月将是？',a:'酉',hint:'酉 · 从魁'},
+  {q:'四月（小满后）月将是？',a:'申',hint:'申 · 传送'},
+  {q:'五月（夏至后）月将是？',a:'未',hint:'未 · 小吉'},
+  {q:'六月（大暑后）月将是？',a:'午',hint:'午 · 胜光'},
+  {q:'七月（处暑后）月将是？',a:'巳',hint:'巳 · 太乙'},
+  {q:'八月（秋分后）月将是？',a:'辰',hint:'辰 · 天罡'},
+  {q:'九月（霜降后）月将是？',a:'卯',hint:'卯 · 太冲'},
+  {q:'十月（小雪后）月将是？',a:'寅',hint:'寅 · 功曹'},
+  {q:'十一月（冬至后）月将是？',a:'丑',hint:'丑 · 大吉'},
+  {q:'十二月（大寒后）月将是？',a:'子',hint:'子 · 神后'},
+];
+const QZ_GR=[
+  {q:'甲·戊·庚 日\n昼贵人在：',a:'丑',hint:'甲戊庚，牛（丑）'},
+  {q:'乙·己 日\n昼贵人在：',a:'子',hint:'乙己，鼠（子）'},
+  {q:'丙·丁 日\n昼贵人在：',a:'亥',hint:'丙丁，猪（亥）'},
+  {q:'辛 日\n昼贵人在：',a:'午',hint:'辛，马（午）'},
+  {q:'壬·癸 日\n昼贵人在：',a:'巳',hint:'壬癸，蛇（巳）'},
+  {q:'甲·戊·庚 日\n夜贵人在：',a:'未',hint:'甲戊庚，羊（未）'},
+  {q:'乙·己 日\n夜贵人在：',a:'申',hint:'乙己，猴（申）'},
+  {q:'丙·丁 日\n夜贵人在：',a:'酉',hint:'丙丁，鸡（酉）'},
+  {q:'辛 日\n夜贵人在：',a:'寅',hint:'辛，虎（寅）'},
+  {q:'壬·癸 日\n夜贵人在：',a:'卯',hint:'壬癸，兔（卯）'},
+];
+const ZHI_ALL=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+let qzState={type:'',qs:[],idx:0,correct:0,answered:false};
+
+function startQZ(type){
+  const pool=type==='yj'?QZ_YJ:QZ_GR;
+  const qs=shuffleArr([...pool]);
+  qzState={type,qs,idx:0,correct:0,answered:false};
+  document.getElementById('qz-title').textContent=type==='yj'?'月将练习':'贵人练习';
+  document.getElementById('pqz-main').style.display='';
+  document.getElementById('pqz-result').style.display='none';
+  show('pqz');
+  updateQZCard();
+}
+function updateQZCard(){
+  const{qs,idx}=qzState,q=qs[idx],total=qs.length;
+  document.getElementById('qz-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-qz-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-qz-pb').style.width=`${idx/total*100}%`;
+  document.getElementById('qz-q').textContent=q.q;
+  document.getElementById('qz-explain').style.display='none';
+  qzState.answered=false;
+  const pool=ZHI_ALL.filter(z=>z!==q.a);
+  shuffleArr(pool);
+  const opts=shuffleArr([q.a,...pool.slice(0,3)]);
+  document.getElementById('qz-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="qzAnswer(this)">${o}</button>`).join('');
+}
+function qzAnswer(btn){
+  if(qzState.answered)return;
+  qzState.answered=true;
+  const chosen=btn.dataset.opt;
+  const q=qzState.qs[qzState.idx];
+  document.querySelectorAll('#qz-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===q.a)b.classList.add('correct');});
+  if(chosen===q.a){qzState.correct++;}
+  else{btn.classList.add('wrong');}
+  const ex=document.getElementById('qz-explain');
+  ex.textContent=(chosen===q.a?'✓ ':'✗ 正确答案 '+q.a+' · ')+q.hint;
+  ex.style.display='block';
+  setTimeout(()=>{
+    qzState.idx++;
+    if(qzState.idx>=qzState.qs.length){qzEndSession();return;}
+    updateQZCard();
+  },1500);
+}
+function qzEndSession(){
+  const{correct,qs}=qzState,total=qs.length,pct=Math.round(correct/total*100);
+  document.getElementById('pqz-main').style.display='none';
+  document.getElementById('pqz-result').style.display='flex';
+  document.getElementById('qz-res-score').textContent=`${correct}/${total}`;
+  const lv=pct>=90?'掌握扎实 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'多加练习 📚';
+  document.getElementById('qz-res-lv').textContent=lv;
+  document.getElementById('qz-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
+
+// ══ 键盘快捷键 ══
+document.addEventListener('keydown',e=>{
+  const pg=document.getElementById('pkj-g');
+  if(pg&&pg.classList.contains('active')&&document.getElementById('pkj-main').style.display!=='none'){
+    if(e.code==='Space'){e.preventDefault();toggleReveal();}
+    if((e.code==='Digit1'||e.code==='KeyZ')&&kjState.revealed)kjMark(false);
+    if((e.code==='Digit2'||e.code==='KeyX')&&kjState.revealed)kjMark(true);
+  }
+});
 </script>
 </body>
 </html>
