@@ -1463,6 +1463,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <script>
 // ══ Navigation ══
 const _scrollPos = {};
+const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
+const BK_DATE_KEY=LR_BK_KEY;
 function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();}}
 function goHome(){show('ph')}
 (function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;updateHomeStats();checkBkRemind();})();
@@ -1582,7 +1584,6 @@ const KJ_DATA = {
 };
 
 // ══ 数据存储 ══
-const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 function getLRData(){try{return JSON.parse(localStorage.getItem(LR_KEY)||'{}')}catch{return{}}}
 function saveLRData(d){localStorage.setItem(LR_KEY,JSON.stringify(d))}
 function todayStr(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`}
@@ -1633,7 +1634,6 @@ function renderHeatmap(d){
 }
 
 // ══ 备份提醒 ══
-const BK_DATE_KEY=LR_BK_KEY;
 function checkBkRemind(){
   const last=localStorage.getItem(BK_DATE_KEY);
   const banner=document.getElementById('bk-remind');if(!banner)return;
