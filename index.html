@@ -2267,11 +2267,12 @@ function _renderBoard(targetEl){
   // 三传：sc-ko 固定宽度列承接○，其余列不受影响
   const scArr=[{z:cc,lb:'初传'},{z:zc,lb:'中传'},{z:mc,lb:'末传'}];
   const scH=`<div class="sec-t">三 传</div><div class="sc-block">${scArr.map(s=>`<div class="sc-row"><span class="sc-lq">${getLQ(s.z)}</span><span class="sc-dg">${getDG(s.z)}</span><b class="sc-zhi">${s.z}</b><span class="sc-ko">${kong.has(s.z)?'○':''}</span><span class="sc-tj">${tjMap[s.z]||''}</span><span class="sc-pos">${s.lb}</span></div>`).join('')}</div>`;
-  // 四课：○单独一行，上神行始终居中
+  // 四课：从右到左排列（第四→三→二→一课），○单独一行
+  const skR=[...sk].reverse();
   const skH=`<div class="sec-t">四 课</div><table class="ske-tbl">
-    <tr class="ske-hdr"><td>第一课</td><td>第二课</td><td>第三课</td><td>第四课</td></tr>
-    <tr>${sk.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#C41230"> ${k.s}</b><br><span style="font-size:9px;color:#C41230;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
-    <tr>${sk.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
+    <tr class="ske-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>
+    <tr>${skR.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#C41230"> ${k.s}</b><br><span style="font-size:9px;color:#C41230;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
+    <tr>${skR.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
   </table>`;
   if(targetEl){
     targetEl.innerHTML=`<div class="z9-ex-hd">${rg}${rz}日 · ${yj.yj}将（${yj.zq}）· ${zs}时</div><div class="z9-ex-mt">${kcState.mt}</div>`+lpH+scH+skH;
