@@ -338,6 +338,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
     <div class="mcard-btns" style="margin-top:6px">
       <button class="btn btn-d" onclick="show('pzfl')">🗺 九宗门流程图</button>
+      <button class="btn btn-d" onclick="show('pbdl')">💡 底层逻辑白话</button>
     </div>
   </div>
   <div class="mcard">
@@ -2427,6 +2428,242 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <tr><td>巳 酉 丑 日</td><td class="c-r">亥</td></tr>
     <tr><td>亥 卯 未 日</td><td class="c-r">巳</td></tr>
   </table>
+
+</div>
+
+<!-- ======== 底层逻辑·大白话 ======== -->
+<div id="pbdl" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">底层逻辑·大白话</div></div>
+
+  <div class="m5-jue">你告诉它「哪天、几点」起的念头，它先摆出一张盘，再从盘里找出「导火索」，顺着导火索推出「起因→经过→结果」，最后给每个字贴上含义，读出吉凶成败。就这么一条流水线。</div>
+
+  <div class="sec-t">这台机器的四层结构</div>
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:12px;line-height:2.3;color:#6B5040;font-family:monospace">
+      <div>第4层 · <b>翻译层</b>　给每个字贴"性格标签"和"便利贴"，读出人事吉凶</div>
+      <div>第3层 · <b>剧情层</b>　起因 → 经过 → 结果（事情怎么发展）</div>
+      <div>第2层 · <b>站位层</b>　我方、对方各自现在是什么状态</div>
+      <div>第1层 · <b>摆盘层</b>　固定的格子 + 转一圈盖上去的一层</div>
+    </div>
+    <div class="m5-text red" style="margin-top:8px;font-size:12px">⚠ 摆盘和站位是死规矩——同一天同一时刻，谁来摆都一样，没有半点随意。真正"玄"、靠经验的，只有最上面读吉凶那层。</div>
+  </div>
+
+  <!-- 第一层：摆盘 -->
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">第一层 · 摆盘（搭好棋盘）<span class="m5-tog-arrow">›</span></button>
+    <div class="m5-body">
+      <div class="m5-text" style="font-size:12px;line-height:1.9">
+        <b>① 地盘（固定不动）</b>：十二个字（子丑寅…亥）均匀排成一圈，永远不动。像十二个固定车位，只提供"地址"。<br><br>
+        <b>② 天盘（转一圈盖上去）</b>：同样这十二个字再拿一份，<b>整体转一个角度</b>盖在地盘上。转多少度，就是这张盘独一无二的"时间指纹"。<br><br>
+        <b>③ 月将加时（唯一要算的一步）</b>：把"月将"这个字对准"你起念的那个时辰"，其余的字顺着排好。——错一格，整张盘全错。
+      </div>
+      <div class="m5-sub">月将表（按当天过了哪个节气查）</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>过了这个节气</th><th>月将</th><th>过了这个节气</th><th>月将</th></tr>
+          <tr><td>雨水</td><td class="c-r">亥</td><td>大暑</td><td class="c-r">午</td></tr>
+          <tr><td>春分</td><td class="c-r">戌</td><td>处暑</td><td class="c-r">巳</td></tr>
+          <tr><td>谷雨</td><td class="c-r">酉</td><td>秋分</td><td class="c-r">辰</td></tr>
+          <tr><td>小满</td><td class="c-r">申</td><td>霜降</td><td class="c-r">卯</td></tr>
+          <tr><td>夏至</td><td class="c-r">未</td><td>小雪</td><td class="c-r">寅</td></tr>
+          <tr><td colspan="2"></td><td>冬至</td><td class="c-r">丑</td></tr>
+          <tr><td colspan="2"></td><td>大寒</td><td class="c-r">子</td></tr>
+        </table>
+      </div>
+      <div class="m5-sub">天干寄宫表（天干没有自己的格子，借住地支格里）</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>天干</th><th>甲</th><th>乙</th><th>丙</th><th>丁</th><th>戊</th><th>己</th><th>庚</th><th>辛</th><th>壬</th><th>癸</th></tr>
+          <tr><td>借住在</td><td class="c-r">寅</td><td class="c-r">辰</td><td class="c-r">巳</td><td class="c-r">未</td><td class="c-r">巳</td><td class="c-r">未</td><td class="c-r">申</td><td class="c-r">戌</td><td class="c-r">亥</td><td class="c-r">丑</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二层：站位 -->
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">第二层 · 站位（谁是我、谁是对方）<span class="m5-tog-arrow">›</span></button>
+    <div class="m5-body">
+      <div class="m5-jue">日干 = 我方（问事的你、主动的一方）<br>日支 = 对方 / 这件事本身（被问的人、环境、事情）</div>
+      <div class="m5-text" style="font-size:12px;line-height:1.9">
+        <b>四课（四对站位）</b>：给"我"和"对方"各自看一眼"头顶上盖着什么字"，各看两层，凑成四对。<br><br>
+        · 我方（日干借住的格子）：头顶第一个字 → 这个字再往上一层得第二个字<br>
+        · 对方（日支的格子）：头顶第一个字 → 这个字再往上一层得第二个字<br><br>
+        这四对，就是<b>此刻这件事的关系快照</b>——我现在被什么笼罩、对方/事情现在是什么状态。但这只是静止的照片，还没告诉你事情会怎么发展。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三层：剧情 -->
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">第三层 · 剧情（起因 → 经过 → 结果）<span class="m5-tog-arrow">›</span></button>
+    <div class="m5-body">
+      <div class="m5-jue">一张安安静静、谁也不惹谁的盘，不会"出事"。事情之所以发生，是因为"失衡"。而最小的失衡，就是两个字之间相克——你就理解成两个字在掐架。谁在掐架，谁就是这件事的导火索。</div>
+      <div class="m5-text" style="font-size:12px;line-height:1.9">
+        找到导火索后，顺着盘往下推两步，得到<b>三段式剧情（三传：初、中、末）</b>：<br><br>
+        <b>初传</b>：事情的根源、最先动起来的那个点（导火索）<br>
+        <b>中传</b>：中间的过程、会碰到的人和事<br>
+        <b>末传</b>：最后的结果、归宿<br><br>
+        怎么推：导火索这个字 → 看它头顶盖着哪个字 → 那个就是中传；中传同样再往上看一步 → 得到末传。像踩着石头过河，连跳两步就到。
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四层：找导火索 -->
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">第四层 · 找导火索（三道筛子，最关键）<span class="m5-tog-arrow">›</span></button>
+    <div class="m5-body">
+      <div class="m5-text red" style="font-size:12px;line-height:1.9">
+        <b>第一步：先看盘里有没有人在掐架</b><br>
+        · 没人掐架 → 跳到"没人掐架怎么办"<br>
+        · 有人在掐 → 往下走<br><br>
+        <b>第二步：优先抓"下面欺负上面"的那一对</b><br>
+        · 下面的欺负上面的（臣顶撞领导）——反常，往往才是真正的乱源，<b>优先抓它</b><br>
+        · 上面的压下面的（领导管下属，正常）——只有在没有下犯上时才轮到它
+      </div>
+      <div class="m5-sub">第三步：三道筛子（哪道能缩到只剩1个，就在那停下）</div>
+      <div class="m5-text" style="font-size:12px;line-height:2">
+        <b>第①道</b>：只有一对在掐？→ 它就是导火索 ✓<br>
+        好几对都在掐 ↓<br><br>
+        <b>第②道</b>：挑"和你同类"的那个（阴阳和"我"一样的）→ 只剩一个？它就是导火索 ✓<br>
+        还是好几个 ↓<br><br>
+        <b>第③道</b>：挑"受气最重"的那个（回家路上被欺负最多） → 还一样重？挑"站得最显眼"（四孟角位）的 ✓
+      </div>
+      <div class="m5-text gold" style="font-size:12px;line-height:1.8">
+        阴阳怎么分：子寅辰午申戌是<b>阳</b>；丑卯巳未酉亥是<b>阴</b><br>
+        "受气最重"：各候选人沿路走回自己家，一路上被多少字欺负，被欺负最多、怨气最深的先爆<br>
+        "最显眼"：站在四孟（寅申巳亥，四角）比四仲（子午卯酉，正位）更优先
+      </div>
+      <div class="m5-sub">没人掐架怎么办（备用招）</div>
+      <div class="m5-text" style="font-size:12px;line-height:1.9">
+        <b>①隔空瞪眼</b>：看有没有字隔着空气和"我"较劲（遥克）。有，就拿它当起头；别人来瞪我 比 我去瞪别人 更优先。<br>
+        <b>②指定位置</b>：连隔空瞪眼都没有，按固定指定位置硬点一个起头（昴星课取酉宫）。<br><br>
+        <b>特殊房型</b>（一眼能认出）：<br>
+        · <b>纹丝不动型</b>（伏吟）：天地盘完全重合，象征停滞、潜伏、原地不动<br>
+        · <b>整张翻转型</b>（返吟）：天地盘整个对冲，象征反复、动荡、来回折腾<br>
+        · <b>缺人型</b>（别责/八专）：四对站位凑不齐，各有专门补救取法
+      </div>
+    </div>
+  </div>
+
+  <!-- 第五层：翻译 -->
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">第五层 · 翻译（给每个字贴标签）<span class="m5-tog-arrow">›</span></button>
+    <div class="m5-body">
+      <div class="m5-sub">1. 十二天将（性格标签）</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>天将</th><th>它代表的意思</th></tr>
+          <tr><td class="c-a">贵人</td><td>贵人、长辈、当官的、帮你的人、逢凶化吉</td></tr>
+          <tr><td class="c-a">腾蛇</td><td>虚惊、怪事、心慌、缠绕、文书</td></tr>
+          <tr><td class="c-a">朱雀</td><td>口舌是非、消息、文书、官司、火</td></tr>
+          <tr><td class="c-a">六合</td><td>婚姻、和好、合作、中间人、私情</td></tr>
+          <tr><td class="c-a">勾陈</td><td>田地、牵扯不清、争斗、拖延</td></tr>
+          <tr><td class="c-g">青龙</td><td>钱财、喜事、酒食、官运</td></tr>
+          <tr><td class="c-a">天空</td><td>虚的、不实在、空想、欺骗、说话不算数</td></tr>
+          <tr><td class="c-r">白虎</td><td>道路、生病、丧事、血光、急、凶</td></tr>
+          <tr><td class="c-a">太常</td><td>吃穿、宴席、文章、平平常常</td></tr>
+          <tr><td class="c-r">玄武</td><td>盗贼、丢东西、暗中的事、隐私、欺诈</td></tr>
+          <tr><td class="c-a">太阴</td><td>暗中、隐蔽、女人、私底下</td></tr>
+          <tr><td class="c-a">天后</td><td>妇女、暧昧、感情、恩惠、家里的事</td></tr>
+        </table>
+      </div>
+      <div class="m5-sub">2. 神煞便利贴（打补丁用的小记号）</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>记号</th><th>意思</th></tr>
+          <tr><td class="c-r">空亡（旬空）</td><td>"作废/落空"——力气大减，事情容易成空、嘴上答应实际没下文</td></tr>
+          <tr><td class="c-g">驿马</td><td>"要动了"——主跑动、出门、变动</td></tr>
+          <tr><td class="c-a">墓</td><td>"被罩住/卡死"——人或事被困住、发懵、动不了</td></tr>
+        </table>
+      </div>
+      <div class="m5-sub">空亡查表（按当天所在的"旬"查）</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>当天属于</th><th>这两个字作废</th></tr>
+          <tr><td>甲子旬</td><td class="c-r">戌 亥</td></tr>
+          <tr><td>甲戌旬</td><td class="c-r">申 酉</td></tr>
+          <tr><td>甲申旬</td><td class="c-r">午 未</td></tr>
+          <tr><td>甲午旬</td><td class="c-r">辰 巳</td></tr>
+          <tr><td>甲辰旬</td><td class="c-r">寅 卯</td></tr>
+          <tr><td>甲寅旬</td><td class="c-r">子 丑</td></tr>
+        </table>
+      </div>
+      <div class="m5-sub">3. 类神（问什么看什么）</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>问的是</th><th>盯着看这个</th></tr>
+          <tr><td>我自己</td><td>日干、头顶的字、本命</td></tr>
+          <tr><td>对方/别人</td><td>日支、头顶的字</td></tr>
+          <tr><td>财运</td><td>"我"能管住的那个字、青龙</td></tr>
+          <tr><td>工作/官运</td><td>"管着我"的那个字、贵人、朱雀</td></tr>
+          <tr><td>婚姻感情</td><td>六合、天后</td></tr>
+          <tr><td>生病</td><td>白虎、本命头顶的字</td></tr>
+          <tr><td>丢东西/抓贼</td><td>玄武</td></tr>
+          <tr><td>考试/文书</td><td>朱雀、贵人</td></tr>
+          <tr><td>出门</td><td>驿马、白虎</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第六层：读吉凶 -->
+  <div class="m5-sec">
+    <button class="m5-tog" onclick="m5Toggle(this)">第六层 · 读出吉凶成败<span class="m5-tog-arrow">›</span></button>
+    <div class="m5-body">
+      <div class="m5-text" style="font-size:12px;line-height:1.9">
+        <b>三个主角</b>：我（干）— 对方/事（支）— 本命（你这个人）<br>
+        看这三者谁帮谁、谁压谁：谁在帮我（得力）、我在被谁压（受制）、我能不能管住对方。
+      </div>
+      <div class="m5-sub">字与字之间的六种关系</div>
+      <div class="m5-wrap">
+        <table class="m5-tbl">
+          <tr><th>关系</th><th>大白话</th><th>偏向</th></tr>
+          <tr><td class="c-g">生</td><td>一个帮另一个</td><td class="c-g">顺、得力、有人扶</td></tr>
+          <tr><td class="c-r">克</td><td>一个压另一个</td><td class="c-r">阻、冲突、被压制</td></tr>
+          <tr><td class="c-g">合</td><td>两个粘在一起</td><td>成、和好，也可能被缠住脱不开</td></tr>
+          <tr><td class="c-a">冲</td><td>正面对撞</td><td class="c-r">动、变、散、对着干</td></tr>
+          <tr><td class="c-r">刑害</td><td>暗中互相伤</td><td class="c-r">内耗、暗损、不和</td></tr>
+          <tr><td class="c-a">墓</td><td>被收进柜子</td><td class="c-r">困、藏、停、发懵</td></tr>
+        </table>
+      </div>
+      <div class="m5-text" style="font-size:12px;line-height:1.9">
+        <b>三段剧情怎么读</b>：<br>
+        · 起因<b>帮</b>结果 → 越走越顺，有好下场<br>
+        · 起因<b>压</b>结果 → 虎头蛇尾，难成<br>
+        · 结果那个字带好标签且没作废 → 结局好<br>
+        · 结果作废或被罩住 → 落空或卡死<br><br>
+        <b>格局（老祖宗总结的常见牌型）</b>：古人把常见盘面归纳成有名字的牌型，每种配好了断语。认出当前盘属于哪个牌型，直接套用前人经验——这是最靠经验和口诀的部分。
+      </div>
+    </div>
+  </div>
+
+  <!-- 总流程 -->
+  <div class="sec-t">全流程一张图</div>
+  <div class="card" style="margin-bottom:8px">
+    <div style="font-size:12px;line-height:2.3;color:#6B5040;font-family:monospace">
+      <div>你说「哪天、几点」</div>
+      <div style="color:#D4C4A0">　　　↓</div>
+      <div>查节气 → 定月将（太阳位置）</div>
+      <div style="color:#D4C4A0">　　　↓</div>
+      <div>月将对准起念时辰 → 天盘转好盖上（摆盘完成）</div>
+      <div style="color:#D4C4A0">　　　↓</div>
+      <div>看干支头顶盖着什么 → 排出四课（现状照片）</div>
+      <div style="color:#D4C4A0">　　　↓</div>
+      <div style="color:#C41230"><b>★ 找掐架的 → 三道筛子挑出导火索 → 推出初·中·末传</b></div>
+      <div style="color:#D4C4A0">　　　↓</div>
+      <div>给每个字贴天将标签、打空亡记号</div>
+      <div style="color:#D4C4A0">　　　↓</div>
+      <div>认准主角 → 看帮/压/粘/撞/作废 → 读出吉凶</div>
+    </div>
+  </div>
+
+  <!-- 四句话总结 -->
+  <div class="sec-t">一句话记住四个核心</div>
+  <div class="m5-jue">① 掐架（相克）是事情的发动机——没人掐架就没有事。
+② 初传·中传·末传 = 一条三段剧情。
+③ 三道筛子，是从一堆掐架里挑出"那个导火索"的办法。
+④ 天将和神煞，是给每个字贴上含义的便利贴。</div>
 
 </div>
 
