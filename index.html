@@ -260,6 +260,39 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .tag-m{font-size:11px;padding:2px 8px;border-radius:10px;background:#f0e6d3;color:#8B6914;font-weight:bold}
 /* 旺相断法练习 */
 .wsd-card{background:#EDE7D8;border-radius:12px;padding:16px;margin-bottom:14px;text-align:center}
+/* 九宗门流程图 */
+.zfl-prem{background:#FDF8F2;border:1px solid #E8D5B0;border-radius:10px;padding:10px 13px;font-size:12px;color:#6B5040;line-height:1.9;margin-bottom:8px}
+.zfl-sec{font-size:10px;color:#9B8570;letter-spacing:2px;margin:12px 0 5px 2px;font-weight:bold;display:flex;align-items:center;gap:6px}
+.zfl-sec::after{content:'';flex:1;height:1px;background:#D4C4A0}
+.zfl-q{background:#FDF8F2;border:2px solid #C41230;border-radius:10px;padding:9px 13px;margin-bottom:5px;font-size:12px;font-weight:bold;color:#1C0A00;line-height:1.6}
+.zfl-branch{padding:3px 0 3px 16px;border-left:2px solid #D4C4A0;margin:5px 0 5px 6px}
+.zfl-bi{background:#F5F0E6;border-radius:8px;padding:8px 11px;margin-bottom:5px;font-size:12px;color:#6B5040;line-height:1.8;border-left:3px solid #D4C4A0}
+.zfl-bi.red{border-left-color:#C41230;background:#FDF8F2}
+.zfl-bi.gold{border-left-color:#8B6914}
+.zfl-bi.green{border-left-color:#2E7D5A}
+.zfl-bi.blue{border-left-color:#283593}
+.zfl-bi.purple{border-left-color:#7B1FA2;background:#F9F4FF}
+.zfl-arrow{text-align:center;color:#C4B49A;font-size:14px;margin:4px 0;letter-spacing:1px}
+.zfl-priority{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 10px}
+.zfl-ptag{color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:bold}
+.zfl-card{background:#EDE7D8;border-radius:12px;margin-bottom:6px;overflow:hidden;border:1px solid #D4C4A0}
+.zfl-ch{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none}
+.zfl-ch-num{background:#C41230;color:#fff;border-radius:50%;width:22px;height:22px;min-width:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0}
+.zfl-ch-name{font-size:13px;font-weight:bold;color:#1C0A00;flex:1}
+.zfl-ch-sub{font-size:10px;color:#9B8570}
+.zfl-ch-arr{color:#D4C4A0;font-size:14px;transition:transform .2s;flex-shrink:0}
+.zfl-card.open .zfl-ch-arr{transform:rotate(90deg)}
+.zfl-cb{display:none;padding:1px 13px 12px;border-top:1px solid #D4C4A0;font-size:12px;color:#6B5040;line-height:1.9}
+.zfl-card.open .zfl-cb{display:block}
+.zfl-cb-row{display:flex;gap:7px;margin:7px 0;align-items:flex-start}
+.zfl-cb-lbl{background:#F5F0E6;color:#9B8570;padding:2px 7px;border-radius:4px;font-size:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;border:1px solid #D4C4A0}
+.zfl-cb-v{color:#6B5040;flex:1;font-size:12px;line-height:1.8}
+.zfl-jue{background:#FDF8F2;border-left:3px solid #8B6914;padding:7px 11px;font-size:11px;color:#8B6914;line-height:1.9;margin:7px 0 3px;border-radius:0 6px 6px 0}
+.zfl-tbl{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0}
+.zfl-tbl th{background:#EDE7D8;color:#8B6914;font-size:10px;padding:6px 4px;text-align:center;border:1px solid #D4C4A0;letter-spacing:1px}
+.zfl-tbl td{padding:7px 6px;text-align:center;border:1px solid #D4C4A0;color:#1C0A00}
+.zfl-tbl tr:nth-child(even) td{background:#F7F2E8}
+.zfl-tbl .c-r{color:#C41230;font-weight:bold}
 .wsd-badge{display:inline-block;padding:4px 16px;border-radius:12px;font-size:14px;font-weight:bold;margin:8px 0}
 .wsd-w{background:#d4edda;color:#1B5E20}
 .wsd-x{background:#ddeeff;color:#0D47A1}
@@ -297,11 +330,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
   </div>
   <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">📚</div><div><div class="mcard-name">速查参考</div><div class="mcard-desc">心法 · 起课表 · 象法类象</div></div></div>
+    <div class="mcard-head"><div class="mcard-icon">📚</div><div><div class="mcard-name">速查参考</div><div class="mcard-desc">心法 · 起课表 · 象法类象 · 宗门流程</div></div></div>
     <div class="mcard-btns">
       <button class="btn btn-d" onclick="show('p-xf')">📜 壬学心法</button>
       <button class="btn btn-d" onclick="show('pqk')">🧮 起课速查</button>
       <button class="btn btn-d" onclick="show('pxf-sym')">🔮 象法速查库</button>
+    </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-d" onclick="show('pzfl')">🗺 九宗门流程图</button>
     </div>
   </div>
   <div class="mcard">
@@ -2116,6 +2152,284 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
   </div>
 </div>
+
+<!-- ======== 九宗门发用流程图 ======== -->
+<div id="pzfl" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">九宗门发用流程</div></div>
+
+  <div class="zfl-prem">
+    <b>前提：四课已布完</b><br>
+    下克上 = <b style="color:#C41230">贼</b>（臣克君）　上克下 = <b style="color:#8B6914">克</b>（君克臣）<br>
+    阳日（甲丙戊庚壬）比<b>阳神</b>（子寅辰午申戌）<br>
+    阴日（乙丁己辛癸）比<b>阴神</b>（丑卯巳未酉亥）
+  </div>
+
+  <div class="zfl-sec">第一步 · 优先检查特殊课型</div>
+  <div class="zfl-q">以下三类最先判定，任一符合即确定宗门</div>
+  <div class="zfl-branch">
+    <div class="zfl-bi purple">
+      <b>月将 = 占时</b>（天地盘完全重合）→ <span class="hit">伏吟课</span><br>
+      有克→克贼法；无克→阳日刑干上神（自任格），阴日刑支上神（自信格）；所取自刑→杜传格
+    </div>
+    <div class="zfl-bi purple">
+      <b>月将与占时地支相冲</b>（天地盘对冲）→ <span class="hit">返吟课</span><br>
+      有克→克贼法；无克→取日干<b>驿马</b>发用；丁己辛丑未日→<b>井栏射格</b>
+    </div>
+    <div class="zfl-bi purple">
+      <b>日干寄宫 = 日支</b>（干支同位，仅两课）→ <span class="hit">八专课</span><br>
+      有克→克贼/涉害；无克→阳日顺数3位，阴日逆数3位；中末传均取<b>日干上神</b>
+    </div>
+  </div>
+
+  <div class="zfl-arrow">↓ 均不符合，继续向下</div>
+
+  <div class="zfl-sec">第二步 · 四课有无正克</div>
+  <div class="zfl-q">四课中存在下克上（贼）或上克下（克）？</div>
+  <div class="zfl-branch">
+    <div class="zfl-bi red">
+      <b>只一处上克下，无贼克</b> → <span class="hit">元首课</span><br>
+      取上克下之<b>上神</b>为初传，三传相因
+    </div>
+    <div class="zfl-bi red">
+      <b>只一处下克上，无正克</b> → <span class="hit">重审课</span><br>
+      取下克上之<b>上神</b>（受克之神）为初传，三传相因
+    </div>
+    <div class="zfl-bi gold">
+      <b>多处同向克，取阴阳与日干相同者</b> → <span class="hit">知一课</span>（比用法）<br>
+      多贼中比阴阳；多克中比阴阳　仍多个 → 进涉害
+    </div>
+    <div class="zfl-bi green">
+      <b>贼克正克混存 / 多克阴阳不比</b> → <span class="hit">涉害课</span><br>
+      各克路顺数至本家，克害最多（最深）者发用<br>
+      相等→取<b>四孟</b>（见机格）→无孟取<b>四仲</b>（察微格）→再等→阳取干上/阴取支上（复等格）
+    </div>
+  </div>
+
+  <div class="zfl-arrow">↓ 四课上下全无克</div>
+
+  <div class="zfl-sec">第三步 · 无克时依次检查</div>
+  <div class="zfl-branch">
+    <div class="zfl-bi gold">
+      <b>日干与第2、3、4课上神有遥克（斜向相克）</b> → <span class="hit">遥克课</span><br>
+      上神遥克日干 → <b>蒿矢格</b>（取遥克日干之上神为初传）<br>
+      日干遥克上神 → <b>弹射格</b>（取被日干遥克之上神为初传）<br>
+      两处遥克 → 取阴阳与日干相比者
+    </div>
+    <div class="zfl-bi green">
+      <b>无遥克 + 四课完备（无重复）</b> → <span class="hit">昴星课</span><br>
+      阳日取<b>酉宫</b>上神（虎视转蓬）；阴日取<b>卯宫</b>上神（阴伏掩目）
+    </div>
+    <div class="zfl-bi blue">
+      <b>无遥克 + 四课不备（有重复＝三课）</b> → <span class="hit">别责课</span><br>
+      阳日→取日干六合神所在宫上神；阴日→取日支三合前一位上神<br>
+      中末传均取<b>日干上神</b>（不相因）
+    </div>
+  </div>
+
+  <div class="zfl-arrow">↓</div>
+
+  <div class="zfl-sec">通用 · 相因推中末传</div>
+  <div class="zfl-prem" style="border-color:#C4123050">
+    <b>初传</b>：由宗门规则定<br>
+    <b>中传</b>：初传地支 → 地盘位置 → 该格天盘上神<br>
+    <b>末传</b>：中传地支 → 地盘位置 → 该格天盘上神<br>
+    <span style="color:#9B8570">例外：八专/别责中末均取干上神；伏吟用三刑相因；返吟无克取驿马→支上神→干上神</span>
+  </div>
+
+  <div class="zfl-sec">优先级速查（高 → 低）</div>
+  <div class="zfl-priority">
+    <span class="zfl-ptag" style="background:#7B1FA2">①伏吟</span>
+    <span class="zfl-ptag" style="background:#6A1B9A">②返吟</span>
+    <span class="zfl-ptag" style="background:#283593">③八专</span>
+    <span class="zfl-ptag" style="background:#C41230">④元首</span>
+    <span class="zfl-ptag" style="background:#C41230">⑤重审</span>
+    <span class="zfl-ptag" style="background:#8B6914">⑥知一</span>
+    <span class="zfl-ptag" style="background:#2E7D5A">⑦涉害</span>
+    <span class="zfl-ptag" style="background:#6B5040">⑧遥克</span>
+    <span class="zfl-ptag" style="background:#1C0A00">⑨昴星</span>
+    <span class="zfl-ptag" style="background:#1C0A00">别责</span>
+  </div>
+
+  <div class="zfl-sec">九宗门逐门详解（点击展开）</div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">一</div><div class="zfl-ch-name">元首课</div><div class="zfl-ch-sub">上克下 · 天象</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课中<b>只一处上克下</b>，无任何下克上</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">初传</span><span class="zfl-cb-v">取上克下的<b>上神</b>为初传发用</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">相因法（通用）</span></div>
+      <div class="zfl-jue">元首一上克其下，天地得位品物亨。<br>如君驭臣，名正言顺，九宗之首。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">事从外来，名分正当，顺势而为，主吉。占官升迁主顺，占财主得，占行人主来。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">二</div><div class="zfl-ch-name">重审课</div><div class="zfl-ch-sub">下克上 · 地象</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课中<b>只一处下克上（贼）</b>，无任何上克下</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">初传</span><span class="zfl-cb-v">取"下克上"的<b>上神</b>（受克之神）为初传</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">相因法（通用）</span></div>
+      <div class="zfl-jue">重审一下贼乎上，以臣净君详审行。<br>臣逼君，须反复审查，慎防逆乱内情。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">事从内起，情况复杂，有逆上之意，内有隐情。宜谨慎审查，防小人从内为害。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">三</div><div class="zfl-ch-name">知一课</div><div class="zfl-ch-sub">比用法 · 从专</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">多处同向克（全贼或全克），需以阴阳比用区分</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">初传</span><span class="zfl-cb-v">多克中取与<b>日干阴阳相同</b>者<br>阳日取阳神（子寅辰午申戌）；阴日取阴神（丑卯巳未酉亥）</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">仍多个</span><span class="zfl-cb-v">同比者仍有多个 → 进入涉害法</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">相因法（通用）</span></div>
+      <div class="zfl-jue">知一上下二相克，择比而用允执中。<br>知一不知其余，得一则万事定。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">专一守中，决断清晰。宜集中力量于一处，分散则不成。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">四</div><div class="zfl-ch-name">涉害课</div><div class="zfl-ch-sub">路途深浅 · 归本家</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">多克且阴阳不比，或贼克正克同时存在</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">起传</span><span class="zfl-cb-v">各克处上神顺数至本家，途经地支若克该神则计"害"，<b>害数最多（最深）者</b>发用</span></div>
+      <div class="zfl-jue">涉害由来是本家，路途多克最堪夸。<br>孟深仲浅季无取，复寻柔辰刚日查。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">见机格</span><span class="zfl-cb-v">深浅相等→取<b>四孟</b>（寅申巳亥）上神。见机则不俟终日，时机贵速。</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">察微格</span><span class="zfl-cb-v">无四孟→取<b>四仲</b>（子午卯酉）上神。忧虑防范，察其细微。</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">复等格</span><span class="zfl-cb-v">仍相等→阳日取<b>日干上神</b>，阴日取<b>日支上神</b>发用</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">路途险阻，危中有机。见机识时，取最利处突围。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">五</div><div class="zfl-ch-name">遥克课</div><div class="zfl-ch-sub">无正克 · 斜向相克</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课无正克，但日干五行与第2、3、4课上神五行存在相克</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">蒿矢格</span><span class="zfl-cb-v"><b>上神遥克日干</b> → 取该上神为初传<br>主初声势大后力衰，利速不利久</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">弹射格</span><span class="zfl-cb-v"><b>日干遥克上神</b> → 取被克上神为初传<br>主利客（先动者）不利主（静守），宜先发制人</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">两克</span><span class="zfl-cb-v">遥克有两处时，取阴阳与日干相比者</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">相因法（通用）</span></div>
+      <div class="zfl-jue">阴阳上下无相克，其中择取遥相贼。<br>贼日之神为用神，弃日之克切需知。</div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">六</div><div class="zfl-ch-name">昴星课</div><div class="zfl-ch-sub">无克无遥 · 从魁酉宫</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课<b>无正克、无遥克</b>，且四课完备（无重复）</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阳日</span><span class="zfl-cb-v">取<b>酉宫</b>（从魁）天盘上神发用<br>虎视转蓬：祸从外来，家居守静则吉</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阴日</span><span class="zfl-cb-v">取<b>卯宫</b>天盘上神发用<br>阴伏掩目：祸从内起，行者淹滞，逃亡可匿</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">相因法（通用）</span></div>
+      <div class="zfl-jue">四课既无克而复无遥，则为昴星。<br>酉中昴宿，白虎金位，性主刑杀，义司决断。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">事情晦暗难明，不宜轻动冒进。访人不见，谋事受阻，占出行不吉。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">七</div><div class="zfl-ch-name">别责课</div><div class="zfl-ch-sub">三课不备 · 芜淫</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课<b>有重复</b>（实为三课），且无正克无遥克</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阳日初传</span><span class="zfl-cb-v">取日干六合位上神<br>甲己→未；乙庚→申；丙辛→酉；丁壬→子；戊癸→亥</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阴日初传</span><span class="zfl-cb-v">取日支三合前一位上神<br>寅午戌→亥；申子辰→巳；巳酉丑→寅；亥卯未→申</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v"><b>均取日干上神</b>（不相因，与通用规则不同）</span></div>
+      <div class="zfl-jue">别责无克三课备，刚三柔六九为中。<br>四课不备，阴阳不全，芜淫肆意。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">事体不全，所谋难以完整实现，占事多有缺陷，利守不利进。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">八</div><div class="zfl-ch-name">八专课</div><div class="zfl-ch-sub">干支同位 · 仅两课</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">日干寄宫地支 = 日支（干支同位），四课实为两课<br>常见：甲寅、乙卯、戊午、己未、庚申、辛酉、壬子、癸亥</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">有克时</span><span class="zfl-cb-v">按克贼法或涉害法取用（不取遥克）</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阳日</span><span class="zfl-cb-v">从<b>日干上神</b>起，天盘<b>顺数3位</b>为初传</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阴日</span><span class="zfl-cb-v">从<b>日支上神</b>起，天盘<b>逆数3位</b>为初传</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v"><b>均取日干上神</b>（不相因）</span></div>
+      <div class="zfl-jue">两课无克号八专，无克顺逆数三神行。<br>刚顺阴逆，中末日上合天心。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">独足格</span><span class="zfl-cb-v">三传均归日干上神（如己未日癸酉时）。主移动艰难，诸占不吉，病占主死。</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">奸邪惊怪，事体混杂。专而有余，难以全面顾及。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">九甲</div><div class="zfl-ch-name">伏吟课</div><div class="zfl-ch-sub">天地盘重合 · 潜伏静</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">月将 = 占时（天地盘完全重合，十二支各居本宫）</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">有克时</span><span class="zfl-cb-v">按克贼法正常取用，三传相因</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阳日<br>自任格</span><span class="zfl-cb-v">取<b>日干上神</b>之三刑神为初传<br>三刑：寅→巳→申→寅；丑→戌→未→丑；子→卯→子</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阴日<br>自信格</span><span class="zfl-cb-v">取<b>日支上神</b>之三刑神为初传</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">初传所刑为中传，中传所刑为末传（三刑相因）</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">杜传格</span><span class="zfl-cb-v">初传为自刑（辰午酉亥），三传同一神，主事中途而止，堵塞不通</span></div>
+      <div class="zfl-jue">伏吟天地俱不动，无克刚看日上柔取辰。<br>万物潜伏，屈而不伸，主静迟阻滞。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">主静迟、内阻、隐患潜伏，动则愈滞。自任宜守静，自信家宅不宁。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-card">
+    <div class="zfl-ch" onclick="zflTog(this)">
+      <div class="zfl-ch-num">九乙</div><div class="zfl-ch-name">返吟课</div><div class="zfl-ch-sub">天地盘对冲 · 反复动</div><div class="zfl-ch-arr">›</div>
+    </div>
+    <div class="zfl-cb">
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">月将与占时地支相冲（天地盘完全对冲，十二支均居对宫）</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">有克时</span><span class="zfl-cb-v">按克贼法正常取用，三传相因</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克初传</span><span class="zfl-cb-v">取<b>日干驿马</b>发用<br>寅午戌→马申；申子辰→马寅；巳酉丑→马亥；亥卯未→马巳</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克中末</span><span class="zfl-cb-v">中传取<b>日支上神</b>，末传取<b>日干上神</b></span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">井栏射格</span><span class="zfl-cb-v">丁、己、辛、丑、未日无克 → 井栏射格（起法同上）</span></div>
+      <div class="zfl-jue">返吟有克往来取，井栏丑未丁己辛。<br>天地俱返，往来不定，主动荡反复速变。</div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无依格</span><span class="zfl-cb-v">阳日无克 → 祸从外来，动荡不安</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无亲格</span><span class="zfl-cb-v">阴日无克 → 速成易破，内外失调</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">对比伏吟</span><span class="zfl-cb-v">伏吟主静主内（潜伏）；返吟主动主外（反复）。阴阳对立，一藏一显。</span></div>
+    </div>
+  </div>
+
+  <div class="zfl-sec">九宗门总口诀</div>
+  <div class="m5-jue">元首一上克其下，天地得位品物亨。
+重审一下贼乎上，以臣净君详审行。
+知一上下二相克，择比而用允执中。
+涉害俱比俱不比，度难归家深浅逢。
+遥克神日互相克，蒿矢弹射势为轻。
+昴宿四课无克遥，阴伏掩目阳转蓬。
+别责无克三课备，刚三柔六九为中。
+八专二课俱无克，日阳辰阴顺逆从。
+伏吟天地俱不动，乙癸有克法不同。
+返吟有克往来取，井栏丑未丁己辛。</div>
+
+  <div class="zfl-sec">附 · 三刑表（伏吟无克起传用）</div>
+  <table class="zfl-tbl">
+    <tr><th>刑类</th><th>刑链</th><th>说明</th></tr>
+    <tr><td>持势之刑</td><td>寅→巳→申→寅</td><td>循环三刑</td></tr>
+    <tr><td>无恩之刑</td><td>丑→戌→未→丑</td><td>循环三刑</td></tr>
+    <tr><td>无礼之刑</td><td>子→卯→子</td><td>互刑</td></tr>
+    <tr><td>自刑→杜传格</td><td>辰 午 酉 亥 各自刑</td><td>三传同一神</td></tr>
+  </table>
+
+  <div class="zfl-sec">附 · 驿马表（返吟无克起传用）</div>
+  <table class="zfl-tbl">
+    <tr><th>日支三合</th><th>驿马位</th></tr>
+    <tr><td>寅 午 戌 日</td><td class="c-r">申</td></tr>
+    <tr><td>申 子 辰 日</td><td class="c-r">寅</td></tr>
+    <tr><td>巳 酉 丑 日</td><td class="c-r">亥</td></tr>
+    <tr><td>亥 卯 未 日</td><td class="c-r">巳</td></tr>
+  </table>
+
+</div>
+
 </div>
 
 <div class="toast" id="toast"></div>
@@ -2236,6 +2550,7 @@ const DAILY_QUOTES=[
   updateHomeStats();checkBkRemind();updateWeakTip();
 })();
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+function zflTog(h){h.parentElement.classList.toggle('open');}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
 function p5GoChap(n){const secs=document.querySelectorAll('#p5 .m5-sec');if(secs[n])secs[n].scrollIntoView({behavior:'smooth',block:'start'})}
