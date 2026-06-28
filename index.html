@@ -236,6 +236,36 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .xf-result strong{color:#C41230}
 .xf-summary{font-size:15px;color:#1C0A00;background:#EDE7D8;border-radius:10px;padding:14px 16px;line-height:1.85;margin-top:20px;border-left:4px solid #C41230}
 .xf-hr{height:1px;background:#D4C4A0;margin:18px 0}
+/* 象法速查 */
+.xfsym-tab-bar{display:flex;gap:6px;margin-bottom:12px}
+.xfsym-tab-btn{flex:1;padding:7px 4px;border:1px solid #D4C4A0;background:#EDE7D8;border-radius:8px;font-size:13px;color:#6B5040;cursor:pointer;font-weight:bold}
+.xfsym-tab-btn.act{background:#C41230;color:#fff;border-color:#C41230}
+.xfsym-card{background:#EDE7D8;border-radius:10px;margin-bottom:8px;overflow:hidden;border:1px solid #D4C4A0}
+.xfsym-hd{display:flex;align-items:center;padding:10px 12px;cursor:pointer;gap:8px}
+.xfsym-nm{font-size:16px;font-weight:bold;color:#1C0A00;flex:1}
+.xfsym-sub{font-size:11px;color:#9B8570}
+.xfsym-arr{color:#D4C4A0;font-size:18px;transition:transform .2s;flex-shrink:0}
+.xfsym-card.xfop .xfsym-arr{transform:rotate(90deg)}
+.xfsym-bd{display:none;padding:0 12px 12px;border-top:1px solid #D4C4A0}
+.xfsym-card.xfop .xfsym-bd{display:block}
+.xfsym-row{display:flex;gap:6px;margin-top:8px;font-size:12px;line-height:1.6}
+.xfsym-lbl{color:#9B8570;flex-shrink:0;min-width:36px}
+.xfsym-v{color:#1C0A00}
+.xfsym-wsd{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:8px}
+.xfsym-wsd-c{background:#F5F0E6;border-radius:6px;padding:4px 2px;text-align:center}
+.xfsym-wsd-s{font-size:10px;color:#9B8570;display:block}
+.xfsym-wsd-d{font-size:10px;color:#1C0A00;display:block;margin-top:1px;line-height:1.3}
+.tag-j{font-size:11px;padding:2px 8px;border-radius:10px;background:#d4edda;color:#2E7D5A;font-weight:bold}
+.tag-x{font-size:11px;padding:2px 8px;border-radius:10px;background:#fde8e8;color:#C41230;font-weight:bold}
+.tag-m{font-size:11px;padding:2px 8px;border-radius:10px;background:#f0e6d3;color:#8B6914;font-weight:bold}
+/* 旺相断法练习 */
+.wsd-card{background:#EDE7D8;border-radius:12px;padding:16px;margin-bottom:14px;text-align:center}
+.wsd-badge{display:inline-block;padding:4px 16px;border-radius:12px;font-size:14px;font-weight:bold;margin:8px 0}
+.wsd-w{background:#d4edda;color:#1B5E20}
+.wsd-x{background:#ddeeff;color:#0D47A1}
+.wsd-r{background:#fff3cd;color:#8B6914}
+.wsd-y{background:#ffe0cc;color:#BF360C}
+.wsd-s{background:#e0d0e8;color:#4A148C}
 </style>
 </head>
 <body>
@@ -350,6 +380,20 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="color:#D4C4A0;font-size:18px">›</div>
     </div>
   </div>
+  <div class="qk-entry-card" onclick="show('pxf-sym')">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">🔮</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">象法速查库</div><div style="font-size:11px;color:#9B8570;margin-top:1px">天将·支神·类象·旺相休囚断法</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
+  <div class="qk-entry-card" onclick="startWSD()">
+    <div class="qk-entry-row">
+      <div style="font-size:22px">⚡</div>
+      <div style="flex:1"><div style="font-size:15px;font-weight:bold;color:#1C0A00">旺相断法练习</div><div style="font-size:11px;color:#9B8570;margin-top:1px">见天将·知旺相→猜断法·四选一</div></div>
+      <div style="color:#D4C4A0;font-size:18px">›</div>
+    </div>
+  </div>
   <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div></div>
@@ -359,6 +403,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#9B8570;font-size:12px">🔮 象法速查库·旺相断法练习·叶飘然讲义精华提炼</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#9B8570;font-size:12px">📜 壬学心法·支神意象测验·布局嵌套bug系列修复</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#9B8570;font-size:12px">🎲 宗门识别/三传推演/天将联想/流程互动·薄弱点追踪</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.27</span><span style="color:#9B8570;font-size:12px">🧭 九宗门详解+随机案例·起课排盘·起课步骤练习</span></div>
@@ -1965,6 +2010,42 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 象法速查库 ======== -->
+<div id="pxf-sym" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">象法速查库</div></div>
+  <div style="padding-bottom:28px">
+    <div class="xfsym-tab-bar">
+      <button class="xfsym-tab-btn act" id="xft-tj" onclick="xfTab('tj')">十二天将</button>
+      <button class="xfsym-tab-btn" id="xft-zs" onclick="xfTab('zs')">十二支神</button>
+    </div>
+    <div id="xfp-tj"></div>
+    <div id="xfp-zs" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ======== 旺相断法练习 ======== -->
+<div id="pxfw" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">旺相断法练习</div><div class="tbr" id="wsd-prog-r"></div></div>
+  <div id="pxfw-main">
+    <div class="prog-row"><span class="prog-txt" id="el-wsd-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-wsd-pb" style="width:0%"></div></div></div>
+    <div class="wsd-card">
+      <div id="wsd-tj" style="font-size:28px;font-weight:bold;color:#C41230;letter-spacing:4px;margin-bottom:4px"></div>
+      <div id="wsd-wx" style="font-size:11px;color:#9B8570;margin-bottom:8px"></div>
+      <div><span id="wsd-badge" class="wsd-badge"></span></div>
+      <div style="font-size:12px;color:#9B8570;margin-top:6px">此将处于此状态，主何断法？</div>
+    </div>
+    <div id="wsd-opts" style="display:grid;gap:8px"></div>
+    <div id="wsd-ex" style="display:none;background:#EDE7D8;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:13px;color:#1C0A00;line-height:1.7"></div>
+  </div>
+  <div id="pxfw-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="wsd-res-score"></div>
+    <div class="qz-lv" id="wsd-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="wsd-res-detail"></div>
+    <button class="btn btn-r" onclick="startWSD()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
 <!-- ======== 壬学心法 ======== -->
 <div id="p-xf" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">壬学心法</div></div>
@@ -2106,7 +2187,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='pxf-sym'){xfInit();}}
 function goHome(){show('ph')}
 (function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;updateHomeStats();checkBkRemind();updateWeakTip();})();
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
@@ -3186,6 +3267,239 @@ function zlFinish(){
   saveWeakRecord('宗门流程',4,wrong);
 }
 function zlShowBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+
+// ══ 象法速查库数据 ══
+const TJ_XIANG=[
+  {name:'贵人',wx:'土',ji:'吉',wang:'四季月',
+   zhu:'官贵文章·传顺吉逆凶·诸事解厄',
+   ren:'官员贵人·长者学士',
+   wu:'珍宝首饰·谷麻·牛蟹獭·色黄白·数八',
+   bing:'头目疾患',
+   wsd:{旺:'主升迁·官鼎印信',相:'主钱财·锡赐财物',休:'主忧虑·忧病',囚:'主牢狱·囚系',死:'主死丧凶事'}},
+  {name:'螣蛇',wx:'火',ji:'凶',wang:'夏(60天)',
+   zhu:'惊恐缠绕·怪异梦境·水火之交',
+   ren:'姑女妇人·术士书工·乞丐吊客',
+   wu:'文字虚誉·车乘金铁·珠玉弓弩·飞虫蟾蛇·数四',
+   bing:'心胞三焦·咽喉面齿·斑点',
+   wsd:{旺:'主县官斗讼',相:'主亡财争讼',休:'主疾病怪异',囚:'主疾病怪异',死:'主死丧惊恐'}},
+  {name:'朱雀',wx:'火',ji:'凶',wang:'夏季',
+   zhu:'文书口舌·信息诉讼·刑戮之神',
+   ren:'蛇略人·咒咀鬼·灶神',
+   wu:'羽毛文章·果谷·赤黑色·数九·飞禽猿马',
+   bing:'心腹上窍·见血呕吐·阴肿',
+   wsd:{旺:'主县官口舌',相:'主钱财婚姻',休:'主疾病心腹',囚:'主囚禁',死:'主死丧口舌'}},
+  {name:'六合',wx:'木',ji:'吉',wang:'春季',
+   zhu:'婚姻和合·媒约交易·喜庆信息',
+   ren:'工巧儿子·木士任官·隐逸之士',
+   wu:'竹木金石·食盐羽毛·光彩色·数六·兔类',
+   bing:'阴阳不调·心腹虚',
+   wsd:{旺:'主赏赐迁职',相:'主嫁娶财礼',休:'主疾病阴私',囚:'主婚姻囚系',死:'主争财死丧'}},
+  {name:'勾陈',wx:'土',ji:'凶',wang:'四季月',
+   zhu:'官讼争田·兵戈迟滞·勾连纠缠',
+   ren:'军卒贫人·冤死之鬼·门户土垣鬼',
+   wu:'木实瓦石·金铁勾网·青黑色·数五·鱼龙水虫',
+   bing:'心腹寒热·痈肿见血',
+   wsd:{旺:'主贵人战斗',相:'主贵人争讼',休:'主争病人田宅',囚:'主争讼禁锢',死:'主争死人财物'}},
+  {name:'青龙',wx:'木',ji:'吉',wang:'春季',
+   zhu:'财帛喜庆·升迁文书·舟车林木',
+   ren:'贤士高人·僧道孝子',
+   wu:'文字财帛·书契官府·春夏为龙秋冬为鱼',
+   bing:'哭泣疾病',
+   wsd:{旺:'求官大吉',相:'经营财货',休:'主疾病',囚:'主囚系公讼',死:'死丧哭泣'}},
+  {name:'天空',wx:'土',ji:'凶',wang:'四季月',
+   zhu:'虚诈落空·诸事无踪·吉不吉凶不凶',
+   ren:'奴婢妾诞·无定之人',
+   wu:'诸事无踪·影无形',
+   bing:'虚诈之病',
+   wsd:{旺:'空中有喜·终不实',相:'虚喜无实',休:'虚病无损',囚:'空中有凶·不成',死:'空凶不成'}},
+  {name:'白虎',wx:'金',ji:'凶',wang:'秋季',
+   zhu:'刀兵死丧·疾病惊恐·血光远行',
+   ren:'病人孝子·兵死客鬼',
+   wu:'铁镣剑器·色白数七·猿猴虎·麦麻',
+   bing:'痈肿头目见血·忧惶',
+   wsd:{旺:'主县官斗讼',相:'主亡财争讼',休:'主疾病怪异',囚:'主囚系恐惧',死:'主死丧惊恐'}},
+  {name:'太常',wx:'土',ji:'吉',wang:'四季月',
+   zhu:'酒食宴乐·文章印绶·服饰官职',
+   ren:'任官文士·媒人宾客',
+   wu:'文章印绶·公裳服饰·绢帛田地五谷',
+   bing:'酒食疾患',
+   wsd:{旺:'主官场印信',相:'主酒食宴庆',休:'主衣物财帛',囚:'主田园宝货',死:'主退藏屯剥'}},
+  {name:'玄武',wx:'水',ji:'凶',wang:'冬季',
+   zhu:'盗贼虚耗·欺诈阴私·失人失物',
+   ren:'盗贼小人·贫薄之人',
+   wu:'阴暗水险·旺时失物可寻',
+   bing:'无',
+   wsd:{旺:'旺时失物可寻',相:'主盗贼横行',休:'主虚耗遗失',囚:'主欺诈暗谋',死:'主失财亡人'}},
+  {name:'太阴',wx:'金',ji:'中',wang:'秋季',
+   zhu:'阴私隐匿·妇女幽暗·暧昧不明',
+   ren:'妇女阴人·暗中之人',
+   wu:'月亮之象·阴私幽暗之物',
+   bing:'妇科阴私之病',
+   wsd:{旺:'主阴私得志',相:'主隐秘可成',休:'主暗事停滞',囚:'主阴谋被困',死:'主阴暗凶事'}},
+  {name:'天后',wx:'水',ji:'吉',wang:'冬季',
+   zhu:'妇女婚姻·生育求子·庶人享嘉',
+   ren:'后宫妇人·主母贤淑之女',
+   wu:'婚嫁生育之象',
+   bing:'妇科孕育之病',
+   wsd:{旺:'主婚嫁喜庆',相:'主生育求子',休:'主妇女安静',囚:'主妇女受困',死:'主妇女凶事'}},
+];
+
+const ZS_XIANG=[
+  {name:'神后',zhi:'子',wx:'水',wei:'正北',
+   zhu:'阴私暗昧·妇女之事·水险幽微',
+   ren:'后妃淫女·乳媪媒妁·幼童老妇',
+   wu:'大雨雪·水物丝帛·大豆鱼鲜',bing:'胎产阴私之病',
+   jue:'神后阴私彩女奸，亡遭盗贼鬼神寒。土公悲泣污盆事，燕鼠行人取类看。'},
+  {name:'大吉',zhi:'丑',wx:'土',wei:'北偏东',
+   zhu:'田宅园囿·积蓄迟缓·财帛宴喜',
+   ren:'人君长者父母·尼僧矮人·牧牛人',
+   wu:'台阁社坛·珍珠首饰·六畜龟蜈蚣',bing:'肾胆肺小肠·腹泄秃发',
+   jue:'大吉将军主荐贤，桥梁长者地祇冤。风伯雨师贵人召，车畜牛螯鳌与田。'},
+  {name:'功曹',zhi:'寅',wx:'木',wei:'东北',
+   zhu:'文书进行·庙观神树·贵人助力',
+   ren:'道士书籍·从事官吏',
+   wu:'庙观神祠·山林栋柱·花木宝剑·香炉禅椅',bing:'肝胆之疾',
+   jue:'功曹道士兼书籍，杂色斑文火炬红。从事信诚征召史，虎豹猫狸居木丛。'},
+  {name:'太冲',zhi:'卯',wx:'木',wei:'正东',
+   zhu:'驿马船车·争讼动荡·门户出入',
+   ren:'长子公主·兄弟男女·贼人艺人',
+   wu:'雷电雨水·桥梁竹木·船车棺椁·鼓笛刀器',bing:'大肠目疾声症',
+   jue:'太冲木士沙门类，行住车舟水陆困。林木江河雷电雨，兄弟私门匿妇人。'},
+  {name:'天罡',zhi:'辰',wx:'土',wei:'东南',
+   zhu:'斗讼死丧·田宅旧事·天牢狱府',
+   ren:'宰公监司·大将屠杀·恶人狱神',
+   wu:'天罗网罟·坟墓田园·鳞族鱼食',bing:'肠胃之疾',
+   jue:'天罡本是鱼龙物，欺诈网罗为恶人。战斗陂池二千石，右目虞官宰杀神。'},
+  {name:'太乙',zhi:'巳',wx:'火',wei:'南偏东',
+   zhu:'斗争口舌·忧惊怪异·飞祸赏赐',
+   ren:'车骑姑女·术人书工·乞丐吊客',
+   wu:'文字水火·金铁珠玉·弓弩飞虫蟾蛇',bing:'心胞三焦·咽喉面齿',
+   jue:'太乙官中口舌生，斗争赏赐忧惊临。巳为进往吉，居午退位不吉。'},
+  {name:'胜光',zhi:'午',wx:'火',wei:'正南',
+   zhu:'光怪文书·官事显贵·光明礼仪',
+   ren:'宫妃使君·娼妇善人·骑者蚕姑',
+   wu:'天王星霞雷·丝绣衣服·书画旗旌',bing:'心目血光·小肠血泻',
+   jue:'胜光宫女信诚妃，善人通语惊恐迟。土工田宅巫天目，使君亭长卷兵持。'},
+  {name:'小吉',zhi:'未',wx:'土',wei:'西南',
+   zhu:'酒食婚姻·祀祭和合·喜庆女性',
+   ren:'父母老人·姑嫂媯妹·道人酒匠',
+   wu:'井泉茶肆·桑木医药·苗圃庆贺',bing:'肝脱脊之疾',
+   jue:'小吉姑嫂婚礼仪，羊酒祠祷祭神祇。白头争讼公婆母，井泉天耳墓风师。'},
+  {name:'传送',zhi:'申',wx:'金',wei:'西偏南',
+   zhu:'道路行人·疾病信耗·丧孝传递',
+   ren:'行人孝子·征夫商贾·银匠铁匠',
+   wu:'天钱天医·道路刀兵·绢帛经文·药物大麦',bing:'肺胆大肠骸骨',
+   jue:'传送刀兵僧及医，冤仇道路税湖池。大麦守城丧碓磨，市贾劫攻田猎师。'},
+  {name:'从魁',zhi:'酉',wx:'金',wei:'正西',
+   zhu:'阴私解散·赏赐金刀·奴婢信息',
+   ren:'妇人婢妾·酒人小奴·乐妓老婢',
+   wu:'霜雪·金银首饰·盘镜铁石·酒浆菜食',bing:'口窍耳目·爪骨精血',
+   jue:'从魁金女小刀钱，奴婢私通近水边。小麦九江并赏赐，鸡鸟解散不为嫌。'},
+  {name:'河魁',zhi:'戌',wx:'土',wei:'西偏北',
+   zhu:'诈欺印绶·旧事重新·虚耗失物',
+   ren:'善人长者僧道·猎人奴仆强盗',
+   wu:'天斗魁天罗·坟墓墙垣·印绶鞋履',bing:'膀胱足腿之疾',
+   jue:'天魁印绶吏都官，垒土高坟集众撷。德合奴婢兼长者，犬豺狼畜悉为欢。'},
+  {name:'登明',zhi:'亥',wx:'水',wei:'西北',
+   zhu:'祸祥征兆·阴私自刑·极阴之位',
+   ren:'天雨鬼神·将军夫人·醉人乞丐',
+   wu:'楼阁狱囲·笔墨伞盖·梅花稻麦盐',bing:'肝脏头发·脾病哭泣',
+   jue:'登明天柱廉楼台，贼盗伤人幼子哀。狱厕秽猪忧溺死，阴私管钥召征来。'},
+];
+
+// ══ 象法速查库 ══
+let _xfInited={tj:false,zs:false};
+function xfInit(){if(!_xfInited.tj)_xfRender('tj');}
+function xfTab(t){
+  document.getElementById('xfp-tj').style.display=t==='tj'?'':'none';
+  document.getElementById('xfp-zs').style.display=t==='zs'?'':'none';
+  document.getElementById('xft-tj').className='xfsym-tab-btn'+(t==='tj'?' act':'');
+  document.getElementById('xft-zs').className='xfsym-tab-btn'+(t==='zs'?' act':'');
+  if(!_xfInited[t])_xfRender(t);
+}
+function _xfRender(t){
+  const data=t==='tj'?TJ_XIANG:ZS_XIANG;
+  const el=document.getElementById('xfp-'+t);
+  const WS=['旺','相','休','囚','死'];
+  el.innerHTML=data.map((d,i)=>{
+    const tagCls=d.ji==='吉'?'tag-j':d.ji==='凶'?'tag-x':'tag-m';
+    const sub=t==='tj'?`${d.wx}·${d.wang}`:`${d.zhi}·${d.wx}·${d.wei}`;
+    const wsdHtml=t==='tj'?`<div style="margin-top:8px;font-size:11px;color:#9B8570;margin-bottom:4px">旺相休囚死断法</div><div class="xfsym-wsd">${WS.map(s=>`<div class="xfsym-wsd-c"><span class="xfsym-wsd-s">${s}</span><span class="xfsym-wsd-d">${(d.wsd||{})[s]||'—'}</span></div>`).join('')}</div>`:'';
+    const jueHtml=t==='zs'?`<div class="xfsym-row"><span class="xfsym-lbl">歌诀</span><span class="xfsym-v" style="font-style:italic;color:#6B5040">${d.jue||''}</span></div>`:'';
+    return `<div class="xfsym-card" id="xfc-${t}-${i}">
+<div class="xfsym-hd" onclick="xfToggle('${t}',${i})">
+<div><div class="xfsym-nm">${d.name}</div><div class="xfsym-sub">${sub}</div></div>
+<span class="${tagCls}" style="margin-left:auto">${d.ji||''}</span>
+<span class="xfsym-arr">›</span>
+</div>
+<div class="xfsym-bd">
+<div class="xfsym-row"><span class="xfsym-lbl">主象</span><span class="xfsym-v">${d.zhu}</span></div>
+<div class="xfsym-row"><span class="xfsym-lbl">人崇</span><span class="xfsym-v">${d.ren}</span></div>
+<div class="xfsym-row"><span class="xfsym-lbl">物事</span><span class="xfsym-v">${d.wu}</span></div>
+<div class="xfsym-row"><span class="xfsym-lbl">病</span><span class="xfsym-v">${d.bing}</span></div>
+${jueHtml}${wsdHtml}
+</div>
+</div>`;
+  }).join('');
+  _xfInited[t]=true;
+}
+function xfToggle(t,i){document.getElementById('xfc-'+t+'-'+i).classList.toggle('xfop');}
+
+// ══ 旺相断法练习 ══
+const WSD_STATES=['旺','相','休','囚','死'];
+const WSD_CLS={旺:'wsd-w',相:'wsd-x',休:'wsd-r',囚:'wsd-y',死:'wsd-s'};
+let wsdState={qs:[],idx:0,correct:0,answered:false};
+function startWSD(){
+  const pool=[];
+  TJ_XIANG.forEach(tj=>{
+    WSD_STATES.forEach(st=>{
+      const desc=(tj.wsd||{})[st];
+      if(desc&&desc!=='—')pool.push({tj:tj.name,wx:tj.wx,ji:tj.ji,wang:tj.wang,state:st,desc});
+    });
+  });
+  const qs=shuffleArr([...pool]).slice(0,15);
+  wsdState={qs,idx:0,correct:0,answered:false};
+  document.getElementById('pxfw-main').style.display='';
+  document.getElementById('pxfw-result').style.display='none';
+  _scrollPos['pxfw']=0;show('pxfw');wsdRender();
+}
+function wsdRender(){
+  const{qs,idx}=wsdState,q=qs[idx],total=qs.length;
+  document.getElementById('wsd-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-wsd-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-wsd-pb').style.width=`${idx/total*100}%`;
+  document.getElementById('wsd-tj').textContent=q.tj;
+  document.getElementById('wsd-wx').textContent=`五行：${q.wx} · ${q.ji==='吉'?'吉将':q.ji==='凶'?'凶将':'中性'} · 旺于${q.wang}`;
+  const badge=document.getElementById('wsd-badge');
+  badge.textContent=q.state;
+  badge.className='wsd-badge '+WSD_CLS[q.state];
+  const allPool=TJ_XIANG.flatMap(tj=>Object.values(tj.wsd||{})).filter(d=>d&&d!==q.desc);
+  const wrongs=shuffleArr([...new Set(allPool)]).slice(0,3);
+  const opts=shuffleArr([q.desc,...wrongs]);
+  document.getElementById('wsd-opts').innerHTML=opts.map(o=>`<button class="qz-opt" style="font-size:14px;letter-spacing:1px" data-opt="${o}" onclick="wsdAnswer(this)">${o}</button>`).join('');
+  document.getElementById('wsd-ex').style.display='none';
+  wsdState.answered=false;
+}
+function wsdAnswer(btn){
+  if(wsdState.answered)return;
+  wsdState.answered=true;
+  const q=wsdState.qs[wsdState.idx],ans=q.desc,chosen=btn.dataset.opt;
+  document.querySelectorAll('#wsd-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
+  if(chosen===ans)wsdState.correct++;else btn.classList.add('wrong');
+  const ex=document.getElementById('wsd-ex');
+  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.tj}</b>（${q.wx}，${q.ji}，旺于${q.wang}）处于<b>${q.state}</b>状态<br>断法：<b style="color:#C41230">${q.desc}</b>`;
+  ex.style.display='block';
+  setTimeout(()=>{wsdState.idx++;if(wsdState.idx>=wsdState.qs.length){_wsdEnd();return;}wsdRender();window.scrollTo(0,0);},1600);
+}
+function _wsdEnd(){
+  const{correct,qs}=wsdState,total=qs.length,pct=Math.round(correct/total*100);
+  saveWeakRecord('旺相断法',total,total-correct);
+  document.getElementById('pxfw-main').style.display='none';
+  document.getElementById('pxfw-result').style.display='flex';
+  document.getElementById('wsd-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('wsd-res-lv').textContent=pct>=90?'断法已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
+  document.getElementById('wsd-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
 
 // ══ 键盘快捷键 ══
 document.addEventListener('keydown',e=>{
