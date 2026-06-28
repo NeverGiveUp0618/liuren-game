@@ -283,7 +283,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="hlogo-s">壬式神煞 · 日学精进</div>
     <div class="hlogo-dec"></div>
   </div>
-  <div class="hquote">六壬之学，以贵神为主，以天将为辅，以三传为用。</div>
+  <div class="hquote" id="el-quote"></div>
   <div class="hdate" id="el-date"></div>
   <div class="hstats">
     <div class="hstat"><div class="hstat-v" id="hs-streak">—</div><div class="hstat-l">连续学习</div></div>
@@ -2127,7 +2127,45 @@ const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
 function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='pxf-sym'){xfInit();}}
 function goHome(){show('ph')}
-(function(){const d=new Date(),dy=['日','一','二','三','四','五','六'];document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;updateHomeStats();checkBkRemind();updateWeakTip();})();
+const DAILY_QUOTES=[
+  '不积跬步，无以至千里；不积小流，无以成江海。',
+  '知之者不如好之者，好之者不如乐之者。',
+  '千里之行，始于足下。',
+  '宝剑锋从磨砺出，梅花香自苦寒来。',
+  '业精于勤，荒于嬉；行成于思，毁于随。',
+  '锲而不舍，金石可镂。',
+  '路漫漫其修远兮，吾将上下而求索。',
+  '天行健，君子以自强不息。',
+  '博学之，审问之，慎思之，明辨之，笃行之。',
+  '山重水复疑无路，柳暗花明又一村。',
+  '天将降大任于斯人也，必先苦其心志，劳其筋骨。',
+  '老骥伏枥，志在千里；烈士暮年，壮心不已。',
+  '长风破浪会有时，直挂云帆济沧海。',
+  '有志者，事竟成。',
+  '精诚所至，金石为开。',
+  '学如逆水行舟，不进则退。',
+  '温故而知新，可以为师矣。',
+  '我们是反复所做之事的总和，卓越并非行为，而是习惯。',
+  '天才是一分灵感，九十九分的汗水。',
+  '成功并非终点，失败并非末日，坚持前行的勇气才最重要。',
+  '积土成山，风雨兴焉；积水成渊，蛟龙生焉。',
+  '志不强者智不达，言不信者行不果。',
+  '读万卷书，行万里路。',
+  '学而不思则罔，思而不学则殆。',
+  '苦心人，天不负；百二秦关终属楚。',
+  '书山有路勤为径，学海无涯苦作舟。',
+  '自信是成功的第一秘诀。',
+  '不怕慢，只怕站；日积月累，水滴石穿。',
+  '知行合一，方得真知。',
+  '今日事，今日毕；勤学苦练，功到自成。',
+];
+(function(){
+  const d=new Date(),dy=['日','一','二','三','四','五','六'];
+  document.getElementById('el-date').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 · 星期${dy[d.getDay()]}`;
+  const dayOfYear=Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);
+  document.getElementById('el-quote').textContent=DAILY_QUOTES[dayOfYear%30];
+  updateHomeStats();checkBkRemind();updateWeakTip();
+})();
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
