@@ -3233,15 +3233,16 @@ function _genKC(){
   kcState={rg,rz,ri,yj,yi2,zsi,zs,day,tp,sk,jg,cc,zc,mc,mt,gr,xi,step:0,score:0,total:6};
   kcState.steps=_kcSteps();
 }
+function _genKC3(){for(let i=0;i<300;i++){_genKC();if(['元首','重审','知一'].includes(_detectMethod(kcState)))return;}_genKC();}
 function startKC(){
-  _genKC();
+  _genKC3();
   const{rg,rz,zs,day}=kcState;
   document.getElementById('kc-info').innerHTML=`日干支：<b style="color:#C41230">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:#C41230">${zs}</b>时（${day?'昼':'夜'}）`;
   document.getElementById('kc-main').style.display='';
   document.getElementById('kc-result').style.display='none';
   _scrollPos['pkc']=0;show('pkc');kcShowStep();
 }
-function startKCBoard(){_genKC();_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+function startKCBoard(){_genKC3();_renderBoard();_scrollPos['pkb']=0;show('pkb');}
 function showKCBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
 
 function _renderBoard(targetEl){
@@ -3549,7 +3550,7 @@ function zmShowBoard(){Object.assign(kcState,zmState.qs[zmState.idx]);_renderBoa
 let scState={step:0,correct:0,answered:false};
 
 function startSC(){
-  _genKC();
+  _genKC3();
   scState={step:0,correct:0,answered:false};
   document.getElementById('psc-main').style.display='';
   document.getElementById('psc-result').style.display='none';
