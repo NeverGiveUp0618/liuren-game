@@ -377,6 +377,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.29</span><span style="color:#9B8570;font-size:12px">🐛 修复知一课阴阳日取法——阴日正确取第三课上神（原误取第一课）</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#9B8570;font-size:12px">🗂 首页菜单重构（速查参考·起课练习·推演练习三组合卡）</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#9B8570;font-size:12px">🔮 象法速查库·旺相断法练习·刷新按钮上移·叶飘然讲义精华</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.28</span><span style="color:#9B8570;font-size:12px">📜 壬学心法·支神意象测验·布局嵌套bug系列修复</span></div>
@@ -3222,8 +3223,9 @@ function _genKC(){
   let cc,mt;
   if(ske.length===1&&xke.length===0){cc=ske[0].s;mt='元首课（上克下）→取上神';}
   else if(xke.length===1&&ske.length===0){let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='重审课（下克上）→取下神';}
-  else if(ske.length>0){cc=ske[0].s;mt='比用/涉害→取首克上神';}
-  else if(xke.length>0){let c=xke[0].x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='比用/涉害→取首克下神';}
+  else if(ske.length>0&&xke.length===0){const yang=GAN_ALL.indexOf(rg)%2===0;const pick=yang?(ske.find(k=>k.n==='第一课')||ske[0]):(ske.find(k=>k.n==='第三课')||ske[ske.length-1]);cc=pick.s;mt='知一课（'+(yang?'阳取第一课':'阴取第三课')+'上神）';}
+  else if(xke.length>0&&ske.length===0){const yang=GAN_ALL.indexOf(rg)%2===0;const pick=yang?(xke.find(k=>k.n==='第一课')||xke[0]):(xke.find(k=>k.n==='第三课')||xke[xke.length-1]);let c=pick.x;if(WX_ZHI_M[c]===undefined)c=GAN_JI[c];cc=c;mt='知一课（'+(yang?'阳取第一课':'阴取第三课')+'下神）';}
+  else if(ske.length>0){cc=ske[0].s;mt='涉害课→取首克上神';}
   else{cc=tp[zsi];mt='昴星课（四课无克）→取占时天盘';}
   if(!cc||!ZHI_ALL.includes(cc))cc=tp[zsi];
   const zc=tp[ZHI_ALL.indexOf(cc)],mc=tp[ZHI_ALL.indexOf(zc)];
@@ -3513,7 +3515,7 @@ function zmAnswer(btn){
   const methodEx={
     '元首':'唯一上克下 → 取克处上神为初传',
     '重审':'唯一下克上 → 取克处下神为初传',
-    '知一':'多处同向克（全上克或全下克）→ 按涉害顺数',
+    '知一':'多处同向克（全上克或全下克）→ 比用法：阳取第一课，阴取第三课',
     '涉害':'上克下与下克上并存 → 顺数本家统计克害深浅',
     '遥克':'无直接克，日干与2/3/4课上神存在遥克',
     '昴星':'四课无克无遥克（取占时天盘为初传）',
