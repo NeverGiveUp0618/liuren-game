@@ -5,294 +5,298 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>大六壬日学</title>
 <style>
+:root{--acc:#8878C0;--acc-dk:#7060B0;--acc-dkk:#5A4890;--acc-tB0:#8878C0B0;--acc-t80:#8878C080;--acc-t50:#8878C050;--acc-t40:#8878C040;--acc-t20:#8878C020;--bg1:#F3F0F9;--bg2:#EAE5F5;--bg3:#F5F2FC;--bg-hov:#DDD8F0;--bd1:#CEC7E8;--bd2:#DED8F4;--bd3:#C0B8E0}
+body.theme-red{--acc:#C41230;--acc-dk:#A30F28;--acc-dkk:#8B0020;--acc-tB0:#C41230B0;--acc-t80:#C4123080;--acc-t50:#C4123050;--acc-t40:#C4123040;--acc-t20:#C4123020;--bg1:#F5F0E6;--bg2:#EDE7D8;--bg3:#FDF8F2;--bg-hov:#E0D9C8;--bd1:#D4C4A0;--bd2:#E8D5B0;--bd3:#C4B49A}
+.theme-tog{background:none;border:1px solid var(--bd1);border-radius:12px;padding:3px 11px;font-size:11px;color:#9B8570;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.theme-tog:hover{background:var(--bg2)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;background:#F3F0F9;color:#1C0A00;min-height:100vh;display:flex;justify-content:center;overflow-x:hidden}
+body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;background:var(--bg1);color:#1C0A00;min-height:100vh;display:flex;justify-content:center;overflow-x:hidden}
 .app{width:100%;max-width:480px;min-height:100vh;overflow-x:hidden}
-@media(min-width:600px){body{background:#EAE5F5;padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
+@media(min-width:600px){body{background:var(--bg2);padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
 .screen{display:none;flex-direction:column;padding:14px 14px 28px;min-height:100vh}
 .screen.active{display:flex}
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
 .tbk{background:none;border:none;color:#9B8570;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
-.tbk:hover{background:#EAE5F5;color:#6B5040}
+.tbk:hover{background:var(--bg2);color:#6B5040}
 .tbtitle{flex:1;text-align:center;font-size:14px;color:#6B5040;letter-spacing:2px}
 .tbr{font-size:12px;color:#9B8570;white-space:nowrap}
 .btn{width:100%;padding:13px;font-size:14px;font-weight:bold;border:none;border-radius:12px;cursor:pointer;transition:all .15s;user-select:none;letter-spacing:1px}
 .btn:active{transform:scale(.98)}
-.btn-r{background:#8878C0;color:#F3F0F9;letter-spacing:2px}.btn-r:hover{background:#7060B0}
-.btn-g{background:#2E7D5A;color:#F3F0F9}.btn-g:hover{background:#236248}
-.btn-d{background:#EAE5F5;color:#6B5040;border:1px solid #CEC7E8}.btn-d:hover{background:#DDD8F0}
-.btn-a{background:#8B6914;color:#F3F0F9}.btn-a:hover{background:#6E520F}
-.card{background:#EAE5F5;border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid #CEC7E8}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1C0A00;color:#F3F0F9;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.btn-r{background:var(--acc);color:var(--bg1);letter-spacing:2px}.btn-r:hover{background:var(--acc-dk)}
+.btn-g{background:#2E7D5A;color:var(--bg1)}.btn-g:hover{background:#236248}
+.btn-d{background:var(--bg2);color:#6B5040;border:1px solid var(--bd1)}.btn-d:hover{background:var(--bg-hov)}
+.btn-a{background:#8B6914;color:var(--bg1)}.btn-a:hover{background:#6E520F}
+.card{background:var(--bg2);border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid var(--bd1)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1C0A00;color:var(--bg1);padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .toast.show{opacity:1}
 .hlogo{text-align:center;padding:26px 0 12px}
-.hlogo-t{font-size:27px;font-weight:bold;color:#8878C0;letter-spacing:8px}
+.hlogo-t{font-size:27px;font-weight:bold;color:var(--acc);letter-spacing:8px}
 .hlogo-s{font-size:11px;color:#9B8570;margin-top:6px;letter-spacing:4px}
-.hlogo-dec{font-size:10px;color:#C0B8E0;margin-top:3px;letter-spacing:3px}
-.hdate{background:#EAE5F5;border:1px solid #CEC7E8;border-radius:12px;padding:10px 14px;text-align:center;font-size:14px;color:#6B5040;margin:6px 0 10px;letter-spacing:1px}
+.hlogo-dec{font-size:10px;color:var(--bd3);margin-top:3px;letter-spacing:3px}
+.hdate{background:var(--bg2);border:1px solid var(--bd1);border-radius:12px;padding:10px 14px;text-align:center;font-size:14px;color:#6B5040;margin:6px 0 10px;letter-spacing:1px}
 .hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
-.hstat{background:#EAE5F5;border:1px solid #CEC7E8;border-radius:12px;padding:11px 6px;text-align:center}
-.hstat-v{font-size:22px;font-weight:bold;color:#8878C0}
+.hstat{background:var(--bg2);border:1px solid var(--bd1);border-radius:12px;padding:11px 6px;text-align:center}
+.hstat-v{font-size:22px;font-weight:bold;color:var(--acc)}
 .hstat-l{font-size:10px;color:#9B8570;margin-top:2px}
-.mcard{background:#EAE5F5;border-radius:16px;padding:13px 15px;margin-bottom:9px;border:2px solid #CEC7E8;transition:border-color .15s}
-.mcard:hover{border-color:#8878C0}
+.mcard{background:var(--bg2);border-radius:16px;padding:13px 15px;margin-bottom:9px;border:2px solid var(--bd1);transition:border-color .15s}
+.mcard:hover{border-color:var(--acc)}
 .mcard-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}
 .mcard-icon{font-size:22px;width:34px;text-align:center;flex-shrink:0}
 .mcard-name{font-size:15px;font-weight:bold;color:#1C0A00}
 .mcard-desc{font-size:11px;color:#9B8570;margin-top:1px}
 .mcard-btns{display:flex;gap:7px;flex-wrap:wrap}
 .mcard-btns .btn{flex:1;min-width:60px;padding:9px 4px;font-size:12px}
-.qk-entry-card{background:#FDF5EC;border:1px solid #DED8F4;border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:border-color .15s}
-.qk-entry-card:hover{border-color:#8878C0}
+.qk-entry-card{background:#FDF5EC;border:1px solid var(--bd2);border-radius:16px;padding:13px 15px;margin-bottom:9px;cursor:pointer;transition:border-color .15s}
+.qk-entry-card:hover{border-color:var(--acc)}
 .qk-entry-row{display:flex;align-items:center;gap:10px}
 .hhist{font-size:11px;color:#9B8570;margin-bottom:6px}
-.hquote{text-align:center;font-size:12px;color:#9B8570;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:#EAE5F5;border-radius:10px;margin:0 0 8px;border:1px solid #CEC7E8;font-style:italic}
+.hquote{text-align:center;font-size:12px;color:#9B8570;padding:6px 14px;letter-spacing:1px;line-height:1.8;background:var(--bg2);border-radius:10px;margin:0 0 8px;border:1px solid var(--bd1);font-style:italic}
 .update-bar{display:flex;align-items:center;gap:8px;padding:5px 2px;margin-bottom:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.update-bar-dot{width:6px;height:6px;border-radius:50%;background:#8878C0;flex-shrink:0}
+.update-bar-dot{width:6px;height:6px;border-radius:50%;background:var(--acc);flex-shrink:0}
 .update-bar-text{font-size:12px;color:#9B8570;flex:1;letter-spacing:.5px}
-.update-bar-btn{font-size:12px;color:#8878C0;white-space:nowrap}
+.update-bar-btn{font-size:12px;color:var(--acc);white-space:nowrap}
 .update-bar:active .update-bar-text,.update-bar:active .update-bar-btn{opacity:.6}
 .kj-grp{margin-bottom:14px}
 .kj-grp-lbl{font-size:11px;color:#9B8570;letter-spacing:2px;margin-bottom:7px;padding:0 2px;font-weight:bold}
 .kj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
-.kj-btn{background:#EAE5F5;border:2px solid #CEC7E8;border-radius:12px;cursor:pointer;padding:13px 8px;text-align:center;transition:all .15s}
-.kj-btn:hover{border-color:#8878C0}.kj-btn:active{transform:scale(.97)}
+.kj-btn{background:var(--bg2);border:2px solid var(--bd1);border-radius:12px;cursor:pointer;padding:13px 8px;text-align:center;transition:all .15s}
+.kj-btn:hover{border-color:var(--acc)}.kj-btn:active{transform:scale(.97)}
 .kj-btn-name{font-size:14px;font-weight:bold;color:#1C0A00}
 .kj-btn-n{font-size:10px;color:#9B8570;margin-top:3px}
-.kj-btn.clr-r{border-color:#8878C040}
+.kj-btn.clr-r{border-color:var(--acc-t40)}
 .kj-btn.clr-g{border-color:#2E7D5A40}
 .kj-btn.clr-a{border-color:#8B691440}
 .prog-row{display:flex;align-items:center;gap:8px;padding:2px 0 8px;flex-shrink:0}
 .prog-txt{font-size:12px;color:#9B8570;white-space:nowrap}
-.prog-wrap{flex:1;height:4px;background:#EAE5F5;border-radius:3px;border:1px solid #CEC7E8}
-.prog-bar{height:100%;border-radius:3px;background:#8878C0;transition:width .3s}
-.fc-card{background:#EAE5F5;border:1px solid #CEC7E8;border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid #8878C0;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.prog-wrap{flex:1;height:4px;background:var(--bg2);border-radius:3px;border:1px solid var(--bd1)}
+.prog-bar{height:100%;border-radius:3px;background:var(--acc);transition:width .3s}
+.fc-card{background:var(--bg2);border:1px solid var(--bd1);border-radius:18px;padding:20px 16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;cursor:pointer;transition:all .2s;position:relative;border-top:4px solid var(--acc);touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .fc-card:active{transform:scale(.99)}
-.fc-label{font-size:10px;color:#9B8570;letter-spacing:3px;margin-bottom:16px;text-align:center;background:#F3F0F9;padding:3px 12px;border-radius:20px;border:1px solid #CEC7E8}
-.fc-title{font-size:21px;font-weight:bold;color:#8878C0;text-align:center;letter-spacing:3px;line-height:1.6;margin-bottom:12px}
-.fc-body{font-size:14px;color:#1C0A00;text-align:left;line-height:2;white-space:pre-wrap;max-width:100%;width:100%;word-break:break-all;background:#F3F0F9;border-radius:10px;padding:12px 14px;border-left:3px solid #8878C0}
+.fc-label{font-size:10px;color:#9B8570;letter-spacing:3px;margin-bottom:16px;text-align:center;background:var(--bg1);padding:3px 12px;border-radius:20px;border:1px solid var(--bd1)}
+.fc-title{font-size:21px;font-weight:bold;color:var(--acc);text-align:center;letter-spacing:3px;line-height:1.6;margin-bottom:12px}
+.fc-body{font-size:14px;color:#1C0A00;text-align:left;line-height:2;white-space:pre-wrap;max-width:100%;width:100%;word-break:break-all;background:var(--bg1);border-radius:10px;padding:12px 14px;border-left:3px solid var(--acc)}
 .fc-body.hidden{display:none}
-.fc-hint{font-size:11px;color:#C0B8E0;text-align:center;margin-top:16px;letter-spacing:2px}
-.fc-reveal{font-size:12px;color:#8878C0;text-align:center;margin-top:10px;font-weight:bold;display:none}
+.fc-hint{font-size:11px;color:var(--bd3);text-align:center;margin-top:16px;letter-spacing:2px}
+.fc-reveal{font-size:12px;color:var(--acc);text-align:center;margin-top:10px;font-weight:bold;display:none}
 .fc-footer{display:flex;gap:8px;margin-top:12px;flex-shrink:0}
 .m5-sec{margin:4px 0}
-.m5-tog{width:100%;background:#EAE5F5;border:1px solid #CEC7E8;border-radius:10px;padding:9px 14px;color:#6B5040;font-size:13px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:1px;display:flex;align-items:center;gap:6px}
-.m5-tog.open{color:#8878C0;border-color:#8878C050;background:#F5F2FC}
-.m5-tog:active{background:#DDD8F0}
-.m5-tog-arrow{margin-left:auto;font-size:12px;color:#CEC7E8;transition:transform .2s;flex-shrink:0}
-.m5-tog.open .m5-tog-arrow{transform:rotate(90deg);color:#8878C0}
+.m5-tog{width:100%;background:var(--bg2);border:1px solid var(--bd1);border-radius:10px;padding:9px 14px;color:#6B5040;font-size:13px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.m5-tog.open{color:var(--acc);border-color:var(--acc-t50);background:var(--bg3)}
+.m5-tog:active{background:var(--bg-hov)}
+.m5-tog-arrow{margin-left:auto;font-size:12px;color:var(--bd1);transition:transform .2s;flex-shrink:0}
+.m5-tog.open .m5-tog-arrow{transform:rotate(90deg);color:var(--acc)}
 .m5-body{padding:4px 2px 2px;display:none}
 .m5-body.open{display:block}
 .m5-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 8px}
 .m5-tbl{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}
-.m5-tbl th{background:#EAE5F5;color:#9B8570;font-size:10px;padding:6px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #CEC7E8}
-.m5-tbl td{padding:6px 8px;text-align:center;border-bottom:1px solid #EAE5F5;color:#1C0A00}
+.m5-tbl th{background:var(--bg2);color:#9B8570;font-size:10px;padding:6px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid var(--bd1)}
+.m5-tbl td{padding:6px 8px;text-align:center;border-bottom:1px solid var(--bg2);color:#1C0A00}
 .m5-tbl tr:nth-child(even) td{background:#F7F2E8}
-.m5-tbl .c-r{color:#8878C0;font-weight:bold}
+.m5-tbl .c-r{color:var(--acc);font-weight:bold}
 .m5-tbl .c-g{color:#2E7D5A;font-weight:bold}
 .m5-tbl .c-a{color:#8B6914;font-weight:bold}
 .m5-sub{font-size:10px;color:#9B8570;letter-spacing:2px;margin:8px 0 4px 2px;font-weight:bold}
-.m5-sub-tog{width:100%;background:#F3F0F9;border:1px solid #CEC7E8;border-radius:8px;padding:7px 12px;color:#9B8570;font-size:12px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:.5px;margin:3px 0;display:block}
-.m5-sub-tog.open{color:#6B5040;border-color:#C0B8E0;background:#EAE5F5}
+.m5-sub-tog{width:100%;background:var(--bg1);border:1px solid var(--bd1);border-radius:8px;padding:7px 12px;color:#9B8570;font-size:12px;font-weight:bold;cursor:pointer;text-align:left;letter-spacing:.5px;margin:3px 0;display:block}
+.m5-sub-tog.open{color:#6B5040;border-color:var(--bd3);background:var(--bg2)}
 .m5-sub-body{padding:2px 4px 4px;display:none}
 .m5-sub-body.open{display:block}
-.m5-text{font-size:13px;color:#1C0A00;line-height:1.9;padding:7px 12px;background:#F3F0F9;border-radius:8px;margin:3px 0;border-left:3px solid #CEC7E8}
-.m5-text.red{border-left-color:#8878C0}
+.m5-text{font-size:13px;color:#1C0A00;line-height:1.9;padding:7px 12px;background:var(--bg1);border-radius:8px;margin:3px 0;border-left:3px solid var(--bd1)}
+.m5-text.red{border-left-color:var(--acc)}
 .m5-text.gold{border-left-color:#8B6914}
-.m5-jue{font-size:13px;color:#6B5040;line-height:2.2;padding:10px 14px;background:#F5F2FC;border-radius:10px;margin:4px 0;border:1px solid #DED8F4;white-space:pre-line;letter-spacing:.5px}
+.m5-jue{font-size:13px;color:#6B5040;line-height:2.2;padding:10px 14px;background:var(--bg3);border-radius:10px;margin:4px 0;border:1px solid var(--bd2);white-space:pre-line;letter-spacing:.5px}
 .qk-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.qk-tab{flex:1;min-width:0;padding:8px 4px;font-size:12px;font-weight:bold;background:#EAE5F5;border:1px solid #CEC7E8;border-radius:9px;cursor:pointer;text-align:center;color:#6B5040;letter-spacing:1px;transition:all .15s}
+.qk-tab{flex:1;min-width:0;padding:8px 4px;font-size:12px;font-weight:bold;background:var(--bg2);border:1px solid var(--bd1);border-radius:9px;cursor:pointer;text-align:center;color:#6B5040;letter-spacing:1px;transition:all .15s}
 .qk-tab:active{transform:scale(.97)}
-.qk-tab.active{background:#8878C0;color:#F3F0F9;border-color:#8878C0}
+.qk-tab.active{background:var(--acc);color:var(--bg1);border-color:var(--acc)}
 .qk-panel{display:none}
 .qk-panel.active{display:block}
 .qk-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 8px}
 .qk-tbl{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}
-.qk-tbl th{background:#EAE5F5;color:#9B8570;font-size:10px;padding:7px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid #CEC7E8}
-.qk-tbl td{padding:7px 8px;text-align:center;border-bottom:1px solid #EAE5F5;color:#1C0A00;font-size:13px}
+.qk-tbl th{background:var(--bg2);color:#9B8570;font-size:10px;padding:7px 8px;text-align:center;letter-spacing:1px;border-bottom:2px solid var(--bd1)}
+.qk-tbl td{padding:7px 8px;text-align:center;border-bottom:1px solid var(--bg2);color:#1C0A00;font-size:13px}
 .qk-tbl tr:nth-child(even) td{background:#F7F2E8}
-.qk-tbl .c-r{color:#8878C0;font-weight:bold;font-size:15px}
+.qk-tbl .c-r{color:var(--acc);font-weight:bold;font-size:15px}
 .qk-tbl .c-a{color:#8B6914;font-weight:bold}
-.qk-sec-title{font-size:11px;color:#9B8570;letter-spacing:3px;padding:6px 2px 8px;font-weight:bold;border-bottom:1px solid #CEC7E8;margin-bottom:10px}
-.bk-banner{background:#F5F2FC;border:1px solid #8878C050;border-radius:12px;padding:10px 14px;margin:0 0 9px;display:none;align-items:center;gap:10px}
+.qk-sec-title{font-size:11px;color:#9B8570;letter-spacing:3px;padding:6px 2px 8px;font-weight:bold;border-bottom:1px solid var(--bd1);margin-bottom:10px}
+.bk-banner{background:var(--bg3);border:1px solid var(--acc-t50);border-radius:12px;padding:10px 14px;margin:0 0 9px;display:none;align-items:center;gap:10px}
 .bk-banner.show{display:flex}
 .bk-banner-txt{flex:1;font-size:12px;color:#6B5040;line-height:1.4}
-.bk-banner-btn{background:#8878C0;color:#F3F0F9;border:none;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.bk-banner-btn{background:var(--acc);color:var(--bg1);border:none;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .bk-row{display:flex;gap:8px;margin:0 0 6px}
-.bk-btn{flex:1;background:#EAE5F5;color:#6B5040;border:1px solid #CEC7E8;border-radius:10px;padding:9px 6px;font-size:12px;cursor:pointer;text-align:center}
-.bk-btn:active{background:#CEC7E8}
+.bk-btn{flex:1;background:var(--bg2);color:#6B5040;border:1px solid var(--bd1);border-radius:10px;padding:9px 6px;font-size:12px;cursor:pointer;text-align:center}
+.bk-btn:active{background:var(--bd1)}
 /* deck mark buttons */
 .fc-mark-row{display:flex;gap:8px;margin-top:10px;flex-shrink:0}
-.fc-mk-kn{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#2E7D5A;color:#F3F0F9;border:none;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.fc-mk-kn{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#2E7D5A;color:var(--bg1);border:none;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
 .fc-mk-kn:active{transform:scale(.98)}
-.fc-mk-rv{flex:1;padding:13px;font-size:13px;font-weight:bold;background:#EAE5F5;color:#6B5040;border:1px solid #CEC7E8;border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
+.fc-mk-rv{flex:1;padding:13px;font-size:13px;font-weight:bold;background:var(--bg2);color:#6B5040;border:1px solid var(--bd1);border-radius:12px;cursor:pointer;transition:all .15s;letter-spacing:1px}
 .fc-mk-rv:active{transform:scale(.98)}
 /* heatmap */
 .hmap-label{font-size:10px;color:#9B8570;letter-spacing:2px;margin:8px 0 4px;font-weight:bold}
 .hmap{display:grid;grid-template-columns:repeat(35,1fr);gap:2px;margin-bottom:10px}
-.hmap-cell{height:10px;border-radius:2px;background:#EAE5F5;border:1px solid #CEC7E8}
-.hmap-cell.lv1{background:#8878C040;border-color:#8878C080}
-.hmap-cell.lv2{background:#8878C080;border-color:#8878C0}
-.hmap-cell.lv3{background:#8878C0B0;border-color:#7060B0}
-.hmap-cell.lv4{background:#8878C0;border-color:#5A4890}
+.hmap-cell{height:10px;border-radius:2px;background:var(--bg2);border:1px solid var(--bd1)}
+.hmap-cell.lv1{background:var(--acc-t40);border-color:var(--acc-t80)}
+.hmap-cell.lv2{background:var(--acc-t80);border-color:var(--acc)}
+.hmap-cell.lv3{background:var(--acc-tB0);border-color:var(--acc-dk)}
+.hmap-cell.lv4{background:var(--acc);border-color:var(--acc-dkk)}
 .hmap-cell.today{outline:2px solid #8B6914;outline-offset:1px}
 /* quiz */
-.qz-opt{width:100%;padding:12px 14px;font-size:18px;font-weight:bold;border:2px solid #CEC7E8;border-radius:12px;cursor:pointer;background:#EAE5F5;color:#1C0A00;margin:6px 0;text-align:center;transition:all .15s;letter-spacing:3px;display:block}
+.qz-opt{width:100%;padding:12px 14px;font-size:18px;font-weight:bold;border:2px solid var(--bd1);border-radius:12px;cursor:pointer;background:var(--bg2);color:#1C0A00;margin:6px 0;text-align:center;transition:all .15s;letter-spacing:3px;display:block}
 .qz-opt:active{transform:scale(.98)}
 .qz-opt.correct{background:#2E7D5A20;border-color:#2E7D5A;color:#2E7D5A}
-.qz-opt.wrong{background:#8878C020;border-color:#8878C0;color:#8878C0}
+.qz-opt.wrong{background:var(--acc-t20);border-color:var(--acc);color:var(--acc)}
 .qz-opt:disabled{cursor:default;opacity:1}
-.qz-score{text-align:center;font-size:36px;font-weight:bold;color:#8878C0;margin:24px 0 4px;letter-spacing:4px}
+.qz-score{text-align:center;font-size:36px;font-weight:bold;color:var(--acc);margin:24px 0 4px;letter-spacing:4px}
 .qz-lv{text-align:center;font-size:14px;color:#6B5040;margin-bottom:20px;letter-spacing:3px}
 /* p5 chapter nav */
-.p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:#EAE5F5;border:1px solid #CEC7E8;border-radius:12px}
-.p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:#F3F0F9;border:1px solid #CEC7E8;border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
-.p5-nav-btn:active{background:#CEC7E8;color:#8878C0}
+.p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:var(--bg2);border:1px solid var(--bd1);border-radius:12px}
+.p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:var(--bg1);border:1px solid var(--bd1);border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
+.p5-nav-btn:active{background:var(--bd1);color:var(--acc)}
 /* 三传发用·九宗门 */
-.z9-step{background:#F5F2FC;border:1px solid #CEC7E8;border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start}
-.z9-num{background:#8878C0;color:#fff;border-radius:50%;width:20px;height:20px;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;margin-top:2px;flex-shrink:0}
+.z9-step{background:var(--bg3);border:1px solid var(--bd1);border-radius:10px;padding:9px 12px;margin-bottom:6px;display:flex;gap:8px;align-items:flex-start}
+.z9-num{background:var(--acc);color:#fff;border-radius:50%;width:20px;height:20px;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;margin-top:2px;flex-shrink:0}
 .z9-sc{flex:1;font-size:12px;color:#6B5040;line-height:1.8}
-.z9-sc .hit{color:#8878C0;font-weight:bold}
+.z9-sc .hit{color:var(--acc);font-weight:bold}
 .z9-sc .sub{color:#9B8570;font-size:11px}
-.z9-card{background:#F5F2FC;border:1px solid #CEC7E8;border-radius:12px;margin-bottom:8px;overflow:hidden}
+.z9-card{background:var(--bg3);border:1px solid var(--bd1);border-radius:12px;margin-bottom:8px;overflow:hidden}
 .z9-hdr{padding:11px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
 .z9-hname{font-size:14px;font-weight:bold;color:#1C0A00;flex:1}
 .z9-htag{font-size:10px;color:#9B8570}
-.z9-arr{color:#CEC7E8;font-size:14px;transition:transform .2s;flex-shrink:0}
+.z9-arr{color:var(--bd1);font-size:14px;transition:transform .2s;flex-shrink:0}
 .z9-hdr.open .z9-arr{transform:rotate(90deg)}
-.z9-body{display:none;padding:10px 14px 13px;border-top:1px solid #EAE5F5;font-size:12px;color:#6B5040;line-height:1.9}
+.z9-body{display:none;padding:10px 14px 13px;border-top:1px solid var(--bg2);font-size:12px;color:#6B5040;line-height:1.9}
 .z9-body.open{display:block}
 .z9-row{margin-bottom:3px}
 .z9-row b{color:#1C0A00}
-.z9-row .hit{color:#8878C0;font-weight:bold}
-.z9-mn{margin-top:8px;background:#EAE5F5;border-radius:7px;padding:7px 10px;font-size:11px;color:#8B6914;line-height:1.7;border-left:3px solid #8878C0}
-.z9-ex{margin-top:10px;border-top:1px solid #EAE5F5;padding-top:10px}
+.z9-row .hit{color:var(--acc);font-weight:bold}
+.z9-mn{margin-top:8px;background:var(--bg2);border-radius:7px;padding:7px 10px;font-size:11px;color:#8B6914;line-height:1.7;border-left:3px solid var(--acc)}
+.z9-ex{margin-top:10px;border-top:1px solid var(--bg2);padding-top:10px}
 .z9-ex-hd{font-size:11px;color:#9B8570;text-align:center;margin-bottom:4px}
-.z9-ex-mt{font-size:11px;color:#8B6914;text-align:center;margin-bottom:8px;padding:4px 8px;background:#EAE5F5;border-radius:6px}
+.z9-ex-mt{font-size:11px;color:#8B6914;text-align:center;margin-bottom:8px;padding:4px 8px;background:var(--bg2);border-radius:6px}
 /* 起课排盘 */
 .lupan{width:100%;border-collapse:collapse;margin:4px 0}
-.lupan td{border:1px solid #CEC7E8;text-align:center;vertical-align:middle;padding:4px 2px}
-.lp-cell{background:#EAE5F5}
-.lp-cell.lp-sc{background:#FFF3F0;border-color:#8878C080!important}
-.lp-center{background:#F5F2FC;font-size:12px;font-weight:bold;color:#8878C0;line-height:1.9;border:2px solid #8878C0!important}
+.lupan td{border:1px solid var(--bd1);text-align:center;vertical-align:middle;padding:4px 2px}
+.lp-cell{background:var(--bg2)}
+.lp-cell.lp-sc{background:#FFF3F0;border-color:var(--acc-t80)!important}
+.lp-center{background:var(--bg3);font-size:12px;font-weight:bold;color:var(--acc);line-height:1.9;border:2px solid var(--acc)!important}
 .lp-tj{font-size:10px;color:#8B6914;font-weight:bold}
 .lp-dg{font-size:10px;color:#9B8570}
-.lp-di{font-size:9px;color:#C0B8E0;margin-top:1px}
-.lp-scl{display:inline-block;font-size:8px;background:#8878C0;color:#fff;border-radius:2px;padding:0 2px;margin-left:1px;vertical-align:middle}
+.lp-di{font-size:9px;color:var(--bd3);margin-top:1px}
+.lp-scl{display:inline-block;font-size:8px;background:var(--acc);color:#fff;border-radius:2px;padding:0 2px;margin-left:1px;vertical-align:middle}
 .sc-block{padding:2px 0 4px}
-.sc-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:5px 0;border-bottom:1px solid #EAE5F5}
+.sc-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--bg2)}
 .sc-row:last-child{border:none}
 .sc-lq{font-size:11px;color:#9B8570;width:18px;text-align:right}
 .sc-dg{font-size:11px;color:#9B8570;width:16px;text-align:center}
-.sc-zhi{font-size:24px;font-weight:bold;color:#8878C0;width:28px;text-align:center;flex-shrink:0}
-.sc-ko{width:12px;font-size:9px;color:#8878C0;flex-shrink:0;text-align:left}
+.sc-zhi{font-size:24px;font-weight:bold;color:var(--acc);width:28px;text-align:center;flex-shrink:0}
+.sc-ko{width:12px;font-size:9px;color:var(--acc);flex-shrink:0;text-align:left}
 .sc-tj{font-size:11px;color:#8B6914;width:16px;text-align:center;flex-shrink:0}
-.sc-pos{font-size:11px;color:#8878C0;font-weight:bold;width:28px;flex-shrink:0}
+.sc-pos{font-size:11px;color:var(--acc);font-weight:bold;width:28px;flex-shrink:0}
 .ske-tbl{width:100%;border-collapse:collapse}
-.ske-tbl td{border:1px solid #CEC7E8;text-align:center;padding:4px 1px}
-.ske-hdr td{background:#EAE5F5;font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
+.ske-tbl td{border:1px solid var(--bd1);text-align:center;padding:4px 1px}
+.ske-hdr td{background:var(--bg2);font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
 .sec-t{font-size:10px;color:#9B8570;letter-spacing:2px;margin:10px 0 4px 2px;font-weight:bold}
 
 .zmq-sk{width:100%;border-collapse:collapse;margin:8px 0}
-.zmq-sk td{border:1px solid #CEC7E8;text-align:center;padding:5px 2px;font-size:13px}
-.zmq-hdr td{background:#EAE5F5;font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
-.zmq-ke{display:block;font-size:9px;color:#8878C0;font-weight:bold;line-height:1.3}
+.zmq-sk td{border:1px solid var(--bd1);text-align:center;padding:5px 2px;font-size:13px}
+.zmq-hdr td{background:var(--bg2);font-size:10px;color:#8B6914;font-weight:bold;padding:3px 1px}
+.zmq-ke{display:block;font-size:9px;color:var(--acc);font-weight:bold;line-height:1.3}
 .zmq-xke{display:block;font-size:9px;color:#2E7D5A;font-weight:bold;line-height:1.3}
-.tj-card{background:#F5F2FC;border:2px solid #8878C040;border-radius:14px;padding:16px;text-align:center;margin-bottom:12px}
-.tj-name{font-size:30px;font-weight:bold;color:#8878C0;letter-spacing:4px;margin-bottom:6px}
+.tj-card{background:var(--bg3);border:2px solid var(--acc-t40);border-radius:14px;padding:16px;text-align:center;margin-bottom:12px}
+.tj-name{font-size:30px;font-weight:bold;color:var(--acc);letter-spacing:4px;margin-bottom:6px}
 .tj-attr{font-size:12px;color:#9B8570;letter-spacing:1px;margin-bottom:8px}
-.tj-sx{font-size:13px;color:#1C0A00;font-weight:bold;padding:10px 16px;background:#EAE5F5;border-radius:8px;line-height:1.8}
-.zl-fact{font-size:12px;color:#6B5040;background:#EAE5F5;border-radius:8px;padding:8px 12px;margin-bottom:8px;line-height:1.8}
-.zl-step{border:2px solid #CEC7E8;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#F5F2FC}
+.tj-sx{font-size:13px;color:#1C0A00;font-weight:bold;padding:10px 16px;background:var(--bg2);border-radius:8px;line-height:1.8}
+.zl-fact{font-size:12px;color:#6B5040;background:var(--bg2);border-radius:8px;padding:8px 12px;margin-bottom:8px;line-height:1.8}
+.zl-step{border:2px solid var(--bd1);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--bg3)}
 .zl-step.done{opacity:.7}
 .zl-q{font-size:13px;color:#1C0A00;font-weight:bold;margin-bottom:8px;line-height:1.6}
 .zl-btns{display:flex;gap:8px}
-.zl-btn{flex:1;padding:10px;font-size:13px;font-weight:bold;border:2px solid #CEC7E8;border-radius:10px;cursor:pointer;background:#EAE5F5;color:#1C0A00;transition:all .15s}
+.zl-btn{flex:1;padding:10px;font-size:13px;font-weight:bold;border:2px solid var(--bd1);border-radius:10px;cursor:pointer;background:var(--bg2);color:#1C0A00;transition:all .15s}
 .zl-btn:active{transform:scale(.97)}
-.zl-ans{font-size:11px;color:#6B5040;margin-top:5px;line-height:1.6;padding:4px 8px;background:#F3F0F9;border-radius:6px}
-.hw-weak{font-size:11px;color:#8878C0;text-align:center;padding:5px 0 2px;letter-spacing:.5px}
+.zl-ans{font-size:11px;color:#6B5040;margin-top:5px;line-height:1.6;padding:4px 8px;background:var(--bg1);border-radius:6px}
+.hw-weak{font-size:11px;color:var(--acc);text-align:center;padding:5px 0 2px;letter-spacing:.5px}
 
 
 /* ── 壬学心法 ── */
 #p-xf{overflow-x:hidden}
 .xf-wrap{padding:0 0 40px;overflow-y:auto;flex:1;min-width:0;box-sizing:border-box;width:100%}
-.xf-title{font-size:18px;font-weight:bold;color:#1C0A00;text-align:center;line-height:1.6;margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid #8878C0}
+.xf-title{font-size:18px;font-weight:bold;color:#1C0A00;text-align:center;line-height:1.6;margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid var(--acc)}
 .xf-lead{font-size:15px;color:#3D2010;line-height:1.85;margin-bottom:10px}
-.xf-part{font-size:17px;font-weight:bold;color:#8878C0;margin:20px 0 12px;padding:6px 12px;border-left:4px solid #8878C0;background:#FDF5EC;border-radius:0 8px 8px 0}
-.xf-step{font-size:15px;font-weight:bold;color:#1C0A00;margin:14px 0 6px;padding:7px 12px;background:#EAE5F5;border-radius:8px}
+.xf-part{font-size:17px;font-weight:bold;color:var(--acc);margin:20px 0 12px;padding:6px 12px;border-left:4px solid var(--acc);background:#FDF5EC;border-radius:0 8px 8px 0}
+.xf-step{font-size:15px;font-weight:bold;color:#1C0A00;margin:14px 0 6px;padding:7px 12px;background:var(--bg2);border-radius:8px}
 .xf-p{font-size:15px;color:#3D2010;line-height:1.85;margin-bottom:8px}
 .xf-ul{font-size:15px;color:#3D2010;line-height:1.85;padding-left:6px;margin-bottom:10px;list-style:none}
 .xf-ul li{margin-bottom:6px;padding-left:16px;position:relative}
-.xf-ul li::before{content:"· ";position:absolute;left:0;color:#8878C0;font-weight:bold}
+.xf-ul li::before{content:"· ";position:absolute;left:0;color:var(--acc);font-weight:bold}
 .xf-ol{font-size:15px;color:#3D2010;line-height:1.85;padding-left:6px;margin-bottom:10px;list-style:none;counter-reset:xf-cnt}
 .xf-ol li{margin-bottom:8px;padding-left:22px;position:relative;counter-increment:xf-cnt}
-.xf-ol li::before{content:counter(xf-cnt)". ";position:absolute;left:0;color:#8878C0;font-weight:bold}
+.xf-ol li::before{content:counter(xf-cnt)". ";position:absolute;left:0;color:var(--acc);font-weight:bold}
 .xf-tbl-wrap{overflow-x:auto;width:100%;margin:10px 0 14px;border-radius:10px;box-shadow:0 1px 4px #0001}
 .xf-tbl{border-collapse:collapse;font-size:13px;white-space:nowrap}
-.xf-tbl th{background:#8878C0;color:#FDF5EC;padding:7px 10px;text-align:center;font-weight:bold;font-size:13px}
-.xf-tbl td{padding:7px 10px;text-align:center;border:1px solid #CEC7E8;color:#1C0A00;background:#FDF5EC}
-.xf-tbl tr:last-child td{background:#EAE5F5}
-.xf-result{font-size:14px;color:#3D2010;background:#EAE5F5;border-radius:8px;padding:10px 12px;margin:8px 0 12px;line-height:1.9}
-.xf-result strong{color:#8878C0}
-.xf-summary{font-size:15px;color:#1C0A00;background:#EAE5F5;border-radius:10px;padding:14px 16px;line-height:1.85;margin-top:20px;border-left:4px solid #8878C0}
-.xf-hr{height:1px;background:#CEC7E8;margin:18px 0}
+.xf-tbl th{background:var(--acc);color:#FDF5EC;padding:7px 10px;text-align:center;font-weight:bold;font-size:13px}
+.xf-tbl td{padding:7px 10px;text-align:center;border:1px solid var(--bd1);color:#1C0A00;background:#FDF5EC}
+.xf-tbl tr:last-child td{background:var(--bg2)}
+.xf-result{font-size:14px;color:#3D2010;background:var(--bg2);border-radius:8px;padding:10px 12px;margin:8px 0 12px;line-height:1.9}
+.xf-result strong{color:var(--acc)}
+.xf-summary{font-size:15px;color:#1C0A00;background:var(--bg2);border-radius:10px;padding:14px 16px;line-height:1.85;margin-top:20px;border-left:4px solid var(--acc)}
+.xf-hr{height:1px;background:var(--bd1);margin:18px 0}
 /* 象法速查 */
 .xfsym-tab-bar{display:flex;gap:6px;margin-bottom:12px}
-.xfsym-tab-btn{flex:1;padding:7px 4px;border:1px solid #CEC7E8;background:#EAE5F5;border-radius:8px;font-size:13px;color:#6B5040;cursor:pointer;font-weight:bold}
-.xfsym-tab-btn.act{background:#8878C0;color:#fff;border-color:#8878C0}
-.xfsym-card{background:#EAE5F5;border-radius:10px;margin-bottom:8px;overflow:hidden;border:1px solid #CEC7E8}
+.xfsym-tab-btn{flex:1;padding:7px 4px;border:1px solid var(--bd1);background:var(--bg2);border-radius:8px;font-size:13px;color:#6B5040;cursor:pointer;font-weight:bold}
+.xfsym-tab-btn.act{background:var(--acc);color:#fff;border-color:var(--acc)}
+.xfsym-card{background:var(--bg2);border-radius:10px;margin-bottom:8px;overflow:hidden;border:1px solid var(--bd1)}
 .xfsym-hd{display:flex;align-items:center;padding:10px 12px;cursor:pointer;gap:8px}
 .xfsym-nm{font-size:16px;font-weight:bold;color:#1C0A00;flex:1}
 .xfsym-sub{font-size:11px;color:#9B8570}
-.xfsym-arr{color:#CEC7E8;font-size:18px;transition:transform .2s;flex-shrink:0}
+.xfsym-arr{color:var(--bd1);font-size:18px;transition:transform .2s;flex-shrink:0}
 .xfsym-card.xfop .xfsym-arr{transform:rotate(90deg)}
-.xfsym-bd{display:none;padding:0 12px 12px;border-top:1px solid #CEC7E8}
+.xfsym-bd{display:none;padding:0 12px 12px;border-top:1px solid var(--bd1)}
 .xfsym-card.xfop .xfsym-bd{display:block}
 .xfsym-row{display:flex;gap:6px;margin-top:8px;font-size:12px;line-height:1.6}
 .xfsym-lbl{color:#9B8570;flex-shrink:0;min-width:36px}
 .xfsym-v{color:#1C0A00}
 .xfsym-wsd{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:8px}
-.xfsym-wsd-c{background:#F3F0F9;border-radius:6px;padding:4px 2px;text-align:center}
+.xfsym-wsd-c{background:var(--bg1);border-radius:6px;padding:4px 2px;text-align:center}
 .xfsym-wsd-s{font-size:10px;color:#9B8570;display:block}
 .xfsym-wsd-d{font-size:10px;color:#1C0A00;display:block;margin-top:1px;line-height:1.3}
 .tag-j{font-size:11px;padding:2px 8px;border-radius:10px;background:#d4edda;color:#2E7D5A;font-weight:bold}
-.tag-x{font-size:11px;padding:2px 8px;border-radius:10px;background:#fde8e8;color:#8878C0;font-weight:bold}
+.tag-x{font-size:11px;padding:2px 8px;border-radius:10px;background:#fde8e8;color:var(--acc);font-weight:bold}
 .tag-m{font-size:11px;padding:2px 8px;border-radius:10px;background:#f0e6d3;color:#8B6914;font-weight:bold}
 /* 旺相断法练习 */
-.wsd-card{background:#EAE5F5;border-radius:12px;padding:16px;margin-bottom:14px;text-align:center}
+.wsd-card{background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:14px;text-align:center}
 /* 九宗门流程图 */
-.zfl-prem{background:#F5F2FC;border:1px solid #DED8F4;border-radius:10px;padding:10px 13px;font-size:12px;color:#6B5040;line-height:1.9;margin-bottom:8px}
+.zfl-prem{background:var(--bg3);border:1px solid var(--bd2);border-radius:10px;padding:10px 13px;font-size:12px;color:#6B5040;line-height:1.9;margin-bottom:8px}
 .zfl-sec{font-size:10px;color:#9B8570;letter-spacing:2px;margin:12px 0 5px 2px;font-weight:bold;display:flex;align-items:center;gap:6px}
-.zfl-sec::after{content:'';flex:1;height:1px;background:#CEC7E8}
-.zfl-q{background:#F5F2FC;border:2px solid #8878C0;border-radius:10px;padding:9px 13px;margin-bottom:5px;font-size:12px;font-weight:bold;color:#1C0A00;line-height:1.6}
-.zfl-branch{padding:3px 0 3px 16px;border-left:2px solid #CEC7E8;margin:5px 0 5px 6px}
-.zfl-bi{background:#F3F0F9;border-radius:8px;padding:8px 11px;margin-bottom:5px;font-size:12px;color:#6B5040;line-height:1.8;border-left:3px solid #CEC7E8}
-.zfl-bi.red{border-left-color:#8878C0;background:#F5F2FC}
+.zfl-sec::after{content:'';flex:1;height:1px;background:var(--bd1)}
+.zfl-q{background:var(--bg3);border:2px solid var(--acc);border-radius:10px;padding:9px 13px;margin-bottom:5px;font-size:12px;font-weight:bold;color:#1C0A00;line-height:1.6}
+.zfl-branch{padding:3px 0 3px 16px;border-left:2px solid var(--bd1);margin:5px 0 5px 6px}
+.zfl-bi{background:var(--bg1);border-radius:8px;padding:8px 11px;margin-bottom:5px;font-size:12px;color:#6B5040;line-height:1.8;border-left:3px solid var(--bd1)}
+.zfl-bi.red{border-left-color:var(--acc);background:var(--bg3)}
 .zfl-bi.gold{border-left-color:#8B6914}
 .zfl-bi.green{border-left-color:#2E7D5A}
 .zfl-bi.blue{border-left-color:#283593}
 .zfl-bi.purple{border-left-color:#7B1FA2;background:#F9F4FF}
-.zfl-arrow{text-align:center;color:#C0B8E0;font-size:14px;margin:4px 0;letter-spacing:1px}
+.zfl-arrow{text-align:center;color:var(--bd3);font-size:14px;margin:4px 0;letter-spacing:1px}
 .zfl-priority{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 10px}
 .zfl-ptag{color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:bold}
-.zfl-card{background:#EAE5F5;border-radius:12px;margin-bottom:6px;overflow:hidden;border:1px solid #CEC7E8}
+.zfl-card{background:var(--bg2);border-radius:12px;margin-bottom:6px;overflow:hidden;border:1px solid var(--bd1)}
 .zfl-ch{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;user-select:none}
-.zfl-ch-num{background:#8878C0;color:#fff;border-radius:50%;width:22px;height:22px;min-width:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0}
+.zfl-ch-num{background:var(--acc);color:#fff;border-radius:50%;width:22px;height:22px;min-width:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0}
 .zfl-ch-name{font-size:13px;font-weight:bold;color:#1C0A00;flex:1}
 .zfl-ch-sub{font-size:10px;color:#9B8570}
-.zfl-ch-arr{color:#CEC7E8;font-size:14px;transition:transform .2s;flex-shrink:0}
+.zfl-ch-arr{color:var(--bd1);font-size:14px;transition:transform .2s;flex-shrink:0}
 .zfl-card.open .zfl-ch-arr{transform:rotate(90deg)}
-.zfl-cb{display:none;padding:1px 13px 12px;border-top:1px solid #CEC7E8;font-size:12px;color:#6B5040;line-height:1.9}
+.zfl-cb{display:none;padding:1px 13px 12px;border-top:1px solid var(--bd1);font-size:12px;color:#6B5040;line-height:1.9}
 .zfl-card.open .zfl-cb{display:block}
 .zfl-cb-row{display:flex;gap:7px;margin:7px 0;align-items:flex-start}
-.zfl-cb-lbl{background:#F3F0F9;color:#9B8570;padding:2px 7px;border-radius:4px;font-size:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;border:1px solid #CEC7E8}
+.zfl-cb-lbl{background:var(--bg1);color:#9B8570;padding:2px 7px;border-radius:4px;font-size:10px;white-space:nowrap;flex-shrink:0;margin-top:3px;border:1px solid var(--bd1)}
 .zfl-cb-v{color:#6B5040;flex:1;font-size:12px;line-height:1.8}
-.zfl-jue{background:#F5F2FC;border-left:3px solid #8B6914;padding:7px 11px;font-size:11px;color:#8B6914;line-height:1.9;margin:7px 0 3px;border-radius:0 6px 6px 0}
+.zfl-jue{background:var(--bg3);border-left:3px solid #8B6914;padding:7px 11px;font-size:11px;color:#8B6914;line-height:1.9;margin:7px 0 3px;border-radius:0 6px 6px 0}
 .zfl-tbl{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0}
-.zfl-tbl th{background:#EAE5F5;color:#8B6914;font-size:10px;padding:6px 4px;text-align:center;border:1px solid #CEC7E8;letter-spacing:1px}
-.zfl-tbl td{padding:7px 6px;text-align:center;border:1px solid #CEC7E8;color:#1C0A00}
+.zfl-tbl th{background:var(--bg2);color:#8B6914;font-size:10px;padding:6px 4px;text-align:center;border:1px solid var(--bd1);letter-spacing:1px}
+.zfl-tbl td{padding:7px 6px;text-align:center;border:1px solid var(--bd1);color:#1C0A00}
 .zfl-tbl tr:nth-child(even) td{background:#F7F2E8}
-.zfl-tbl .c-r{color:#8878C0;font-weight:bold}
+.zfl-tbl .c-r{color:var(--acc);font-weight:bold}
 .wsd-badge{display:inline-block;padding:4px 16px;border-radius:12px;font-size:14px;font-weight:bold;margin:8px 0}
 .wsd-w{background:#d4edda;color:#1B5E20}
 .wsd-x{background:#ddeeff;color:#0D47A1}
@@ -306,6 +310,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <!-- ======== HOME ======== -->
 <div id="ph" class="screen active">
+  <div style="display:flex;justify-content:flex-end;margin-bottom:2px">
+    <button id="theme-tog" class="theme-tog" onclick="toggleTheme()">朱雀红</button>
+  </div>
   <div class="update-bar" onclick="location.href=location.pathname+'?r='+Date.now()">
     <div class="update-bar-dot"></div>
     <span class="update-bar-text">近期有更新</span>
@@ -330,7 +337,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
   </div>
   <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">💡</div><div><div class="mcard-name">大六壬底层逻辑 <span style="font-size:10px;background:#8878C0;color:#fff;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:middle">重要</span></div><div class="mcard-desc">四层结构白话讲解 · 读懂六壬运作原理</div></div></div>
+    <div class="mcard-head"><div class="mcard-icon">💡</div><div><div class="mcard-name">大六壬底层逻辑 <span style="font-size:10px;background:var(--acc);color:#fff;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:middle">重要</span></div><div class="mcard-desc">四层结构白话讲解 · 读懂六壬运作原理</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pbdl')">进入阅读 →</button></div>
   </div>
   <div class="mcard">
@@ -1613,7 +1620,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="font-size:16px;font-weight:bold;color:#1C0A00;letter-spacing:1px;line-height:2" id="qz-q">—</div>
     </div>
     <div id="qz-opts"></div>
-    <div id="qz-explain" style="display:none;font-size:12px;color:#9B8570;text-align:center;margin-top:8px;padding:7px 10px;background:#EAE5F5;border-radius:8px;letter-spacing:1px;border:1px solid #CEC7E8"></div>
+    <div id="qz-explain" style="display:none;font-size:12px;color:#9B8570;text-align:center;margin-top:8px;padding:7px 10px;background:var(--bg2);border-radius:8px;letter-spacing:1px;border:1px solid var(--bd1)"></div>
   </div>
   <div id="pqz-result" style="display:none;flex-direction:column;align-items:center;padding-top:16px">
     <div class="qz-score" id="qz-res-score">—</div>
@@ -1636,7 +1643,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div style="font-size:10px;color:#9B8570;letter-spacing:2px;margin-bottom:5px;font-weight:bold" id="kc-step-label">第一步·定月将</div>
     <div class="card" style="margin-bottom:10px;font-size:15px;font-weight:bold;text-align:center;line-height:2;color:#1C0A00;min-height:60px;display:flex;align-items:center;justify-content:center;white-space:pre-line" id="kc-q">—</div>
     <div id="kc-opts" style="margin-bottom:8px"></div>
-    <div id="kc-explain" style="display:none;font-size:12px;color:#6B5040;margin-top:6px;padding:10px 12px;background:#EAE5F5;border-radius:10px;line-height:2;border:1px solid #CEC7E8;white-space:pre-line"></div>
+    <div id="kc-explain" style="display:none;font-size:12px;color:#6B5040;margin-top:6px;padding:10px 12px;background:var(--bg2);border-radius:10px;line-height:2;border:1px solid var(--bd1);white-space:pre-line"></div>
     <button class="btn btn-r" id="kc-next-btn" style="display:none;margin-top:10px" onclick="kcNextStep()">下一步 →</button>
   </div>
   <div id="kc-result" style="display:none;flex-direction:column;align-items:center;padding-top:20px">
@@ -1900,7 +1907,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="sec-t">四 课</div>
     <table class="zmq-sk" id="zm-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
     <div id="zm-opts" style="margin-top:12px"></div>
-    <div id="zm-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#F5F2FC;border-radius:8px;padding:10px 12px;border-left:3px solid #8878C0;line-height:1.8"></div>
+    <div id="zm-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
     <button id="zm-board-btn" onclick="zmShowBoard()" class="btn btn-d" style="display:none;margin-top:8px;font-size:12px">查看全盘 →</button>
     <button id="zm-next-btn" onclick="zmNext()" class="btn btn-r" style="display:none;margin-top:10px">下一题 →</button>
   </div>
@@ -1920,10 +1927,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="card" id="sc-info" style="font-size:12px;color:#9B8570;text-align:center;padding:8px 12px;margin-bottom:8px"></div>
     <div class="sec-t">四 课（含克贼关系）</div>
     <table class="zmq-sk" id="sc-sk-tbl"><tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr></table>
-    <div id="sc-step-label" style="font-size:13px;font-weight:bold;color:#8878C0;margin:12px 0 6px;letter-spacing:1px"></div>
+    <div id="sc-step-label" style="font-size:13px;font-weight:bold;color:var(--acc);margin:12px 0 6px;letter-spacing:1px"></div>
     <div id="sc-step-hint" style="font-size:11px;color:#9B8570;margin-bottom:8px;line-height:1.6"></div>
     <div id="sc-opts"></div>
-    <div id="sc-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#F5F2FC;border-radius:8px;padding:10px 12px;border-left:3px solid #8878C0;line-height:1.8"></div>
+    <div id="sc-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
     <button id="sc-next-btn" onclick="scNext()" class="btn btn-r" style="display:none;margin-top:10px">继续 →</button>
     <button id="sc-board-btn" onclick="scShowBoard()" class="btn btn-d" style="display:none;margin-top:8px;font-size:12px">查看全盘</button>
   </div>
@@ -1943,7 +1950,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="prog-row"><span class="prog-txt" id="el-tj-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-tj-pb" style="width:0%"></div></div></div>
     <div class="tj-card" id="tj-card"></div>
     <div id="tj-opts"></div>
-    <div id="tj-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#F5F2FC;border-radius:8px;padding:10px 12px;border-left:3px solid #8878C0;line-height:1.8"></div>
+    <div id="tj-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
   </div>
   <div id="ptj-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
     <div class="qz-score" id="tj-res-score"></div>
@@ -1978,7 +1985,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="prog-row"><span class="prog-txt" id="el-zs-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-zs-pb" style="width:0%"></div></div></div>
     <div class="tj-card" id="zs-card"></div>
     <div id="zs-opts"></div>
-    <div id="zs-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:#F5F2FC;border-radius:8px;padding:10px 12px;border-left:3px solid #8878C0;line-height:1.8"></div>
+    <div id="zs-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
   </div>
   <div id="pzs-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
     <div class="qz-score" id="zs-res-score"></div>
@@ -2008,13 +2015,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div id="pxfw-main">
     <div class="prog-row"><span class="prog-txt" id="el-wsd-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-wsd-pb" style="width:0%"></div></div></div>
     <div class="wsd-card">
-      <div id="wsd-tj" style="font-size:28px;font-weight:bold;color:#8878C0;letter-spacing:4px;margin-bottom:4px"></div>
+      <div id="wsd-tj" style="font-size:28px;font-weight:bold;color:var(--acc);letter-spacing:4px;margin-bottom:4px"></div>
       <div id="wsd-wx" style="font-size:11px;color:#9B8570;margin-bottom:8px"></div>
       <div><span id="wsd-badge" class="wsd-badge"></span></div>
       <div style="font-size:12px;color:#9B8570;margin-top:6px">此将处于此状态，主何断法？</div>
     </div>
     <div id="wsd-opts" style="display:grid;gap:8px"></div>
-    <div id="wsd-ex" style="display:none;background:#EAE5F5;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:13px;color:#1C0A00;line-height:1.7"></div>
+    <div id="wsd-ex" style="display:none;background:var(--bg2);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:13px;color:#1C0A00;line-height:1.7"></div>
   </div>
   <div id="pxfw-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
     <div class="qz-score" id="wsd-res-score"></div>
@@ -2068,7 +2075,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="xf-tbl-wrap">
       <table class="xf-tbl">
         <tr><th>地盘方位（固定）</th><th>戌</th><th>亥</th><th>子</th><th>丑</th><th>寅</th><th>卯</th><th>辰</th><th>巳</th><th>午</th><th>未</th><th>申</th><th>酉</th></tr>
-        <tr><td style="font-weight:bold;background:#EAE5F5">天盘落子（旋转）</td><td><strong>未</strong></td><td><strong>申</strong></td><td><strong>酉</strong></td><td><strong>戌</strong></td><td><strong>亥</strong></td><td><strong>子</strong></td><td><strong>丑</strong></td><td><strong>寅</strong></td><td><strong>卯</strong></td><td><strong>辰</strong></td><td><strong>巳</strong></td><td><strong>午</strong></td></tr>
+        <tr><td style="font-weight:bold;background:var(--bg2)">天盘落子（旋转）</td><td><strong>未</strong></td><td><strong>申</strong></td><td><strong>酉</strong></td><td><strong>戌</strong></td><td><strong>亥</strong></td><td><strong>子</strong></td><td><strong>丑</strong></td><td><strong>寅</strong></td><td><strong>卯</strong></td><td><strong>辰</strong></td><td><strong>巳</strong></td><td><strong>午</strong></td></tr>
       </table>
     </div>
 
@@ -2108,7 +2115,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="xf-tbl-wrap">
       <table class="xf-tbl">
         <tr><th>天将</th><th>贵人</th><th>天后</th><th>太阴</th><th>玄武</th><th>太常</th><th>白虎</th><th>天空</th><th>青龙</th><th>勾陈</th><th>六合</th><th>朱雀</th><th>螣蛇</th></tr>
-        <tr><td style="font-weight:bold;background:#EAE5F5">天盘地支</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td></tr>
+        <tr><td style="font-weight:bold;background:var(--bg2)">天盘地支</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td></tr>
       </table>
     </div>
 
@@ -2164,7 +2171,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
   <div class="zfl-prem">
     <b>前提：四课已布完</b><br>
-    下克上 = <b style="color:#8878C0">贼</b>（臣克君）　上克下 = <b style="color:#8B6914">克</b>（君克臣）<br>
+    下克上 = <b style="color:var(--acc)">贼</b>（臣克君）　上克下 = <b style="color:#8B6914">克</b>（君克臣）<br>
     阳日（甲丙戊庚壬）比<b>阳神</b>（子寅辰午申戌）<br>
     阴日（乙丁己辛癸）比<b>阴神</b>（丑卯巳未酉亥）
   </div>
@@ -2234,7 +2241,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="zfl-arrow">↓</div>
 
   <div class="zfl-sec">通用 · 相因推中末传</div>
-  <div class="zfl-prem" style="border-color:#8878C050">
+  <div class="zfl-prem" style="border-color:var(--acc-t50)">
     <b>初传</b>：由宗门规则定<br>
     <b>中传</b>：初传地支 → 地盘位置 → 该格天盘上神<br>
     <b>末传</b>：中传地支 → 地盘位置 → 该格天盘上神<br>
@@ -2246,8 +2253,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <span class="zfl-ptag" style="background:#7B1FA2">①伏吟</span>
     <span class="zfl-ptag" style="background:#6A1B9A">②返吟</span>
     <span class="zfl-ptag" style="background:#283593">③八专</span>
-    <span class="zfl-ptag" style="background:#8878C0">④元首</span>
-    <span class="zfl-ptag" style="background:#8878C0">⑤重审</span>
+    <span class="zfl-ptag" style="background:var(--acc)">④元首</span>
+    <span class="zfl-ptag" style="background:var(--acc)">⑤重审</span>
     <span class="zfl-ptag" style="background:#8B6914">⑥知一</span>
     <span class="zfl-ptag" style="background:#2E7D5A">⑦涉害</span>
     <span class="zfl-ptag" style="background:#6B5040">⑧遥克</span>
@@ -2646,17 +2653,17 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:8px">
     <div style="font-size:12px;line-height:2.3;color:#6B5040;font-family:monospace">
       <div>你说「哪天、几点」</div>
-      <div style="color:#CEC7E8">　　　↓</div>
+      <div style="color:var(--bd1)">　　　↓</div>
       <div>查节气 → 定月将（太阳位置）</div>
-      <div style="color:#CEC7E8">　　　↓</div>
+      <div style="color:var(--bd1)">　　　↓</div>
       <div>月将对准起念时辰 → 天盘转好盖上（摆盘完成）</div>
-      <div style="color:#CEC7E8">　　　↓</div>
+      <div style="color:var(--bd1)">　　　↓</div>
       <div>看干支头顶盖着什么 → 排出四课（现状照片）</div>
-      <div style="color:#CEC7E8">　　　↓</div>
-      <div style="color:#8878C0"><b>★ 找掐架的 → 三道筛子挑出导火索 → 推出初·中·末传</b></div>
-      <div style="color:#CEC7E8">　　　↓</div>
+      <div style="color:var(--bd1)">　　　↓</div>
+      <div style="color:var(--acc)"><b>★ 找掐架的 → 三道筛子挑出导火索 → 推出初·中·末传</b></div>
+      <div style="color:var(--bd1)">　　　↓</div>
       <div>给每个字贴天将标签、打空亡记号</div>
-      <div style="color:#CEC7E8">　　　↓</div>
+      <div style="color:var(--bd1)">　　　↓</div>
       <div>认准主角 → 看帮/压/粘/撞/作废 → 读出吉凶</div>
     </div>
   </div>
@@ -3240,7 +3247,7 @@ function _genKC3(){for(let i=0;i<300;i++){_genKC();if(['元首','重审','知一
 function startKC(){
   _genKC3();
   const{rg,rz,zs,day}=kcState;
-  document.getElementById('kc-info').innerHTML=`日干支：<b style="color:#8878C0">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:#8878C0">${zs}</b>时（${day?'昼':'夜'}）`;
+  document.getElementById('kc-info').innerHTML=`日干支：<b style="color:var(--acc)">${rg}${rz}</b> &nbsp;·&nbsp; 占时：<b style="color:var(--acc)">${zs}</b>时（${day?'昼':'夜'}）`;
   document.getElementById('kc-main').style.display='';
   document.getElementById('kc-result').style.display='none';
   _scrollPos['pkc']=0;show('pkc');kcShowStep();
@@ -3272,7 +3279,7 @@ function _renderBoard(targetEl){
   // 式盘：○和传位标记单独一行，地支行始终纯净
   const ch=c=>{
     const mark=c.kong||c.scPos
-      ?`<div style="font-size:9px;color:#8878C0;line-height:1.2;min-height:11px">${c.kong?'○':''}${c.scPos?`<b>${c.scPos}</b>`:''}</div>`
+      ?`<div style="font-size:9px;color:var(--acc);line-height:1.2;min-height:11px">${c.kong?'○':''}${c.scPos?`<b>${c.scPos}</b>`:''}</div>`
       :`<div style="min-height:11px"></div>`;
     return `<td class="lp-cell${c.scPos?' lp-sc':''}">
       <div class="lp-tj">${c.tj}</div>
@@ -3294,7 +3301,7 @@ function _renderBoard(targetEl){
   const skR=[...sk].reverse();
   const skH=`<div class="sec-t">四 课</div><table class="ske-tbl">
     <tr class="ske-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>
-    <tr>${skR.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:#8878C0"> ${k.s}</b><br><span style="font-size:9px;color:#8878C0;line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
+    <tr>${skR.map(k=>`<td><span class="lp-tj">${tjMap[k.s]||''}</span><br><span class="lp-dg">${getDG(k.s)}</span><b style="font-size:15px;color:var(--acc)"> ${k.s}</b><br><span style="font-size:9px;color:var(--acc);line-height:1">${kong.has(k.s)?'○':' '}</span></td>`).join('')}</tr>
     <tr>${skR.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
   </table>`;
   if(targetEl){
@@ -3470,7 +3477,7 @@ function _skTableHTML(sk,tp){
   const rows=skR.map(k=>{
     const keUp=_isKe(k.s,k.x),keDown=_isKe(k.x,k.s);
     const mark=keUp?'<span class="zmq-ke">↑克</span>':keDown?'<span class="zmq-xke">↓贼</span>':'';
-    return`<td><b style="font-size:15px;color:#8878C0">${k.s}</b>${mark}<hr style="border:none;border-top:1px solid #CEC7E8;margin:3px 0"><span style="font-size:13px;color:#1C0A00">${typeof k.x==='string'&&k.x.length===1?k.x:k.x}</span></td>`;
+    return`<td><b style="font-size:15px;color:var(--acc)">${k.s}</b>${mark}<hr style="border:none;border-top:1px solid var(--bd1);margin:3px 0"><span style="font-size:13px;color:#1C0A00">${typeof k.x==='string'&&k.x.length===1?k.x:k.x}</span></td>`;
   });
   return`<tr>${rows.join('')}</tr>`;
 }
@@ -3492,7 +3499,7 @@ function startZM(){
 function zmRender(){
   const{qs,idx}=zmState,q=qs[idx];
   document.getElementById('zm-prog-r').textContent=`${idx+1}/10`;
-  document.getElementById('zm-info').innerHTML=`日干支：<b style="color:#8878C0">${q.rg}${q.rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#8878C0">${q.yj.yj}</b>（${q.yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#8878C0">${q.zs}</b>时`;
+  document.getElementById('zm-info').innerHTML=`日干支：<b style="color:var(--acc)">${q.rg}${q.rz}</b> &nbsp;·&nbsp; 月将：<b style="color:var(--acc)">${q.yj.yj}</b>（${q.yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:var(--acc)">${q.zs}</b>时`;
   // 四课表
   const tbl=document.getElementById('zm-sk-tbl');
   tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`+_skTableHTML(q.sk,q.tp);
@@ -3563,7 +3570,7 @@ function startSC(){
 function scRender(){
   const{rg,rz,yj,zs,sk,cc,zc,mc,tp,mt}=kcState;
   document.getElementById('sc-prog-r').textContent=`步骤 ${scState.step+1}/3`;
-  document.getElementById('sc-info').innerHTML=`日干支：<b style="color:#8878C0">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#8878C0">${yj.yj}</b> &nbsp;·&nbsp; 占时：<b style="color:#8878C0">${zs}</b>时`;
+  document.getElementById('sc-info').innerHTML=`日干支：<b style="color:var(--acc)">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:var(--acc)">${yj.yj}</b> &nbsp;·&nbsp; 占时：<b style="color:var(--acc)">${zs}</b>时`;
   // 四课（含克贼标记）
   const tbl=document.getElementById('sc-sk-tbl');
   tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`+_skTableHTML(sk,tp);
@@ -3658,7 +3665,7 @@ function tjRender(){
   let opts,ans;
   if(q.typeA){
     // 见将名猜主象
-    card.innerHTML=`<div class="tj-name">${q.name}</div><div class="tj-attr">五行：${q.wx} &nbsp;|&nbsp; ${q.ji==='吉'?'<span style="color:#2E7D5A">吉将</span>':q.ji==='凶'?'<span style="color:#8878C0">凶将</span>':'中性将'}</div><div class="tj-attr" style="margin-top:4px">主象是？</div>`;
+    card.innerHTML=`<div class="tj-name">${q.name}</div><div class="tj-attr">五行：${q.wx} &nbsp;|&nbsp; ${q.ji==='吉'?'<span style="color:#2E7D5A">吉将</span>':q.ji==='凶'?'<span style="color:var(--acc)">凶将</span>':'中性将'}</div><div class="tj-attr" style="margin-top:4px">主象是？</div>`;
     ans=q.sx;
     const pool=shuffleArr(TJ_QUIZ.filter(t=>t.name!==q.name)).slice(0,3).map(t=>t.sx);
     opts=shuffleArr([ans,...pool]);
@@ -3776,7 +3783,7 @@ function startZL(){
   _genKC();
   zlState={answers:[],done:false};
   const{rg,rz,yj,zs,day,sk,tp}=kcState;
-  document.getElementById('zl-info').innerHTML=`日干支：<b style="color:#8878C0">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:#8878C0">${yj.yj}</b>（${yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:#8878C0">${zs}</b>时（${day?'昼':'夜'}）`;
+  document.getElementById('zl-info').innerHTML=`日干支：<b style="color:var(--acc)">${rg}${rz}</b> &nbsp;·&nbsp; 月将：<b style="color:var(--acc)">${yj.yj}</b>（${yj.zq}）&nbsp;·&nbsp; 占时：<b style="color:var(--acc)">${zs}</b>时（${day?'昼':'夜'}）`;
   const tbl=document.getElementById('zl-sk-tbl');
   tbl.innerHTML=`<tr class="zmq-hdr"><td>第四课</td><td>第三课</td><td>第二课</td><td>第一课</td></tr>`+_skTableHTML(sk,tp);
   // 事实摘要
@@ -3861,9 +3868,9 @@ function zlFinish(){
   const wrong=zlState.answers.filter(a=>!a.correct).length;
   const conc=document.getElementById('zl-conclusion');
   conc.style.display='block';
-  conc.style.background=wrong===0?'#2E7D5A20':'#8878C020';
-  conc.style.color=wrong===0?'#2E7D5A':'#8878C0';
-  conc.style.border=`2px solid ${wrong===0?'#2E7D5A':'#8878C0'}`;
+  conc.style.background=wrong===0?'#2E7D5A20':'var(--acc-t20)';
+  conc.style.color=wrong===0?'#2E7D5A':'var(--acc)';
+  conc.style.border=`2px solid ${wrong===0?'#2E7D5A':'var(--acc)'}`;
   conc.innerHTML=`判断结果：<b>${method}课</b><br>${wrong===0?'流程完全正确 🎉':`${wrong}步判断有误，对照上方解析复习`}`;
   document.getElementById('zl-board-btn').style.display='';
   saveWeakRecord('宗门流程',4,wrong);
@@ -4089,7 +4096,7 @@ function wsdAnswer(btn){
   document.querySelectorAll('#wsd-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
   if(chosen===ans)wsdState.correct++;else btn.classList.add('wrong');
   const ex=document.getElementById('wsd-ex');
-  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.tj}</b>（${q.wx}，${q.ji}，旺于${q.wang}）处于<b>${q.state}</b>状态<br>断法：<b style="color:#8878C0">${q.desc}</b>`;
+  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.tj}</b>（${q.wx}，${q.ji}，旺于${q.wang}）处于<b>${q.state}</b>状态<br>断法：<b style="color:var(--acc)">${q.desc}</b>`;
   ex.style.display='block';
   setTimeout(()=>{wsdState.idx++;if(wsdState.idx>=wsdState.qs.length){_wsdEnd();return;}wsdRender();window.scrollTo(0,0);},1600);
 }
@@ -4102,6 +4109,19 @@ function _wsdEnd(){
   document.getElementById('wsd-res-lv').textContent=pct>=90?'断法已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
   document.getElementById('wsd-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
 }
+
+// ══ 主题切换 ══
+function toggleTheme(){
+  const rd=document.body.classList.toggle('theme-red');
+  localStorage.setItem('lr_theme',rd?'red':'lav');
+  const tog=document.getElementById('theme-tog');
+  if(tog)tog.textContent=rd?'薰衣草':'朱雀红';
+}
+(function(){
+  if(localStorage.getItem('lr_theme')==='red')document.body.classList.add('theme-red');
+  const tog=document.getElementById('theme-tog');
+  if(tog)tog.textContent=document.body.classList.contains('theme-red')?'薰衣草':'朱雀红';
+})();
 
 // ══ 键盘快捷键 ══
 document.addEventListener('keydown',e=>{
