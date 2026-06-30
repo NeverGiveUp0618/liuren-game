@@ -4054,6 +4054,164 @@ function _detectMethod(st){
   if([sk[1].s,sk[2].s,sk[3].s].some(s=>_isKe(s,rg)||_isKe(rg,s)))return '遥克';
   return '昴星';
 }
+// 正确计算所有九宗门的三传
+function _compute3chuan(st){
+  const{rg,rz,yj,zs,tp,sk}=st;
+  const m=_detectMethod(st);
+  const yang=GAN_ALL.indexOf(rg)%2===0;
+  const toZ=x=>ZHI_ALL.includes(x)?x:(GAN_JI[x]||'子');
+  const ske=sk.filter(k=>_isKe(k.s,k.x)),xke=sk.filter(k=>_isKe(k.x,k.s));
+  const XING={'寅':'巳','巳':'申','申':'寅','丑':'戌','戌':'未','未':'丑','子':'卯','卯':'子','辰':'辰','午':'午','酉':'酉','亥':'亥'};
+  const dep=z=>['寅','申','巳','亥'].includes(z)?2:['子','午','卯','酉'].includes(z)?1:0;
+  const HE6={'甲':'己','乙':'庚','丙':'辛','丁':'壬','戊':'癸','己':'甲','庚':'乙','辛':'丙','壬':'丁','癸':'戊'};
+  const S3M={'亥':'卯','卯':'卯','未':'卯','寅':'午','午':'午','戌':'午','巳':'酉','酉':'酉','丑':'酉','申':'子','子':'子','辰':'子'};
+  let cc;
+  if(m==='元首'){cc=ske[0].s;}
+  else if(m==='重审'){cc=toZ(xke[0].x);}
+  else if(m==='知一'){
+    const c=ske.length?ske:xke;
+    const p=yang?(c.find(k=>k.n==='第一课')||c[0]):(c.find(k=>k.n==='第三课')||c[c.length-1]);
+    cc=ske.length?p.s:toZ(p.x);
+  }else if(m==='涉害'){
+    const cs=[...ske.map(k=>({z:k.s,k})),...xke.map(k=>({z:toZ(k.x),k}))];
+    const md=Math.max(...cs.map(c=>dep(c.z)));
+    const top=cs.filter(c=>dep(c.z)===md);
+    if(top.length===1){cc=top[0].z;}
+    else{const og=top.filter(c=>c.k.n==='第一课'||c.k.n==='第二课');cc=og.length?og[0].z:(yang?sk[0].s:sk[2].s);}
+  }else if(m==='遥克'){
+    const s2=[sk[1],sk[2],sk[3]];
+    const h=s2.filter(k=>_isKe(k.s,rg)),d=s2.filter(k=>_isKe(rg,k.s));
+    cc=h.length?h[0].s:d.length?d[0].s:tp[9];
+  }else if(m==='昴星'){cc=tp[9];}
+  else if(m==='别责'){
+    cc=yang?tp[ZHI_ALL.indexOf(GAN_JI[HE6[rg]]||'子')]:tp[ZHI_ALL.indexOf(S3M[rz]||'子')];
+  }else if(m==='八专'){
+    if(ske.length)cc=ske[0].s;else if(xke.length)cc=toZ(xke[0].x);
+    else cc=ZHI_ALL[(ZHI_ALL.indexOf(sk[0].s)+(yang?3:9))%12];
+  }else if(m==='伏吟'){
+    if(ske.length)cc=ske[0].s;else if(xke.length)cc=toZ(xke[0].x);
+    else cc=yang?sk[0].s:sk[2].s;
+  }else if(m==='返吟'){
+    if(ske.length)cc=ske[0].s;else if(xke.length)cc=toZ(xke[0].x);
+    else cc=XING[sk[2].s]||sk[2].s;
+  }else cc=tp[9];
+  if(!ZHI_ALL.includes(cc))cc=tp[9];
+  let zc,mc;
+  if(m==='伏吟'){zc=XING[cc]||cc;mc=XING[zc]||zc;}
+  else if(m==='返吟'){zc=ZHI_ALL[(ZHI_ALL.indexOf(cc)+6)%12];mc=ZHI_ALL[(ZHI_ALL.indexOf(zc)+6)%12];}
+  else if(m==='八专'||m==='别责'){zc=sk[0].s;mc=sk[0].s;}
+  else{zc=tp[ZHI_ALL.indexOf(cc)];mc=tp[ZHI_ALL.indexOf(zc)];}
+  return{cc,zc,mc};
+}
+
+// 生成推导过程HTML
+function _z9DeriveHTML(st){
+  const{rg,rz,yj,zs,tp,sk,cc,zc,mc}=st;
+  const m=_detectMethod(st);
+  const yang=GAN_ALL.indexOf(rg)%2===0;
+  const ske=sk.filter(k=>_isKe(k.s,k.x)),xke=sk.filter(k=>_isKe(k.x,k.s));
+  const toZ=x=>ZHI_ALL.includes(x)?x:(GAN_JI[x]||x);
+  const wxn=x=>WX_N[_wxOf(x)]||'?';
+  const hit=t=>`<span class="hit">${t}</span>`;
+  const S=t=>`<div class="z9-dstep">${t}</div>`;
+  const G=t=>`<div class="z9-deg" style="margin-top:6px">💡 ${t}</div>`;
+  const dep=z=>['寅','申','巳','亥'].includes(z)?'孟位':['子','午','卯','酉'].includes(z)?'仲位':'季位';
+  const chong=z=>ZHI_ALL[(ZHI_ALL.indexOf(z)+6)%12];
+  const XING={'寅':'巳','巳':'申','申':'寅','丑':'戌','戌':'未','未':'丑','子':'卯','卯':'子','辰':'辰','午':'午','酉':'酉','亥':'亥'};
+  const HE6={'甲':'己','乙':'庚','丙':'辛','丁':'壬','戊':'癸','己':'甲','庚':'乙','辛':'丙','壬':'丁','癸':'戊'};
+  const S3M={'亥':'卯','卯':'卯','未':'卯','寅':'午','午':'午','戌':'午','巳':'酉','酉':'酉','丑':'酉','申':'子','子':'子','辰':'子'};
+  const selfX=z=>['辰','午','酉','亥'].includes(z);
+  let s='';
+
+  if(m==='元首'){
+    const k=ske[0];
+    s+=S('① 逐格检查四课：');
+    sk.forEach(c=>{const up=_isKe(c.s,c.x),dn=_isKe(c.x,c.s);
+      s+=`<div style="font-size:11px;padding:1px 0 1px 18px">${up?`<b style="color:var(--acc)">✦ ${c.n}：${c.s}(${wxn(c.s)})克${c.x}(${wxn(c.x)}) ← 上克下</b>`:dn?`<span style="color:#2E7D5A">※ ${c.n}：下克上</span>`:`<span style="color:#9B8570">◦ ${c.n}：无克</span>`}</div>`;});
+    s+=S(`② 唯一上克下（${k.n}），无下克上 → ${hit('元首课')}`);
+    s+=S(`③ 初传 = ${k.n}上神 = ${hit(cc)}`);
+    s+=S(`④ 中传 = ${cc}落地盘对应天盘 = ${hit(zc)}；末传 = ${hit(mc)}`);
+  }else if(m==='重审'){
+    const k=xke[0];const rawX=k.x;const isDg=!ZHI_ALL.includes(rawX);const c=toZ(rawX);
+    s+=S('① 逐格检查四课：');
+    sk.forEach(ck=>{const up=_isKe(ck.s,ck.x),dn=_isKe(ck.x,ck.s);
+      s+=`<div style="font-size:11px;padding:1px 0 1px 18px">${dn?`<b style="color:var(--acc)">✦ ${ck.n}：${ck.x}(${wxn(ck.x)})克${ck.s}(${wxn(ck.s)}) ← 下克上</b>`:up?`<span style="color:#2E7D5A">※ 上克下</span>`:`<span style="color:#9B8570">◦ ${ck.n}：无克</span>`}</div>`;});
+    s+=S(`② 唯一下克上（${k.n}），无上克下 → ${hit('重审课')}`);
+    s+=S(`③ 初传 = 下神${rawX}${isDg?` = 天干，换寄宫 ${hit(c)}`:` = ${hit(c)}`}`);
+    s+=S(`④ 中传 = ${c}的天盘 = ${hit(zc)}；末传 = ${hit(mc)}`);
+  }else if(m==='知一'){
+    const allUp=ske.length>0&&xke.length===0;const cands=allUp?ske:xke;
+    s+=S(`① 四课有${cands.length}处克，方向一致（${allUp?'全为上克下':'全为下克上'}）→ 比用法`);
+    s+=S(`② 日干${rg}（${yang?'阳':'阴'}日）→ 取${yang?'阳地支（子寅辰午申戌）':'阴地支（丑卯巳未酉亥）'}：`);
+    cands.forEach(k=>{const tg=allUp?k.s:toZ(k.x);const ti=ZHI_ALL.indexOf(tg);const ty=ti%2===0;const win=yang===ty;
+      s+=`<div style="font-size:11px;padding:1px 0 1px 18px"><span style="color:${win?'var(--acc)':'#9B8570'}">${win?'✦ 选中':'◦ 淘汰'} ${k.n}：${tg}（${ty?'阳':'阴'}）</span></div>`;});
+    s+=S(`③ 初传 = ${hit(cc)}；中传 = ${hit(zc)}；末传 = ${hit(mc)}`);
+  }else if(m==='涉害'){
+    const cs=[...ske.map(k=>({z:k.s,k,dir:'上克'})),...xke.map(k=>({z:toZ(k.x),k,dir:'下克'}))];
+    s+=S(`① 四课混合克：上克下${ske.length}处 + 下克上${xke.length}处 → 涉害法`);
+    s+=S('② 各候选涉害深浅（孟最深 > 仲 > 季最浅）：');
+    cs.forEach(c=>{const dt=dep(c.z);const win=c.z===cc;
+      s+=`<div style="font-size:11px;padding:1px 0 1px 18px"><span style="color:${win?'var(--acc)':'#9B8570'}">${win?'✦ 最深':'◦'} ${c.k.n}（${c.dir}）→ ${c.z} · <b>${dt}</b></span></div>`;});
+    s+=S(`③ 取涉害最深者 → 初传 = ${hit(cc)}`);
+    s+=S(`④ 中传 = ${hit(zc)}；末传 = ${hit(mc)}`);
+    s+=G('孟（寅申巳亥）路途最长，遭遇克制最多，动能最大，优先发用');
+  }else if(m==='遥克'){
+    const s2=[sk[1],sk[2],sk[3]];
+    s+=S('① 四课上下无正克（已确认）');
+    s+=S(`② 日干${rg}(${wxn(rg)})，逐一对比第二/三/四课上神：`);
+    s2.forEach(k=>{const h=_isKe(k.s,rg),d=_isKe(rg,k.s);
+      s+=`<div style="font-size:11px;padding:1px 0 1px 18px">${h?`<b style="color:var(--acc)">✦ 蒿矢 ${k.n}：上神${k.s}(${wxn(k.s)})克日干${rg}(${wxn(rg)})</b>`:d?`<b style="color:#2E7D5A">✦ 弹射 ${k.n}：日干${rg}(${wxn(rg)})克上神${k.s}(${wxn(k.s)})</b>`:`<span style="color:#9B8570">◦ ${k.n}：${k.s}，无遥克</span>`}</div>`;});
+    const hasShroud=s2.some(k=>_isKe(k.s,rg));
+    s+=S(`③ ${hasShroud?hit('蒿矢格（优先）'):hit('弹射格')} → 初传 = ${hit(cc)}`);
+    s+=S(`④ 中传 = ${hit(zc)}；末传 = ${hit(mc)}`);
+  }else if(m==='昴星'){
+    s+=S('① 四课无正克，且无遥克 → 昴星法');
+    s+=S('② 找地盘「酉」位（ZHI_ALL第9位，固定位置）');
+    s+=S(`③ 地盘酉位天盘 = ${hit(cc)} → 初传`);
+    s+=S(`④ 中传 = ${hit(zc)}；末传 = ${hit(mc)}`);
+  }else if(m==='别责'){
+    s+=S('① 四课有重复（实为三课），且无克无遥克 → 别责法');
+    if(yang){
+      const hg=HE6[rg];const hz=GAN_JI[hg]||'?';
+      s+=S(`② 阳日${rg}：六合天干 = ${hg} → 寄宫地支 = ${hz}`);
+      s+=S(`③ 地盘${hz}位天盘 = ${hit(cc)} → 初传`);
+    }else{
+      const mid=S3M[rz]||'?';
+      s+=S(`② 阴日，日支${rz} → 三合取帝旺位 = ${mid}`);
+      s+=S(`③ 地盘${mid}位天盘 = ${hit(cc)} → 初传`);
+    }
+    s+=S(`④ 中传 = 末传 = 干上神 = ${hit(zc)}`);
+  }else if(m==='八专'){
+    s+=S(`① 日干${rg}寄宫 = 日支${rz} → 干支同位，仅两课`);
+    const haske=ske.length||xke.length;
+    if(haske){s+=S(`② 有克 → 贼克法取初传 = ${hit(cc)}`);}
+    else{
+      const base=sk[0].s;const path=[base];
+      for(let i=1;i<=3;i++)path.push(ZHI_ALL[(ZHI_ALL.indexOf(path[path.length-1])+(yang?1:11))%12]);
+      s+=S(`② 无克 → ${yang?'阳日':'阴日'}从干上神${base}${yang?'顺':'逆'}数3位：${path.join('→')}`);
+    }
+    s+=S(`③ 初传 = ${hit(cc)}；中传 = 末传 = 干上神 = ${hit(zc)}`);
+  }else if(m==='伏吟'){
+    s+=S(`① 月将${yj.yj} = 占时${zs} → 天地盘完全重合 → 伏吟课`);
+    const haske=ske.length||xke.length;
+    if(haske){s+=S(`② 有克 → 贼克法取初传 = ${hit(cc)}`);}
+    else{s+=S(`② 无克 → ${yang?'阳日取干上神（第一课）':'阴日取支上神（第三课）'} = ${hit(cc)}`);}
+    const x1=XING[cc]||cc,x2=XING[x1]||x1;
+    s+=S(`③ 中传 = ${cc}所刑${selfX(cc)?'（自刑）':''} = ${hit(x1)}；末传 = ${x1}所刑${selfX(x1)?'（自刑）':''} = ${hit(x2)}`);
+    s+=G('天地盘冻结，无法常规推演，只能用「刑」来撬动三传');
+  }else if(m==='返吟'){
+    s+=S(`① 月将${yj.yj}与占时${zs}相冲 → 天地盘对冲 → 返吟课`);
+    const haske=ske.length||xke.length;
+    if(haske){s+=S(`② 有克 → 贼克/涉害法取初传 = ${hit(cc)}`);}
+    else{s+=S(`② 无克（井栏射）→ 支上神${sk[2].s}的刑位 = ${hit(cc)}`);}
+    s+=S(`③ 中传 = ${cc}冲位 = ${hit(chong(cc))}；末传 = ${zc}冲位 = ${hit(chong(zc))}`);
+    s+=G(`返吟三传 ${cc}→${zc}→${mc}，冲来冲去，反复无常`);
+  }
+
+  if(!s)return'';
+  return`<div class="z9-derive"><div class="z9-derive-hd">📐 本案推导（${m}课）</div>${s}</div>`;
+}
+
 function z9Example(key,btn){
   const body=btn.closest('.z9-body');
   let ex=body.querySelector('.z9-ex');
@@ -4063,7 +4221,11 @@ function z9Example(key,btn){
     let found=false;
     for(let i=0;i<3000;i++){_genKC();if(_detectMethod(kcState)===key){found=true;break;}}
     if(!found){ex.innerHTML='<div style="text-align:center;font-size:11px;color:#9B8570;padding:8px 0">未找到，请重试</div>';return;}
+    const corr=_compute3chuan(kcState);
+    kcState.cc=corr.cc;kcState.zc=corr.zc;kcState.mc=corr.mc;
     _renderBoard(ex);
+    const dh=_z9DeriveHTML(kcState);
+    if(dh){const dd=document.createElement('div');dd.innerHTML=dh;ex.appendChild(dd);}
   },0);
 }
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
