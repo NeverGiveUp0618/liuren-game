@@ -170,6 +170,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .z9-row b{color:#1C0A00}
 .z9-row .hit{color:var(--acc);font-weight:bold}
 .z9-mn{margin-top:8px;background:var(--bg2);border-radius:7px;padding:7px 10px;font-size:11px;color:#8B6914;line-height:1.7;border-left:3px solid var(--acc)}
+.z9-derive{margin-top:10px;border-top:1px dashed var(--bd1);padding-top:10px}
+.z9-derive-hd{font-size:11px;font-weight:bold;color:#2E7D5A;letter-spacing:.5px;margin-bottom:6px}
+.z9-dstep{font-size:12px;color:#3D2010;line-height:1.85;padding-left:16px;position:relative;margin-bottom:4px}
+.z9-dstep::before{content:"▸";position:absolute;left:2px;color:#2E7D5A;font-weight:bold}
+.z9-deg{background:#F0F7F4;border:1px solid #B8D9BC;border-radius:8px;padding:7px 10px;margin-top:8px;font-size:11px;color:#1C0A00;line-height:1.9}
 .z9-ex{margin-top:10px;border-top:1px solid var(--bg2);padding-top:10px}
 .z9-ex-hd{font-size:11px;color:#9B8570;text-align:center;margin-bottom:4px}
 .z9-ex-mt{font-size:11px;color:#8B6914;text-align:center;margin-bottom:8px;padding:4px 8px;background:var(--bg2);border-radius:6px}
@@ -1733,6 +1738,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>取法：</b>那个克处的<span class="hit">上神</span>就是初传；中传=初传落地盘上的天盘；末传同理</div>
       <div class="z9-row"><b>象意：</b>上克下如君令臣，顺正之象，事多顺遂</div>
       <div class="z9-mn">记：唯一一个上神胜出，当仁不让发用</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：逐格检查四课（四格），看每格上神与下神的五行是否相克（木克土、土克水、水克火、火克金、金克木）</div>
+        <div class="z9-dstep">第②步：找到唯一一处「上神五行 → 克 → 下神五行」，确认其余三格均无下克上</div>
+        <div class="z9-dstep">第③步：取该格的<span class="hit">上神</span>直接作初传</div>
+        <div class="z9-dstep">第④步：中传 = 查初传在地盘的位置 → 看该位置天盘是什么地支；末传同理再推一步</div>
+        <div class="z9-deg">💡 <b>举例</b>：四课第一格「午（上）/ 子（下）」，午火克子水 = 上克下，且其他格无克 → <b>元首课</b>，初传 = 午</div>
+      </div>
     </div>
   </div>
 
@@ -1750,6 +1763,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>取法：</b>那个克处的<span class="hit">下神</span>为初传；若下神是天干（日干），取日干寄宫地支</div>
       <div class="z9-row"><b>象意：</b>臣克君，需重新审视，事多反复、情况复杂</div>
       <div class="z9-mn">记：下神爬上来发用，事情有点反常</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：逐格检查四课，找到「下神五行 → 克 → 上神五行」的格（即下克上）</div>
+        <div class="z9-dstep">第②步：确认全部四课中没有任何「上克下」（有则须用涉害法）</div>
+        <div class="z9-dstep">第③步：取该格的<span class="hit">下神</span>为初传；若下神是天干（日干本身），则取日干的寄宫地支代替</div>
+        <div class="z9-dstep">第④步：中末传照常从地盘天盘顺推</div>
+        <div class="z9-deg">💡 <b>举例</b>：第三课「丁（上·火）/ 亥（下·水）」，亥水克丁火 = 下克上，且无上克下 → <b>重审课</b>，初传 = 亥</div>
+      </div>
     </div>
   </div>
 
@@ -1768,6 +1789,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>取法（下克上多处）：</b>阳日取<span class="hit">第一课下神</span>，阴日取<span class="hit">第三课下神</span></div>
       <div class="z9-row" style="color:#9B8570;font-size:11px">阳日：甲丙戊庚壬；阴日：乙丁己辛癸</div>
       <div class="z9-mn">记：多中取一，阳干跟着日干走，阴日跟着日支走</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤（比用法）</div>
+        <div class="z9-dstep">第①步：确认四课有多处克，且方向相同（全是上克下，或全是下克上）</div>
+        <div class="z9-dstep">第②步：判断日干阴阳：甲丙戊庚壬 = 阳日；乙丁己辛癸 = 阴日</div>
+        <div class="z9-dstep">第③步：阳日 → 多个候选中取<span class="hit">属阳的地支</span>（子寅辰午申戌）；阴日 → 取<span class="hit">属阴的地支</span>（丑卯巳未酉亥）</div>
+        <div class="z9-dstep">第④步：筛选后若仅剩一个 → 即为初传；若仍有多个同阴同阳，进入涉害法</div>
+        <div class="z9-deg">💡 <b>举例</b>：壬日（阳），两处上克下，候选上神为「午（阳·火）」和「卯（阴·木）」→ 壬日取阳地支 → 初传 = 午（卯阴被淘汰）</div>
+      </div>
     </div>
   </div>
 
@@ -1786,6 +1815,23 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>深浅规则：</b>孟（寅申巳亥）> 仲（子午卯酉）> 季（辰戌丑未），深者优先</div>
       <div class="z9-row"><b>相等时：</b>见机格（孟上神）> 察微格（仲上神），或阳日取干上/阴日取支上</div>
       <div class="z9-mn">记：走得越远、克得越多，说明你涉险越深，取最深那条路</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤（涉害法是九宗门中最复杂的，耐心看完）</div>
+        <div class="z9-dstep">第①步：四课中<b>既有上克下又有下克上</b>（混合克），或比用法后仍有多个同阴同阳候选无法取舍</div>
+        <div class="z9-dstep">第②步：列出所有参与克的候选上神（上克下取上神，下克上取下神）</div>
+        <div class="z9-dstep">第③步：判断各候选在地盘的「位置类型」（这决定了"涉害深度"）：<br>
+          　　<span class="hit">孟位（寅申巳亥）= 涉害最深</span> — 离老家最远，路途最长，遭遇克制最多<br>
+          　　<span style="color:#2E7D5A">仲位（子午卯酉）= 涉害居中</span><br>
+          　　<span style="color:#9B8570">季位（辰戌丑未）= 涉害最浅</span> — 离老家最近，经历最少</div>
+        <div class="z9-dstep">第④步：取<span class="hit">涉害最深</span>的候选为初传（孟 > 仲 > 季）</div>
+        <div class="z9-dstep">第⑤步：若多个候选同位（如两个都在孟），依次用平局规则：<br>
+          　　① <b>见机格</b>：候选落在第一/二课（日干上方）→ 优先取<br>
+          　　② <b>察微格</b>：候选落在第三/四课（日支上方）→ 次取<br>
+          　　③ <b>复等格</b>（仍相等）：阳日取干上神，阴日取支上神</div>
+        <div class="z9-deg">💡 <b>为何孟位最深？</b>把每个候选想象成从"老家"（本宫）出发旅行的人——寅申巳亥（孟）路途最长，沿途遇到被五行克制的地方最多，所以"涉害"最深，动能最大，最有资格发用。<br>
+          <b>举例①</b>：混克候选有「寅（孟，第一课）」和「辰（季，第三课）」→ 孟 > 季 → 初传 = 寅<br>
+          <b>举例②（平局）</b>：候选「寅（孟，第一课·日干上）」和「申（孟，第三课·日支上）」→ 同是孟，但寅在日干上 → 见机格 → 初传 = 寅</div>
+      </div>
     </div>
   </div>
 
@@ -1804,6 +1850,20 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>弹射（日干克上神）：</b>「日干打出去」→ 取<span class="hit">被克的上神</span>为初传</div>
       <div class="z9-row"><b>多处遥克：</b>按知一/涉害的比用法处理</div>
       <div class="z9-mn">记：没打到面前，隔空喊话——蒿矢是被人打，弹射是自己射出去</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：先确认四课上下之间<b>无任何正克</b>（每课上下五行相生、比和或无关系）</div>
+        <div class="z9-dstep">第②步：取出日干的五行属性（甲乙=木 · 丙丁=火 · 戊己=土 · 庚辛=金 · 壬癸=水）</div>
+        <div class="z9-dstep">第③步：逐一对照<b>第二、三、四课</b>的上神（天盘地支）五行：<br>
+          　　□ 若上神五行 → 克 → 日干五行 → 标记为「<span class="hit">蒿矢候选</span>」（外力来打我）<br>
+          　　□ 若日干五行 → 克 → 上神五行 → 标记为「<span style="color:#2E7D5A">弹射候选</span>」（我主动出击）<br>
+          　　□ 注意：<b>第一课上神不参与</b>，它是日干的直接上神，属正克范围</div>
+        <div class="z9-dstep">第④步：<span class="hit">优先取蒿矢</span>（被打更紧迫）；若无蒿矢，则取弹射。取对应上神为初传</div>
+        <div class="z9-dstep">第⑤步：若多处同类遥克，再按比用法（阴阳相比）筛一次</div>
+        <div class="z9-deg">💡 <b>蒿矢举例</b>：甲日（木），四课无正克。检查2/3/4课上神：第三课上神 = 申（金），金克木 = 申克甲日干 → <b>蒿矢格</b>，初传 = 申<br>
+          <b>弹射举例</b>：甲日（木），无蒿矢候选。第二课上神 = 未（土），木克土 = 甲克未 → <b>弹射格</b>，初传 = 未<br>
+          <b>联想记忆</b>：蒿矢 = 用芦苇秆射我（力量弱，伤害轻，但主动攻我）；弹射 = 我用泥弹打出去（主动出击，力也不强）</div>
+      </div>
     </div>
   </div>
 
@@ -1822,6 +1882,15 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>刚日（阳干）：</b>从酉上取，祸从外起；<b>柔日（阴干）：</b>从酉上取，祸从内起</div>
       <div class="z9-row"><b>象意：</b>四课死气沉沉，让西方肃杀之神出面决断</div>
       <div class="z9-mn">记：实在没得选，就让酉位（从魁）出来担大旗</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：逐一核查——四课无正克（上下不克）→ 遥克也没有（日干与各课上神不克）→ 方才启用昴星法</div>
+        <div class="z9-dstep">第②步：在地盘上定位「酉」的固定位置（地盘各支永远不动，酉就是正西方那格）</div>
+        <div class="z9-dstep">第③步：看天盘中，位于「地盘酉位」正上方的地支 → 即为初传</div>
+        <div class="z9-dstep">第④步：中末传照常从天地盘顺推</div>
+        <div class="z9-deg">💡 <b>为何取酉？</b>昴星宿（二十八宿）居于西方酉位，象征肃杀决断之气。四课死寂无克，系统被迫借西方金气强行启动三传。<br>
+          <b>举例</b>：当前天地盘中，地盘酉位正上方的天盘地支是「午」→ 昴星课，初传 = 午</div>
+      </div>
     </div>
   </div>
 
@@ -1840,6 +1909,21 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>阴日取法：</b>找日支三合局的<span class="hit">中间一支</span>（如日支巳→巳酉丑三合，取酉），取其地盘地支为初传；中末传取干上神</div>
       <div class="z9-row" style="color:#9B8570;font-size:11px">六合：甲己·乙庚·丙辛·丁壬·戊癸；三合：寅午戌·申子辰·巳酉丑·亥卯未</div>
       <div class="z9-mn">记：四课残缺，靠「合」字来牵线找初传</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：确认四课有重复（如第一课=第三课），实际只有三课，且无克、无遥克</div>
+        <div class="z9-dstep">第②步（阳日）：<br>
+          　　① 找日干的「天干六合」对应天干（甲→己·乙→庚·丙→辛·丁→壬·戊→癸）<br>
+          　　② 找该天干的「寄宫地支」（己→未·庚→申·辛→酉·壬→亥·癸→丑·甲→寅·乙→卯·丙丁→午·戊→戌）<br>
+          　　③ 看地盘该寄宫位置上的<span class="hit">天盘地支</span> → 初传</div>
+        <div class="z9-dstep">第③步（阴日）：<br>
+          　　① 找日支所在「三合局」（寅午戌·申子辰·巳酉丑·亥卯未）<br>
+          　　② 取三合局中<span class="hit">居中的那支</span>（寅午戌→午；申子辰→子；巳酉丑→酉；亥卯未→卯）<br>
+          　　③ 看地盘该地支位置上的天盘地支 → 初传</div>
+        <div class="z9-dstep">第④步：中传和末传均取<span class="hit">日上神</span>（固定，不再推演）</div>
+        <div class="z9-deg">💡 <b>阳日举例</b>：丙日（阳），丙合辛，辛寄宫酉 → 查地盘酉位天盘 = X → 初传 = X，中末传 = 丙上神<br>
+          <b>阴日举例</b>：丁日（阴），日支亥 → 亥卯未三合，居中是卯 → 查地盘卯位天盘 = X → 初传 = X，中末传 = 丁上神</div>
+      </div>
     </div>
   </div>
 
@@ -1859,6 +1943,18 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>中末传：</b>均取日上神（不管有没有克）</div>
       <div class="z9-row"><b>象意：</b>干支混杂同位，阴阳不分，主私秘淫乱、事情不清</div>
       <div class="z9-mn">记：两课局面，没克就顺（阳）逆（阴）数三个找初传</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：确认日干寄宫地支 = 日支（如甲寄寅·壬寄子·庚寄申·戊寄戌·丙寄午等），四课因此只剩两课有效</div>
+        <div class="z9-dstep">第②步：检查这两课是否有克（上克下或下克上）<br>
+          　　<b>有克</b> → 按贼克法（元首/重审）正常取初传；中末传均取日上神（固定）</div>
+        <div class="z9-dstep">第③步（无克·阳日）：从<span class="hit">日上神</span>地支出发，<b>顺时针数3位</b>（子→丑→寅→卯方向）→ 到达的地支为初传</div>
+        <div class="z9-dstep">第④步（无克·阴日）：从<span class="hit">支上神</span>地支出发，<b>逆时针数3位</b>（卯→寅→丑→子方向）→ 到达的地支为初传</div>
+        <div class="z9-dstep">第⑤步：中传 = 日上神，末传 = 日上神（中末均同，固定为日上神）</div>
+        <div class="z9-deg">💡 <b>举例（无克·阳日）</b>：甲寅日（阳），日上神 = 午<br>
+          顺时针数3位：午→未(1)→申(2)→酉(3) → 初传 = 酉<br>
+          中传 = 午（日上神），末传 = 午（日上神）</div>
+      </div>
     </div>
   </div>
 
@@ -1878,6 +1974,22 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>刑序：</b>寅刑巳→巳刑申→申刑寅；丑刑戌→戌刑未→未刑丑；子刑卯→卯刑子；辰午酉亥<b>自刑</b>（遇自刑则取日辰并用）</div>
       <div class="z9-row"><b>象意：</b>万物潜伏不动，主隐匿、事不明、静中难动</div>
       <div class="z9-mn">记：天地合体不动，只能靠「刑」来撬动三传</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：确认月将 = 占时地支（如月将午、占时也是午时）→ 天地盘完全重合，各支都回到本位</div>
+        <div class="z9-dstep">第②步：检查四课是否有克<br>
+          　　<b>有克</b> → 按贼克法（元首/重审）取初传；但中末传须改用刑法（见第④步）</div>
+        <div class="z9-dstep">第③步（无克时）：阳日取<span class="hit">干上神</span>（第一课上神）为初传；阴日取<span class="hit">支上神</span>（第三课上神）为初传</div>
+        <div class="z9-dstep">第④步：用刑序推中末传（初传刑→中传；中传刑→末传）：<br>
+          　　寅→巳→申→寅（三角循环）<br>
+          　　丑→戌→未→丑（三角循环）<br>
+          　　子→卯→子（对刑循环）<br>
+          　　辰·午·酉·亥 = 自刑（自己刑自己，此时取日干上神与支上神并用为杜传）</div>
+        <div class="z9-deg">💡 <b>举例（无克·阳日）</b>：庚申日，月将申·占时申时 → 伏吟！<br>
+          庚寄宫申，干上神 = 申（天地盘重合时，申位上的天盘也是申）<br>
+          初传 = 申 → 申刑寅 → 中传 = 寅 → 寅刑巳 → 末传 = 巳<br>
+          <b>为何用刑？</b>天地盘冻结，一切静止，只有「刑」这种强制撕裂的力量才能打破静止，撬动三传流转。</div>
+      </div>
     </div>
   </div>
 
@@ -1896,6 +2008,21 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="z9-row"><b>无克（井栏射，丁己辛+丑未日）：</b>取<span class="hit">支上神所刑地支</span>为初传；中传=初传冲，末传=中传刑</div>
       <div class="z9-row"><b>象意：</b>来去相冲，反复无常，主事情不定、往返变化</div>
       <div class="z9-mn">记：天地对冲，三传也跟着「冲来冲去」反复</div>
+      <div class="z9-derive">
+        <div class="z9-derive-hd">📐 推导步骤</div>
+        <div class="z9-dstep">第①步：确认月将与占时相冲（如月将子·占时午时，子午相冲）→ 天盘与地盘各支全部对调到冲位</div>
+        <div class="z9-dstep">第②步：检查四课是否有克<br>
+          　　<b>有克</b> → 按贼克/涉害法正常取初传（方法同前）</div>
+        <div class="z9-dstep">第③步（有克时）中末传固定公式：<br>
+          　　中传 = 初传的<span class="hit">冲位地支</span>（子冲午·丑冲未·寅冲申·卯冲酉·辰冲戌·巳冲亥）<br>
+          　　末传 = 中传的冲位 → 又回到初传对面，来回反复</div>
+        <div class="z9-dstep">第④步（无克时·井栏射）：仅限丁己辛日+丑未时出现<br>
+          　　取<span class="hit">支上神所刑</span>之地支为初传；中传 = 初传冲；末传 = 中传刑</div>
+        <div class="z9-deg">💡 <b>举例（有克）</b>：壬日，返吟课，克取法得初传 = 午<br>
+          中传 = 午冲 = 子 → 末传 = 子冲 = 午（又回来了！）<br>
+          三传：午→子→午，来回横跳 → 这正是"返吟"反复无常的象意<br>
+          <b>记忆口诀</b>：返吟三传冲来冲去，事情就像乒乓球，一来一回定不了</div>
+      </div>
     </div>
   </div>
 
