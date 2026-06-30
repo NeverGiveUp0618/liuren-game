@@ -337,8 +337,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
   </div>
   <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">💡</div><div><div class="mcard-name">大六壬底层逻辑 <span style="font-size:10px;background:var(--acc);color:#fff;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:middle">重要</span></div><div class="mcard-desc">四层结构白话讲解 · 读懂六壬运作原理</div></div></div>
+    <div class="mcard-head"><div class="mcard-icon">💡</div><div><div class="mcard-name">六壬运作原理·白话入门 <span style="font-size:10px;background:var(--acc);color:#fff;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:middle">重要</span></div><div class="mcard-desc">六层结构大白话 · 零基础读懂六壬运作</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pbdl')">进入阅读 →</button></div>
+  </div>
+  <div class="mcard">
+    <div class="mcard-head"><div class="mcard-icon">🔬</div><div><div class="mcard-name">六壬算法逻辑梳理·进阶 <span style="font-size:10px;background:var(--acc);color:#fff;border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:middle">重要</span></div><div class="mcard-desc">五阶段完整拆解 · 九宗门到应期推算全流程</div></div></div>
+    <div class="mcard-btns"><button class="btn btn-r" onclick="show('pllj')">进入阅读 →</button></div>
   </div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">📚</div><div><div class="mcard-name">速查参考</div><div class="mcard-desc">心法 · 起课表 · 象法类象 · 宗门流程</div></div></div>
@@ -2444,7 +2448,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <!-- ======== 底层逻辑·大白话 ======== -->
 <div id="pbdl" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">大六壬底层逻辑</div></div>
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">六壬运作原理·白话入门</div></div>
 
   <div class="m5-jue">你告诉它「哪天、几点」起的念头，它先摆出一张盘，再从盘里找出「导火索」，顺着导火索推出「起因→经过→结果」，最后给每个字贴上含义，读出吉凶成败。就这么一条流水线。</div>
 
@@ -2675,6 +2679,502 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 ③ 三道筛子，是从一堆掐架里挑出"那个导火索"的办法。
 ④ 天将和神煞，是给每个字贴上含义的便利贴。</div>
 
+</div>
+
+<!-- ======== 六壬算法逻辑梳理·进阶 ======== -->
+<div id="pllj" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">六壬算法逻辑梳理·进阶</div></div>
+  <div class="xf-wrap">
+
+    <div class="xf-title">大六壬整体逻辑算法梳理</div>
+    <p class="xf-lead">以程序算法视角完整拆解大六壬推演引擎：五个基础阶段构建从起盘到断局的完整流水线，五个高阶模块深入异常处理、类神并发、个性化密钥、神煞扩展与三式联动。</p>
+
+    <!-- ===== 导读 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">导读：五个进阶阶段总览 <span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">在大六壬的底层数据结构与基础运行流水线搭建完毕后，进阶学习可以像推进项目开发一样，按以下顺序逐步完善算法的边缘测试、变量权重与最终输出模块：</p>
+        <ul class="xf-ul">
+          <li><strong>第一阶段 · 边界测试</strong>（Edge Cases）——当四课中出现多克、零克、数据缺失或盘面死锁时，系统如何依次调用比用、涉害、遥克、昴星、别责/八专、伏吟/返吟等算法分支，保证永远输出唯一三传。</li>
+          <li><strong>第二阶段 · 权重系统</strong>——引入月建与日辰作为全局环境变量，叠加十二长生状态机，计算盘面每个地支的能量级别；同时处理空亡与刑冲克害带来的干扰与损耗。</li>
+          <li><strong>第三阶段 · 类象数据库</strong>（Object Mapping）——把抽象的干支符号翻译成具体人类社会事件：地支是物理实体（名词），天将是属性标签（形容词），两者拼接输出具体象意。</li>
+          <li><strong>第四阶段 · 设计模式</strong>（课格）——古人从海量盘面总结出高频结构，认出课格即可跳过逐点分析，直接调用缓存结论。</li>
+          <li><strong>第五阶段 · 断局输出</strong>（Output Generation）——确定视觉焦点（先锋门），结算初传与日干的交互关系，最后推算应期时间戳。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xf-part">基础五阶段</div>
+
+    <!-- ===== 阶段一 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">阶段一 · 边界测试 · 九宗门完整算法 <span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">当"贼克法"（四课中仅有一克）失效时，系统按严格优先级依次调用后续分支。以下是完整的六大异常处理机制：</p>
+
+        <div class="xf-step">一、比用法（极性过滤算法）</div>
+        <p class="xf-p"><strong>触发条件：</strong>四课中出现两重、三重或四重克，无法直接判定初传。</p>
+        <p class="xf-p"><strong>底层逻辑：</strong>与日干阴阳属性相同的克，对我产生的影响最直接。</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>日干阴阳</th><th>取哪个克为初传</th><th>典型例子</th></tr>
+            <tr><td>阳日（甲丙戊庚壬）</td><td>阳地支（子寅辰午申戌）</td><td>甲日多克，取属阳者</td></tr>
+            <tr><td>阴日（乙丁己辛癸）</td><td>阴地支（丑卯巳未酉亥）</td><td>丁日多克，取属阴者</td></tr>
+          </table>
+        </div>
+        <p class="xf-p">中传与末传：初传确定后，中末传恢复默认（查天地盘落位顺延）。</p>
+
+        <div class="xf-step">二、涉害法（路径遍历与深度计算）</div>
+        <p class="xf-p"><strong>触发条件：</strong>比用法过滤后仍有两个以上阴阳属性相同的地支。</p>
+        <p class="xf-p"><strong>底层逻辑：</strong>"涉害"意为跋山涉水经历克害——经历磨难越多，动能越大。各候选地支从其地盘老家（本位）出发，顺时针走到天盘当前位置，统计沿途被克次数，受克最深者取为初传。</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>地支位置</th><th>涉害深度</th><th>备注</th></tr>
+            <tr><td>孟位（寅申巳亥）</td><td>最深（三至四重克）</td><td>动能最大，优先取</td></tr>
+            <tr><td>仲位（子午卯酉）</td><td>中等（两重克）</td><td>次选</td></tr>
+            <tr><td>季位（辰戌丑未）</td><td>最浅（一重克）</td><td>末选</td></tr>
+          </table>
+        </div>
+        <p class="xf-p"><strong>二次防死锁机制（见机与察微）：</strong>若两候选克数完全相同：</p>
+        <ul class="xf-ul">
+          <li><strong>见机：</strong>落在第一/二课（日干之上）者为初传</li>
+          <li><strong>察微：</strong>落在第三/四课（日支之上）者为初传</li>
+          <li><strong>缀瑕格：</strong>若两者同时临干或同时临支，阳日从地盘"寅"顺时针寻找，阴日从地盘"申"逆时针寻找，先遇者为初传</li>
+        </ul>
+
+        <div class="xf-step">三、遥克法（全局越权扫描）</div>
+        <p class="xf-p"><strong>触发条件：</strong>四课上下完全无克（相生或比和），贼克、比用、涉害全部失效。</p>
+        <p class="xf-p"><strong>底层逻辑：</strong>内部无矛盾，向外部找干涉——跳出四课的上下对应，跨层级查询。</p>
+        <ul class="xf-ul">
+          <li><strong>扫描对象：</strong>第二、三、四课的天盘地支</li>
+          <li><strong>神机（蒿矢）：</strong>这三个天盘地支中有克日干者，取为初传（外力来搞我）</li>
+          <li><strong>鬼觉（弹射）：</strong>若无克日干者，则看日干克哪个天盘地支，取受克者为初传（我主动出击）</li>
+          <li><strong>多重遥克：</strong>再次调用比用法（极性过滤）</li>
+        </ul>
+
+        <div class="xf-step">四、昴星法（绝对零度下的强制触发）</div>
+        <p class="xf-p"><strong>触发条件：</strong>四课无克，且无任何遥克，系统陷入绝对零度的死寂。</p>
+        <p class="xf-p"><strong>底层逻辑：</strong>借用宇宙固定物理属性——"酉"是日落之地、阴阳交界之门（昴星在此），强行提取状态。</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>日干阴阳</th><th>操作</th><th>取值</th></tr>
+            <tr><td>阳日（仰视向外求）</td><td>去地盘找"酉"位</td><td>地盘酉上顶着的天盘地支为初传</td></tr>
+            <tr><td>阴日（俯视向内求）</td><td>去天盘找"酉"位</td><td>天盘酉落在的地盘地支为初传</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">五、别责法 与 八专法（数据缺失处理）</div>
+        <p class="xf-p"><strong>触发条件：</strong>第一课与第三课重合，四课缩减为三课甚至两课。</p>
+        <p class="xf-p"><strong>别责法（三课且无克）：</strong></p>
+        <ul class="xf-ul">
+          <li>阳日：找日干的"五合"天干的寄宫，取其上神为初传（甲与己合，取己寄宫未的上神）</li>
+          <li>阴日：找日支所在"三合局"，取日支前一位合神为初传（亥卯未三合，亥前一位为戌）</li>
+        </ul>
+        <p class="xf-p"><strong>八专法（两课且无克）：</strong>干支同位（如甲寅日），信息极度坍塌。</p>
+        <ul class="xf-ul">
+          <li>阳日：从第一课天盘顺时针数三个位置，取该地支为初传</li>
+          <li>阴日：从第一课天盘逆时针数三个位置，取该地支为初传</li>
+        </ul>
+
+        <div class="xf-step">六、伏吟法 与 返吟法（特殊矩阵接管）</div>
+        <p class="xf-p">这是整个系统中最极端的两种全局状态，一旦识别，<strong>直接跳过前面所有算法</strong>，进入专有处理通道。</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>类型</th><th>触发条件</th><th>物理意义</th><th>发传逻辑</th></tr>
+            <tr><td><strong>伏吟</strong>（系统死锁）</td><td>月将 = 占时，天盘与地盘完全重合</td><td>天地不动，时空凝固，事情卡住</td><td>取日干寄宫或日支为切入，按"刑法"（子卯刑、寅巳申三刑）强行推动三传</td></tr>
+            <tr><td><strong>返吟</strong>（系统对冲）</td><td>月将与占时相冲（如月将子，占时午），盘面180°大反转</td><td>天地颠倒，来回折腾，事情反复无常</td><td>有克仍用贼克法；中末传取初传对冲位（如初传寅→中传申→末传寅，来回横跳）</td></tr>
+          </table>
+        </div>
+        <div class="xf-result">✅ <strong>算法完备性保证：</strong>以上六套算法（含贼克法共九宗门）确保无论输入什么时间，系统都不会崩溃，必定吐出唯一确定的三传。</div>
+      </div>
+    </div>
+
+    <!-- ===== 阶段二 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">阶段二 · 权重系统 · 五行衰旺与长生 <span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">骨架（三传）搭好后，需要知道盘面里哪个参数说话分量最重——不是所有的"火"都一样热，不是所有的"水"都一样冷。</p>
+
+        <div class="xf-step">一、全局环境变量：月建与日辰的支配权</div>
+        <p class="xf-p"><strong>月建</strong>（占测时的月份地支）决定整个盘面的五行基调，赋予各地支五个能量等级：</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>状态</th><th>含义</th><th>能量倍率</th><th>春季（寅卯月）举例</th></tr>
+            <tr><td class="c-g">旺</td><td>与月建同五行</td><td>100%</td><td>木（寅卯）——无坚不摧</td></tr>
+            <tr><td class="c-g">相</td><td>月建所生的五行</td><td>80%</td><td>火——正在发育</td></tr>
+            <tr><td>休</td><td>生月建的五行</td><td>40%</td><td>水——进入休眠</td></tr>
+            <tr><td class="c-r">囚</td><td>克月建的五行</td><td>20%</td><td>金——能量被困</td></tr>
+            <tr><td class="c-r">死</td><td>月建所克的五行</td><td>0%</td><td>土——彻底失效</td></tr>
+          </table>
+        </div>
+        <p class="xf-p"><strong>日辰</strong>是事情发生当下的局部环境。即使地支在月建中被判定为"死囚"，只要日辰去生扶，依然能获得"动态可用"的能量。</p>
+        <div class="xf-result">核心断语："<strong>旺相发用</strong>（初传）事情迅速成真，<strong>休囚发用</strong>事情迟滞难成。"</div>
+
+        <div class="xf-step">二、十二长生诀（状态机流转）</div>
+        <p class="xf-p">每个地支自身带有一套动态"生命周期状态"，精细描绘事物从孕育到消亡的12个阶段：</p>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>阶段</th><th>大白话</th><th>能量</th><th>断局含义</th></tr>
+            <tr><td>长生</td><td>婴儿降生</td><td>↑↑</td><td>新起步、生机勃勃、有贵人支持</td></tr>
+            <tr><td>沐浴</td><td>桃花/败地</td><td>↑（不稳）</td><td>脆弱、易受诱惑、暗藏色情纠纷</td></tr>
+            <tr><td>冠带</td><td>少年成长</td><td>↑↑</td><td>事物逐渐成型，开始有所作为</td></tr>
+            <tr><td>临官</td><td>步入职场</td><td>↑↑↑</td><td>能量成熟，大力出奇迹</td></tr>
+            <tr><td>帝旺</td><td>顶峰状态</td><td>最强</td><td>利进攻求官求财；但物极必反</td></tr>
+            <tr><td>衰</td><td>开始走下坡</td><td>↓</td><td>力量减退，宜守不宜攻</td></tr>
+            <tr><td>病</td><td>进入病态</td><td>↓↓</td><td>事物开始出现问题</td></tr>
+            <tr><td>死</td><td>能量归零</td><td>↓↓↓</td><td>力量消尽，难以行动</td></tr>
+            <tr><td><strong>墓</strong></td><td>被收进柜子</td><td>（被冻结）</td><td>⚠ 事物被隐藏/困住/进入死胡同，除非被冲开</td></tr>
+            <tr><td>绝</td><td>彻底断绝</td><td>最弱</td><td>断根、消失，重新孕育前的空窗</td></tr>
+            <tr><td>胎</td><td>开始孕育</td><td>（新生）</td><td>新事物正在酝酿中，尚未显现</td></tr>
+            <tr><td>养</td><td>养育阶段</td><td>（待发）</td><td>事物在保护中成长，即将出生</td></tr>
+          </table>
+        </div>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>五行</th><th>长生</th><th>沐浴</th><th>冠带</th><th>临官</th><th>帝旺</th><th>衰</th><th>病</th><th>死</th><th>墓</th><th>绝</th><th>胎</th><th>养</th></tr>
+            <tr><td>木</td><td>亥</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td></tr>
+            <tr><td>火</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td></tr>
+            <tr><td>土（同火）</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td></tr>
+            <tr><td>金</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td></tr>
+            <tr><td>水（同土）</td><td>申</td><td>酉</td><td>戌</td><td>亥</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">三、数据突变与内存泄漏：刑冲克害与空亡</div>
+        <p class="xf-p"><strong>空亡（Null Pointer）：</strong>空亡地支相当于直接赋空——</p>
+        <ul class="xf-ul">
+          <li>吉事落空 → 画饼竹篮打水，口头允诺无法落地</li>
+          <li>凶事落空 → 虚惊一场，逢凶化吉</li>
+          <li>出空机制：到了填实空亡地支的日子，或有其他地支来冲，数据重新加载生效</li>
+        </ul>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>关系</th><th>大白话</th><th>典型表现</th></tr>
+            <tr><td class="c-r">冲（如子午冲）</td><td>最猛烈的碰撞</td><td>突发事件、散伙决裂；吉事逢冲则散，凶事逢冲同样消散</td></tr>
+            <tr><td class="c-r">刑（如无恩之刑）</td><td>内部摩擦互相折磨</td><td>官司诉讼、刑罚伤灾，极其痛苦难以抽身</td></tr>
+            <tr><td class="c-a">破（如子酉破）</td><td>结构损坏</td><td>事情中途掉链子、器物损坏、关系出现裂痕</td></tr>
+            <tr><td class="c-r">害（如子未害）</td><td>暗中伤害</td><td>背后放冷箭、被自己人背叛、慢性损耗</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 阶段三 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">阶段三 · 类象数据库 · Object Mapping <span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">算法跑通后，把抽象的干支符号翻译成具体人类社会事件：<strong>地支 = 物理实体（名词），天将 = 属性标签（形容词）</strong>，两者拼接输出具体画面。</p>
+
+        <div class="xf-step">一、十二地支万物类象</div>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>地支</th><th>核心意象</th><th>典型人物/社会角色</th><th>物品/场所</th><th>身体部位</th></tr>
+            <tr><td><strong>子</strong></td><td>流动、暗昧、圆润、寒冷</td><td>妇女、盗贼、航海者、儿童</td><td>水池、江河、暗道、珍珠</td><td>肾、泌尿系统、耳、血液</td></tr>
+            <tr><td><strong>丑</strong></td><td>迟滞、阴暗、包容、冤仇</td><td>尊长、老人、农夫、怨妇</td><td>桥梁、坟墓、田园、保险柜、下水道</td><td>脾胃、腹部、子宫</td></tr>
+            <tr><td><strong>寅</strong></td><td>生机、发端、栋梁、正直</td><td>官员、丈夫、公职人员、首领</td><td>树林、公门、庙宇、高楼、木材</td><td>胆、毛发、关节、脉络</td></tr>
+            <tr><td><strong>卯</strong></td><td>震动、交替、分离、破裂</td><td>兄弟、手工业者、司机、手艺人</td><td>门窗、车辆、船只、大街、床</td><td>肝、筋脉、十指、神经</td></tr>
+            <tr><td><strong>辰</strong></td><td>变化、争讼、凶狠、掩盖</td><td>军警、恶人、屠夫、地痞</td><td>麦地、坟墓、法庭、网罟、井泉</td><td>皮肤、肩、胸部、项背</td></tr>
+            <tr><td><strong>巳</strong></td><td>变化、文章、惊恐、明朗</td><td>妇人、学者、炉冶之人、乞丐</td><td>炉冶、窑灶、砖瓦、文书、画框</td><td>心、面部、咽喉、齿</td></tr>
+            <tr><td><strong>午</strong></td><td>光明、文书、高耸、急躁</td><td>官员、使者、文化人、名流</td><td>厅堂、马房、道路、信件、电子产品</td><td>小肠、眼睛、头、心血</td></tr>
+            <tr><td><strong>未</strong></td><td>宴饮、迟疑、醇厚、木讷</td><td>父母、老妇、厨师、酒场中人</td><td>庭院、酒肆、茶馆、井泉、医药</td><td>脾、脊梁、肌肉、唇</td></tr>
+            <tr><td><strong>申</strong></td><td>传递、肃杀、威武、阻隔</td><td>行人、军警、医生、猎人</td><td>道路、金属物、祠堂、医院、刀剑</td><td>大肠、经络、骨、肺</td></tr>
+            <tr><td><strong>酉</strong></td><td>肃杀、刑伤、精巧、密谋</td><td>少女、妓女、金银匠、暗娼</td><td>金银首饰、银行、钟表、乐器</td><td>肺、呼吸道、口齿、精血</td></tr>
+            <tr><td><strong>戌</strong></td><td>欺诈、孤寒、聚合、暴力</td><td>狱卒、长者、和尚、孤儿</td><td>牢狱、坟墓、锁钥、厨房、寺观</td><td>命门、腿足、胃、踝</td></tr>
+            <tr><td><strong>亥</strong></td><td>赏赐、幼小、流转、通达</td><td>孩童、乞丐、醉客、江湖人</td><td>厕所、沟渠、楼阁、江河、笔墨</td><td>肾、头部、血液</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">二、十二天将核心类象</div>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>天将</th><th>五行</th><th>核心类象</th><th>发用断语</th><th>空亡效果</th></tr>
+            <tr><td><strong>贵人</strong></td><td>土</td><td>权贵、福禄、吉祥保护</td><td>贵人相助，升迁有望</td><td>贵人缺位，救祸无效</td></tr>
+            <tr><td><strong>螣蛇</strong></td><td>火</td><td>惊恐、怪异、缠绕、梦魇</td><td>吉中带扰，凶时灾祸缠身</td><td>诸凶可免（螣蛇最喜入空）</td></tr>
+            <tr><td><strong>朱雀</strong></td><td>火</td><td>文书、口舌、信息、诉讼</td><td>主口舌是非或文书往来</td><td>口舌消散，文书不成</td></tr>
+            <tr><td><strong>六合</strong></td><td>木</td><td>婚姻、交易、合作、和合</td><td>占婚最喜，交易顺利</td><td>婚约不成，合同作废</td></tr>
+            <tr><td><strong>勾陈</strong></td><td>土</td><td>田土、牢狱、争斗、迟滞</td><td>主田产纠纷、官司拖延</td><td>纠纷可解，事不成</td></tr>
+            <tr><td><strong>青龙</strong></td><td>木</td><td>财帛、喜庆、升迁、酒食</td><td>大吉，主财利升官嫁娶</td><td>财喜减半</td></tr>
+            <tr><td><strong>天空</strong></td><td>土</td><td>虚诈、落空、僧道、遗失</td><td>事体落空，虚诈不实</td><td>—（天空本身就是空）</td></tr>
+            <tr><td><strong>白虎</strong></td><td>金</td><td>血光、疾病、死亡、丧事</td><td>大凶，主伤灾疾病丧亡</td><td>见凶不凶，大凶减等</td></tr>
+            <tr><td><strong>太常</strong></td><td>土</td><td>饮食、宴饮、服饰、官职</td><td>主婚宴喜庆、官场礼遇</td><td>喜事减半</td></tr>
+            <tr><td><strong>玄武</strong></td><td>水</td><td>盗贼、欺诈、遗失、暗昧</td><td>主失窃被骗，预谋不轨</td><td>谋害不凶，盗贼不成</td></tr>
+            <tr><td><strong>太阴</strong></td><td>金</td><td>阴私、隐匿、妇女、阴谋</td><td>主暗中谋划、阴私之事</td><td>—</td></tr>
+            <tr><td><strong>天后</strong></td><td>水</td><td>妇女、婚姻、生育、雨水</td><td>主妇女之事婚姻生育</td><td>—</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">三、神将组合的化学反应（案例）</div>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>组合</th><th>天将</th><th>地支</th><th>象意输出</th></tr>
+            <tr><td>朱雀 + 卯</td><td>文书、罚单、信息</td><td>车辆、门窗、道路</td><td>出行吃交通罚单，或车子手续证件出问题</td></tr>
+            <tr><td>白虎 + 申（真虎发威）</td><td>血光、威权、刀剑</td><td>道路、金属、公安（金同申）</td><td>疾病大凶（需手术），官司对方背景极强、暴力执法</td></tr>
+            <tr><td>玄武 + 子</td><td>盗贼、遗失、暗昧</td><td>水池、江河、暗道</td><td>失物被贼偷走藏入极阴暗处，很难追回</td></tr>
+            <tr><td>六合 + 酉</td><td>婚姻、合作</td><td>少女、首饰、暗娼（酉金克六合木）</td><td>不正当私情，或因金钱暗中交易，看似和合实则各有图谋</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 阶段四 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">阶段四 · 设计模式 · 课格系统 <span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">古人经过大量实践总结出许多高频出现的特定盘面结构。掌握课格，断局时可直接调用"缓存"结论，一针见血。课格有上百种，以下精选最具实战价值的核心课格。</p>
+
+        <div class="xf-step">一、吉格（系统成功路径）</div>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>课格</th><th>触发条件</th><th>核心象意</th></tr>
+            <tr><td><strong>铸印课</strong></td><td>戌加巳为初传（巳火炼戌土印信），或三传见戌巳卯</td><td>重塑权威、获得背书。极度利于考取功名、获得营业执照、掌握公司核心权力</td></tr>
+            <tr><td><strong>斩关课</strong></td><td>三传贯穿四孟（寅申巳亥）冲破各方阻隔</td><td>利于出行、突围、逃跑、打破僵局，势如破竹一往无前</td></tr>
+            <tr><td><strong>催官课</strong></td><td>贵人、青龙、太常加临日干，且五行旺相</td><td>官方提拔、绿灯放行。领导直接下委任状，升职加薪速度极快，一路畅通无阻</td></tr>
+            <tr><td><strong>斫轮课</strong></td><td>天盘"卯"落在地盘"申"上（申金砍伐卯木）</td><td>精雕细琢、人才历练。过程虽痛苦，最终能被塑造成有用之才，利升职</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">二、凶格（系统报错状态）</div>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>课格</th><th>触发条件</th><th>核心象意</th></tr>
+            <tr><td><strong>龙战课</strong></td><td>卯酉日，天盘卯落地盘酉上（或酉落卯上）</td><td>同归于尽、激烈火拼。两股势均力敌正面硬刚，两败俱伤，绝无妥协</td></tr>
+            <tr><td><strong>退茹课</strong></td><td>三传呈逐步退缩之势（末传弱于初传）</td><td>步步后退、事情受阻。当前项目必须叫停或重构</td></tr>
+            <tr><td><strong>玄胎课</strong></td><td>玄武乘亥子发用，或三传相生循环</td><td>暗中孕育麻烦、反复纠缠。表面风平浪静，内部已有祸患酝酿</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">三、课格与环境权重的联合判断</div>
+        <ul class="xf-ul">
+          <li><strong>吉格遇空亡：</strong>摇出铸印课却"戌"处于空亡，相当于超级管理员权限通道的尽头是404页面——空欢喜，口头允诺无法落地</li>
+          <li><strong>凶格逢生旺：</strong>退茹课但三传地支月建极旺，如公司走下坡却底子厚、现金流充裕，"退"只是战略收缩，不至崩盘</li>
+        </ul>
+        <div class="xf-result">大六壬的魅力：<strong>课格（框架）+ 旺衰/空亡（变量）</strong>的动态解析，框架给方向，变量做校验。</div>
+      </div>
+    </div>
+
+    <!-- ===== 阶段五 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">阶段五 · 断局输出 · 先锋门与应期 <span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">前四阶段完成了后台运算，第五阶段将所有参数组装成用户能看懂的"最终诊断报告"。</p>
+
+        <div class="xf-step">一、视觉焦点：先锋门（入口函数）</div>
+        <p class="xf-p">拿到排好的盘面，程序第一眼抓取三个核心变量，构成事情的主轴：</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>切入点</th><th>对应位置</th><th>代表含义</th></tr>
+            <tr><td>初传（发用）</td><td>三传第一位</td><td>事情的起因、最先动起来的核心动力</td></tr>
+            <tr><td>末传（归宿）</td><td>三传第三位</td><td>事情的最终结果与归宿</td></tr>
+            <tr><td>日干（本体）</td><td>日干自身</td><td>求测者当前的状态与能量</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">二、主客交互：初传与日干的结算判定</div>
+        <p class="xf-p">初传是事情的起因和动能，但这个动能对"我（日干）"到底是好是坏，必须通过五行生克结算：</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>交互关系</th><th>业务输出结论</th></tr>
+            <tr><td>初传 <strong class="c-g">生</strong> 日干</td><td class="c-g">有人助我、贵人相助，事情对我有利</td></tr>
+            <tr><td>初传 <strong class="c-r">克</strong> 日干</td><td class="c-r">遭受打压、被外力克制，形势不利</td></tr>
+            <tr><td>日干 <strong>生</strong> 初传</td><td>我主动输出能量，劳碌耗心，可能得不偿失</td></tr>
+            <tr><td>日干 <strong class="c-g">克</strong> 初传</td><td class="c-g">我能掌控局势，能管住对方/事情</td></tr>
+            <tr><td>初传与日干 <strong>比和</strong></td><td>同业竞争、同类相遇，平分秋色，或竞争激烈</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">三、应期推算：时间戳定位算法</div>
+        <p class="xf-p">预测最终发生时间——有一套"锁与钥匙"的匹配机制。事情没发生，是因为关键数据被"锁"住了；当时间流转到特定地支，把锁打开时，就是事件弹出的应期。</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>锁定状态</th><th>解锁条件（应期）</th></tr>
+            <tr><td>三传/用神落空亡</td><td>出空之日（旬内被冲开，或换旬后自动出空）</td></tr>
+            <tr><td>三传/用神入墓</td><td>冲墓之日（如用神入未墓，逢丑日冲开）</td></tr>
+            <tr><td>三传/用神被合绊（贪合忘克）</td><td>合神被冲开之日，或合局散去之时</td></tr>
+            <tr><td>初传旺相</td><td>近期（旬内）迅速发生</td></tr>
+            <tr><td>初传休囚</td><td>延迟（月后或更久）方能发生</td></tr>
+          </table>
+        </div>
+        <p class="xf-p">推算流程：① 检查三传和用神的异常状态标签（空亡/入墓/被合）→ ② 调用表格寻找对应"解锁钥匙地支" → ③ 将该地支映射到干支历，输出具体年月日。</p>
+        <div class="xf-result">✅ <strong>全盘技术流转闭环：</strong>参数输入 → 矩阵构建 → 状态抽取 → 异常捕获 → 权重赋予 → 类象映射 → 时间戳锁定</div>
+      </div>
+    </div>
+
+    <div class="xf-part">高阶五模块</div>
+
+    <!-- ===== 高阶一 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">高阶一 · 异常处理 · 灾难恢复机制（Try-Catch）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">当盘面抛出"大凶"课格时，系统并不直接宣判失败，而是触发后台扫描程序，寻找能修复这个Bug的"补丁"。</p>
+
+        <div class="xf-step">一、贪生忘克（动态路由重定向）</div>
+        <p class="xf-p">五行的底层天性是"贪生忘克"——只要有可以投资（生）的目标，就立刻放弃原有的攻击（克）计划。</p>
+        <div class="xf-result">
+          <strong>案例：</strong>日干是木，初传抛出"申金"（金克木）。但中传出现"亥水"——申金转而生扶亥水，亥水再生扶日干木。原本的强敌打压，变成贵人（水）出面调停，反哺求测者。这叫"<strong>因祸得福、化敌为友</strong>"。
+        </div>
+
+        <div class="xf-step">二、合解冲刑（进程锁死与中断）</div>
+        <p class="xf-p">当盘面出现"冲"（决裂碰撞）或"刑"（内部折磨），系统会调用"合"机制强行中断冲突。</p>
+        <div class="xf-result">
+          <strong>案例：</strong>盘面出现"子午相冲"（合作破裂），但日支或年命出现"丑"。因为"子丑六合"，丑把子锁死，子失去冲撞午的动能。这叫"<strong>贪合忘冲</strong>"——第三方用极厚利益绑定一方，危机被强行按下暂停键。
+        </div>
+
+        <div class="xf-step">三、德神系统（Root权限与安全沙箱）</div>
+        <p class="xf-p">德神是系统直接下发的最高级VIP免疫特权——盘面带德神，相当于运行在最高级别"安全沙箱"中，任何凶煞都无法造成毁灭性打击。</p>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>德神</th><th>推算规则</th><th>权限级别</th></tr>
+            <tr><td>天德</td><td>按月份推算，各月固定（正月丁、二月申、三月壬…）</td><td>最高级，覆盖大部分凶煞</td></tr>
+            <tr><td>月德</td><td>寅午戌月在丙，申子辰月在壬，亥卯未月在甲，巳酉丑月在庚</td><td>次高级，与天德叠加效果更强</td></tr>
+          </table>
+        </div>
+        <ul class="xf-ul">
+          <li><strong>叠加（双重免死金牌）：</strong>初传既是天德又是月德，即使白虎螣蛇也被压制无法作恶</li>
+          <li><strong>失效：</strong>德神落空亡或入墓，相当于VIP激活码网络断了无法验证，免疫特权失效</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== 高阶二 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">高阶二 · 类神系统 · 多线程并发查询<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">三传（Main Thread）反映动能最大的核心事件。但如果求测者同时抛出多个并发请求（"跳槽能成功吗？同时婚姻有没有问题？"），就需要调用"类神（Class Object）"机制，脱离三传主轴，向全局天地盘矩阵发起并发查询。</p>
+
+        <div class="xf-step">核心业务类神对照表</div>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>查询业务</th><th>主要类神（天将）</th><th>辅助类神（地支）</th></tr>
+            <tr><td>文书、合同、信息</td><td>朱雀</td><td>巳、午（文字）</td></tr>
+            <tr><td>财富、钱财</td><td>青龙、天后</td><td>妻财爻对应地支</td></tr>
+            <tr><td>官职、工作</td><td>贵人、太常</td><td>官鬼爻对应地支</td></tr>
+            <tr><td>婚姻、感情</td><td>六合、天后</td><td>妻财/天后对应地支</td></tr>
+            <tr><td>疾病、健康</td><td>白虎、螣蛇</td><td>病对应地支（长生12阶）</td></tr>
+            <tr><td>盗窃、遗失</td><td>玄武</td><td>子（水暗藏）</td></tr>
+            <tr><td>官司、诉讼</td><td>勾陈、朱雀</td><td>辰（天牢）</td></tr>
+            <tr><td>出行、旅途</td><td>驿马、贵人</td><td>寅申（道路）</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">并发查询执行逻辑（三步）</div>
+        <ul class="xf-ul">
+          <li><strong>① 锚定对象：</strong>识别求测者的业务需求，从对照表匹配对应的类神</li>
+          <li><strong>② 全局寻址：</strong>跳出三传，直接去天地盘矩阵中找该天将落在哪个地支上，查看其状态（空亡？旺相？被克？）</li>
+          <li><strong>③ 主客结算：</strong>看该类神地支对日干是生是克，输出个性化判定——同一盘面，不同问题，不同结论</li>
+        </ul>
+        <div class="xf-result">三传永远是Main()函数，代表宇宙最想告诉你的绝对核心事件；类神是扩展API接口，用户请求了才调用，不干扰主轴运行。</div>
+      </div>
+    </div>
+
+    <!-- ===== 高阶三 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">高阶三 · 本命与行年 · 个性化权限密钥<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">同一时间同一地点两人起盘，四课三传完全一样——但结局必然不同。大六壬通过"本命"与"行年"两个个性化API Key将宇宙的公共矩阵与个体属性剥离开来。</p>
+
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>参数</th><th>数据来源</th><th>物理意义</th><th>类比</th></tr>
+            <tr><td><strong>本命</strong></td><td>求测者出生那年的农历地支</td><td>物理肉身、先天根基、底线与最终承受力（终身不变）</td><td>硬件MAC地址/静态属性</td></tr>
+            <tr><td><strong>行年</strong></td><td>当年虚岁对应的动态地支</td><td>当前这一年的运势环境、正在经历的核心事件（每年更新）</td><td>动态Session ID/运行时环境</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">行年推算算法</div>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>性别</th><th>起算点</th><th>方向</th><th>算法</th></tr>
+            <tr><td>男命（阳顺）</td><td>寅（1岁起）</td><td>顺时针</td><td>(寅位 + 虚岁 - 1) % 12 → 对应地支</td></tr>
+            <tr><td>女命（阴逆）</td><td>申（1岁起）</td><td>逆时针</td><td>(申位 - 虚岁 + 1 + N×12) % 12 → 对应地支</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">密钥注入与交叉结算</div>
+        <p class="xf-p">将本命与行年这两个地支投射到天地盘中，看其"上神"（头顶盖着的天盘地支）——</p>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>数据结构表现</th><th>业务输出结论</th></tr>
+            <tr><td>三传凶煞未冲克本命/行年，且上神为吉神</td><td class="c-g">灾难避险——大环境恶劣但个体防御强，灾祸绕开该人</td></tr>
+            <tr><td>三传大吉但本命/行年上神落空亡</td><td class="c-r">红利无效——大好局面与我无关，完美错过这波红利</td></tr>
+            <tr><td>天地盘隐藏凶将恰好落在本命/行年之上</td><td class="c-r">引火烧身——表面风平浪静，暗中小人专门针对该人</td></tr>
+            <tr><td>三传能量全部流向并生扶本命/行年，或末传就是本命/行年</td><td class="c-g">反客为主——最终利益/控制权全部落入该人口袋</td></tr>
+          </table>
+        </div>
+        <div class="xf-result">不加本命行年的大六壬，看的是"天下大势"；加上了本命行年，看的才是"您的专属人生"。</div>
+      </div>
+    </div>
+
+    <!-- ===== 高阶四 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">高阶四 · 神煞系统 · 隐藏指针与扩展组件<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">除核心业务逻辑（四课三传）外，系统还根据年月日变量动态生成上百个"神煞"插件，不改变主干吉凶，但极大微调事件颗粒度，提供极具象的细节特写。</p>
+
+        <div class="xf-step">一、资产与权限模块（基于日干生成）</div>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>神煞</th><th>算法规则</th><th>功能含义</th></tr>
+            <tr><td>禄神</td><td>日干五行的临官之地</td><td>核心资金池、底薪、正官职位</td></tr>
+            <tr><td>羊刃</td><td>日干五行的帝旺之地</td><td>刚猛动能、手术刀、竞争对手</td></tr>
+            <tr><td>天乙贵人</td><td>按日干查贵人表（甲戊庚→丑未，乙己→子申…）</td><td>贵人、上级、能救场的关键人物</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">二、动能与网络模块（基于日支生成）</div>
+        <div class="m5-wrap">
+          <table class="m5-tbl">
+            <tr><th>神煞</th><th>算法规则</th><th>功能含义</th></tr>
+            <tr><td>驿马</td><td>申子辰马在寅，寅午戌马在申，亥卯未马在巳，巳酉丑马在亥</td><td>加速器、位移、出行、快递、跳槽变动</td></tr>
+            <tr><td>桃花</td><td>申子辰花在酉，寅午戌花在卯，亥卯未花在子，巳酉丑花在午</td><td>异性缘、人际吸引力、暗藏色情纠纷</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">三、扩展组件加载约束</div>
+        <ul class="xf-ul">
+          <li><strong>挂载依附性：</strong>神煞不能独立发传，必须"寄生"在天地盘地支上（插件必须依托宿主程序）</li>
+          <li><strong>空亡卸载：</strong>地支落空亡，附着其上的所有神煞（吉凶全部）断开连接失效——"吉神空亡不为吉，凶神空亡不为凶"</li>
+          <li><strong>组合叠加爆炸：</strong>寅（车）+ 白虎（血光）+ 丧门（死亡）+ 驿马（行驶中）→ 输出精准结论：高速行驶中发生致命车祸</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== 高阶五 ===== -->
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">高阶五 · 三式联动 · 跨平台架构对比<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <p class="xf-p">太乙神数、奇门遁甲、大六壬并称"三式"，是古代最高级别的三大预测模型，底层架构的设计初衷完全不同。</p>
+
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>系统</th><th>算力侧重</th><th>时间颗粒度</th><th>核心数据模型</th><th>最擅长的业务</th></tr>
+            <tr><td><strong>太乙神数</strong></td><td>国运/宏观大势</td><td>年为周期</td><td>九宫阴阳大数</td><td>国家政策、行业趋势、历史兴衰预判</td></tr>
+            <tr><td><strong>奇门遁甲</strong></td><td>兵机/空间战术</td><td>时辰为周期</td><td>九宫八门八神</td><td>空间战术布局、选方位、藏匿隐蔽、出行择时</td></tr>
+            <tr><td><strong>大六壬</strong></td><td>人事/百事演化</td><td>精确到起念瞬间</td><td>天地盘干支交叉矩阵</td><td>人际博弈、合同纠纷、婚姻诉讼、事件全息透视</td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">同一业务请求的跨平台处理差异</div>
+        <p class="xf-p">请求："明天去竞争对手公司谈判，能不能成功？"</p>
+        <div class="xf-tbl-wrap">
+          <table class="xf-tbl">
+            <tr><th>系统</th><th>处理逻辑</th><th>输出风格</th></tr>
+            <tr><td>奇门遁甲</td><td>把明天时空切分成九个宫位</td><td>"明天下午3点坐会议室正东方（生门），竞争对手坐正西方（死门），可形成空间降维打击"——重<strong>空间战术</strong></td></tr>
+            <tr><td>太乙神数</td><td>扫描当前行业大周期</td><td>"当前行业衰退周期第三年，大环境缺水，任何激进扩张谈判都无意义"——重<strong>宏观大势</strong></td></tr>
+            <tr><td>大六壬</td><td>抓取谈判启动时间，四课三传翻开各方底牌</td><td>"第一课乘青龙（你资金充足），第三课乘玄武（对手表面答应暗中套数据），且你行年落空亡（明天可能因突发情况去不了现场）"——重<strong>全息透视</strong></td></tr>
+          </table>
+        </div>
+
+        <div class="xf-step">大六壬为何被称为"人事之王"</div>
+        <ul class="xf-ul">
+          <li><strong>极高时间敏感度：</strong>触发精确到"求测者起念的瞬间"，参数流转极其敏感，对碎片化瞬息万变的人事有极高捕获率</li>
+          <li><strong>主客关系的极致对立：</strong>"四课"底层数据结构直接分出主客（日与辰）、明暗（干与阴），完美对称模型量身定制于人际博弈与合同纠纷</li>
+        </ul>
+
+        <div class="xf-summary">终章：大六壬本质上是以"干支"为基础代码、以"生克制化"为运行协议的巨型状态机。只要精准提取当时的参数，就能推演出这段程序的最终走向。五大基础阶段 + 五大高阶模块，构成了从零到精通的完整逻辑闭环。</div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 </div>
