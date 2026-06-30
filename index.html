@@ -576,12 +576,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
         <div class="m5-text red">①克贼法：先取下克上（贼），无贼取上克下（克）。一上克下→元首课；一下克上→重审课。</div>
         <div class="m5-text">②比用法：多课相克，取与日干阴阳相比者发用。二下贼→比用；二上克→知一。</div>
         <div class="m5-text">③涉害法：多克阴阳不比，顺数至本家统计克害，取深者。相等则：有孟取孟（见机）→ 有仲取仲（察微）→ 复等：阳日取干上、阴日取辰上（复等）。</div>
-        <div class="m5-text">④遥克法：四课无正克。日干遥克上神→蒿矢（取初传）；上神遥克日干→弹射。</div>
-        <div class="m5-text">⑤昴星法：无克无遥克。阳日取冲时之支（天门）上神，阴日取地户上神。</div>
+        <div class="m5-text">④遥克法：四课无正克。上神遥克日干→蒿矢（取初传）；日干遥克上神→弹射。</div>
+        <div class="m5-text">⑤昴星法：无克无遥克。取地盘酉位（从魁）上神为初传，不分阴阳日。</div>
         <div class="m5-text">⑥别责法：柔日无克无遥克，二三课同。初传取日支前三合，中末均取日上神。</div>
         <div class="m5-text">⑦八专法：干支同位，仅两课。有克按克法；无克刚日顺数、柔日逆数三位发用，中末取日上神。</div>
-        <div class="m5-text">⑧伏吟法：天地盘重合。有克按克贼；无克阳日取日干刑神，阴日取日支刑神。刑序：寅巳申、丑戌未、子卯、辰午酉亥自刑。</div>
-        <div class="m5-text">⑨返吟法：天地盘对冲。有克按克贼；无克（井栏射）取日驿马，中传取支上神，末传取干上神。</div>
+        <div class="m5-text">⑧伏吟法：天地盘重合。有克按克贼；无克阳日取日干上神，阴日取日支上神为初传；中末传以三刑相因。刑序：寅巳申、丑戌未、子卯、辰午酉亥自刑。</div>
+        <div class="m5-text">⑨返吟法：天地盘对冲。有克按克贼；无克（井栏射）取支上神所刑地支为初传，中传取初传冲，末传取中传刑。</div>
       </div>
       <button class="m5-sub-tog" onclick="m5SubToggle(this)">遁干、六亲与断诀</button>
       <div class="m5-sub-body">
@@ -1827,13 +1827,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
           　　<span style="color:#2E7D5A">仲位（子午卯酉）= 涉害居中</span><br>
           　　<span style="color:#9B8570">季位（辰戌丑未）= 涉害最浅</span> — 离老家最近，经历最少</div>
         <div class="z9-dstep">第④步：取<span class="hit">涉害最深</span>的候选为初传（孟 > 仲 > 季）</div>
-        <div class="z9-dstep">第⑤步：若多个候选同位（如两个都在孟），依次用平局规则：<br>
-          　　① <b>见机格</b>：候选落在第一/二课（日干上方）→ 优先取<br>
-          　　② <b>察微格</b>：候选落在第三/四课（日支上方）→ 次取<br>
-          　　③ <b>复等格</b>（仍相等）：阳日取干上神，阴日取支上神</div>
+        <div class="z9-dstep">第⑤步：若多个候选涉害深度相等（均在孟位，或均在仲位），用<b>复等格</b>：阳日取干上神（第一课），阴日取辰上神（第三课）<br>
+          　　注：见机格=取孟位者发用；察微格=取仲位者发用——均已在第④步"孟>仲>季"的深度比较中体现</div>
         <div class="z9-deg">💡 <b>为何孟位最深？</b>把每个候选想象成从"老家"（本宫）出发旅行的人——寅申巳亥（孟）路途最长，沿途遇到被五行克制的地方最多，所以"涉害"最深，动能最大，最有资格发用。<br>
           <b>举例①</b>：混克候选有「寅（孟，第一课）」和「辰（季，第三课）」→ 孟 > 季 → 初传 = 寅<br>
-          <b>举例②（平局）</b>：候选「寅（孟，第一课·日干上）」和「申（孟，第三课·日支上）」→ 同是孟，但寅在日干上 → 见机格 → 初传 = 寅</div>
+          <b>举例②（平局）</b>：候选「寅（孟，第一课·日干上）」和「申（孟，第三课·日支上）」→ 同是孟、深度相等 → 复等格 → 阳日取干上神 = 寅 → 初传 = 寅</div>
       </div>
     </div>
   </div>
@@ -2363,11 +2361,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
     <div class="zfl-bi green">
       <b>无遥克 + 四课完备（无重复）</b> → <span class="hit">昴星课</span><br>
-      阳日取<b>酉宫</b>上神（虎视转蓬）；阴日取<b>卯宫</b>上神（阴伏掩目）
+      取<b>酉宫</b>（从魁）上神为初传，不分阴阳日（刚日祸从外，柔日祸从内）
     </div>
     <div class="zfl-bi blue">
       <b>无遥克 + 四课不备（有重复＝三课）</b> → <span class="hit">别责课</span><br>
-      阳日→取日干六合神所在宫上神；阴日→取日支三合前一位上神<br>
+      阳日→取日干六合天干寄宫地支上神；阴日→取日支三合居中那支（帝旺位）上神<br>
       中末传均取<b>日干上神</b>（不相因）
     </div>
   </div>
@@ -2379,7 +2377,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <b>初传</b>：由宗门规则定<br>
     <b>中传</b>：初传地支 → 地盘位置 → 该格天盘上神<br>
     <b>末传</b>：中传地支 → 地盘位置 → 该格天盘上神<br>
-    <span style="color:#9B8570">例外：八专/别责中末均取干上神；伏吟用三刑相因；返吟无克取驿马→支上神→干上神</span>
+    <span style="color:#9B8570">例外：八专/别责中末均取干上神；伏吟无克用三刑相因；返吟无克取支上神所刑→初传冲→中传刑</span>
   </div>
 
   <div class="zfl-sec">优先级速查（高 → 低）</div>
@@ -2474,7 +2472,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="zfl-cb">
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课<b>无正克、无遥克</b>，且四课完备（无重复）</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">阳日</span><span class="zfl-cb-v">取<b>酉宫</b>（从魁）天盘上神发用<br>虎视转蓬：祸从外来，家居守静则吉</span></div>
-      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阴日</span><span class="zfl-cb-v">取<b>卯宫</b>天盘上神发用<br>阴伏掩目：祸从内起，行者淹滞，逃亡可匿</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阴日</span><span class="zfl-cb-v">取<b>酉宫</b>（从魁）天盘上神发用（与阳日同）<br>阴伏掩目：祸从内起，行者淹滞，逃亡可匿</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">相因法（通用）</span></div>
       <div class="zfl-jue">四课既无克而复无遥，则为昴星。<br>酉中昴宿，白虎金位，性主刑杀，义司决断。</div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">象意</span><span class="zfl-cb-v">事情晦暗难明，不宜轻动冒进。访人不见，谋事受阻，占出行不吉。</span></div>
@@ -2487,7 +2485,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
     <div class="zfl-cb">
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">四课<b>有重复</b>（实为三课），且无正克无遥克</span></div>
-      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阳日初传</span><span class="zfl-cb-v">取日干六合天干的寄宫地支上神<br>甲己→未；乙庚→申；丙辛→戌；丁壬→亥；戊癸→丑</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">阳日初传</span><span class="zfl-cb-v">取日干六合天干的寄宫地支上神<br>甲己→未；乙庚→辰；丙辛→戌；丁壬→未；戊癸→丑</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">阴日初传</span><span class="zfl-cb-v">取日支三合局居中那支（帝旺位）上神<br>寅午戌→午；申子辰→子；巳酉丑→酉；亥卯未→卯</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v"><b>均取日干上神</b>（不相因，与通用规则不同）</span></div>
       <div class="zfl-jue">别责无克三课备，刚三柔六九为中。<br>四课不备，阴阳不全，芜淫肆意。</div>
@@ -2518,8 +2516,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="zfl-cb">
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">月将 = 占时（天地盘完全重合，十二支各居本宫）</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">有克时</span><span class="zfl-cb-v">按克贼法正常取用，三传相因</span></div>
-      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阳日<br>自任格</span><span class="zfl-cb-v">取<b>日干上神</b>之三刑神为初传<br>三刑：寅→巳→申→寅；丑→戌→未→丑；子→卯→子</span></div>
-      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阴日<br>自信格</span><span class="zfl-cb-v">取<b>日支上神</b>之三刑神为初传</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阳日<br>自任格</span><span class="zfl-cb-v">取<b>日干上神</b>为初传；中传=干上神所刑，末传=中传所刑（三刑相因）<br>三刑：寅→巳→申→寅；丑→戌→未→丑；子→卯→子；辰午酉亥自刑</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克·阴日<br>自信格</span><span class="zfl-cb-v">取<b>日支上神</b>为初传；中末传同样以三刑相因</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">中末传</span><span class="zfl-cb-v">初传所刑为中传，中传所刑为末传（三刑相因）</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">杜传格</span><span class="zfl-cb-v">初传为自刑（辰午酉亥），三传同一神，主事中途而止，堵塞不通</span></div>
       <div class="zfl-jue">伏吟天地俱不动，无克刚看日上柔取辰。<br>万物潜伏，屈而不伸，主静迟阻滞。</div>
@@ -2534,8 +2532,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="zfl-cb">
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">条件</span><span class="zfl-cb-v">月将与占时地支相冲（天地盘完全对冲，十二支均居对宫）</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">有克时</span><span class="zfl-cb-v">按克贼法正常取用，三传相因</span></div>
-      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克初传</span><span class="zfl-cb-v">取<b>日干驿马</b>发用<br>寅午戌→马申；申子辰→马寅；巳酉丑→马亥；亥卯未→马巳</span></div>
-      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克中末</span><span class="zfl-cb-v">中传取<b>日支上神</b>，末传取<b>日干上神</b></span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克初传</span><span class="zfl-cb-v">取<b>日支上神所刑地支</b>为初传<br>三刑：寅→巳；巳→申；申→寅；丑→戌；戌→未；未→丑；子→卯；卯→子</span></div>
+      <div class="zfl-cb-row"><span class="zfl-cb-lbl">无克中末</span><span class="zfl-cb-v">中传 = 初传所冲；末传 = 中传所刑</span></div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">井栏射格</span><span class="zfl-cb-v">丁、己、辛、丑、未日无克 → 井栏射格（起法同上）</span></div>
       <div class="zfl-jue">返吟有克往来取，井栏丑未丁己辛。<br>天地俱返，往来不定，主动荡反复速变。</div>
       <div class="zfl-cb-row"><span class="zfl-cb-lbl">无依格</span><span class="zfl-cb-v">阳日无克 → 祸从外来，动荡不安</span></div>
@@ -2559,13 +2557,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="zfl-sec">附 · 三刑表（伏吟无克起传用）</div>
   <table class="zfl-tbl">
     <tr><th>刑类</th><th>刑链</th><th>说明</th></tr>
-    <tr><td>持势之刑</td><td>寅→巳→申→寅</td><td>循环三刑</td></tr>
-    <tr><td>无恩之刑</td><td>丑→戌→未→丑</td><td>循环三刑</td></tr>
+    <tr><td>无恩之刑</td><td>寅→巳→申→寅</td><td>循环三刑</td></tr>
+    <tr><td>持势之刑</td><td>丑→戌→未→丑</td><td>循环三刑</td></tr>
     <tr><td>无礼之刑</td><td>子→卯→子</td><td>互刑</td></tr>
     <tr><td>自刑→杜传格</td><td>辰 午 酉 亥 各自刑</td><td>三传同一神</td></tr>
   </table>
 
-  <div class="zfl-sec">附 · 驿马表（返吟无克起传用）</div>
+  <div class="zfl-sec">附 · 驿马表（八专/行程占断参考，返吟无克不用驿马）</div>
   <table class="zfl-tbl">
     <tr><th>日支三合</th><th>驿马位</th></tr>
     <tr><td>寅 午 戌 日</td><td class="c-r">申</td></tr>
@@ -2898,7 +2896,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
         <p class="xf-p"><strong>别责法（三课且无克）：</strong></p>
         <ul class="xf-ul">
           <li>阳日：找日干的"五合"天干的寄宫，取其上神为初传（甲与己合，取己寄宫未的上神）</li>
-          <li>阴日：找日支所在"三合局"，取日支前一位合神为初传（亥卯未三合，亥前一位为戌）</li>
+          <li>阴日：找日支所在"三合局"，取三合居中那支（帝旺位）上神为初传（亥卯未三合，帝旺位=卯，取地盘卯位天盘）</li>
         </ul>
         <p class="xf-p"><strong>八专法（两课且无克）：</strong>干支同位（如甲寅日），信息极度坍塌。</p>
         <ul class="xf-ul">
@@ -3480,9 +3478,9 @@ const KJ_DATA = {
   {title:'重审课',body:'特征：一下克上（地贼天）\n发用：取受克之下神为初传\n象意：地象，臣谏君，宜审慎\n断法：事从内起，主慎重，发难之端'},
   {title:'比用课',body:'特征：二或四课交相克\n发用：取与日干阴阳相比者（阳日取阳，阴日取阴）\n二下贼上→比用；二上克下→知一\n断法：事多纠纷，阴阳有别，需明辨立场'},
   {title:'涉害课',body:'特征：多克且阴阳不比，顺数本家统计克害\n发用：取克害次数最深者\n相等取法：有孟取孟（见机）→ 有仲取仲（察微）→ 复等：阳日取干上，阴日取辰上\n断法：涉险而过，步步为营'},
-  {title:'遥克·蒿矢',body:'特征：四课无正克，日干遥克他课上神\n发用：取被日干遥克之上神为初传\n象意：蒿矢者，以草作箭，力微\n断法：利小不利大，初凶后休，主动则吉'},
-  {title:'遥克·弹射',body:'特征：四课无正克，他课上神遥克日干\n发用：取遥克日干之上神为初传\n象意：弹射者，被动受击\n断法：利客不利主，宜先发制人'},
-  {title:'昴星课',body:'特征：无克无遥克\n发用：阳日取冲所占时之支（天门）的上神；阴日取地户上神\n断法：一切茫然，无迹可寻，凭感觉行事，宜问神'},
+  {title:'遥克·蒿矢',body:'特征：四课无正克，他课上神遥克日干\n发用：取遥克日干之上神为初传\n象意：蒿矢者，以草作箭，力微，被动受击\n断法：利客不利主，宜守不宜动'},
+  {title:'遥克·弹射',body:'特征：四课无正克，日干遥克他课上神\n发用：取被日干遥克之上神为初传\n象意：弹射者，主动出击，力强\n断法：利小不利大，主动则吉，利主不利客'},
+  {title:'昴星课',body:'特征：无克无遥克，四课完备\n发用：取地盘酉位（从魁）上神为初传，不分阴阳日\n断法：一切茫然，无迹可寻，凭感觉行事，宜问神'},
   {title:'别责课',body:'特征：柔日（阴日），四课无克无遥克，二三课相同\n发用：初传取日支前三合之神；中末传均取日上神\n断法：主事不全，责任不清，宜分工明确'},
   {title:'八专课',body:'特征：干支同位，仅两课\n发用：有克按克法；无克刚日顺数三位，柔日逆数三位；中末取日上神\n断法：主混杂宣淫，一人独断，事体偏颇'},
 ],
@@ -4080,7 +4078,7 @@ function _compute3chuan(st){
     const md=Math.max(...cs.map(c=>dep(c.z)));
     const top=cs.filter(c=>dep(c.z)===md);
     if(top.length===1){cc=top[0].z;}
-    else{const og=top.filter(c=>c.k.n==='第一课'||c.k.n==='第二课');cc=og.length?og[0].z:(yang?sk[0].s:sk[2].s);}
+    else{cc=yang?sk[0].s:sk[2].s;}
   }else if(m==='遥克'){
     const s2=[sk[1],sk[2],sk[3]];
     const h=s2.filter(k=>_isKe(k.s,rg)),d=s2.filter(k=>_isKe(rg,k.s));
