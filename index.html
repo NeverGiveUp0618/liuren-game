@@ -400,7 +400,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀，按十大主题分类折叠</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📖 九宗门详解9门全部加推导步骤+举例（涉害/遥克/昴星/别责等）</span></div>
@@ -4841,13 +4841,127 @@ const BF_FA=[
 {c:'总纲',f:'常问不应逢吉象',m:'常人占逢贵课吉象反恐致灾，宜远出免祸'},
 {c:'总纲',f:'已灾凶逃返无疑',m:'凶否卦已灾后占则灾消、未灾前占则祸至'},
 ];
+const BF_DETAIL={};
+Object.assign(BF_DETAIL,{
+'前后引从升迁吉':'<div class="m5-text"><b>定义</b>　初传居干（或支）之前为「引」，末传居干（或支）之后为「从」。</div><div class="m5-text red">引干宜进职，引支宜迁宅；昼夜贵人拱年命主得贵人引荐、升擢官职。忌墓神覆日无冲救、忌空亡。</div>',
+'首尾相见始终宜':'<div class="m5-text"><b>定义</b>　干上有旬尾、支上有旬首（周而复始格）。</div><div class="m5-text red">攻必取、战必胜，凡谋皆就、去而复来；不宜占解散忧疑之事。</div>',
+'帘幕贵人高甲第':'<div class="m5-text"><b>定义</b>　昼占得夜贵、夜占得昼贵，临于年命或日干之上。</div><div class="m5-text red">应试必高中；旬首或辰戌作旬首临命尤验。忌空亡（使试官置卷不视）。</div>',
+'催官使者赴官期':'<div class="m5-text"><b>定义</b>　日鬼乘白虎加临日干或年命之上。</div><div class="m5-text red">纵是远缺亦催促速赴任；若逢空亡则为虚信或被差遣。</div>',
+'尊崇传内遇三奇':'<div class="m5-text"><b>定义</b>　三传全遇甲庚戊，或全遇乙丙丁（遁旬干或五子元建之法）。</div><div class="m5-text red">君子占官居一品、贵入岩廊；常人占亦可消除灾祸。</div>',
+'害贵讼直作屈断':'<div class="m5-text"><b>定义</b>　贵人受克，或作墓、空、六害。</div><div class="m5-text red">占讼理虽直而必遭曲断，事小必致大凶；纵有密谋终主败露，宜识时屈就免祸。</div>',
+'课传俱贵转无依':'<div class="m5-text"><b>定义</b>　四课三传皆昼夜贵人所聚（遍地贵人）。</div><div class="m5-text red">贵多者不贵，凡占不归于一、反无依倚，托事无成；用夜贵名「咄目煞」，大不利告贵、占讼尤凶。</div>',
+'昼夜贵加求两贵':'<div class="m5-text"><b>定义</b>　六处有旦暮天乙相加。</div><div class="m5-text red">告贵求事必干涉两贵人而成；若谒贵反多不遇（贵人往见别贵）。空亡则不作此论。</div>',
+'贵人差迭事参差':'<div class="m5-text"><b>定义</b>　昼贵临于夜地，夜贵却临昼方。</div><div class="m5-text red">告贵求事多不归一，如「尖担两头脱」。</div>',
+'贵虽在狱宜临干':'<div class="m5-text"><b>定义</b>　天乙贵人加临地盘辰戌（名入狱）。</div><div class="m5-text red">常主贵人怒、干官贵怒，惟宜私谋阴祷（名贵人受贿）；乙辛日反宜投贵成事；辰戌日占为贵人入宅，非坐狱论。</div>',
+'神藏煞没须求贵':'<div class="m5-text"><b>定义</b>　贵人登天门（甲戊庚日丑未昼夜贵加地盘亥），百煞拱伏潜藏。</div><div class="m5-text red">凡谋亨利、任意谋为；四孟月占尤验。</div>',
+'鬼乘天乙乃神祇':'<div class="m5-text"><b>定义</b>　日鬼临身，却因其为贵人。</div><div class="m5-text red">不可作鬼祟看，占病为神祇为害，临宅则家堂神像不肃致病，宜修设功德安慰宅神。</div>',
+'两贵受克难干贵':'<div class="m5-text"><b>定义</b>　昼夜贵人皆立于受克之方。</div><div class="m5-text red">不可告贵用事，二贵自受克必自怒而不能成就我；不如不告。甲戊庚三干无此例。</div>',
+});
+Object.assign(BF_DETAIL,{
+'旺禄临身徒妄作':'<div class="m5-text"><b>定义</b>　日之禄神又作日之旺神，临于干上。</div><div class="m5-text red">切不可舍此别谋（到处去来不如在此）；若旺禄旬空则所得不偿所费，反宜弃禄就三传之财。</div>',
+'权摄不正禄临支':'<div class="m5-text"><b>定义</b>　日干禄神加临支辰之上。</div><div class="m5-text red">凡占不自尊大、受屈折于人；主权摄不正、遥授职禄，或以己禄替于儿男。</div>',
+'传财太旺反财亏':'<div class="m5-text"><b>定义</b>　三传皆财且财旺（如秋冬水旺），财自贪生旺不为我用。</div><div class="m5-text red">求财反费己财；待身旺财衰之月方可取。</div>',
+'脱上逢脱防虚诈':'<div class="m5-text"><b>定义</b>　日干生上神、上神又生天将（脱上脱）。</div><div class="m5-text red">尽被脱耗、多虚诈不实；三传成局盗日尤甚。</div>',
+'空上乘空事莫追':'<div class="m5-text"><b>定义</b>　旬空之神又乘天空。</div><div class="m5-text red">凡占指空话空、全无实象，欲成事不可得。</div>',
+'进茹空亡宜退步':'<div class="m5-text"><b>定义</b>　向前三传（连茹）皆值空亡。</div><div class="m5-text red">宜退步抽身缩首，就干支上有合处反有所得；不利托人。</div>',
+'踏脚空亡进用宜':'<div class="m5-text"><b>定义</b>　退步之传全值空亡（既退后而遇空）。</div><div class="m5-text red">宜进而不宜退；鬼空可脱灾避难，惟不宜守旧（干上乘墓）。</div>',
+'传财化鬼财休觅':'<div class="m5-text"><b>定义</b>　日上神作财，却遁旬中干鬼（财遁鬼）。</div><div class="m5-text red">必因财致祸、为食丧身、因妻成讼，求财不得。</div>',
+'传鬼化财钱险危':'<div class="m5-text"><b>定义</b>　三传俱鬼能去比肩，独存一字为财。</div><div class="m5-text red">其财终是危险中出，纵得亦不安稳，君子不取。</div>',
+'费有余而得不足':'<div class="m5-text"><b>定义</b>　干支上生神落空，脱气与鬼却坐实。</div><div class="m5-text red">既见生不生、不如无生，得之不足、费之有余，所得不偿所费。</div>',
+'用破身心无所归':'<div class="m5-text"><b>定义</b>　发用坐破碎，恋此惊危之财引入中末鬼乡。</div><div class="m5-text red">凡占身心无所归依；幸鬼空则应「亦无欢笑亦无愁」。</div>',
+'胎财生气妻怀孕':'<div class="m5-text"><b>定义</b>　日干之胎神作日之妻财，又逢月内之生气。</div><div class="m5-text red">占妻必孕；胎神临妻之年命或临支上尤好，妻财作生气纵不作胎神亦可用。</div>',
+'胎财死气损胎推':'<div class="m5-text"><b>定义</b>　胎神作月内之死气。</div><div class="m5-text red">妇孕不育、必有损；如约母之年命透出支干之外，可免母凶。</div>',
+'后合应知有另情':'<div class="m5-text"><b>定义</b>　干为夫、支为妻，干支上乘天后、六合，或男女行年互居干支。</div><div class="m5-text red">主先奸后娶、私情之象；看何边空亡以审真伪，空则止怀虚意。</div>',
+'交车相合交关利':'<div class="m5-text"><b>定义</b>　日干与支上神作六合、地支与干上神作六合（交车合）。</div><div class="m5-text red">宜交关交易、交换成合，不利占解散；分长生/合财/脱/害/空/刑/冲/三合等类而断。</div>',
+'上下皆合两心齐':'<div class="m5-text"><b>定义</b>　支干上神作六合，地盘支干亦作六合。</div><div class="m5-text red">主客相顺、神合道合；内有一字空亡反为凶咎。</div>',
+'彼求我事支传干':'<div class="m5-text"><b>定义</b>　初传从支上起、末传归于干上。</div><div class="m5-text red">他人委托我干谋事，吉凶皆成，行人至、求取得。</div>',
+'我求彼事干传支':'<div class="m5-text"><b>定义</b>　初传从干上起、末传归于支上。</div><div class="m5-text red">凡事勉强、俯求于人、为人抑勒；宜低心下意，不宜高上，百事不举。</div>',
+'互生俱生凡事益':'<div class="m5-text"><b>定义</b>　干上神生支、支上神生干（互生）；或干上生干、支上生支（俱生）。</div><div class="m5-text red">两相有益、彼此和顺，宜合作营生；若生而作墓败空则反作衰耗论。</div>',
+'互旺皆旺坐谋宜':'<div class="m5-text"><b>定义</b>　干上乘支之旺、支上乘干之旺（互旺，仅甲申庚寅二日）；或干支上皆乘旺神（皆旺）。</div><div class="m5-text red">彼我兴旺、谋事顺利，宜坐待复旧；忌意外之求、远谋动用（变羊刃）。</div>',
+});
+Object.assign(BF_DETAIL,{
+'眷属丰盈居狭宅':'<div class="m5-text"><b>定义</b>　三传生其日干、反脱其支辰。</div><div class="m5-text red">人口丰隆而住宅窄狭；切不可迁居宽广之屋，恐反生灾咎。</div>',
+'屋宅宽广致人衰':'<div class="m5-text"><b>定义</b>　三传窃盗日干、反生支辰。</div><div class="m5-text red">宅宽人少、日渐衰羸，患难俱生，宜弃此别迁居住。</div>',
+'华盖覆日人昏晦':'<div class="m5-text"><b>定义</b>　辰之华盖作干之墓神，临于干上发用。</div><div class="m5-text red">身位多昏晦、卒难明白，或遭冤枉难诉、行人在彼不归。</div>',
+'太阳射宅屋光辉':'<div class="m5-text"><b>定义</b>　以戌等月将太阳临宅（本为支墓，得太阳则吉）。</div><div class="m5-text red">屋必向阳明朗、常有上人光饰；太岁贵人入宅更美。</div>',
+'干墓并关人宅废':'<div class="m5-text"><b>定义</b>　日干之墓作四季关神（春丑夏辰秋未冬戌）发用。</div><div class="m5-text red">干两课上发用主人衰、支两课上发用主宅废；若作库务差遣反得，勿作墓看。</div>',
+'支坟财并旅程稽':'<div class="m5-text"><b>定义</b>　地支之墓作日干之财。</div><div class="m5-text red">主商贩折本、在路阻程，凡谋蹇滞不通。</div>',
+'病符克宅全家患':'<div class="m5-text"><b>定义</b>　病符（旧太岁）临支又克支。</div><div class="m5-text red">主阖家病患，乘天鬼遭时疫、乘白虎尤凶；作月生气主全家病、死气必死。</div>',
+'人宅坐墓甘招晦':'<div class="m5-text"><b>定义</b>　天盘支干皆坐于地盘墓上。</div><div class="m5-text red">甘受暗昧、凡事自招其祸，不可怨天尤人；互坐丘墓则彼此昏晦、不宜相投。</div>',
+'干乘墓虎无占病':'<div class="m5-text"><b>定义</b>　干墓乘白虎（昼将）作墓神。</div><div class="m5-text red">占病必死，诸事凶恶昏迷，防仇人冤执遭棰楚；冬占丑旺作库稍轻。</div>',
+'支乘墓虎有伏尸':'<div class="m5-text"><b>定义</b>　干墓或支墓乘白虎临支，又克支。</div><div class="m5-text red">占宅必有伏尸鬼祸或丧动、其年有停丧；详墓属何类断何人死。</div>',
+'受虎克神为病症':'<div class="m5-text"><b>定义</b>　白虎所乘之神克某五行，定其病位。</div><div class="m5-text red">金虎肝病、木虎脾病、水虎心病、火虎肺病、土虎肾病；可治其所生之脏，而不可治所病之脏。</div>',
+'制鬼之位乃良医':'<div class="m5-text"><b>定义</b>　能克制日鬼之神（即日之食神）。</div><div class="m5-text red">即良医、救神，或本家亲人能医、家堂祖宗保护；乘贵得上人释愆。若鬼空则救神无用（庸医）。</div>',
+'虎乘遁鬼殃非浅':'<div class="m5-text"><b>定义</b>　白虎加临旬内遁干而作日鬼。</div><div class="m5-text red">应验如神，凡占咎深难消，纵空亡亦不能为救。</div>',
+'干支值绝凡谋决':'<div class="m5-text"><b>定义</b>　干支上皆乘绝神。</div><div class="m5-text red">止宜结绝凶事、释解官讼、占病痊；返吟结事极速。绝神作财宜结绝财物，忌占妻病、食禄。</div>',
+'人宅皆死各衰赢':'<div class="m5-text"><b>定义</b>　干支上神互乘死气。</div><div class="m5-text red">不宜吊丧问病，乘月内死气尤的，占病必死。</div>',
+'龙加生气吉迟迟':'<div class="m5-text"><b>定义</b>　青龙乘生干之神、又作月内之生气。</div><div class="m5-text red">目下未足峥嵘、徐徐发福；喻君子施惠于人，缓而作吉。</div>',
+});
+Object.assign(BF_DETAIL,{
+'避难逃生须弃旧':'<div class="m5-text"><b>定义</b>　三传无所益（财空、鬼克、脱气），日干就干上或支上神受生。</div><div class="m5-text red">应避难逃生、弃旧就新（四面受敌亦有无敌之处）；忌舍益就损。</div>',
+'朽木难雕别作为':'<div class="m5-text"><b>定义</b>　课中卯木作空亡（朽木不可雕）。</div><div class="m5-text red">宜改科易业、别作营生；卯加空地（斧斤不利）则凡谋不遂。</div>',
+'众鬼虽彰全不畏':'<div class="m5-text"><b>定义</b>　三传皆日鬼，但干上有救神（如寅木制土鬼）、或鬼坐空乡。</div><div class="m5-text red">先值惊危、后无所畏；有人谋害终不能为祸。救神不可作脱气言。</div>',
+'虽忧狐假虎威仪':'<div class="m5-text"><b>定义</b>　日干畏克，倚赖支神制克神（如狐借虎威）。</div><div class="m5-text red">切不可动谋，动则离支神保护、克神伤干。</div>',
+'鬼贼当时无畏忌':'<div class="m5-text"><b>定义</b>　三传皆日鬼，但鬼当令荣旺、贪生无意克干。</div><div class="m5-text red">当时无畏，防至休囚之季祸发；如有祸宜断绝以免后患。</div>',
+'金日逢丁凶祸动':'<div class="m5-text"><b>定义</b>　庚辛金日，三传年命日辰逢旬内六丁神。</div><div class="m5-text red">必主凶动；官人赴任极速，常人宜制丁乘神。分乘勾陈/死气/贵人/玄武/蛇雀而断。</div>',
+'水日逢丁财动之':'<div class="m5-text"><b>定义</b>　壬癸水日逢丁神（丁为水日之财）。</div><div class="m5-text red">主因财而动。</div>',
+'人宅受脱俱招盗':'<div class="m5-text"><b>定义</b>　干上支上皆乘脱气，或干上脱支、支上脱干。</div><div class="m5-text red">人被脱赚、宅遭盗窃；占病因盖屋费用致气脱，宜服补药。失脱乘玄武发用尤的。</div>',
+'所谋多拙逢罗网':'<div class="m5-text"><b>定义</b>　干上乘干前一辰（天罗）、支上乘支前一辰（地网）。</div><div class="m5-text red">网裹身宅、诸占不快，止利守己；动则变罗网伤身毁宅。年命冲破或空亡为破网。</div>',
+'天网自裹己招非':'<div class="m5-text"><b>定义</b>　墓神覆日，占人本命又填其墓神。</div><div class="m5-text red">天网自裹、自招其非，所作昏晦如处云雾，宜醮谢本命星位。</div>',
+'鬼临三四讼灾随':'<div class="m5-text"><b>定义</b>　日干之鬼临于第三、四课全。</div><div class="m5-text red">官词病患继踵而至，宜修德作福；若全值空亡始能免此。</div>',
+'丧吊全逢挂缟衣':'<div class="m5-text"><b>定义</b>　干支上全逢丧门（岁前二辰）、吊客（岁后二辰）。</div><div class="m5-text red">主凶；行年本命上乘之，其年必哭送亲姻、身披孝服。</div>',
+'虎临干鬼凶速速':'<div class="m5-text"><b>定义</b>　日干之鬼上乘白虎。</div><div class="m5-text red">凶祸速中又速；虎鬼无制不空则占讼被刑、占病死。虎之阴神能制虎则病者愈。官人则名催官符。</div>',
+'六阳数足须公用':'<div class="m5-text"><b>定义</b>　支干四课三传皆居六阳之位。</div><div class="m5-text red">利公干而不利私谋；有动达高尊之象，君子畏初中空亡减力。</div>',
+'六阴相继尽昏迷':'<div class="m5-text"><b>定义</b>　课传皆居六阴之位。</div><div class="m5-text red">利阴谋私干、不利公闻，尽昏迷；自昼传夜昏迷愈甚，占病必死、求望皆脱耗。</div>',
+'两蛇夹墓凶难免':'<div class="m5-text"><b>定义</b>　墓神覆日，又昼夜天将皆乘螣蛇夹之。</div><div class="m5-text red">如抱石投江；占病有积块难救、占讼被囚、占产凶；年命冲墓（破墓）可少延。</div>',
+'虎视逢虎力难施':'<div class="m5-text"><b>定义</b>　柔日虎视课，天将又乘白虎。</div><div class="m5-text red">前后皆虎、难施其力，凡占惊天动地、凶祸难免（双拳不敌四手）。</div>',
+'彼此全伤防两损':'<div class="m5-text"><b>定义</b>　支干各被上神克伐。</div><div class="m5-text red">占讼两家皆被扑责、诸占两边各亏、身伤宅损。</div>',
+'夫妇芜淫各有私':'<div class="m5-text"><b>定义</b>　干被支上神克、支却被干上神克（芜淫卦）。</div><div class="m5-text red">无夫妇好合之情、有奸私不协之意；干支行年值此为真解离。不可专执为夫妇。</div>',
+'宾主不投刑在上':'<div class="m5-text"><b>定义</b>　支干上乘刑（一字自刑/二字无礼/三字三刑）。</div><div class="m5-text red">所谋交涉各有异心，不可受降盟约；犯重刑占讼凶，空亡、皇恩、天赦可解。</div>',
+'彼此猜忌害相随':'<div class="m5-text"><b>定义</b>　支干上作六害。</div><div class="m5-text red">彼此猜忌、主客不相顾接、各有戾害；交互作害则我欲害人人已害我，最为危难。</div>',
+'传墓入墓分憎爱':'<div class="m5-text"><b>定义</b>　初传吉神（财禄长生官）忌入中末墓；初传凶神（鬼盗）喜入中末墓。</div><div class="m5-text red">故分憎爱而断：德禄财入墓不利、鬼入墓则先凶后吉。</div>',
+'合中犯杀蜜中砒':'<div class="m5-text"><b>定义</b>　三合局中，干支上见自刑、六害或冲克之神。</div><div class="m5-text red">恩中变怨、合中有破、被人阻隔；先应其事、后成阻（笑里有刀）。</div>',
+'初遭夹克不由己':'<div class="m5-text"><b>定义</b>　初传坐于克方，又被天将所伤（夹克）。</div><div class="m5-text red">身不由己、受人驱策；惟日鬼受夹克为妙（当忧不忧之义）。</div>',
+'干支乘墓各昏迷':'<div class="m5-text"><b>定义</b>　支干全被上神墓覆。</div><div class="m5-text red">如云雾中行、家宅尘暗，彼此不亨快；互乘墓神则我欲昏他反被他昏（天网恢恢疏而不漏）。</div>',
+});
+Object.assign(BF_DETAIL,{
+'任信丁马须言动':'<div class="m5-text"><b>定义</b>　伏吟卦（刚日自任、柔日自信），传中或支干上有旬内丁神、或乘天马驿马。</div><div class="m5-text red">不可便言伏匿不动，主静中求动；无丁马则尽伏尽匿终不动。六丙日吉、六戊日凶。</div>',
+'来去俱空岂动宜':'<div class="m5-text"><b>定义</b>　返吟卦而三传皆空亡。</div><div class="m5-text red">虽有动意实不动；诸返吟占事难成而覆破、访人差迭。天罡乘龙合在日上为真斩关（移远就近）。</div>',
+'三传递生人举荐':'<div class="m5-text"><b>定义</b>　三传递生（初生中、中生末、末生干，或反向）至日干。</div><div class="m5-text red">隔三隔四有人推荐、皆赖众人之说，宜干官请举；初末空亡则有心无实（闲话多赤心少）。</div>',
+'三传互克众人欺':'<div class="m5-text"><b>定义</b>　三传递相克害，或克日干。</div><div class="m5-text red">必有人递互相克、众口相欺，或遭雷攻状论；在朝官宜自检束、防台阁上言之患。</div>',
+'有始无终难变易':'<div class="m5-text"><b>定义</b>　初传日之长生、末传干之墓（有始无终）；反之初墓末长生（难变易）。</div><div class="m5-text red">前者初谋如锦后无成；后者先难后易、先暗后明。</div>',
+'苦去甘来乐里悲':'<div class="m5-text"><b>定义</b>　末生中、中生初、初克干，但末传又冲克初传并生干。</div><div class="m5-text red">先受磨折、后却安逸，不成功处反成功。</div>',
+'干支皆败事倾颓':'<div class="m5-text"><b>定义</b>　干支上皆逢败气。</div><div class="m5-text red">占身气血衰败、占宅崩颓，日渐狼狈；不可捕奸告讦，到官反牵连旧过（杀人一万自损三千）。</div>',
+'末助初兮三等论':'<div class="m5-text"><b>定义</b>　末传助其初传，分生干、克干、作财三等。</div><div class="m5-text red">助初生干则欲年命制末方吉；助初克干为教唆词讼之人；助初作财为暗有人以财相助。</div>',
+'闭口卦体两般推':'<div class="m5-text"><b>定义</b>　地盘旬首上神乘玄武（旬尾加旬首亦然）。</div><div class="m5-text red">宜捕盗追逃；占病禁口痢咽喉塞、占产哑儿、占失脱旁人不言、求事人闭口不语。</div>',
+'太阳照武宜擒贼':'<div class="m5-text"><b>定义</b>　玄武坐于太阳月将之上。</div><div class="m5-text red">贼形现露、不劳捕捉必自败；纵太阳空亡尤好，惟畏占时在夜（太阳已归地下）。</div>',
+'富贵干支逢禄马':'<div class="m5-text"><b>定义</b>　干上有支之驿马、支上有干之禄神（真富贵卦）。</div><div class="m5-text red">君子占加官添俸、富贵双全；常人占病讼俱凶、宅移身动。</div>',
+'魁度天门关隔定':'<div class="m5-text"><b>定义</b>　戌为天魁、亥为天门，戌加亥为用。</div><div class="m5-text red">占谋用皆被阻隔；壬癸日旦暮乘白虎，占病多隔气、盗难获、访人不见。</div>',
+'罡塞鬼户任谋为':'<div class="m5-text"><b>定义</b>　辰为天罡、寅为鬼户，辰加寅（罡塞鬼门）。</div><div class="m5-text red">众鬼不得窥觑，宜闪灾避难、阴谋私祷、吊丧问病、合药书符；甲戊庚日昼贵登天门尤的。</div>',
+'前后逼迫难进退':'<div class="m5-text"><b>定义</b>　前不可进（前值空/鬼）、后不可退（后值脱/鬼）。</div><div class="m5-text red">惟宜守干上旺、切不可妄动，动则虚耗百出。</div>',
+'空空如也事休追':'<div class="m5-text"><b>定义</b>　三传皆空亡（或三合两传空、余乘天空）。</div><div class="m5-text red">指空话空、全无实象，宜解散忧疑；鬼空尤妙，久病者死、新病者空，须待改旬再谋。</div>',
+'不行传者考初时':'<div class="m5-text"><b>定义</b>　中末传空亡，只以初传断吉凶（守株待兔）。</div><div class="m5-text red">初传为鬼坐实则恶事有好事无；初为遥克则好恶俱无。</div>',
+'万事喜忻三六合':'<div class="m5-text"><b>定义</b>　三传成三合局，且干支上见局中间一字作六合。</div><div class="m5-text red">凡谋皆遂、全无障碍、有人相助（纵带恶不成嗔）；不宜占解散、占病势笃。</div>',
+'将逢内战所谋危':'<div class="m5-text"><b>定义</b>　天将乘神与所临之神内战，为发用。</div><div class="m5-text red">将成合而被人搅扰、祸起萧墙；占讼被刑、占病死，惟宜占官从卑贱迤逦迁转。</div>',
+'妄用三传灾福异':'<div class="m5-text"><b>定义</b>　起三传若取用有误。</div><div class="m5-text red">则灾福应验无准；须辨涉害与比和、慎取发用，不可一概而论。</div>',
+'喜惧空亡乃妙机':'<div class="m5-text"><b>定义</b>　空亡分游行（天盘七八分）、落底（地盘十分）。</div><div class="m5-text red">克盗墓神、遥克日者宜空；生我救神、德合财官忌空。见生不生/见克不克/见财无财/见救不救/见盗不盗五格皆本此。</div>',
+'六爻现卦防其克':'<div class="m5-text"><b>定义</b>　三传现某一六亲爻。</div><div class="m5-text red">须防其所克之亲受灾：财现忧父母、父母现忧子息、子息现忧官事、官鬼现忧己身兄弟、同类现忧妻财；干上先有化神则无忧。</div>',
+'旬内空亡逐类推':'<div class="m5-text"><b>定义</b>　按本旬空亡所落之六亲。</div><div class="m5-text red">逐类推断（财空军储乏、鬼空敌人遁、救空谋策拙、比空赞佐慵、生空防失惠）；十恶大败日禄神空亡。</div>',
+'所筮不入仍凭类':'<div class="m5-text"><b>定义</b>　所占之象不入四课三传六处。</div><div class="m5-text red">仍凭其类神断其方所、色目，万类皆如其法。</div>',
+'非占现类勿言之':'<div class="m5-text"><b>定义</b>　盘中所现之象非本次所占之事类。</div><div class="m5-text red">不可妄言（如问求财不可言梁栋摧折），时人不可不自警。</div>',
+'常问不应逢吉象':'<div class="m5-text"><b>定义</b>　常人所问却逢诸贵德吉泰之课。</div><div class="m5-text red">官君子占为吉兆（迁官面君）；常人占反恐致灾（因讼达朝廷、见太守遭罪），远出可免病讼。</div>',
+'已灾凶逃返无疑':'<div class="m5-text"><b>定义</b>　已见病讼灾迍之后，占得凶否之卦（丧魂/天祸/天网等）。</div><div class="m5-text red">灾可消除；若未灾之前占得则病讼丧祸并至。天罡临命行年，静者主动、动者主静。</div>',
+});
 let _bfRendered=false;
 function bfInit(){
   if(_bfRendered)return;_bfRendered=true;
   let html='';
   BF_CATS.forEach(c=>{
     const list=BF_FA.filter(x=>x.c===c);
-    const inner=list.map(x=>`<div class="m5-text"><b style="color:var(--acc)">${x.f}</b><br><span style="color:#9B8570">${x.m}</span></div>`).join('');
+    const inner=list.map(x=>{
+      const d=BF_DETAIL[x.f]||`<div class="m5-text" style="color:#B0A08C;font-size:11px">（逐法详解补充中…）</div>`;
+      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${x.f}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">诀意</b>　${x.m}</div>${d}</div>`;
+    }).join('');
     html+=`<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${BF_CAT_NAME[c]}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${list.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${inner}</div></div>`;
   });
   document.getElementById('bf-sec').innerHTML=html;
