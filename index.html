@@ -359,6 +359,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="mcard-btns" style="margin-top:6px">
       <button class="btn btn-d" onclick="show('pzfl')">🗺 九宗门流程图</button>
       <button class="btn btn-d" onclick="show('pgz')">⚛ 干支关系</button>
+      <button class="btn btn-d" onclick="show('pbf')">📜 毕法赋</button>
     </div>
   </div>
   <div class="mcard">
@@ -387,6 +388,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="mcard-btns" style="margin-top:6px">
       <button class="btn btn-d" onclick="startWSD()">⚡ 旺相断法</button>
       <button class="btn btn-d" onclick="startGZ()">⚛ 干支关系</button>
+      <button class="btn btn-d" onclick="startBF()">📜 毕法赋</button>
     </div>
   </div>
   <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
@@ -398,6 +400,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀，按十大主题分类折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📖 九宗门详解9门全部加推导步骤+举例（涉害/遥克/昴星/别责等）</span></div>
@@ -2268,6 +2271,33 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 毕法赋速查 ======== -->
+<div id="pbf" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋速查</div></div>
+  <div style="padding-bottom:28px">
+    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">《毕法赋》宋·凌福之据邵彦和断案整理而成，为大六壬断法总纲，凡一百法。以下按<b>十大主题</b>分类，每法列<b>法诀+简释</b>，可折叠查阅。<br><span style="color:#9B8570;font-size:12px">领会精神，不可拘泥。逐法详解（100+格）持续追加中…</span></div>
+    <div id="bf-sec" style="margin-top:6px"></div>
+  </div>
+</div>
+
+<!-- ======== 毕法赋练习 ======== -->
+<div id="pbfq" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋练习</div><div class="tbr" id="bf-prog-r"></div></div>
+  <div id="pbfq-main">
+    <div class="prog-row"><span class="prog-txt" id="el-bf-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-bf-pb" style="width:0%"></div></div></div>
+    <div class="tj-card" id="bf-card"></div>
+    <div id="bf-opts"></div>
+    <div id="bf-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
+  </div>
+  <div id="pbfq-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="bf-res-score"></div>
+    <div class="qz-lv" id="bf-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="bf-res-detail"></div>
+    <button class="btn btn-r" onclick="startBF()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
 <!-- ======== 象法速查库 ======== -->
 <div id="pxf-sym" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">象法速查库</div></div>
@@ -3454,7 +3484,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='pxf-sym'){xfInit();}}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='pbf'){bfInit();}if(id==='pxf-sym'){xfInit();}}
 function goHome(){show('ph')}
 const DAILY_QUOTES=[
   '不积跬步，无以至千里；不积小流，无以成江海。',
@@ -4704,6 +4734,177 @@ function _zsEnd(){
   document.getElementById('zs-res-score').textContent=`${correct}/${total}`;
   document.getElementById('zs-res-lv').textContent=pct>=90?'支神已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
   document.getElementById('zs-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 毕法赋 速查 + 练习 ══
+const BF_CATS=['官贵','财运','婚孕','交易','家宅','疾病','鬼贼','刑墓','伏返','总纲'];
+const BF_CAT_NAME={官贵:'一 · 官贵科第',财运:'二 · 财运求谋',婚孕:'三 · 婚姻胎产',交易:'四 · 交易谋合',家宅:'五 · 家宅居住',疾病:'六 · 疾病生死',鬼贼:'七 · 鬼贼盗讼孝丧',刑墓:'八 · 刑冲害墓绝',伏返:'九 · 伏吟返吟',总纲:'十 · 综合断法总纲'};
+const BF_FA=[
+{c:'官贵',f:'前后引从升迁吉',m:'初末引从干支之前后，宜升职迁宅'},
+{c:'官贵',f:'首尾相见始终宜',m:'干上旬尾、支上旬首，攻取必胜、诸谋皆就'},
+{c:'官贵',f:'帘幕贵人高甲第',m:'昼占夜贵、夜占昼贵临身命，应试高中'},
+{c:'官贵',f:'催官使者赴官期',m:'日鬼乘白虎临干命，催速赴任'},
+{c:'官贵',f:'尊崇传内遇三奇',m:'三传全甲庚戊或乙丙丁，官居一品、可消灾'},
+{c:'官贵',f:'害贵讼直作屈断',m:'贵人受克墓空害，占讼理直反遭曲断'},
+{c:'官贵',f:'课传俱贵转无依',m:'四课三传遍地贵人，反无依倚、托事难成'},
+{c:'官贵',f:'昼夜贵加求两贵',m:'六处旦暮天乙相加，告贵须涉两贵人'},
+{c:'官贵',f:'贵人差迭事参差',m:'昼贵临夜地、夜贵临昼方，告贵多不归一'},
+{c:'官贵',f:'贵虽在狱宜临干',m:'贵人临辰戌为入狱，宜私谋阴祷、贵人受贿'},
+{c:'官贵',f:'神藏煞没须求贵',m:'贵登天门、百煞潜藏，凡谋亨利'},
+{c:'官贵',f:'鬼乘天乙乃神祇',m:'日鬼临身却为贵人，作神祇非鬼祟'},
+{c:'官贵',f:'两贵受克难干贵',m:'昼夜贵人皆受克，不可告贵、告亦不成'},
+{c:'财运',f:'旺禄临身徒妄作',m:'日禄又作旺神临干，守此勿他谋'},
+{c:'财运',f:'权摄不正禄临支',m:'禄神临支辰，受屈于人、权摄不正'},
+{c:'财运',f:'传财太旺反财亏',m:'三传财旺自贪生，求财反费己财'},
+{c:'财运',f:'脱上逢脱防虚诈',m:'干生上、上生将，尽被脱耗、多虚诈'},
+{c:'财运',f:'空上乘空事莫追',m:'旬空又乘天空，指空话空、全无实象'},
+{c:'财运',f:'进茹空亡宜退步',m:'向前三传皆空，宜退步抽身缩首'},
+{c:'财运',f:'踏脚空亡进用宜',m:'退步之传值空，既退遇空、宜进不宜退'},
+{c:'财运',f:'传财化鬼财休觅',m:'财爻遁鬼或化鬼，求财不得反招祸'},
+{c:'财运',f:'传鬼化财钱险危',m:'三传俱鬼独存一财，财出险中难安稳'},
+{c:'财运',f:'费有余而得不足',m:'生神落空、脱鬼却实，所得不偿所费'},
+{c:'财运',f:'用破身心无所归',m:'发用坐破、恋惊危之财引入鬼乡，身心无归'},
+{c:'婚孕',f:'胎财生气妻怀孕',m:'日胎神作妻财又逢月生气，主妻有孕'},
+{c:'婚孕',f:'胎财死气损胎推',m:'胎神作月内死气，妇孕不育、有损'},
+{c:'婚孕',f:'后合应知有另情',m:'干支上乘天后六合，主先奸后娶、私情'},
+{c:'交易',f:'交车相合交关利',m:'干支上神互作六合，宜交关交易成合'},
+{c:'交易',f:'上下皆合两心齐',m:'支干上神与地盘皆作六合，主客相顺'},
+{c:'交易',f:'彼求我事支传干',m:'初传起于支、末归于干，他人托我谋事'},
+{c:'交易',f:'我求彼事干传支',m:'初传起于干、末归于支，我俯求于人'},
+{c:'交易',f:'互生俱生凡事益',m:'干支上神互生或各自生身，两相有益'},
+{c:'交易',f:'互旺皆旺坐谋宜',m:'干支上乘旺神，彼我兴旺、坐待成谋'},
+{c:'家宅',f:'眷属丰盈居狭宅',m:'三传生干反脱支，人口丰隆而住宅窄狭'},
+{c:'家宅',f:'屋宅宽广致人衰',m:'三传盗干反生支，宅宽人少、日渐衰羸'},
+{c:'家宅',f:'华盖覆日人昏晦',m:'辰华盖作干墓临干发用，身位多昏晦'},
+{c:'家宅',f:'太阳射宅屋光辉',m:'月将太阳照宅，屋向阳明朗、有上人光饰'},
+{c:'家宅',f:'干墓并关人宅废',m:'日干之墓作四季关神发用，主人衰宅废'},
+{c:'家宅',f:'支坟财并旅程稽',m:'地支之墓作日财，商贩折本、在路阻程'},
+{c:'家宅',f:'病符克宅全家患',m:'病符临支又克支，阖家病患、逢天鬼遭疫'},
+{c:'家宅',f:'人宅坐墓甘招晦',m:'天盘支干皆坐地盘墓，甘受暗昧、自招其祸'},
+{c:'疾病',f:'干乘墓虎无占病',m:'干墓乘白虎，占病必死、诸事凶恶昏迷'},
+{c:'疾病',f:'支乘墓虎有伏尸',m:'干支墓乘虎临支，宅有伏尸鬼祸或丧动'},
+{c:'疾病',f:'受虎克神为病症',m:'白虎所克之神定病位，可治其所生之脏'},
+{c:'疾病',f:'制鬼之位乃良医',m:'克制日鬼之神即良医、食神，救难解祸'},
+{c:'疾病',f:'虎乘遁鬼殃非浅',m:'白虎加临旬内遁干作日鬼，凶咎难消'},
+{c:'疾病',f:'干支值绝凡谋决',m:'干支上皆乘绝神，宜结绝凶事、解讼病痊'},
+{c:'疾病',f:'人宅皆死各衰赢',m:'干支上互乘死气，不宜吊丧问病、占病必死'},
+{c:'疾病',f:'龙加生气吉迟迟',m:'青龙乘生神又作月生气，徐徐发福'},
+{c:'鬼贼',f:'避难逃生须弃旧',m:'三传无益，就干支上受生以避难逃生'},
+{c:'鬼贼',f:'朽木难雕别作为',m:'课中卯木空亡，宜改科易业、别作营生'},
+{c:'鬼贼',f:'众鬼虽彰全不畏',m:'三传皆鬼但干上有救神或鬼空，终不为祸'},
+{c:'鬼贼',f:'虽忧狐假虎威仪',m:'日干畏克但倚支神制克神，如狐借虎威'},
+{c:'鬼贼',f:'鬼贼当时无畏忌',m:'三传鬼当令荣旺贪生，当时无畏、防休囚祸发'},
+{c:'鬼贼',f:'金日逢丁凶祸动',m:'庚辛金日逢旬内六丁神，必主凶动'},
+{c:'鬼贼',f:'水日逢丁财动之',m:'壬癸水日逢丁神，主因财而动'},
+{c:'鬼贼',f:'人宅受脱俱招盗',m:'干支上皆乘脱气，人被脱赚、宅遭盗窃'},
+{c:'鬼贼',f:'所谋多拙逢罗网',m:'干上乘天罗、支上乘地网，网裹身宅、宜守'},
+{c:'鬼贼',f:'天网自裹己招非',m:'墓神覆日又本命填之，天网自裹、自招其非'},
+{c:'鬼贼',f:'鬼临三四讼灾随',m:'日鬼临第三四课全，官词病患继踵而至'},
+{c:'鬼贼',f:'丧吊全逢挂缟衣',m:'干支全逢丧门吊客，主哭送亲姻、身披孝服'},
+{c:'鬼贼',f:'虎临干鬼凶速速',m:'日干之鬼上乘白虎，凶祸速中又速'},
+{c:'刑墓',f:'六阳数足须公用',m:'课传皆居六阳之位，利公干不利私谋'},
+{c:'刑墓',f:'六阴相继尽昏迷',m:'课传皆居六阴之位，主阴谋私干、昏迷'},
+{c:'刑墓',f:'两蛇夹墓凶难免',m:'墓神覆日又两蛇夹之，如抱石投江、占病凶'},
+{c:'刑墓',f:'虎视逢虎力难施',m:'柔日虎视课天将又乘白虎，前后皆虎、惊危'},
+{c:'刑墓',f:'彼此全伤防两损',m:'支干各被上神克伐，两家皆亏、身伤宅损'},
+{c:'刑墓',f:'夫妇芜淫各有私',m:'干支互被对方上神克，无好合情、有奸私意'},
+{c:'刑墓',f:'宾主不投刑在上',m:'支干上乘刑，所谋各有异心、不可盟约'},
+{c:'刑墓',f:'彼此猜忌害相随',m:'支干上作六害，彼此猜忌、各有戾害'},
+{c:'刑墓',f:'传墓入墓分憎爱',m:'吉神入墓则憎、凶神入墓则爱，分而断之'},
+{c:'刑墓',f:'合中犯杀蜜中砒',m:'三合局中见自刑六害冲，恩中变怨、蜜中砒'},
+{c:'刑墓',f:'初遭夹克不由己',m:'初传坐克方又被天将伤，身不由己、受驱策'},
+{c:'刑墓',f:'干支乘墓各昏迷',m:'支干全被上神墓覆，如云雾中行、皆不亨快'},
+{c:'伏返',f:'任信丁马须言动',m:'伏吟卦见丁神天马，静中求动、必有动象'},
+{c:'伏返',f:'来去俱空岂动宜',m:'返吟卦三传皆空，虽有动意实不动'},
+{c:'总纲',f:'三传递生人举荐',m:'三传递生至干，隔三隔四有人推荐'},
+{c:'总纲',f:'三传互克众人欺',m:'三传递相克或克干，众口相欺、递互相害'},
+{c:'总纲',f:'有始无终难变易',m:'初长生末干墓则有始无终、反之先难后易'},
+{c:'总纲',f:'苦去甘来乐里悲',m:'末生中、中生初、初克干，末又冲初生干，先苦后甘'},
+{c:'总纲',f:'干支皆败事倾颓',m:'干支上皆逢败气，身衰宅颓、日渐狼狈'},
+{c:'总纲',f:'末助初兮三等论',m:'末传助初，分生干、克干、作财三等而断'},
+{c:'总纲',f:'闭口卦体两般推',m:'旬首上神乘玄武，占病禁口、诸事闭口不语'},
+{c:'总纲',f:'太阳照武宜擒贼',m:'玄武坐太阳月将之上，贼形现露、不劳自败'},
+{c:'总纲',f:'富贵干支逢禄马',m:'干上支驿马、支上干禄神，真富贵卦'},
+{c:'总纲',f:'魁度天门关隔定',m:'戌加亥为用，谋用皆被阻隔'},
+{c:'总纲',f:'罡塞鬼户任谋为',m:'辰加寅塞鬼门，众鬼不窥、任意谋为'},
+{c:'总纲',f:'前后逼迫难进退',m:'前不可进后不可退，惟守干上旺、勿妄动'},
+{c:'总纲',f:'空空如也事休追',m:'三传皆空亡，指空话空、宜解散忧疑'},
+{c:'总纲',f:'不行传者考初时',m:'中末空亡，只以初传断吉凶、守株待兔'},
+{c:'总纲',f:'万事喜忻三六合',m:'三合局又逢六合，凡谋皆遂、有人相助'},
+{c:'总纲',f:'将逢内战所谋危',m:'天将乘神内战为用，将成而被搅扰、祸起萧墙'},
+{c:'总纲',f:'妄用三传灾福异',m:'起三传若误则应验无准，须辨涉害比和'},
+{c:'总纲',f:'喜惧空亡乃妙机',m:'凶神宜空、吉神忌空，空亡喜惧是断课妙机'},
+{c:'总纲',f:'六爻现卦防其克',m:'三传现某六亲，须防其所克之亲受灾'},
+{c:'总纲',f:'旬内空亡逐类推',m:'按旬空所落六亲逐类推断吉凶得失'},
+{c:'总纲',f:'所筮不入仍凭类',m:'所占之象不入六处，仍凭类神断方所色目'},
+{c:'总纲',f:'非占现类勿言之',m:'盘现之象非所占事类，不可妄言'},
+{c:'总纲',f:'常问不应逢吉象',m:'常人占逢贵课吉象反恐致灾，宜远出免祸'},
+{c:'总纲',f:'已灾凶逃返无疑',m:'凶否卦已灾后占则灾消、未灾前占则祸至'},
+];
+let _bfRendered=false;
+function bfInit(){
+  if(_bfRendered)return;_bfRendered=true;
+  let html='';
+  BF_CATS.forEach(c=>{
+    const list=BF_FA.filter(x=>x.c===c);
+    const inner=list.map(x=>`<div class="m5-text"><b style="color:var(--acc)">${x.f}</b><br><span style="color:#9B8570">${x.m}</span></div>`).join('');
+    html+=`<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${BF_CAT_NAME[c]}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${list.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${inner}</div></div>`;
+  });
+  document.getElementById('bf-sec').innerHTML=html;
+}
+let bfState={qs:[],idx:0,correct:0,answered:false};
+function startBF(){
+  const pool=shuffleArr([...BF_FA]).slice(0,12);
+  const qs=pool.map((t,i)=>({...t,typeA:i%2===0}));
+  bfState={qs,idx:0,correct:0,answered:false};
+  document.getElementById('pbfq-main').style.display='';
+  document.getElementById('pbfq-result').style.display='none';
+  _scrollPos['pbfq']=0;show('pbfq');bfRender();
+}
+function bfRender(){
+  const{qs,idx}=bfState,q=qs[idx],total=qs.length;
+  document.getElementById('bf-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-bf-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-bf-pb').style.width=`${idx/total*100}%`;
+  const card=document.getElementById('bf-card');
+  let opts,ans;
+  if(q.typeA){
+    card.innerHTML=`<div class="tj-attr" style="margin:6px 0 2px;font-size:11px">毕法赋 · ${BF_CAT_NAME[q.c].split(' · ')[1]}</div><div style="font-size:18px;color:var(--acc);font-weight:bold;letter-spacing:1px;padding:6px 0">${q.f}</div><div class="tj-attr" style="font-size:12px">此法诀的含义是？</div>`;
+    ans=q.m;
+    opts=shuffleArr([ans,...shuffleArr(BF_FA.filter(t=>t.f!==q.f)).slice(0,3).map(t=>t.m)]);
+  } else {
+    card.innerHTML=`<div class="tj-attr" style="margin:6px 0 2px;font-size:11px">毕法赋 · 断象</div><div style="font-size:14px;color:#4A3520;padding:6px 0;line-height:1.7">${q.m}</div><div class="tj-attr" style="font-size:12px">对应哪一条法诀？</div>`;
+    ans=q.f;
+    opts=shuffleArr([ans,...shuffleArr(BF_FA.filter(t=>t.f!==q.f)).slice(0,3).map(t=>t.f)]);
+  }
+  document.getElementById('bf-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="bfAnswer(this)" style="font-size:14px;line-height:1.5;text-align:left;padding:10px 12px">${o}</button>`).join('');
+  document.getElementById('bf-explain').style.display='none';
+  bfState.answered=false;
+}
+function bfAnswer(btn){
+  if(bfState.answered)return;
+  bfState.answered=true;
+  const q=bfState.qs[bfState.idx];
+  const ans=q.typeA?q.m:q.f,chosen=btn.dataset.opt;
+  document.querySelectorAll('#bf-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
+  if(chosen===ans)bfState.correct++;else btn.classList.add('wrong');
+  const ex=document.getElementById('bf-explain');
+  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.f}</b>（${BF_CAT_NAME[q.c].split(' · ')[1]}）<br>${q.m}`;
+  ex.style.display='block';
+  setTimeout(()=>{
+    bfState.idx++;
+    if(bfState.idx>=bfState.qs.length){_bfEnd();return;}
+    bfRender();window.scrollTo(0,0);
+  },1800);
+}
+function _bfEnd(){
+  const{correct,qs}=bfState,total=qs.length,pct=Math.round(correct/total*100);
+  saveWeakRecord('毕法赋',total,total-correct);
+  document.getElementById('pbfq-main').style.display='none';
+  document.getElementById('pbfq-result').style.display='flex';
+  document.getElementById('bf-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('bf-res-lv').textContent=pct>=90?'毕法通熟 🎉':pct>=70?'渐入佳境 👍':pct>=50?'继续加油 💪':'需多研读 📚';
+  document.getElementById('bf-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
 }
 
 // ══ 干支关系练习 ══
