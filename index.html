@@ -358,6 +358,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
     <div class="mcard-btns" style="margin-top:6px">
       <button class="btn btn-d" onclick="show('pzfl')">🗺 九宗门流程图</button>
+      <button class="btn btn-d" onclick="show('pgz')">⚛ 干支关系</button>
     </div>
   </div>
   <div class="mcard">
@@ -385,6 +386,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
     <div class="mcard-btns" style="margin-top:6px">
       <button class="btn btn-d" onclick="startWSD()">⚡ 旺相断法</button>
+      <button class="btn btn-d" onclick="startGZ()">⚛ 干支关系</button>
     </div>
   </div>
   <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
@@ -396,6 +398,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📖 九宗门详解9门全部加推导步骤+举例（涉害/遥克/昴星/别责等）</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">🔬 新增「六壬算法逻辑梳理·进阶」文章（五阶段+五高阶完整算法体系）</span></div>
@@ -2124,6 +2127,143 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="qz-lv" id="zs-res-lv"></div>
     <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="zs-res-detail"></div>
     <button class="btn btn-r" onclick="startZS()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
+<!-- ======== 干支关系速查 ======== -->
+<div id="pgz" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">干支关系速查</div></div>
+  <div style="padding-bottom:28px">
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">五行生克<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <div class="m5-text red">相生：金→水→木→火→土→金（顺次相生一圈）。</div>
+        <div class="m5-text red">相克：金→木→土→水→火→金（隔位相克）。</div>
+        <div class="m5-text">生我者为印（生扶我），我生者为脱（泄我气）；克我者为鬼（官杀），我克者为财。六壬断课，干支神将皆以五行生克定吉凶成败。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">六合（地支相合）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th>相合</th><th>化气</th></tr>
+        <tr><td>子 丑</td><td>化土</td></tr>
+        <tr><td>寅 亥</td><td>化木</td></tr>
+        <tr><td>卯 戌</td><td>化火</td></tr>
+        <tr><td>辰 酉</td><td>化金</td></tr>
+        <tr><td>巳 申</td><td>化水</td></tr>
+        <tr><td>午 未</td><td>日月合</td></tr></table>
+        <div class="m5-text red">六合主和合、羁绊、事成；合中带煞则成中有阻。</div>
+        <div class="m5-text">注意：寅亥、巳申既是六合又是相破（合破同临，主先合后离、藕断丝连）。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">三合局<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th>三支</th><th>合成</th><th>结构</th></tr>
+        <tr><td>申 子 辰</td><td>水局</td><td>生·旺·墓</td></tr>
+        <tr><td>亥 卯 未</td><td>木局</td><td>生·旺·墓</td></tr>
+        <tr><td>寅 午 戌</td><td>火局</td><td>生·旺·墓</td></tr>
+        <tr><td>巳 酉 丑</td><td>金局</td><td>生·旺·墓</td></tr></table>
+        <div class="m5-text red">三合主聚、事成、群体力量。中神（子午卯酉·旺神）为局之核心，缺中神则合力大减。</div>
+        <div class="m5-text">半合：缺一字，生+旺 或 旺+墓 两字亦成半合，力次于全局；缺旺神的拱合更弱。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">六冲<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th colspan="2">相冲</th></tr>
+        <tr><td>子 午</td><td>丑 未</td></tr>
+        <tr><td>寅 申</td><td>卯 酉</td></tr>
+        <tr><td>辰 戌</td><td>巳 亥</td></tr></table>
+        <div class="m5-text red">六冲为克之动态（对宫相冲，相距七位），主变动、冲突、离散、动摇。凶冲则事败人散；吉神逢冲则动而有为。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">三刑 · 自刑<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th>类型</th><th>相刑</th></tr>
+        <tr><td>无恩之刑</td><td>寅刑巳 · 巳刑申 · 申刑寅</td></tr>
+        <tr><td>恃势之刑</td><td>丑刑戌 · 戌刑未 · 未刑丑</td></tr>
+        <tr><td>无礼之刑</td><td>子刑卯 · 卯刑子</td></tr></table>
+        <div class="m5-text red">三刑主伤残、官非、刑狱、恩中招怨。</div>
+        <div class="m5-text">自刑：辰辰 · 午午 · 酉酉 · 亥亥。六壬伏吟课无冲可用时，多取刑（含自刑）以起发用。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">相破（六破）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th colspan="2">相破</th></tr>
+        <tr><td>子 酉</td><td>丑 辰</td></tr>
+        <tr><td>寅 亥</td><td>卯 午</td></tr>
+        <tr><td>巳 申</td><td>未 戌</td></tr></table>
+        <div class="m5-text red">相破主破坏、分离、半途而废（阳日后三辰、阴日前三辰）。</div>
+        <div class="m5-text">注：六壬用此传统六破，与部分八字体系的「歌诀四破」不同，勿混用。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">六害（相穿）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th colspan="2">相害</th></tr>
+        <tr><td>子 未</td><td>丑 午</td></tr>
+        <tr><td>寅 巳</td><td>卯 辰</td></tr>
+        <tr><td>申 亥</td><td>酉 戌</td></tr></table>
+        <div class="m5-text red">六害（穿）主阻隔、妨害、暗中受损、恩中招怨。由六合逢冲破而成（合被冲则相害）。</div>
+        <div class="m5-text">注：寅巳既是六害又是无恩之刑（寅刑巳），害刑并见，伤害更重。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">五行生克制化喜害诀<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <div class="m5-text red">旺而得制得泄，方成器用：</div>
+        <div class="m5-jue">金旺得火，方成器皿。　火旺得水，方成相济。
+水旺得土，方成池沼。　土旺得木，方能疏通。
+木旺得金，方成栋梁。</div>
+        <div class="m5-text red">生多反为害（母旺子受损）：</div>
+        <div class="m5-jue">金赖土生，土多金埋。　土赖火生，火多土焦。
+火赖木生，木多火炽。　木赖水生，水多木漂。
+水赖金生，金多水浊。</div>
+        <div class="m5-jue">金能生水，水多金沉。　水能生木，木盛水缩。
+木能生火，火多木焚。　火能生土，土多火晦。
+土能生金，金多土变。</div>
+        <div class="m5-text red">克制反侮（衰极受制则凶）：</div>
+        <div class="m5-jue">金能克木，木坚金缺。　木能克土，土重木折。
+土能克水，水多土流。　水能克火，火炎水灼。
+火能克金，金多火熄。</div>
+        <div class="m5-jue">金衰遇火，必见销熔。　火弱逢水，必为熄灭。
+水弱逢土，必为淤塞。　土衰遇木，必遭倾陷。
+木弱逢金，必为砍折。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">旺相休囚死（四季五行状态）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th>季</th><th>旺</th><th>相</th><th>休</th><th>囚</th><th>死</th></tr>
+        <tr><td>春</td><td>木</td><td>火</td><td>水</td><td>金</td><td>土</td></tr>
+        <tr><td>夏</td><td>火</td><td>土</td><td>木</td><td>水</td><td>金</td></tr>
+        <tr><td>秋</td><td>金</td><td>水</td><td>土</td><td>火</td><td>木</td></tr>
+        <tr><td>冬</td><td>水</td><td>木</td><td>金</td><td>土</td><td>火</td></tr></table>
+        <div class="m5-text">当令者旺，令生者相，生令者休，克令者囚，令克者死。四季月（辰戌丑未月）土旺。</div>
+        <div class="m5-text red">「凶神吉将不可一例而推，旺相休囚不可一途而泥」——不可只凭月令定五行强弱。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 干支关系练习 ======== -->
+<div id="pgzq" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">干支关系练习</div><div class="tbr" id="gz-prog-r"></div></div>
+  <div id="pgzq-main">
+    <div class="prog-row"><span class="prog-txt" id="el-gz-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-gz-pb" style="width:0%"></div></div></div>
+    <div class="tj-card" id="gz-card"></div>
+    <div id="gz-opts"></div>
+    <div id="gz-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
+  </div>
+  <div id="pgzq-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="gz-res-score"></div>
+    <div class="qz-lv" id="gz-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="gz-res-detail"></div>
+    <button class="btn btn-r" onclick="startGZ()" style="margin-bottom:10px">再来一轮 ↺</button>
     <button class="btn btn-d" onclick="goHome()">← 首页</button>
   </div>
 </div>
@@ -4564,6 +4704,84 @@ function _zsEnd(){
   document.getElementById('zs-res-score').textContent=`${correct}/${total}`;
   document.getElementById('zs-res-lv').textContent=pct>=90?'支神已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
   document.getElementById('zs-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 干支关系练习 ══
+const GZ_HE=[['子','丑','土'],['寅','亥','木'],['卯','戌','火'],['辰','酉','金'],['巳','申','水'],['午','未','日月']];
+const GZ_CHONG=[['子','午'],['丑','未'],['寅','申'],['卯','酉'],['辰','戌'],['巳','亥']];
+const GZ_SANHE=[[['申','子','辰'],'水局'],[['亥','卯','未'],'木局'],[['寅','午','戌'],'火局'],[['巳','酉','丑'],'金局']];
+// 关系判定题库：每组在六种关系中唯一命中（已排除合破/害刑同临的歧义组）
+const GZ_REL_ID=[
+  {z:'子丑',r:'六合'},{z:'卯戌',r:'六合'},{z:'辰酉',r:'六合'},{z:'午未',r:'六合'},
+  {z:'子午',r:'六冲'},{z:'丑未',r:'六冲'},{z:'寅申',r:'六冲'},{z:'卯酉',r:'六冲'},{z:'辰戌',r:'六冲'},{z:'巳亥',r:'六冲'},
+  {z:'申子辰',r:'三合'},{z:'亥卯未',r:'三合'},{z:'寅午戌',r:'三合'},{z:'巳酉丑',r:'三合'},
+  {z:'寅巳申',r:'三刑'},{z:'丑戌未',r:'三刑'},
+  {z:'子酉',r:'相破'},{z:'丑辰',r:'相破'},{z:'卯午',r:'相破'},{z:'未戌',r:'相破'},
+  {z:'子未',r:'六害'},{z:'丑午',r:'六害'},{z:'卯辰',r:'六害'},{z:'申亥',r:'六害'},{z:'酉戌',r:'六害'},
+];
+const GZ_REL_NAMES=['六合','三合','六冲','三刑','相破','六害'];
+let gzState={qs:[],idx:0,correct:0,answered:false};
+function buildGZ(){
+  const qs=[];
+  shuffleArr([...GZ_HE]).slice(0,4).forEach(([a,b,hua])=>{
+    const from=Math.random()<.5?a:b, ans=from===a?b:a;
+    qs.push({q:`「${from}」的六合是哪一支？`,ans,pool:'zhi',ex:`${a}${b}相合${hua==='日月'?'（日月之合）':'，化'+hua}。`});
+  });
+  shuffleArr([...GZ_CHONG]).slice(0,3).forEach(([a,b])=>{
+    const from=Math.random()<.5?a:b, ans=from===a?b:a;
+    qs.push({q:`「${from}」的六冲是哪一支？`,ans,pool:'zhi',ex:`${a}${b}相冲（对宫七位，主变动离散）。`});
+  });
+  shuffleArr([...GZ_SANHE]).slice(0,2).forEach(([trio,ju])=>{
+    qs.push({q:`「${trio.join(' ')}」三合成什么局？`,ans:ju,pool:'ju',ex:`${trio.join('')}三合${ju}（生·旺·墓，中神${trio[1]}为核心）。`});
+  });
+  shuffleArr([...GZ_REL_ID]).slice(0,3).forEach(o=>{
+    qs.push({q:`「${o.z.split('').join(' ')}」是什么关系？`,ans:o.r,pool:'rel',ex:`${o.z} 属「${o.r}」。`});
+  });
+  return shuffleArr(qs);
+}
+function startGZ(){
+  gzState={qs:buildGZ(),idx:0,correct:0,answered:false};
+  document.getElementById('pgzq-main').style.display='';
+  document.getElementById('pgzq-result').style.display='none';
+  _scrollPos['pgzq']=0;show('pgzq');gzRender();
+}
+function gzRender(){
+  const{qs,idx}=gzState,q=qs[idx],total=qs.length;
+  document.getElementById('gz-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-gz-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-gz-pb').style.width=`${idx/total*100}%`;
+  document.getElementById('gz-card').innerHTML=`<div class="tj-attr" style="margin:6px 0 2px;font-size:11px">干支关系</div><div style="font-size:19px;color:var(--acc);font-weight:bold;letter-spacing:2px;padding:6px 0">${q.q}</div>`;
+  let opts;
+  if(q.pool==='zhi')opts=shuffleArr([q.ans,...shuffleArr(ZHI_ALL.filter(z=>z!==q.ans)).slice(0,3)]);
+  else if(q.pool==='ju')opts=shuffleArr(['水局','木局','火局','金局']);
+  else opts=shuffleArr([...GZ_REL_NAMES]);
+  document.getElementById('gz-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="gzAnswer(this)" style="font-size:15px;letter-spacing:2px">${o}</button>`).join('');
+  document.getElementById('gz-explain').style.display='none';
+  gzState.answered=false;
+}
+function gzAnswer(btn){
+  if(gzState.answered)return;
+  gzState.answered=true;
+  const q=gzState.qs[gzState.idx],chosen=btn.dataset.opt;
+  document.querySelectorAll('#gz-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===q.ans)b.classList.add('correct');});
+  if(chosen===q.ans)gzState.correct++;else btn.classList.add('wrong');
+  const ex=document.getElementById('gz-explain');
+  ex.innerHTML=`${chosen===q.ans?'✓ ':'✗ '}正确答案：<b>${q.ans}</b><br>${q.ex}`;
+  ex.style.display='block';
+  setTimeout(()=>{
+    gzState.idx++;
+    if(gzState.idx>=gzState.qs.length){_gzEnd();return;}
+    gzRender();window.scrollTo(0,0);
+  },1600);
+}
+function _gzEnd(){
+  const{correct,qs}=gzState,total=qs.length,pct=Math.round(correct/total*100);
+  saveWeakRecord('干支关系',total,total-correct);
+  document.getElementById('pgzq-main').style.display='none';
+  document.getElementById('pgzq-result').style.display='flex';
+  document.getElementById('gz-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('gz-res-lv').textContent=pct>=90?'关系已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
+  document.getElementById('gz-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
 }
 
 // ══ 宗门流程互动 ══
