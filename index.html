@@ -4966,6 +4966,33 @@ Object.assign(BF_CASE,{
 '贵人差迭事参差':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　甲子日，丑为昼贵却坐酉上、未为夜贵却坐卯上（昼贵临夜地、夜贵临昼方）。告贵求事多不归一，如谚云「尖担两头脱」。</div>',
 '贵虽在狱宜临干':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　天乙贵人加临地盘辰戌为「入狱」。乙、辛二日占名「贵人临身」，反宜干投贵人成事；其余八干则干官贵怒，惟宜私谋阴祷（名「贵人受贿」）。辰、戌二日占为贵人入宅，非坐狱论。</div>',
 });
+// 毕法赋案例排盘参数：{r:日干支, yj:月将, zs:占时, sc?:书中三传[初,中,末](有则注入,无则引擎起传), mt:发传法说明}
+// 仅收录原著给足信息、可自洽复原盘面的案例；条件式/信息不足的法不排盘
+const BF_BOARD={
+'前后引从升迁吉':{r:'壬子',yj:'亥',zs:'午',sc:['巳','戌','卯'],mt:'两贵引从格 · 比用取巳（初传乘昼贵）'},
+'贵人差迭事参差':{r:'甲子',yj:'酉',zs:'巳',mt:'元首课 · 昼贵丑坐酉地、夜贵未坐卯地'},
+};
+function bfBoard(fa,btn){
+  const sp=BF_BOARD[fa];if(!sp)return;
+  const body=btn.parentElement;
+  let ex=body.querySelector('.bf-ex');
+  if(ex){ex.remove();btn.textContent='📐 排盘 ↺';return;}
+  ex=document.createElement('div');ex.className='z9-ex bf-ex';body.insertBefore(ex,btn);
+  const rg=sp.r[0],rz=sp.r[1];
+  let ri=0;for(let i=0;i<60;i++)if(GAN_ALL[i%10]===rg&&ZHI_ALL[i%12]===rz){ri=i;break;}
+  const yi2=ZHI_ALL.indexOf(sp.yj),zsi=ZHI_ALL.indexOf(sp.zs);
+  const tp=ZHI_ALL.map((_,i)=>ZHI_ALL[(yi2+(i-zsi+12)%12)%12]);
+  const day=ZHU_SHI.includes(sp.zs);
+  const ji=ZHI_ALL.indexOf(GAN_JI[rg]);
+  const k1s=tp[ji],k2s=tp[ZHI_ALL.indexOf(k1s)],k3s=tp[ZHI_ALL.indexOf(rz)],k4s=tp[ZHI_ALL.indexOf(k3s)];
+  const sk=[{s:k1s,x:rg,n:'第一课'},{s:k2s,x:k1s,n:'第二课'},{s:k3s,x:rz,n:'第三课'},{s:k4s,x:k3s,n:'第四课'}];
+  kcState={rg,rz,ri,yj:YJ_TBL.find(y=>y.yj===sp.yj),yi2,zsi,zs:sp.zs,day,tp,sk,jg:GAN_JI[rg],gr:day?GR_Z[rg]:GR_Y[rg],xi:KONG_TBL[Math.floor(ri/10)]};
+  const s3=sp.sc?{cc:sp.sc[0],zc:sp.sc[1],mc:sp.sc[2]}:_compute3chuan(kcState);
+  kcState.cc=s3.cc;kcState.zc=s3.zc;kcState.mc=s3.mc;
+  kcState.mt=sp.mt||_detectMethod(kcState);
+  _renderBoard(ex);
+  btn.textContent='收起 ▲';
+}
 let _bfRendered=false;
 function bfInit(){
   if(_bfRendered)return;_bfRendered=true;
@@ -4975,7 +5002,8 @@ function bfInit(){
     const inner=list.map(x=>{
       const d=BF_DETAIL[x.f]||`<div class="m5-text" style="color:#B0A08C;font-size:11px">（逐法详解补充中…）</div>`;
       const cs=BF_CASE[x.f]||'';
-      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${x.f}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">诀意</b>　${x.m}</div>${d}${cs}</div>`;
+      const bd=BF_BOARD[x.f]?`<button class="btn btn-d" style="width:100%;margin-top:8px;font-size:12px" onclick="bfBoard('${x.f}',this)">📐 排盘 ↺</button>`:'';
+      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${x.f}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">诀意</b>　${x.m}</div>${d}${cs}${bd}</div>`;
     }).join('');
     html+=`<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${BF_CAT_NAME[c]}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${list.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${inner}</div></div>`;
   });
