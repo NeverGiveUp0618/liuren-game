@@ -4952,6 +4952,20 @@ Object.assign(BF_DETAIL,{
 '常问不应逢吉象':'<div class="m5-text"><b>定义</b>　常人所问却逢诸贵德吉泰之课。</div><div class="m5-text red">官君子占为吉兆（迁官面君）；常人占反恐致灾（因讼达朝廷、见太守遭罪），远出可免病讼。</div>',
 '已灾凶逃返无疑':'<div class="m5-text"><b>定义</b>　已见病讼灾迍之后，占得凶否之卦（丧魂/天祸/天网等）。</div><div class="m5-text red">灾可消除；若未灾之前占得则病讼丧祸并至。天罡临命行年，静者主动、动者主静。</div>',
 });
+// 毕法赋原著日课案例（据 zhong_notes.md 逐法提取；先补官贵类前10法，其余持续追加）
+const BF_CASE={};
+Object.assign(BF_CASE,{
+'前后引从升迁吉':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　<b>两贵引从（天干）</b>：壬子日，初传巳加子为昼贵、末传卯加戌为夜贵。虽墓神覆日，赖中传戌冲辰不畏墓，主得上人提携、两处贵人引荐。<br><b>二贵拱年命</b>：癸未日，初传巳加子、末传卯加戌，占人行年本命在亥（名「末助初财初德」），亦贵人助人。<br><b>初中拱地盘贵人</b>：庚午日，干上戌、支上申，支干并初中拱夜贵，宜告贵成合事。</div>',
+'首尾相见始终宜':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　<b>干上旬尾·支上旬首</b>之日：乙未（卯加辰）、辛丑（卯加戌）、丙申（卯加巳）、壬寅（卯加亥）、戊申（丑加巳）。<br><b>干上旬首·支上旬尾</b>之日：乙丑（子加辰）、辛未（子加戌）、丙寅（丑加巳）、戊寅（戌加巳）、壬申（子加亥）。</div>',
+'帘幕贵人高甲第':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　<b>昼夜贵人拱年命</b>：丁酉日，干上酉、支上亥，占人年命在申，干支上神作昼夜贵人拱年命上河魁，赴试必中。<br><b>源消根断</b>：癸卯日，干上卯、支上巳，年命在寅；虽二贵拱年命高中，恐以不摄终成劳瘵。<br><b>斗鬼相加</b>：丑加未、或未加丑作年命日干，主中魁元。</div>',
+'催官使者赴官期':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　日鬼乘白虎加临日干或年命，纵是远缺必催速赴任；若逢空亡则为虚信或被差遣。<br><b>返吟</b>：赴任占得返吟卦，多不满任。</div>',
+'尊崇传内遇三奇':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　<b>遁旬中干（乙丙丁）</b>：己卯日，初传丁丑、中传丙子、末传乙亥。<br><b>遁甲己还生甲（甲庚戊）</b>：辛巳日，初传甲午、中传庚寅、末传戊戌。</div>',
+'害贵讼直作屈断':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　甲申日，未加申为夜贵、乃日之墓神；丑作昼贵、又受寅木克、又作天空；初传子与未又为六害。占讼理虽直而必致曲断，事小必致大凶。</div>',
+'课传俱贵转无依':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　丁酉日，四课三传酉亥丑皆是贵人（遍地贵人）。贵多者不贵、托事无成；若用夜贵名「咄目煞」，占讼尤凶。</div>',
+'昼夜贵加求两贵':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　<b>贵覆干支</b>：甲申日，干上丑、支上未；庚寅日，干上未、支上丑——干支上皆乘昼夜贵人，占得两贵周全成事。（若值空亡则不作此论。）</div>',
+'贵人差迭事参差':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　甲子日，丑为昼贵却坐酉上、未为夜贵却坐卯上（昼贵临夜地、夜贵临昼方）。告贵求事多不归一，如谚云「尖担两头脱」。</div>',
+'贵虽在狱宜临干':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　天乙贵人加临地盘辰戌为「入狱」。乙、辛二日占名「贵人临身」，反宜干投贵人成事；其余八干则干官贵怒，惟宜私谋阴祷（名「贵人受贿」）。辰、戌二日占为贵人入宅，非坐狱论。</div>',
+});
 let _bfRendered=false;
 function bfInit(){
   if(_bfRendered)return;_bfRendered=true;
@@ -4960,7 +4974,8 @@ function bfInit(){
     const list=BF_FA.filter(x=>x.c===c);
     const inner=list.map(x=>{
       const d=BF_DETAIL[x.f]||`<div class="m5-text" style="color:#B0A08C;font-size:11px">（逐法详解补充中…）</div>`;
-      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${x.f}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">诀意</b>　${x.m}</div>${d}</div>`;
+      const cs=BF_CASE[x.f]||'';
+      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${x.f}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">诀意</b>　${x.m}</div>${d}${cs}</div>`;
     }).join('');
     html+=`<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${BF_CAT_NAME[c]}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${list.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${inner}</div></div>`;
   });
