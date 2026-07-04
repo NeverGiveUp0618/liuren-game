@@ -400,6 +400,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.4</span><span style="color:#9B8570;font-size:12px">📖 毕法赋新增「四库足本·卷九上」逐格详解：依《图解六壬大全·第三部》两级「法→格」，每格原文+白话+原著排盘，样板先录第一法9格+第二法（共10格9盘）</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
@@ -2276,6 +2277,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋速查</div></div>
   <div style="padding-bottom:28px">
     <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">《毕法赋》宋·凌福之据邵彦和断案整理而成，为大六壬断法总纲，凡一百法。以下按<b>十大主题</b>分类，每法列<b>法诀+简释</b>，可折叠查阅。<br><span style="color:#9B8570;font-size:12px">领会精神，不可拘泥。逐法详解（100+格）持续追加中…</span></div>
+    <div style="margin-top:14px;font-size:13px;font-weight:bold;color:#8B6914;letter-spacing:1px;padding:0 2px">📖 四库足本 · 卷九《毕法赋》上</div>
+    <div style="font-size:11px;color:#9B8570;padding:2px 2px 6px;line-height:1.6">依《图解六壬大全·第三部》(明)郭载骙原著。两级「法 → 格」，每格含原文、白话、原著排盘。（样板已录前两法，持续补录中）</div>
+    <div id="bfku-sec"></div>
+    <div style="margin-top:16px;font-size:13px;font-weight:bold;color:#6B5040;letter-spacing:1px;padding:0 2px">🗂 主题速查 · 一百法歌诀</div>
     <div id="bf-sec" style="margin-top:6px"></div>
   </div>
 </div>
@@ -3484,7 +3489,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='pbf'){bfInit();}if(id==='pxf-sym'){xfInit();}}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}}
 function goHome(){show('ph')}
 const DAILY_QUOTES=[
   '不积跬步，无以至千里；不积小流，无以成江海。',
@@ -4972,12 +4977,8 @@ const BF_BOARD={
 '前后引从升迁吉':{r:'壬子',yj:'亥',zs:'午',sc:['巳','戌','卯'],mt:'两贵引从格 · 比用取巳（初传乘昼贵）'},
 '贵人差迭事参差':{r:'甲子',yj:'酉',zs:'巳',mt:'元首课 · 昼贵丑坐酉地、夜贵未坐卯地'},
 };
-function bfBoard(fa,btn){
-  const sp=BF_BOARD[fa];if(!sp)return;
-  const body=btn.parentElement;
-  let ex=body.querySelector('.bf-ex');
-  if(ex){ex.remove();btn.textContent='📐 排盘 ↺';return;}
-  ex=document.createElement('div');ex.className='z9-ex bf-ex';body.insertBefore(ex,btn);
+// 从 {r,yj,zs,sc?,mt} 起盘并渲染到 ex（四课引擎自算，三传有 sc 则注入书中原盘）
+function _bfBuildAndRender(sp,ex){
   const rg=sp.r[0],rz=sp.r[1];
   let ri=0;for(let i=0;i<60;i++)if(GAN_ALL[i%10]===rg&&ZHI_ALL[i%12]===rz){ri=i;break;}
   const yi2=ZHI_ALL.indexOf(sp.yj),zsi=ZHI_ALL.indexOf(sp.zs);
@@ -4991,7 +4992,86 @@ function bfBoard(fa,btn){
   kcState.cc=s3.cc;kcState.zc=s3.zc;kcState.mc=s3.mc;
   kcState.mt=sp.mt||_detectMethod(kcState);
   _renderBoard(ex);
+}
+function _bfToggleBoard(sp,btn){
+  if(!sp)return;
+  const body=btn.parentElement;
+  let ex=body.querySelector('.bf-ex');
+  if(ex){ex.remove();btn.textContent='📐 排盘 ↺';return;}
+  ex=document.createElement('div');ex.className='z9-ex bf-ex';body.insertBefore(ex,btn);
+  _bfBuildAndRender(sp,ex);
   btn.textContent='收起 ▲';
+}
+function bfBoard(fa,btn){_bfToggleBoard(BF_BOARD[fa],btn);}
+function bfkBoard(li,gi,btn){_bfToggleBoard(BF_KU[li].ge[gi].board,btn);}
+
+// ══ 毕法赋·四库足本（卷九《毕法赋》上）逐格详解＋排盘 ══
+// 依《图解六壬大全·第三部毕法赋》(明)郭载骙原著，两级结构：法→格；盘面参数经引擎复现书中四课验证
+const BF_KU=[
+{n:1,ju:'前后引从升迁吉',pian:'进职迁宅',zhu:'引干宜进职，引支宜迁宅',ge:[
+  {name:'前后引从格',duan:'升官迁宅',
+   yw:'夫前引后从格者有二等，如遇初传居干前为引、末传居干后为从，值此格者必升擢官职；又如初传居支前为引、末传居支后为从，值此格者必迁修家宅，二事皆吉。',
+   bh:'前引后从的格局分两类：一类是初传居于天干前为引、末传居于天干后为从，占得此格主官职升迁；另一类是初传居于地支前为引、末传居于地支后为从，占得此格主家宅迁移修葺。两者均为吉。此格为总述，下列各格皆其变格。',
+   board:null},
+  {name:'拱贵格',duan:'官职升擢',
+   yw:'引从天干格内，如庚辰日寅加酉为初传、子加未为末传，此乃初末引从，庚干在内，干上丑为昼贵，兼三传下贼上，岂不应升擢官职也。夜占乃墓神覆日亦无畏，缘中传未作天乙冲破丑墓，乃为吉课也。',
+   bh:'拱贵格属前引后从第一类，即初传居天干前、末传居天干后。例如庚辰日，寅加酉为初传、子加未为末传。庚干在内，干上丑是昼贵人，兼有初中末三传下贼上，应验提升官职。夜占就算墓神覆盖日干也不用怕，因中传未作天乙冲破丑墓。占得此格，主官职升迁。',
+   board:{r:'庚辰',yj:'亥',zs:'午',sc:['寅','未','子'],mt:'拱贵格 · 庚辰日昼占，干上丑乘昼贵，三传下贼上'}},
+  {name:'两贵引从天干格',duan:'贵人提携',
+   yw:'如壬子日，初传巳加子为昼贵，末传卯加戌为夜贵，亦是墓神覆日，赖中传之戌冲辰，不畏墓也。凡值此例，必得上人提携，或两处贵人引荐成事，如辰为月将尤妙也。',
+   bh:'两贵引从天干格，譬如壬子日第八局。壬日昼贵在巳、夜贵在卯，壬寄亥宫。初传巳加子，巳为昼贵，居亥前为引；末传卯加戌，卯为夜贵，居亥后为从。昼夜两贵引从壬干，故称两贵引从天干格。另壬水以辰为墓神，辰临壬上为墓神覆日，但中传为戌，戌辰相冲，故不畏墓神。占得此格，主受贵人提携，或得两贵引荐而成事。若辰为月将，更吉。',
+   board:{r:'壬子',yj:'亥',zs:'午',sc:['巳','戌','卯'],mt:'两贵引从格 · 壬子日昼占，初传巳乘昼贵、末传卯乘夜贵'}},
+  {name:'初末引从地支格',duan:'迁修家宅',
+   yw:'如己亥日，初传巳加子，末传卯加戌，亦系引从地支格。虽初末加其干墓覆支，赖中传之戌冲辰亦无畏，宜迁修家宅则吉。又如丁亥日，初传巳加子，末传卯加戌，亦初末引从地支格。奈昼夜天将皆是白虎居于支上，岂宜迁修宅舍乎？殊不知亦赖中传戌蛇冲辰虎，不为害也。如用辰为月将尤为妙也，或占人行年本命又居巳位，以巳上二戌冲辰，众凶皆散矣。',
+   bh:'初末引从地支格，如己亥日第八局，初传巳加子、末传卯加戌。巳居日支亥水之前为引，卯居日支亥水之后为从，故为初末引从地支格。虽初末加亥干墓覆盖地支，依仗中传的戌冲辰，也不用担心，宜于迁修家宅。（另丁亥日同格，支上乘白虎凶将，但中传戌乘腾蛇、戌冲辰，白虎不为害。）',
+   board:{r:'己亥',yj:'亥',zs:'午',sc:['巳','戌','卯'],mt:'初末引从地支格 · 己亥日昼占，巳卯引从日支亥'}},
+  {name:'昼夜贵人临干支上拱其年命在内者',duan:'告贵成事',
+   yw:'昼夜贵人临干支上拱其年命在内者，宜告贵用事，必得两贵人成就。如丁酉日酉加丁、亥加酉，占人年命在申；丁巳日亥加丁、酉加巳，占人年命在午；癸亥日巳加癸、卯加亥，占人年命在子。凡干支夹拱在下层，惟甲子、甲辰、癸亥、癸卯；在上层惟庚午、庚戌、丁巳、丁酉。',
+   bh:'昼夜贵人临于干支上，夹拱年命。如丁酉日第十一局，占人年命在申。丁日夜贵在酉，酉居日干丁上、居申前为引；昼贵在亥，亥居日支酉上、居申后为从。两贵夹拱年命申于其内。主宜告贵用事，必得两贵人成就。（下盘取夜占为例。）',
+   board:{r:'丁酉',yj:'巳',zs:'卯',sc:['酉','亥','丑'],mt:'昼夜贵临干支拱年命申 · 丁酉日（下盘昼占示例）'}},
+  {name:'二贵拱年命格',duan:'告贵成事',
+   yw:'如癸未日，初传巳加子，末传卯加戌，占人行年、本命在亥，宜告贵成事。名末助初财初德，亦贵人助贵人也。',
+   bh:'二贵拱年命格，如癸未日第八局，占人行年、本命在亥。初传巳贵加子，居亥前为引；末传卯贵加戌，居亥后为从。占得此格，宜告贵成事。另外此课又是日德、日贵并妻财发用，日禄临支，末传助妻财，辰土官星临本命，故求财、求官皆吉，利于科考。',
+   board:{r:'癸未',yj:'亥',zs:'午',sc:['巳','戌','卯'],mt:'二贵拱年命格 · 癸未日昼占，二贵夹拱年命亥'}},
+  {name:'干支拱定日禄格',duan:'宜占前程',
+   yw:'惟伏吟卦为的。如丁巳、己巳、癸亥皆伏吟，宜占食禄事。癸亥为嫌禄空。',
+   bh:'此格均为伏吟课。如丁、己禄在午，丁巳、己巳两日占得伏吟课，干上乘未、支上乘巳，夹拱日禄午。癸禄在子，癸亥日占得伏吟课，干上乘丑、支上乘亥，夹拱日禄子。此课宜占食禄、前程之事。但癸亥日子水逢空，故称禄空，便不以此断。',
+   board:{r:'丁巳',yj:'巳',zs:'巳',sc:['巳','申','寅'],mt:'干支拱定日禄格 · 丁巳日伏吟，干支夹拱日禄午'}},
+  {name:'干支拱夜贵昼贵格',duan:'告贵求事吉',
+   yw:'惟伏吟为的。如庚午、己酉支干拱夜贵，甲子支干拱昼贵，皆伏吟卦，宜告贵人求事。',
+   bh:'此格亦为伏吟课。如庚午日占，夜贵在未，伏吟课，庚上乘申、午上乘午，夹拱夜贵未；己酉日占，夜贵在申，己上乘未、酉上乘酉，夹拱夜贵申——两者为干支拱夜贵。甲子日占，昼贵在丑，伏吟课，甲上乘寅、子上乘子，夹拱昼贵丑，为干支拱昼贵。占得此格，宜告贵求事。（下盘取庚午日夜占示例。）',
+   board:{r:'庚午',yj:'子',zs:'子',sc:['申','寅','巳'],mt:'干支拱夜贵格 · 庚午日伏吟夜占，干支夹拱夜贵未'}},
+  {name:'初中拱地盘贵人格',duan:'告贵成事',
+   yw:'如庚午日，干上戌，支上申，乃支干并初中拱夜贵也；又庚午日，干上酉，支上未；又庚午日，干上午、支上辰，乃支干初中皆拱地盘之夜贵，皆宜告贵而成合事。余皆仿此。',
+   bh:'初中拱地盘贵人格。如庚午日第十一局，夜贵在未，干上神戌、支上神申，初传申、中传戌，夹拱酉，酉对应地盘上为夜贵未。因此为干支并初中拱地盘之夜贵。占得此格，宜告贵成事。',
+   board:{r:'庚午',yj:'寅',zs:'子',sc:['申','戌','子'],mt:'初中拱地盘贵人格 · 庚午日夜占，初中传夹拱地盘夜贵'}},
+]},
+{n:2,ju:'首尾相见始终宜',pian:'所谋皆成',zhu:'攻必取，战必胜',ge:[
+  {name:'周而复始格',duan:'占事必成',
+   yw:'谓干上有旬尾，支上有旬首，名周而复始格，亦名一旬周遍格。凡值此者，占事不脱，所谋皆成。占赴试，宜代工；占讼，宜换司易局；占交加用事，去而复来。惟不宜占释散事，如有忧疑，其事尽在未能决断。惟乙未、辛丑、丙申、壬寅、戊申五日有之。',
+   bh:'“首尾相见”指干支上神为旬尾和旬首。干上神为旬尾、支上神为旬首，称周而复始格，又叫一旬周遍格。占得此格，事情不会失脱，谋划皆可成功。占考试宜代工应试；占诉讼宜改换衙门；事情多有交加、反复来去。只是不宜占释散忧疑之事，主事情不能决断。（干上旬尾支上旬首之日：乙未、辛丑、丙申、壬寅、戊申；干上旬首支上旬尾之日：乙丑、辛未、丙寅、戊寅、壬申。）',
+   board:{r:'乙未',yj:'辰',zs:'巳',sc:['戌','卯','午'],mt:'周而复始格 · 乙未日第二局，干上旬尾、支上旬首'}},
+]},
+];
+let _bfkRendered=false;
+function bfKuInit(){
+  if(_bfkRendered)return;_bfkRendered=true;
+  let html='';
+  BF_KU.forEach((law,li)=>{
+    const geHtml=law.ge.map((g,gi)=>{
+      const bd=g.board?`<button class="btn btn-d" style="width:100%;margin-top:8px;font-size:12px" onclick="bfkBoard(${li},${gi},this)">📐 排盘 ↺</button>`:'';
+      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${g.name}　<span style="color:#B08D57;font-weight:normal">${g.duan}</span></button>`+
+        `<div class="m5-sub-body">`+
+        `<div class="m5-text"><b style="color:#8B6914">原文</b>　${g.yw}</div>`+
+        `<div class="m5-text red"><b style="color:var(--acc)">白话</b>　${g.bh}</div>`+
+        bd+`</div>`;
+    }).join('');
+    html+=`<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">第${law.n}法 · ${law.ju}<span style="color:#9B8570;font-size:11px;margin-left:5px">${law.pian}</span><span class="m5-tog-arrow">›</span></button>`+
+      `<div class="m5-body">`+
+      `<div class="m5-text" style="background:var(--bg2);border-left-color:#6B5040"><b style="color:#6B5040">口诀</b>　${law.ju}　<span style="color:#9B8570;font-size:12px">〔${law.zhu}〕</span></div>`+
+      geHtml+`</div></div>`;
+  });
+  document.getElementById('bfku-sec').innerHTML=html;
 }
 let _bfRendered=false;
 function bfInit(){
