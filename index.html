@@ -409,6 +409,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📚 毕法赋四库足本继续录入第91~100法：补入虎鬼龙生、妄用三传、空亡妙机、六爻现卦、类神取断、贵课凶课等收束十法</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📐 毕法赋第71~100法补入原著图例课盘：按第几局反推月将占时、三传照书图注入，并通过统一排盘UI全量渲染校验</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">🔎 毕法赋第71~100法二轮精校：补入可反推的原文例课课盘，统一旧摘要题名，并修正空亡注语等OCR残留</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">🔎 毕法赋第1~70法复盘统计：核定182盘/256格，并为全书无图例或条件不足的格目增加无盘说明</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
@@ -6653,7 +6654,9 @@ function bfKuInit(){
   let html='';
   BF_KU.forEach((law,li)=>{
     const geHtml=law.ge.map((g,gi)=>{
-      const bd=g.board?`<button class="btn btn-d" style="width:100%;margin-top:8px;font-size:12px" onclick="bfkBoard(${li},${gi},this)">📐 排盘 ↺</button>`:'';
+      const bd=g.board
+        ?`<button class="btn btn-d" style="width:100%;margin-top:8px;font-size:12px" onclick="bfkBoard(${li},${gi},this)">📐 排盘 ↺</button>`
+        :`<div class="m5-text" style="font-size:11px;color:#9B8570;background:var(--bg2);border-left-color:#D6C4AA"><b style="color:#6B5040">排盘</b>　原书无图例，或当前文字条件不足以唯一反推课盘，暂不显示排盘。</div>`;
       return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${g.name}　<span style="color:#B08D57;font-weight:normal">${g.duan}</span></button>`+
         `<div class="m5-sub-body">`+
         `<div class="m5-text"><b style="color:#8B6914">原文</b>　${g.yw}</div>`+
