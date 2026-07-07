@@ -408,6 +408,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📚 毕法赋四库足本继续录入第81~90法：补入传墓、不行传、三六合、合中犯杀、夹克内战、坐墓乘墓、伏吟丁马、返吟空亡等逐格原文与白话</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📚 毕法赋四库足本继续录入第91~100法：补入虎鬼龙生、妄用三传、空亡妙机、六爻现卦、类神取断、贵课凶课等收束十法</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📐 毕法赋第71~100法补入原著图例课盘：按第几局反推月将占时、三传照书图注入，并通过统一排盘UI全量渲染校验</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">🔎 毕法赋第71~100法二轮精校：补入可反推的原文例课课盘，统一旧摘要题名，并修正空亡注语等OCR残留</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
@@ -4799,7 +4800,7 @@ const BF_FA=[
 {c:'疾病',f:'制鬼之位乃良医',m:'克制日鬼之神即良医、食神，救难解祸'},
 {c:'疾病',f:'虎乘遁鬼殃非浅',m:'白虎加临旬内遁干作日鬼，凶咎难消'},
 {c:'疾病',f:'干支值绝凡谋决',m:'干支上皆乘绝神，宜结绝凶事、解讼病痊'},
-{c:'疾病',f:'人宅皆死各衰赢',m:'干支上互乘死气，不宜吊丧问病、占病必死'},
+{c:'疾病',f:'人宅皆死各衰羸',m:'干支上互乘死气，不宜吊丧问病、占病必死'},
 {c:'疾病',f:'龙加生气吉迟迟',m:'青龙乘生神又作月生气，徐徐发福'},
 {c:'鬼贼',f:'避难逃生须弃旧',m:'三传无益，就干支上受生以避难逃生'},
 {c:'鬼贼',f:'朽木难雕别作为',m:'课中卯木空亡，宜改科易业、别作营生'},
@@ -4827,7 +4828,7 @@ const BF_FA=[
 {c:'刑墓',f:'初遭夹克不由己',m:'初传坐克方又被天将伤，身不由己、受驱策'},
 {c:'刑墓',f:'干支乘墓各昏迷',m:'支干全被上神墓覆，如云雾中行、皆不亨快'},
 {c:'伏返',f:'任信丁马须言动',m:'伏吟卦见丁神天马，静中求动、必有动象'},
-{c:'伏返',f:'来去俱空岂动宜',m:'返吟卦三传皆空，虽有动意实不动'},
+{c:'伏返',f:'来去俱空岂动移',m:'返吟卦三传皆空，虽有动意实不动'},
 {c:'总纲',f:'三传递生人举荐',m:'三传递生至干，隔三隔四有人推荐'},
 {c:'总纲',f:'三传互克众人欺',m:'三传递相克或克干，众口相欺、递互相害'},
 {c:'总纲',f:'有始无终难变易',m:'初长生末干墓则有始无终、反之先难后易'},
@@ -4906,7 +4907,7 @@ Object.assign(BF_DETAIL,{
 '制鬼之位乃良医':'<div class="m5-text"><b>定义</b>　能克制日鬼之神（即日之食神）。</div><div class="m5-text red">即良医、救神，或本家亲人能医、家堂祖宗保护；乘贵得上人释愆。若鬼空则救神无用（庸医）。</div>',
 '虎乘遁鬼殃非浅':'<div class="m5-text"><b>定义</b>　白虎加临旬内遁干而作日鬼。</div><div class="m5-text red">应验如神，凡占咎深难消，纵空亡亦不能为救。</div>',
 '干支值绝凡谋决':'<div class="m5-text"><b>定义</b>　干支上皆乘绝神。</div><div class="m5-text red">止宜结绝凶事、释解官讼、占病痊；返吟结事极速。绝神作财宜结绝财物，忌占妻病、食禄。</div>',
-'人宅皆死各衰赢':'<div class="m5-text"><b>定义</b>　干支上神互乘死气。</div><div class="m5-text red">不宜吊丧问病，乘月内死气尤的，占病必死。</div>',
+'人宅皆死各衰羸':'<div class="m5-text"><b>定义</b>　干支上神互乘死气。</div><div class="m5-text red">不宜吊丧问病，乘月内死气尤的，占病必死。</div>',
 '龙加生气吉迟迟':'<div class="m5-text"><b>定义</b>　青龙乘生干之神、又作月内之生气。</div><div class="m5-text red">目下未足峥嵘、徐徐发福；喻君子施惠于人，缓而作吉。</div>',
 });
 Object.assign(BF_DETAIL,{
@@ -4938,7 +4939,7 @@ Object.assign(BF_DETAIL,{
 });
 Object.assign(BF_DETAIL,{
 '任信丁马须言动':'<div class="m5-text"><b>定义</b>　伏吟卦（刚日自任、柔日自信），传中或支干上有旬内丁神、或乘天马驿马。</div><div class="m5-text red">不可便言伏匿不动，主静中求动；无丁马则尽伏尽匿终不动。六丙日吉、六戊日凶。</div>',
-'来去俱空岂动宜':'<div class="m5-text"><b>定义</b>　返吟卦而三传皆空亡。</div><div class="m5-text red">虽有动意实不动；诸返吟占事难成而覆破、访人差迭。天罡乘龙合在日上为真斩关（移远就近）。</div>',
+'来去俱空岂动移':'<div class="m5-text"><b>定义</b>　返吟卦而三传皆空亡。</div><div class="m5-text red">虽有动意实不动；诸返吟占事难成而覆破、访人差迭。天罡乘龙合在日上为真斩关（移远就近）。</div>',
 '三传递生人举荐':'<div class="m5-text"><b>定义</b>　三传递生（初生中、中生末、末生干，或反向）至日干。</div><div class="m5-text red">隔三隔四有人推荐、皆赖众人之说，宜干官请举；初末空亡则有心无实（闲话多赤心少）。</div>',
 '三传互克众人欺':'<div class="m5-text"><b>定义</b>　三传递相克害，或克日干。</div><div class="m5-text red">必有人递互相克、众口相欺，或遭雷攻状论；在朝官宜自检束、防台阁上言之患。</div>',
 '有始无终难变易':'<div class="m5-text"><b>定义</b>　初传日之长生、末传干之墓（有始无终）；反之初墓末长生（难变易）。</div><div class="m5-text red">前者初谋如锦后无成；后者先难后易、先暗后明。</div>',
@@ -5014,11 +5015,11 @@ function bfkBoard(li,gi,btn){_bfToggleBoard(BF_KU[li].ge[gi].board,btn);}
 
 // ══ 毕法赋·四库足本（卷九《毕法赋》上）逐格详解＋排盘 ══
 // 依《图解六壬大全·第三部毕法赋》(明)郭载骙原著，两级结构：法→格；盘面参数经引擎复现书中四课验证
-function bfp(r,ju,sc,mt,night=false){
+function bfp(r,ju,sc,mt,night=false,src='书图'){
   const zs=night?'酉':'午';
   const off=ju===1?0:13-ju;
   const yj=ZHI_ALL[(ZHI_ALL.indexOf(zs)+off+12)%12];
-  return{r,yj,zs,sc,mt:`${mt} · ${r}日第${ju}局${night?'夜占':'昼占'}（据书图三传${sc.join('')}注入）`};
+  return{r,yj,zs,sc,mt:`${mt} · ${r}日第${ju}局${night?'夜占':'昼占'}（据${src}三传${sc.join('')}注入）`};
 }
 const BF_KU=[
 {n:1,ju:'前后引从升迁吉',pian:'进职迁宅',zhu:'引干宜进职，引支宜迁宅',ge:[
@@ -6217,7 +6218,7 @@ const BF_KU=[
   {name:'进退不可格',duan:'不可妄动',
    yw:'假令壬寅日干上子，三传辰巳午皆空而不可进。欲退后一步，逢地下寅盗气，又退一步，逢丑为干鬼，乃前不可进，后不可退。以此推之，惟宜守干上旺，切不可轻举妄动，如动则虚耗百出。又癸巳日干上子，乙巳日干上卯，三传卯寅丑。甲寅日干上卯，三传辰巳午。壬申日干上子，三传丑寅卯。癸卯日干上寅，三传辰巳午。',
    bh:'前路逢空，退后又遇盗气、日鬼，为进退不可。占得只宜守干上旺处，不可轻动，动则虚耗百出。',
-   board:null},
+   board:bfp('壬寅',12,['辰','巳','午'],'进退不可格 · 壬寅日干上子，三传辰巳午皆空',false,'原文例课')},
   {name:'初传上下皆克格',duan:'诸占不宜',
    yw:'初传上下皆克格，初传既被下克，继归地盘本宫，又被上神所克，上下俱伤，诸占不宜。',
    bh:'初传受地盘下克，又归本宫被上神克，上下皆伤，主所谋阻碍重重。',
@@ -6519,7 +6520,7 @@ const BF_KU=[
   {name:'龙加生气格',duan:'慢慢成福',
    yw:'谓青龙乘生干之神，又作月内之生气者。虽目下未足峥嵘，却徐徐而发福也。此例喻君子欲施恩于人，未尝启齿，缓而作吉，尤赖岁君。如六丙日寅加巳夜将乘青龙，三月占尤的。六丁日干上寅夜将，三月占，内丙午、丁未日空亡不中用。六戊日干上申昼将乘青龙，九月占，内戊寅日申空。六己日干上巳昼将，六月占，内己亥日巳空。余干无例。',
    bh:'青龙乘生干之神，又作月内生气，主福吉缓缓而来，眼前未显，日后渐成。若生气空亡，则不用此断。',
-   board:null},
+   board:bfp('丙申',4,['巳','寅','亥'],'龙加生气格 · 六丙日寅加巳夜将乘青龙，三月占',true,'原文例课')},
 ]},
 {n:93,ju:'妄用三传灾福异',pian:'三传起用辨误',zhu:'三传错误则灾福不验',ge:[
   {name:'妄用三传格',duan:'占断错误',
@@ -6607,7 +6608,7 @@ const BF_KU=[
    bh:'阳日返吟为德丧禄绝，阴日返吟为四绝体，多不利吉事进取。',
    board:null},
 ]},
-{n:96,ju:'旬内空亡逐类推',pian:'详辨多端',zhu:'财空军储乏，鬼空政人违，救空谋策拙，比空赞佐情，生空防失惠',ge:[
+{n:96,ju:'旬内空亡逐类推',pian:'详辨多端',zhu:'财空军储乏，鬼空敌人遁，救空谋策拙，比空赞佐情，生空防失惠',ge:[
   {name:'类神空亡格',duan:'六亲空亡',
    yw:'甲子旬戌亥空亡。甲子、乙丑日妻财及父母空；丙寅、丁卯日子息及官鬼空；戊辰、己巳日兄弟及妻财空；庚午、辛未日父母及子息空；壬申、癸酉日官鬼及兄弟空。其余五旬以此类推。十恶大败日乃无禄之日也，盖甲辰、乙巳、壬申、丙申、丁亥、庚辰、戊戌、癸亥、辛巳、己丑，此十日禄神空亡，故为无禄之日。',
    bh:'旬空要按日干六亲逐类推断。财空主财乏，鬼空主官鬼无力，救空主谋策不灵，比空主助力不足，生空主恩惠失落；十恶大败日以禄神空亡为要。',
@@ -6639,11 +6640,11 @@ const BF_KU=[
   {name:'结绝格',duan:'凶事完结',
    yw:'结绝格，六丙日干上亥，或常问必主病讼。如已见凶灾，反宜结绝旧事；又作昼贵，尤宜告贵人而结绝凶事。',
    bh:'六丙日干上亥，常问主病讼；若已有凶灾，则宜借贵人之力结绝旧事。',
-   board:null},
+   board:bfp('丙子',7,['亥','巳','亥'],'结绝格 · 六丙日干上亥，昼贵宜告贵结绝凶事',false,'原文例课')},
   {name:'以凶制凶格',duan:'宜于解忧',
    yw:'以凶制凶格，六癸日辰加丑，此用墓神敌克日，诚为凶也。如夜将又乘蛇尤凶，以末上戌乘白虎冲辰，谓之破墓冲鬼，以凶制凶，凶即散而无从也。又六癸日辰加丑昼将，亦赖末之蛇冲虎，辰冲戌，尤宜解忧。',
    bh:'凶神被另一凶神冲破制伏，为以凶制凶。虽课象凶，若已有忧灾，反宜解忧散凶。',
-   board:null},
+   board:bfp('癸未',10,['辰','未','戌'],'以凶制凶格 · 六癸日辰加丑，破墓冲鬼',false,'原文例课')},
 ]},
 ];
 let _bfkRendered=false;
