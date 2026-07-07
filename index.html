@@ -362,6 +362,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <button class="btn btn-d" onclick="show('pgz')">⚛ 干支关系</button>
     </div>
     <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-d" onclick="show('pcase')">📂 课例库</button>
       <button class="btn btn-d" onclick="show('pbf')">📜 毕法赋</button>
     </div>
   </div>
@@ -415,6 +416,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">🔎 毕法赋第1~70法复盘统计：核定182盘/256格，并为全书无图例或条件不足的格目增加无盘说明</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📜 毕法赋页面结构调整：四库足本作为正文主区，原歌诀速查改为百法速记索引并移到正文前方</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📚 新增「六十四课经」格局库：按叶飘然讲义第五章校出64项主课体，提供分组检索、成格定义与来源定位</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📂 新增「历代课例库」MVP：先录天时、胎产、疾病、失盗四类16条讲义案例，按分类与关键词检索断法抓手、验应反馈和来源位置</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
@@ -2345,6 +2347,20 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 历代课例库 ======== -->
+<div id="pcase" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">历代课例库</div></div>
+  <div style="padding-bottom:28px">
+    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">依叶飘然《大六壬通解》第六章分类案例整理。当前先做<b>天时、胎产、疾病、失盗</b>四类轻量索引，每条保留原题、断法抓手、验应反馈和来源位置；完整课盘与隐藏答案训练后续逐步接入。</div>
+    <div style="display:flex;gap:8px;margin:10px 0 8px">
+      <input id="case-q" oninput="caseRender()" placeholder="搜索分类、原题、断法抓手、验应" style="flex:1;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 10px;color:#4A3520;font-size:13px;outline:none">
+      <button class="btn btn-d" style="width:74px" onclick="document.getElementById('case-q').value='';caseRender()">清空</button>
+    </div>
+    <div id="case-tabs" class="xfsym-tab-bar"></div>
+    <div id="case-sec" style="margin-top:8px"></div>
+  </div>
+</div>
+
 <!-- ======== 毕法赋 ======== -->
 <div id="pbf" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋</div></div>
@@ -3563,7 +3579,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}}
 function goHome(){show('ph')}
 const DAILY_QUOTES=[
   '不积跬步，无以至千里；不积小流，无以成江海。',
@@ -4813,6 +4829,47 @@ function _zsEnd(){
   document.getElementById('zs-res-score').textContent=`${correct}/${total}`;
   document.getElementById('zs-res-lv').textContent=pct>=90?'支神已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
   document.getElementById('zs-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 历代课例库 ══
+const CASE_CATS=['全部','天时','胎产','疾病','失盗'];
+let caseCat='全部',caseDone=false;
+const CASE_LIB=[
+{cat:'天时',title:'庚寅年公历七月十九日，占断当日天气变化',catch:'天罡临玄武且为正时；辰为水库；酉金毕宿发用；三传酉子卯；庚日丁鬼临卯主雷电。',result:'巳时云层变化，午时小雨后太阳出，申酉风雷雨至，酉时大雨。',src:'叶飘然讲义中册·第六章·天时，约5980-6005行。'},
+{cat:'天时',title:'明道二年癸酉，京城三月至六月不雨，仁宗召苗公占',catch:'发用青龙跨虎有风云微雨；中传朱雀临亥为水火交战发雷；日上巳火乘太常故当日不雨；登明水神加申定庚申日雨；甲子日卯加子云雷相加大雨。',result:'申时风雷无雨，庚申午时雨，甲子日雷电大雨。',src:'叶飘然讲义中册·第六章·天时，约6006-6025行。'},
+{cat:'天时',title:'十二月庚申日子将申时，占晴雨',catch:'润下课，玄临子发用，中传青龙乘申，末传夜将亦青龙；冬占主雨雪。',result:'辛亥日雨，丙辰日大雪，戊午日晴而起风。',src:'叶飘然讲义中册·第六章·天时，约6026-6039行。'},
+{cat:'天时',title:'建炎三年己酉十一月初四，韩太守祈雪占课',catch:'铸印课主锻造变化；水升火降；申子为水加临日辰；三传顺行；卯作白虎与申皆白色；子作勾陈主雪深厚。',result:'巳时风起转寒，未时雨，亥时雪，积七寸。',src:'叶飘然讲义中册·第六章·天时，约6040行后。'},
+{cat:'胎产',title:'现代怀孕案例：结婚四个月多，问何时怀上',catch:'支上青龙、日上日德，且为玄胎课；辰土为丙火子孙乘青龙，应三月；末传寅木乘虎为生产象。',result:'阳历4月28日反馈已怀孕。',src:'叶飘然讲义下册·胎产，约4-18行。'},
+{cat:'胎产',title:'皇祐三年辛卯，陈贵妃妊身十月未产',catch:'三传出现子孙且加日干，以此定子息；天后主女；申加午受克并临白虎为凶丧；行年亥上丑土贵神，土加水主迟晚闭塞。',result:'降生公主，产艰，失左目，五日后殁，母产后无恙。',src:'叶飘然讲义下册·胎产，约20-45行。'},
+{cat:'胎产',title:'淳祐七年丁未七月十二，女命月事不行将及三月，问疾或胎',catch:'秋月属金，金胎在卯，卯上发用；申字有胞胎象；课中无鬼杀，行年见青龙为喜；终传午乘天后为七月生气。',result:'断主孕有胎，此胎可育。',src:'叶飘然讲义下册·胎产，约46-61行。'},
+{cat:'胎产',title:'六月癸酉日午将卯时，占生产',catch:'天罡为鬼为墓覆干；魁罡刑祸；三传皆土克干且伤破支上神；“罡作天后临日上，主伤胎。”',result:'断腹中双儿，恐子母当日死。',src:'叶飘然讲义下册·胎产，约80-90行。'},
+{cat:'疾病',title:'现代女友身体不适',catch:'日上乘墓见白虎。',result:'断腹部有疾、胸腹闷满、不利泌尿、白带、皮肤瘙痒、肝脾不和，反馈“全对”。',src:'叶飘然讲义下册·疾病，约420-435行。'},
+{cat:'疾病',title:'皇祐元年李都尉公主病危，楚衍占课',catch:'未为木墓加亥阴极主冷物；太冲加未得白虎乘卯木制，主白兽惊恐；木聚主风；天医临行年，申为贵人，天医乘之主神医入梦。',result:'子时神医入梦，醒后汗吐而渐安。',src:'叶飘然讲义下册·疾病，约436-470行。'},
+{cat:'疾病',title:'杭州灵芝寺住持印宗师背疽甚重，求医',catch:'初传青龙胜光，宜南方求医；火针一开即愈；天医入三传，病可治。',result:'南方医者用针，旬日全愈。',src:'叶飘然讲义下册·疾病，约500-514行。'},
+{cat:'疾病',title:'六月癸丑日巳将亥时，壬辰老人占病',catch:'日上小吉主羊酒，太常主筵席，土主脾胃，各乘休气；三传皆土，癸水不能流行；小吉为药、太常为饮食，既为日鬼，主药不效饮食不进。',result:'断酒食伤脾胃下痢，小肠不通，心腹胀满，旦暮即死。',src:'叶飘然讲义下册·疾病，约477-495行。'},
+{cat:'失盗',title:'天圣六年戊辰正月二十八甲子日，老人占逃亡',catch:'玄武临财发用，支上发用为急应；天空为奴婢；玄武阴上见申金生水，财藏水中；行年卯克发用玄武，贼易获；回环格走不脱。',result:'婢逃失财，往正北人家藏匿，钱藏水中，当日申时获。',src:'叶飘然讲义下册·失盗，约1042-1083行。'},
+{cat:'失盗',title:'五月丙子日申将午时，二十六岁人占失贼',catch:'天乙临酉门户不宁；白虎临日本主长上惊危；寅天梁、卯天关、辰天关恶神，主关梁厄滞；玄武上下不战，又见青龙六合，贼有庇佑难获。',result:'父兄度关遭贼失财，兄伤左目，贼不能捕。',src:'叶飘然讲义下册·失盗，约1084-1102行。'},
+{cat:'失盗',title:'己酉年十月癸卯日寅将辰时，占捕逃有罪人',catch:'干来加支并发用，退归西北；亥中壬加水取汪姓；酉加亥为酒器，酉为婢，太常为丧服；勾陈克日，追逃必获。',result:'断逃往买卖人汪家后空猪圈，丑日可问着孝衣洗酒器之婢，或在崩败东厕内擒。',src:'叶飘然讲义下册·失盗，约1103-1116行。'},
+{cat:'失盗',title:'三月辛卯日酉将辰时，僧占失度牒',catch:'度牒以朱雀为类神；申为僧人；玄武乘卯合辛为亲人；朱雀乘申遁丙火，为火焚象。',result:'外弟偷去并火焚，手足有疾。',src:'叶飘然讲义下册·失盗，约1128-1140行。'}
+];
+function caseInit(){
+  if(!caseDone){
+    document.getElementById('case-tabs').innerHTML=CASE_CATS.map(c=>`<button class="xfsym-tab-btn ${c===caseCat?'act':''}" onclick="caseSetCat('${c}')">${c}</button>`).join('');
+    caseDone=true;
+  }
+  caseRender();
+}
+function caseSetCat(c){caseCat=c;document.querySelectorAll('#case-tabs .xfsym-tab-btn').forEach(b=>b.classList.toggle('act',b.textContent===c));caseRender();}
+function caseRender(){
+  const el=document.getElementById('case-sec');if(!el)return;
+  const q=(document.getElementById('case-q')?.value||'').trim();
+  const list=CASE_LIB.filter(x=>(caseCat==='全部'||x.cat===caseCat)&&(!q||`${x.cat}${x.title}${x.catch}${x.result}${x.src}`.includes(q)));
+  const cats=CASE_CATS.filter(c=>c!=='全部'&&list.some(x=>x.cat===c));
+  el.innerHTML=cats.map(c=>{
+    const sub=list.filter(x=>x.cat===c);
+    const items=sub.map((x,i)=>`<button class="m5-sub-tog" onclick="m5SubToggle(this)">${i+1}. ${x.title}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">原题</b>　${x.title}</div><div class="m5-text"><b style="color:var(--acc)">抓手</b>　${x.catch}</div><div class="m5-text"><b style="color:var(--acc)">验应</b>　${x.result}</div><div class="m5-text" style="font-size:11px;color:#9B8570">来源：${x.src}</div></div>`).join('');
+    return `<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${c}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${sub.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${items}</div></div>`;
+  }).join('')||'<div class="tj-card" style="font-size:13px;color:#9B8570">没有匹配的课例。</div>';
 }
 
 // ══ 六十四课经格局库 ══
