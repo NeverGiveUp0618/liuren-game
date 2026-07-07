@@ -410,6 +410,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📐 毕法赋第71~100法补入原著图例课盘：按第几局反推月将占时、三传照书图注入，并通过统一排盘UI全量渲染校验</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">🔎 毕法赋第71~100法二轮精校：补入可反推的原文例课课盘，统一旧摘要题名，并修正空亡注语等OCR残留</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">🔎 毕法赋第1~70法复盘统计：核定182盘/256格，并为全书无图例或条件不足的格目增加无盘说明</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📜 毕法赋页面结构调整：四库足本作为正文主区，原歌诀速查改为百法速记索引并移到正文前方</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
@@ -2281,16 +2282,17 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
-<!-- ======== 毕法赋速查 ======== -->
+<!-- ======== 毕法赋 ======== -->
 <div id="pbf" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋速查</div></div>
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋</div></div>
   <div style="padding-bottom:28px">
-    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">《毕法赋》宋·凌福之据邵彦和断案整理而成，为大六壬断法总纲，凡一百法。以下按<b>十大主题</b>分类，每法列<b>法诀+简释</b>，可折叠查阅。<br><span style="color:#9B8570;font-size:12px">领会精神，不可拘泥。逐法详解（100+格）持续追加中…</span></div>
-    <div style="margin-top:14px;font-size:13px;font-weight:bold;color:#8B6914;letter-spacing:1px;padding:0 2px">📖 四库足本 · 卷九《毕法赋》上</div>
-    <div style="font-size:11px;color:#9B8570;padding:2px 2px 6px;line-height:1.6">依《图解六壬大全·第三部》(明)郭载骙原著。两级「法 → 格」，每格含原文、白话、原著排盘。（样板已录前两法，持续补录中）</div>
-    <div id="bfku-sec"></div>
-    <div style="margin-top:16px;font-size:13px;font-weight:bold;color:#6B5040;letter-spacing:1px;padding:0 2px">🗂 主题速查 · 一百法歌诀</div>
+    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">《毕法赋》宋·凌福之据邵彦和断案整理而成，为大六壬断法总纲，凡一百法。正文以<b>四库足本</b>为准，含逐格原文、白话和可核对课盘；索引仅作快速定位与练习辅助。</div>
+    <div style="margin-top:14px;font-size:13px;font-weight:bold;color:#6B5040;letter-spacing:1px;padding:0 2px">🗂 百法速记索引</div>
+    <div class="m5-text" style="font-size:12px;color:#9B8570">按十大主题折叠，只列法诀与简释；完整原文、白话和课盘请看下方四库足本正文。</div>
     <div id="bf-sec" style="margin-top:6px"></div>
+    <div style="margin-top:16px;font-size:13px;font-weight:bold;color:#8B6914;letter-spacing:1px;padding:0 2px">📖 四库足本 · 100法逐格正文</div>
+    <div style="font-size:11px;color:#9B8570;padding:2px 2px 6px;line-height:1.6">依《图解六壬大全·第三部》(明)郭载骙原著。两级「法 → 格」，每格含原文、白话、可核对课盘；原书无图例或条件不足的格目会显示无盘说明。</div>
+    <div id="bfku-sec"></div>
   </div>
 </div>
 
@@ -4762,9 +4764,9 @@ const BF_FA=[
 {c:'官贵',f:'害贵讼直作屈断',m:'贵人受克墓空害，占讼理直反遭曲断'},
 {c:'官贵',f:'课传俱贵转无依',m:'四课三传遍地贵人，反无依倚、托事难成'},
 {c:'官贵',f:'昼夜贵加求两贵',m:'六处旦暮天乙相加，告贵须涉两贵人'},
-{c:'官贵',f:'贵人差迭事参差',m:'昼贵临夜地、夜贵临昼方，告贵多不归一'},
+{c:'官贵',f:'贵人差送事参差',m:'昼贵临夜地、夜贵临昼方，告贵多不归一'},
 {c:'官贵',f:'贵虽在狱宜临干',m:'贵人临辰戌为入狱，宜私谋阴祷、贵人受贿'},
-{c:'官贵',f:'神藏煞没须求贵',m:'贵登天门、百煞潜藏，凡谋亨利'},
+{c:'官贵',f:'二贵皆空虚喜期',m:'昼夜贵人皆空亡，先允后拙、虚喜耗费'},
 {c:'官贵',f:'鬼乘天乙乃神祇',m:'日鬼临身却为贵人，作神祇非鬼祟'},
 {c:'官贵',f:'两贵受克难干贵',m:'昼夜贵人皆受克，不可告贵、告亦不成'},
 {c:'财运',f:'旺禄临身徒妄作',m:'日禄又作旺神临干，守此勿他谋'},
@@ -4780,7 +4782,7 @@ const BF_FA=[
 {c:'财运',f:'用破身心无所归',m:'发用坐破、恋惊危之财引入鬼乡，身心无归'},
 {c:'婚孕',f:'胎财生气妻怀孕',m:'日胎神作妻财又逢月生气，主妻有孕'},
 {c:'婚孕',f:'胎财死气损胎推',m:'胎神作月内死气，妇孕不育、有损'},
-{c:'婚孕',f:'后合应知有另情',m:'干支上乘天后六合，主先奸后娶、私情'},
+{c:'婚孕',f:'后合占婚岂用媒',m:'干支上乘天后六合，主先奸后娶、私情'},
 {c:'交易',f:'交车相合交关利',m:'干支上神互作六合，宜交关交易成合'},
 {c:'交易',f:'上下皆合两心齐',m:'支干上神与地盘皆作六合，主客相顺'},
 {c:'交易',f:'彼求我事支传干',m:'初传起于支、末归于干，他人托我谋事'},
@@ -4834,7 +4836,7 @@ const BF_FA=[
 {c:'总纲',f:'三传互克众人欺',m:'三传递相克或克干，众口相欺、递互相害'},
 {c:'总纲',f:'有始无终难变易',m:'初长生末干墓则有始无终、反之先难后易'},
 {c:'总纲',f:'苦去甘来乐里悲',m:'末生中、中生初、初克干，末又冲初生干，先苦后甘'},
-{c:'总纲',f:'干支皆败事倾颓',m:'干支上皆逢败气，身衰宅颓、日渐狼狈'},
+{c:'总纲',f:'干支皆败势倾颓',m:'干支上皆逢败气，身衰宅颓、日渐狼狈'},
 {c:'总纲',f:'末助初兮三等论',m:'末传助初，分生干、克干、作财三等而断'},
 {c:'总纲',f:'闭口卦体两般推',m:'旬首上神乘玄武，占病禁口、诸事闭口不语'},
 {c:'总纲',f:'太阳照武宜擒贼',m:'玄武坐太阳月将之上，贼形现露、不劳自败'},
@@ -4865,9 +4867,9 @@ Object.assign(BF_DETAIL,{
 '害贵讼直作屈断':'<div class="m5-text"><b>定义</b>　贵人受克，或作墓、空、六害。</div><div class="m5-text red">占讼理虽直而必遭曲断，事小必致大凶；纵有密谋终主败露，宜识时屈就免祸。</div>',
 '课传俱贵转无依':'<div class="m5-text"><b>定义</b>　四课三传皆昼夜贵人所聚（遍地贵人）。</div><div class="m5-text red">贵多者不贵，凡占不归于一、反无依倚，托事无成；用夜贵名「咄目煞」，大不利告贵、占讼尤凶。</div>',
 '昼夜贵加求两贵':'<div class="m5-text"><b>定义</b>　六处有旦暮天乙相加。</div><div class="m5-text red">告贵求事必干涉两贵人而成；若谒贵反多不遇（贵人往见别贵）。空亡则不作此论。</div>',
-'贵人差迭事参差':'<div class="m5-text"><b>定义</b>　昼贵临于夜地，夜贵却临昼方。</div><div class="m5-text red">告贵求事多不归一，如「尖担两头脱」。</div>',
+'贵人差送事参差':'<div class="m5-text"><b>定义</b>　昼贵临于夜地，夜贵却临昼方。</div><div class="m5-text red">告贵求事多不归一，如「尖担两头脱」。</div>',
 '贵虽在狱宜临干':'<div class="m5-text"><b>定义</b>　天乙贵人加临地盘辰戌（名入狱）。</div><div class="m5-text red">常主贵人怒、干官贵怒，惟宜私谋阴祷（名贵人受贿）；乙辛日反宜投贵成事；辰戌日占为贵人入宅，非坐狱论。</div>',
-'神藏煞没须求贵':'<div class="m5-text"><b>定义</b>　贵人登天门（甲戊庚日丑未昼夜贵加地盘亥），百煞拱伏潜藏。</div><div class="m5-text red">凡谋亨利、任意谋为；四孟月占尤验。</div>',
+'二贵皆空虚喜期':'<div class="m5-text"><b>定义</b>　昼夜贵人皆空亡。</div><div class="m5-text red">干投贵人，初时蒙许允，后却被人换越；凡占事事成拙，有喜报亦不可轻信，恐为同名姓人，反成虚喜耗费。</div>',
 '鬼乘天乙乃神祇':'<div class="m5-text"><b>定义</b>　日鬼临身，却因其为贵人。</div><div class="m5-text red">不可作鬼祟看，占病为神祇为害，临宅则家堂神像不肃致病，宜修设功德安慰宅神。</div>',
 '两贵受克难干贵':'<div class="m5-text"><b>定义</b>　昼夜贵人皆立于受克之方。</div><div class="m5-text red">不可告贵用事，二贵自受克必自怒而不能成就我；不如不告。甲戊庚三干无此例。</div>',
 });
@@ -4885,7 +4887,7 @@ Object.assign(BF_DETAIL,{
 '用破身心无所归':'<div class="m5-text"><b>定义</b>　发用坐破碎，恋此惊危之财引入中末鬼乡。</div><div class="m5-text red">凡占身心无所归依；幸鬼空则应「亦无欢笑亦无愁」。</div>',
 '胎财生气妻怀孕':'<div class="m5-text"><b>定义</b>　日干之胎神作日之妻财，又逢月内之生气。</div><div class="m5-text red">占妻必孕；胎神临妻之年命或临支上尤好，妻财作生气纵不作胎神亦可用。</div>',
 '胎财死气损胎推':'<div class="m5-text"><b>定义</b>　胎神作月内之死气。</div><div class="m5-text red">妇孕不育、必有损；如约母之年命透出支干之外，可免母凶。</div>',
-'后合应知有另情':'<div class="m5-text"><b>定义</b>　干为夫、支为妻，干支上乘天后、六合，或男女行年互居干支。</div><div class="m5-text red">主先奸后娶、私情之象；看何边空亡以审真伪，空则止怀虚意。</div>',
+'后合占婚岂用媒':'<div class="m5-text"><b>定义</b>　干为夫、支为妻，干支上乘天后、六合，或男女行年互居干支。</div><div class="m5-text red">主先奸后娶、私情之象；看何边空亡以审真伪，空则止怀虚意。</div>',
 '交车相合交关利':'<div class="m5-text"><b>定义</b>　日干与支上神作六合、地支与干上神作六合（交车合）。</div><div class="m5-text red">宜交关交易、交换成合，不利占解散；分长生/合财/脱/害/空/刑/冲/三合等类而断。</div>',
 '上下皆合两心齐':'<div class="m5-text"><b>定义</b>　支干上神作六合，地盘支干亦作六合。</div><div class="m5-text red">主客相顺、神合道合；内有一字空亡反为凶咎。</div>',
 '彼求我事支传干':'<div class="m5-text"><b>定义</b>　初传从支上起、末传归于干上。</div><div class="m5-text red">他人委托我干谋事，吉凶皆成，行人至、求取得。</div>',
@@ -4945,7 +4947,7 @@ Object.assign(BF_DETAIL,{
 '三传互克众人欺':'<div class="m5-text"><b>定义</b>　三传递相克害，或克日干。</div><div class="m5-text red">必有人递互相克、众口相欺，或遭雷攻状论；在朝官宜自检束、防台阁上言之患。</div>',
 '有始无终难变易':'<div class="m5-text"><b>定义</b>　初传日之长生、末传干之墓（有始无终）；反之初墓末长生（难变易）。</div><div class="m5-text red">前者初谋如锦后无成；后者先难后易、先暗后明。</div>',
 '苦去甘来乐里悲':'<div class="m5-text"><b>定义</b>　末生中、中生初、初克干，但末传又冲克初传并生干。</div><div class="m5-text red">先受磨折、后却安逸，不成功处反成功。</div>',
-'干支皆败事倾颓':'<div class="m5-text"><b>定义</b>　干支上皆逢败气。</div><div class="m5-text red">占身气血衰败、占宅崩颓，日渐狼狈；不可捕奸告讦，到官反牵连旧过（杀人一万自损三千）。</div>',
+'干支皆败势倾颓':'<div class="m5-text"><b>定义</b>　干支上皆逢败气。</div><div class="m5-text red">占身气血衰败、占宅崩颓，日渐狼狈；不可捕奸告讦，到官反牵连旧过（杀人一万自损三千）。</div>',
 '末助初兮三等论':'<div class="m5-text"><b>定义</b>　末传助其初传，分生干、克干、作财三等。</div><div class="m5-text red">助初生干则欲年命制末方吉；助初克干为教唆词讼之人；助初作财为暗有人以财相助。</div>',
 '闭口卦体两般推':'<div class="m5-text"><b>定义</b>　地盘旬首上神乘玄武（旬尾加旬首亦然）。</div><div class="m5-text red">宜捕盗追逃；占病禁口痢咽喉塞、占产哑儿、占失脱旁人不言、求事人闭口不语。</div>',
 '太阳照武宜擒贼':'<div class="m5-text"><b>定义</b>　玄武坐于太阳月将之上。</div><div class="m5-text red">贼形现露、不劳捕捉必自败；纵太阳空亡尤好，惟畏占时在夜（太阳已归地下）。</div>',
@@ -4977,14 +4979,14 @@ Object.assign(BF_CASE,{
 '害贵讼直作屈断':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　甲申日，未加申为夜贵、乃日之墓神；丑作昼贵、又受寅木克、又作天空；初传子与未又为六害。占讼理虽直而必致曲断，事小必致大凶。</div>',
 '课传俱贵转无依':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　丁酉日，四课三传酉亥丑皆是贵人（遍地贵人）。贵多者不贵、托事无成；若用夜贵名「咄目煞」，占讼尤凶。</div>',
 '昼夜贵加求两贵':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　<b>贵覆干支</b>：甲申日，干上丑、支上未；庚寅日，干上未、支上丑——干支上皆乘昼夜贵人，占得两贵周全成事。（若值空亡则不作此论。）</div>',
-'贵人差迭事参差':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　甲子日，丑为昼贵却坐酉上、未为夜贵却坐卯上（昼贵临夜地、夜贵临昼方）。告贵求事多不归一，如谚云「尖担两头脱」。</div>',
+'贵人差送事参差':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　甲子日，丑为昼贵却坐酉上、未为夜贵却坐卯上（昼贵临夜地、夜贵临昼方）。告贵求事多不归一，如谚云「尖担两头脱」。</div>',
 '贵虽在狱宜临干':'<div class="m5-text gold"><b style="color:#8B6914">案例</b>　天乙贵人加临地盘辰戌为「入狱」。乙、辛二日占名「贵人临身」，反宜干投贵人成事；其余八干则干官贵怒，惟宜私谋阴祷（名「贵人受贿」）。辰、戌二日占为贵人入宅，非坐狱论。</div>',
 });
 // 毕法赋案例排盘参数：{r:日干支, yj:月将, zs:占时, sc?:书中三传[初,中,末](有则注入,无则引擎起传), mt:发传法说明}
 // 仅收录原著给足信息、可自洽复原盘面的案例；条件式/信息不足的法不排盘
 const BF_BOARD={
 '前后引从升迁吉':{r:'壬子',yj:'亥',zs:'午',sc:['巳','戌','卯'],mt:'两贵引从格 · 比用取巳（初传乘昼贵）'},
-'贵人差迭事参差':{r:'甲子',yj:'酉',zs:'巳',mt:'元首课 · 昼贵丑坐酉地、夜贵未坐卯地'},
+'贵人差送事参差':{r:'甲子',yj:'酉',zs:'巳',mt:'元首课 · 昼贵丑坐酉地、夜贵未坐卯地'},
 };
 // 从 {r,yj,zs,sc?,mt} 起盘并渲染到 ex（四课引擎自算，三传有 sc 则注入书中原盘）
 function _bfBuildAndRender(sp,ex){
@@ -6674,13 +6676,16 @@ let _bfRendered=false;
 function bfInit(){
   if(_bfRendered)return;_bfRendered=true;
   let html='';
+  const kuByJu=new Map(BF_KU.map(x=>[x.ju,x]));
   BF_CATS.forEach(c=>{
     const list=BF_FA.filter(x=>x.c===c);
     const inner=list.map(x=>{
+      const law=kuByJu.get(x.f);
+      const title=law?`第${law.n}法 · ${law.ju}`:x.f;
       const d=BF_DETAIL[x.f]||`<div class="m5-text" style="color:#B0A08C;font-size:11px">（逐法详解补充中…）</div>`;
       const cs=BF_CASE[x.f]||'';
       const bd=BF_BOARD[x.f]?`<button class="btn btn-d" style="width:100%;margin-top:8px;font-size:12px" onclick="bfBoard('${x.f}',this)">📐 排盘 ↺</button>`:'';
-      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${x.f}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">诀意</b>　${x.m}</div>${d}${cs}${bd}</div>`;
+      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">${title}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">速记</b>　${x.m}</div>${d}${cs}${bd}</div>`;
     }).join('');
     html+=`<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${BF_CAT_NAME[c]}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${list.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${inner}</div></div>`;
   });
