@@ -249,6 +249,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .xfsym-tab-bar{display:flex;gap:6px;margin-bottom:12px}
 .xfsym-tab-btn{flex:1;padding:7px 4px;border:1px solid var(--bd1);background:var(--bg2);border-radius:8px;font-size:13px;color:#6B5040;cursor:pointer;font-weight:bold}
 .xfsym-tab-btn.act{background:var(--acc);color:#fff;border-color:var(--acc)}
+.xfsym-search{width:100%;box-sizing:border-box;border:1px solid var(--bd1);background:#FDF5EC;border-radius:8px;padding:9px 11px;margin-bottom:10px;font-size:13px;color:#1C0A00;outline:none}
+.xfsym-search:focus{border-color:var(--acc);box-shadow:0 0 0 2px #B94A3A22}
 .xfsym-card{background:var(--bg2);border-radius:10px;margin-bottom:8px;overflow:hidden;border:1px solid var(--bd1)}
 .xfsym-hd{display:flex;align-items:center;padding:10px 12px;cursor:pointer;gap:8px}
 .xfsym-nm{font-size:16px;font-weight:bold;color:#1C0A00;flex:1}
@@ -260,6 +262,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .xfsym-row{display:flex;gap:6px;margin-top:8px;font-size:12px;line-height:1.6}
 .xfsym-lbl{color:#9B8570;flex-shrink:0;min-width:36px}
 .xfsym-v{color:#1C0A00}
+.xfsym-note{font-size:11px;color:#9B8570;line-height:1.6;margin-top:8px}
 .xfsym-wsd{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:8px}
 .xfsym-wsd-c{background:var(--bg1);border-radius:6px;padding:4px 2px;text-align:center}
 .xfsym-wsd-s{font-size:10px;color:#9B8570;display:block}
@@ -417,6 +420,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📜 毕法赋页面结构调整：四库足本作为正文主区，原歌诀速查改为百法速记索引并移到正文前方</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📚 新增「六十四课经」格局库：按叶飘然讲义第五章校出64项主课体，提供分组检索、成格定义与来源定位</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.7</span><span style="color:#9B8570;font-size:12px">📂 新增「历代课例库」MVP：先录天时、胎产、疾病、失盗四类16条讲义案例，按分类与关键词检索断法抓手、验应反馈和来源位置</span></div>
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.8</span><span style="color:#9B8570;font-size:12px">🔮 象法速查库补入叶飘然讲义取象内容：新增取象法则、分类类神与关键词检索，覆盖类神显隐、七处、阴神、旺衰、天时、疾病、失物、家宅等常用断法</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">📜 新增「毕法赋速查+练习」：凌福之百法歌诀+逐法详解，按十大主题两级折叠</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.3</span><span style="color:#9B8570;font-size:12px">⚛ 新增「干支关系速查+练习」：六合/三合/六冲/三刑/相破/六害/生克制化/旺相休囚</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.6.30</span><span style="color:#9B8570;font-size:12px">📐 九宗门随机案例新增逐步推导过程，并修正全部9宗门三传算法</span></div>
@@ -2400,9 +2404,14 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="xfsym-tab-bar">
       <button class="xfsym-tab-btn act" id="xft-tj" onclick="xfTab('tj')">十二天将</button>
       <button class="xfsym-tab-btn" id="xft-zs" onclick="xfTab('zs')">十二支神</button>
+      <button class="xfsym-tab-btn" id="xft-fa" onclick="xfTab('fa')">取象法则</button>
+      <button class="xfsym-tab-btn" id="xft-lei" onclick="xfTab('lei')">分类类神</button>
     </div>
+    <input class="xfsym-search" id="xf-search" placeholder="搜索象法、类神、断法关键词" oninput="xfSearch()">
     <div id="xfp-tj"></div>
     <div id="xfp-zs" style="display:none"></div>
+    <div id="xfp-fa" style="display:none"></div>
+    <div id="xfp-lei" style="display:none"></div>
   </div>
 </div>
 
@@ -7273,20 +7282,150 @@ const ZS_XIANG=[
    jue:'登明天柱廉楼台，贼盗伤人幼子哀。狱厕秽猪忧溺死，阴私管钥召征来。'},
 ];
 
+const XF_FA=[
+  {name:'象法总纲',group:'取象原则',src:'叶飘然讲义上册·神将类象的意义',
+   key:'神将地支比拟万事万象，取象必须服务于所占之事。',
+   use:'先定事体，再取相关类神；类象只作参考，不可照搬。凶将吉将、旺相休囚、课体喜忌要合看，目标是做到“式事合一”。'},
+  {name:'类神显隐',group:'类神规则',src:'叶飘然讲义上册·神将类象的意义',
+   key:'类神入课传为显，入本命行年次之，俱不入则为晦。',
+   use:'占文书看朱雀，占见贵看天乙，占惊怪看螣蛇，占婚男看青龙、女看天后。类神不出现，不等于没有其事，常表示事情隐伏、间接或未到显发处。'},
+  {name:'七处定位',group:'类神规则',src:'叶飘然讲义上册·神将类象的意义',
+   key:'日、辰、初传、中传、末传、本命、行年，是判断类神的关键位置。',
+   use:'类神入七处，重点看落宫、所乘神将、刑冲破害、旺相休囚、空亡与是否当令。七处以外的类神，可先看它与阳神、日辰之间的关系。'},
+  {name:'阴神取象',group:'类神规则',src:'叶飘然讲义上册·神将类象的意义',
+   key:'类神有阳神、阴神两面，阴神是其内情、根由、背后状态。',
+   use:'看类神本身之外，还要看其阴神与阳神、日辰的生克。占人事常用阴神推背后的人、隐情、真实原因。'},
+  {name:'凡有其象必有其事',group:'取象原则',src:'叶飘然讲义上册·神将类象的意义',
+   key:'课中出现明确象意，往往对应现实事件。',
+   use:'不要孤立抓一个字断事。必须同时满足事体相符、类神入位、神将配合、旺衰有力，才可下重断。'},
+  {name:'体用与太极点',group:'断课入口',src:'叶飘然讲义上册·判断入门',
+   key:'六壬占人事，要先确立太极点，再分彼此、体用、内外、宾主、尊卑。',
+   use:'常规以日干为我/人，日支为彼/宅/事；不同问题可改用类神、本命、行年、初传为体。体用错，象法会全盘跑偏。'},
+  {name:'日辰内外',group:'断课入口',src:'叶飘然讲义上册·判断入门',
+   key:'日干偏人、主、阳、外显；日支偏宅、彼、阴、承载。',
+   use:'占婚可分男女，占宅以支为宅，占人以干为身。干支上神、干支阴神，是主客双方的直接状态和后续变化。'},
+  {name:'初中末三传',group:'发展观',src:'叶飘然讲义中册·物类课',
+   key:'初传言事之始，末传决事之终。',
+   use:'初传凶而末传吉，先难后遂；初传吉而末传凶，先成后败。初末皆吉则始终吉，初末皆凶则始终难。'},
+  {name:'旺衰校正',group:'旺相休囚',src:'叶飘然讲义中册·物类课',
+   key:'吉将囚休不尽吉，凶将旺相不尽凶；凶将囚休，凶事反重。',
+   use:'同一类象必须看月令、日辰、旺相休囚死。旺相为有力、显著、可成；休囚为弱、迟、暗；死绝为空耗、断绝。'},
+  {name:'物以声应 方以类萃',group:'综合取象',src:'叶飘然讲义中册·物类课',
+   key:'六亲、五行、神将、地支同类互相牵引。',
+   use:'见父母爻可推长上、文书；见财爻可推妻财、产业；见兄弟可推同类争财。再以神将吉凶、旺衰和刑冲破害细分吉凶。'},
+  {name:'新旧生死',group:'综合取象',src:'叶飘然讲义中册·物类课',
+   key:'生旺可作新、生物、正在发生；死墓可作旧、故物、已衰败。',
+   use:'占物、占宅、占病时，看类神所临五行状态。生处为库，死处为墓；库可藏可成，墓多闭塞衰滞。'},
+  {name:'聚散取舍',group:'综合取象',src:'叶飘然讲义上册·判断入门',
+   key:'得令得气为聚，失令无气为散。',
+   use:'当象太多时，用五行得气、遁干、生克趋势来取舍主象。聚则事集中、有力、成局；散则力量分裂、难成、易改。'},
+  {name:'不可一端泥象',group:'取象戒法',src:'叶飘然讲义中册·案例附议',
+   key:'象者，像也，像则无物不该，不能只按一个固定含义套断。',
+   use:'同一课象在平常事可作宾主相投，在兵贼事可作围困交结。取象必须随事体切换语境。'},
+  {name:'来意约束取象',group:'取象戒法',src:'叶飘然讲义中册·来意占例',
+   key:'来问者身份、问题场景，会约束同一符号的落点。',
+   use:'老农来占，酉可偏麦产、田财；商人来占，酉可偏财货、交易；病人来占，酉又可落口窍、血精、肺金。'},
+  {name:'支神骨架',group:'十二支骨架',src:'叶飘然讲义上册·十二支神的重要特征',
+   key:'子午关口，卯酉门户，寅申道路，辰戌牢狱，丑未天厨，巳亥堂庙。',
+   use:'先用六组地支骨架定大方向：关卡、门户、移动、争讼、饮食享受、征召高位，再叠加天将和事体类神。'},
+  {name:'卯酉门户',group:'十二支骨架',src:'叶飘然讲义上册·十二支神的重要特征',
+   key:'卯酉为日月之门，主门户、出入、隐私、动荡。',
+   use:'日辰临卯酉，疏者合、合者疏。占家事、婚姻、人际，卯酉常提示关系开合、门户变动、私情显露。'},
+  {name:'辰戌魁罡',group:'十二支骨架',src:'叶飘然讲义上册·十二支神的重要特征',
+   key:'辰戌为牢狱、刑狱、战斗之地。',
+   use:'年命立魁罡，动者静、静者动。遇勾陈、白虎、朱雀、鬼墓，容易落到争讼、拘束、阻隔、旧事翻起。'},
+  {name:'五行根性',group:'五行象法',src:'叶飘然讲义上册·五行',
+   key:'水土金性向下，木火性向上。',
+   use:'火主明、炎上、显露；木主生发、腾上；水主润下、流动、阴隐；金主肃杀、成器；土随四时，主承载、墓库、迟滞。'},
+  {name:'天将破象',group:'神将组合',src:'叶飘然讲义上册·八煞九宝',
+   key:'破主散、移、破损；不同天将遇破，所破之事不同。',
+   use:'贵破则贵助废，蛇破则牵连不允，雀破则文书口舌不行，合破则婚姻交易不成，龙破则财喜文案不成，武破则盗谋不成，后破则恩泽婚姻不来。'},
+  {name:'直接类神不看六亲',group:'类神规则',src:'叶飘然讲义中册·家宅例',
+   key:'部分十二支类神可直接取其本象，不必先按日干六亲转义。',
+   use:'如子可直取子息、水物，酉可直取鸡鸟金玉，申可直取道路行人。若类神又临凶将、入传、受克，象意更实。'},
+];
+
+const XF_LEI=[
+  {name:'天时气象类神',group:'分类类神',src:'叶飘然讲义中册·第六章·天时',
+   key:'子阴云云雨，丑雨师，寅未风伯，卯雷雪，辰雾水库海，巳虹霓风门，午电晴，申风水母，酉霜虹，戌云尘霾，亥雨水天河。',
+   use:'天将配合：贵为阴，蛇为电霓虹疫疠，雀为行火招风，合为雨师电，勾为兴云积雪，龙为甘雨，后为阴雾霖雨，阴为霜雪水，武为苦雨，常为和风，虎为大风霰雹冻雷，空为尘雾。'},
+  {name:'文书信息',group:'分类类神',src:'叶飘然讲义上册·神将类象',
+   key:'朱雀主文书、口舌、信息、诉讼；胜光亦主文书官事。',
+   use:'朱雀入课传而旺相，多有文书消息；受克、空亡、破，则文书不行、口舌散或信息失真。'},
+  {name:'见贵求官',group:'分类类神',src:'叶飘然讲义上册·神将类象',
+   key:'天乙贵人为贵人、官长、解厄；青龙主财喜升迁。',
+   use:'贵人入日辰、年命、三传为显；空亡受克则贵力不足。官事还要看官鬼、印绶、德禄、三奇六仪。'},
+  {name:'惊怪鬼祟',group:'分类类神',src:'叶飘然讲义上册·神将类象',
+   key:'螣蛇主惊恐、怪异、梦魇、缠绕；辰戌、鬼墓、空亡可加重怪异象。',
+   use:'蛇旺相则惊扰显，休囚死则忧惶缠绵；蛇空或凶神空，常可减凶。'},
+  {name:'婚姻男女',group:'分类类神',src:'叶飘然讲义上册·神将类象',
+   key:'占婚男方看青龙，女方看天后；六合主媒约和合。',
+   use:'龙后合入课传、相生合，多主可成；空亡、刑冲破害、合破，则约不成或关系有阻。太阴、玄武、卯酉常提示阴私。'},
+  {name:'胎产子息',group:'分类类神',src:'叶飘然讲义下册·胎产',
+   key:'胎产重看子孙、天后、青龙、玄胎课、胎神与行年。',
+   use:'子孙入传、临日干或行年有喜神，多主有孕；白虎、墓、刑、空亡叠见，主产难、损胎或子息不利。'},
+  {name:'疾病身体',group:'分类类神',src:'叶飘然讲义下册·疾病',
+   key:'占病以日干支为人体，日为上部，支为下部；病象从五行、支神、天将同看。',
+   use:'白虎主病伤死丧，螣蛇主惊怪热扰，玄武主水湿阴病，太阴主妇科阴私。初传可看病起，三传看发展，末传看归宿。'},
+  {name:'饮食致病',group:'分类类神',src:'叶飘然讲义下册·疾病例',
+   key:'食物象可由地支形类、五行冷热、天将人物连缀而成。',
+   use:'如火中之物、米形、加水、太阴老妇、酉麦申面、玄武过水等，可合成冷粽、冷淘面一类具体病因。'},
+  {name:'失物失盗',group:'分类类神',src:'叶飘然讲义下册·失盗',
+   key:'脱气多为失物，发用常为事情起点或贼身；玄武主盗，六合可作朋友、交易、手足之物。',
+   use:'先看类神是否入课传，再看发用、玄武、财爻、空亡与方向。旺相有气可寻，空亡受克多虚、散、难得。'},
+  {name:'走失寻人',group:'分类类神',src:'叶飘然讲义下册·走失例',
+   key:'人之类神入传则必看，方位由所临地盘、行年、本命、门户道路类象综合定。',
+   use:'妇女可取太阴、天后；行人看寅申道路、驿马、三传进退；河井、水象、玄武空亡可辨投水真假。'},
+  {name:'动物走失',group:'分类类神',src:'叶飘然讲义下册·动物走失',
+   key:'动物直接取支神本象：酉鸡鸟，午马，未羊，丑牛，亥猪，卯兔等。',
+   use:'类神临日辰或发用而不空，多有线索；临白虎、刀刃、受克，主伤死；临六合、青龙、生合，较易寻回。'},
+  {name:'家宅风水',group:'分类类神',src:'叶飘然讲义中册·家宅',
+   key:'占宅以支为宅，干为人；新旧宅、求宅、人宅吉凶不可混断。',
+   use:'支上克干多不吉，鬼临三四更凶；勾陈可看明堂、田土，玄武看总体隐情，道路、门户、土木、墓库需合支神取象。'},
+  {name:'功名前程',group:'分类类神',src:'叶飘然讲义下册·事业前程',
+   key:'功名看官鬼、贵人、青龙、朱雀文书、禄马、三奇六仪、魁星等。',
+   use:'贵入空墓、禄被克绝，常主有名无实或升迁不成；虎马丁神发用、岁君生日、三奇拱照，可作起官迁转象。'},
+  {name:'道路行人',group:'分类类神',src:'叶飘然讲义上册·十二支神',
+   key:'寅申为道路之神，驿马、丁神、斩关、游子等主动行。',
+   use:'三传进退、初末冲合、马临何方，可定来去迟速。传归宅、支加干，多有归来或就人之象。'},
+  {name:'财物交易',group:'分类类神',src:'叶飘然讲义上册·神将类象',
+   key:'财爻、青龙、六合、太常、从魁金玉钱帛，常用于财物交易。',
+   use:'财旺生身、龙合有气，利求财成交；财空、龙破、合破、玄武夹杂，多主虚财、失财、欺诈。'},
+];
+
 // ══ 象法速查库 ══
-let _xfInited={tj:false,zs:false};
+let _xfInited={tj:false,zs:false,fa:false,lei:false};
+let _xfTab='tj';
 function xfInit(){if(!_xfInited.tj)_xfRender('tj');}
 function xfTab(t){
-  document.getElementById('xfp-tj').style.display=t==='tj'?'':'none';
-  document.getElementById('xfp-zs').style.display=t==='zs'?'':'none';
-  document.getElementById('xft-tj').className='xfsym-tab-btn'+(t==='tj'?' act':'');
-  document.getElementById('xft-zs').className='xfsym-tab-btn'+(t==='zs'?' act':'');
+  _xfTab=t;
+  ['tj','zs','fa','lei'].forEach(k=>{
+    document.getElementById('xfp-'+k).style.display=t===k?'':'none';
+    document.getElementById('xft-'+k).className='xfsym-tab-btn'+(t===k?' act':'');
+  });
   if(!_xfInited[t])_xfRender(t);
+  xfSearch();
 }
 function _xfRender(t){
-  const data=t==='tj'?TJ_XIANG:ZS_XIANG;
+  const data=t==='tj'?TJ_XIANG:t==='zs'?ZS_XIANG:t==='fa'?XF_FA:XF_LEI;
   const el=document.getElementById('xfp-'+t);
   const WS=['旺','相','休','囚','死'];
+  if(t==='fa'||t==='lei'){
+    el.innerHTML=data.map((d,i)=>`<div class="xfsym-card xfop" id="xfc-${t}-${i}">
+<div class="xfsym-hd" onclick="xfToggle('${t}',${i})">
+<div><div class="xfsym-nm">${d.name}</div><div class="xfsym-sub">${d.group} · ${d.src}</div></div>
+<span class="tag-m" style="margin-left:auto">${t==='fa'?'法':'类'}</span>
+<span class="xfsym-arr">›</span>
+</div>
+<div class="xfsym-bd">
+<div class="xfsym-row"><span class="xfsym-lbl">要点</span><span class="xfsym-v">${d.key}</span></div>
+<div class="xfsym-row"><span class="xfsym-lbl">用法</span><span class="xfsym-v">${d.use}</span></div>
+<div class="xfsym-note">来源：${d.src}</div>
+</div>
+</div>`).join('');
+    _xfInited[t]=true;
+    return;
+  }
   el.innerHTML=data.map((d,i)=>{
     const tagCls=d.ji==='吉'?'tag-j':d.ji==='凶'?'tag-x':'tag-m';
     const sub=t==='tj'?`${d.wx}·${d.wang}`:`${d.zhi}·${d.wx}·${d.wei}`;
@@ -7310,6 +7449,14 @@ ${jueHtml}${wsdHtml}
   _xfInited[t]=true;
 }
 function xfToggle(t,i){document.getElementById('xfc-'+t+'-'+i).classList.toggle('xfop');}
+function xfSearch(){
+  const q=(document.getElementById('xf-search')?.value||'').trim().toLowerCase();
+  const panel=document.getElementById('xfp-'+_xfTab);
+  if(!panel)return;
+  panel.querySelectorAll('.xfsym-card').forEach(card=>{
+    card.style.display=!q||card.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
 
 // ══ 旺相断法练习 ══
 const WSD_STATES=['旺','相','休','囚','死'];
