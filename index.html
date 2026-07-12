@@ -311,6 +311,28 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .wsd-r{background:#fff3cd;color:#8B6914}
 .wsd-y{background:#ffe0cc;color:#BF360C}
 .wsd-s{background:#e0d0e8;color:#4A148C}
+/* 自选起课 pqi */
+.qi-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.qi-f{display:flex;flex-direction:column;gap:3px}
+.qi-f label{font-size:11px;color:#9B8570;letter-spacing:1px}
+.qi-sel{padding:10px 6px;border:1px solid var(--bd1);border-radius:9px;background:var(--bg3);font-size:15px;color:#1C0A00;font-family:inherit;text-align:center;text-align-last:center;-webkit-appearance:none;appearance:none}
+.qi-sel:focus{outline:none;border-color:var(--acc)}
+.bf-note{font-size:12px;color:var(--acc-dk);letter-spacing:1px;margin:14px 2px 8px;font-weight:600}
+.bf-hit{background:var(--bg2);border:1px solid var(--bd1);border-radius:11px;padding:10px 13px;margin-bottom:7px}
+.bf-hit b{color:var(--acc)}
+.bf-hit .bf-d{font-size:13px;color:#5A4A38;margin-top:3px;line-height:1.6}
+.bf-empty{text-align:center;color:#9B8570;font-size:13px;padding:14px}
+/* 薄弱点复习 pfx */
+.fx-row{display:flex;align-items:center;gap:11px;background:var(--bg2);border:1px solid var(--bd1);border-radius:12px;padding:12px 14px;margin-bottom:9px}
+.fx-row.fx-worst{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.fx-info{flex:1;min-width:0}
+.fx-nm{font-size:15px;color:#1C0A00;font-weight:600}
+.fx-st{font-size:12px;color:#9B8570;margin-top:2px}
+.fx-bar{height:5px;background:var(--bd1);border-radius:3px;overflow:hidden;margin-top:5px}
+.fx-bar>i{display:block;height:100%;background:var(--acc);border-radius:3px}
+.fx-go{flex:none;padding:8px 14px;font-size:13px;border-radius:9px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer;font-family:inherit}
+.fx-go:active{opacity:.8}
+.hw-weak{cursor:pointer}
 </style>
 </head>
 <body>
@@ -379,6 +401,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <button class="btn btn-d" onclick="startKC()">🔮 起课步骤</button>
       <button class="btn btn-d" onclick="startKCBoard()">🗺 起课排盘</button>
     </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-r" onclick="show('pqi')">🧮 自选起课（输日干支·占时 → 全盘 + 断案）</button>
+    </div>
   </div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">🎯</div><div><div class="mcard-name">推演练习</div><div class="mcard-desc">九宗门 · 宗门识别 · 三传推演 · 天将 · 支神 · 旺相</div></div></div>
@@ -397,8 +422,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <button class="btn btn-d" onclick="startGZ()">⚛ 干支关系</button>
       <button class="btn btn-d" onclick="startBF()">📜 毕法赋</button>
     </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-r" onclick="show('pfx')">📊 薄弱点复习中心</button>
+    </div>
   </div>
-  <div id="hw-weak-tip" class="hw-weak" style="display:none"></div>
+  <div id="hw-weak-tip" class="hw-weak" style="display:none" onclick="show('pfx')"></div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识速查</div><div class="mcard-desc">十章折叠速查，随时翻阅复习</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('p5')">进入速查 →</button></div>
@@ -1752,6 +1780,28 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <button class="btn btn-r" onclick="startKCBoard()" style="flex:1">换一局 ↺</button>
     <button class="btn btn-d" onclick="goHome()" style="flex:1">← 首页</button>
   </div>
+</div>
+
+<!-- ======== 自选起课 ======== -->
+<div id="pqi" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">自选起课</div></div>
+  <div class="card" style="padding:13px">
+    <div class="qi-grid">
+      <div class="qi-f"><label>日 干</label><select id="qi-rg" class="qi-sel"></select></div>
+      <div class="qi-f"><label>日 支</label><select id="qi-rz" class="qi-sel"></select></div>
+      <div class="qi-f"><label>月将（节气）</label><select id="qi-yj" class="qi-sel"></select></div>
+      <div class="qi-f"><label>占 时</label><select id="qi-zs" class="qi-sel"></select></div>
+    </div>
+    <button class="btn btn-r" style="width:100%;margin-top:12px" onclick="qiCast()">起 课 →</button>
+    <div id="qi-tip" style="font-size:11px;color:#9B8570;text-align:center;margin-top:7px;line-height:1.6">选日干支＋月将＋占时，自动排全盘·判宗门·列适用毕法。昼夜由占时定（卯~申为昼）。</div>
+  </div>
+  <div id="qi-out"></div>
+</div>
+
+<!-- ======== 薄弱点复习中心 ======== -->
+<div id="pfx" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">薄弱点复习</div></div>
+  <div id="pfx-body"></div>
 </div>
 
 <!-- ======== 三传发用·九宗门 ======== -->
@@ -3589,7 +3639,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}}
+function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}}
 function goHome(){show('ph')}
 const DAILY_QUOTES=[
   '不积跬步，无以至千里；不积小流，无以成江海。',
@@ -4157,6 +4207,110 @@ function startKC(){
 }
 function startKCBoard(){_genKC3();_renderBoard();_scrollPos['pkb']=0;show('pkb');}
 function showKCBoard(){_renderBoard();_scrollPos['pkb']=0;show('pkb');}
+
+/* ========= 自选起课（手动输入 → 全盘 + 毕法自动断案） ========= */
+// 由输入构建 kcState（同 _genKC 的构建口径），再用 _compute3chuan 纠正三传
+function _manualKC(rg,rz,yj,zs){
+  const rgi=GAN_ALL.indexOf(rg),rzt=ZHI_ALL.indexOf(rz);
+  let ri=-1;for(let i=0;i<60;i++){if(i%10===rgi&&i%12===rzt){ri=i;break;}}
+  if(ri<0)return null;                       // 干支阴阳不一致，非六十甲子
+  const zsi=ZHI_ALL.indexOf(zs),day=ZHU_SHI.includes(zs),yi2=ZHI_ALL.indexOf(yj.yj);
+  const tp=ZHI_ALL.map((_,i)=>ZHI_ALL[(yi2+(i-zsi+12)%12)%12]);
+  const jg=GAN_JI[rg],ji=ZHI_ALL.indexOf(jg);
+  const k1s=tp[ji],k2s=tp[ZHI_ALL.indexOf(k1s)];
+  const rzi=ZHI_ALL.indexOf(rz),k3s=tp[rzi],k4s=tp[ZHI_ALL.indexOf(k3s)];
+  const sk=[{s:k1s,x:rg,n:'第一课'},{s:k2s,x:k1s,n:'第二课'},{s:k3s,x:rz,n:'第三课'},{s:k4s,x:k3s,n:'第四课'}];
+  const gr=day?GR_Z[rg]:GR_Y[rg],xi=KONG_TBL[Math.floor(ri/10)];
+  const st={rg,rz,ri,yj,yi2,zsi,zs,day,tp,sk,jg,gr,xi};
+  const t=_compute3chuan(st);st.cc=t.cc;st.zc=t.zc;st.mc=t.mc;
+  st.mt=_detectMethod(st)+'课';
+  return st;
+}
+function _luqin(rg,z){
+  const rw=WX_GAN[rg],zw=_wxOf(z);
+  if(rw===zw)return '兄';if(KE_M[rw]===zw)return '财';if(KE_M[zw]===rw)return '官鬼';
+  if(SHENG_M[rw]===zw)return '子孙';if(SHENG_M[zw]===rw)return '父母';return '';
+}
+// 只判「程序可精确判定」之毕法，绝不含糊断
+function _bfDetect(st){
+  const{rg,cc,zc,mc,sk,gr,xi}=st,R=[],m=_detectMethod(st),kong=new Set(xi.k),w=z=>_wxOf(z);
+  if(SHENG_M[w(cc)]===w(zc)&&SHENG_M[w(zc)]===w(mc))R.push(['第31法·递生格','三传递生（初生中·中生末），层层相生 → 得人举荐、诸事顺遂']);
+  if(KE_M[w(cc)]===w(zc)&&KE_M[w(zc)]===w(mc))R.push(['第32法·递克格','三传递克，众人相欺、彼此内耗']);
+  const S3=[['申','子','辰','水'],['寅','午','戌','火'],['巳','酉','丑','金'],['亥','卯','未','木']];
+  const tset=new Set([cc,zc,mc]);
+  for(const[a,b,c,e]of S3)if(tset.size===3&&tset.has(a)&&tset.has(b)&&tset.has(c))R.push(['三传合'+e+'局','三传结成 '+e+' 三合局，众人协力、聚合成事']);
+  const lq=[cc,zc,mc].map(z=>_luqin(rg,z));
+  if(lq[0]&&lq.every(x=>x===lq[0])){
+    const M={'财':['第14法·三传财旺','三传俱财，占财大吉；然财太旺反主克父克印、耗身，须防'],'官鬼':['第11法·众鬼类','三传俱鬼（官杀），忧疑压身，须贵人德神或制化方解'],'子孙':['三传俱子孙','三传俱子孙，利求子、解忧、伤官泄秀'],'父母':['三传俱父母','三传俱印绶，利文书、尊长、契券'],'兄':['三传俱兄弟','三传俱比劫，主分夺、破财、竞争']};
+    R.push(M[lq[0]]);
+  }
+  const kc=[cc,zc,mc].filter(z=>kong.has(z));
+  if(kc.length===3)R.push(['第17法·进茹空亡','三传皆落旬空，事多虚耗 → 宜退守、勿进']);
+  else if(kong.has(cc))R.push(['第16~18法·空上类','初传（发用）旬空，谋事多虚假、防落空']);
+  if(m==='伏吟')R.push(['伏吟课','天地不动、伏而不发 → 事阻宜守，凭刑推动']);
+  if(m==='返吟')R.push(['返吟课','冲反不定、去而复来 → 事多反复']);
+  if(m==='八专')R.push(['八专课','干支同位、内外不分 → 多暧昧私情、彼此不明']);
+  if(sk[0].s===gr)R.push(['第11法·贵德临身','贵人临日干上神 → 逢凶化吉、得贵人扶助']);
+  else if(sk[2].s===gr)R.push(['贵人临支','贵人临日支上神 → 宅得贵助']);
+  return R;
+}
+function _bfDetectHTML(st){
+  const R=_bfDetect(st);
+  let s='<div class="bf-note">⚡ 适用毕法（程序初判，仅列可精确判定者；完整断法请查「毕法赋」）</div>';
+  if(!R.length)return s+'<div class="bf-empty">本课未命中可程序判定之毕法格局<br>可到「毕法赋」按课体逐条对照</div>';
+  return s+R.map(([t,d])=>`<div class="bf-hit"><b>${t}</b><div class="bf-d">${d}</div></div>`).join('');
+}
+let _qiInited=false;
+function qiInit(){
+  if(_qiInited)return;_qiInited=true;
+  const opt=(arr,f)=>arr.map((v,i)=>`<option value="${f?i:v}">${f?f(v):v}</option>`).join('');
+  document.getElementById('qi-rg').innerHTML=opt(GAN_ALL);
+  document.getElementById('qi-rz').innerHTML=opt(ZHI_ALL);
+  document.getElementById('qi-yj').innerHTML=opt(YJ_TBL,y=>`${y.zq}·${y.yj}将`);
+  document.getElementById('qi-zs').innerHTML=opt(ZHI_ALL);
+  // 合理默认：甲子日 · 雨水后亥将 · 卯时
+  document.getElementById('qi-rz').value='子';document.getElementById('qi-zs').value='卯';
+}
+function qiCast(){
+  const rg=document.getElementById('qi-rg').value,rz=document.getElementById('qi-rz').value,
+        zs=document.getElementById('qi-zs').value,yj=YJ_TBL[+document.getElementById('qi-yj').value];
+  const out=document.getElementById('qi-out');
+  const st=_manualKC(rg,rz,yj,zs);
+  if(!st){out.innerHTML=`<div class="card" style="text-align:center;color:#C41230;padding:14px">「${rg}${rz}」非六十甲子（干支阴阳需一致，如甲子·乙丑…），请重选日支</div>`;return;}
+  kcState=st;
+  out.innerHTML='<div class="card" id="qi-board" style="padding:12px"></div><div id="qi-bf"></div>';
+  _renderBoard(document.getElementById('qi-board'));
+  document.getElementById('qi-bf').innerHTML=_bfDetectHTML(st);
+}
+
+/* ========= 薄弱点复习中心 ========= */
+const FX_CATS=[
+  {k:'宗门识别',fn:startZM},{k:'三传推演',fn:startSC},{k:'宗门流程',fn:startZL},
+  {k:'天将联想',fn:startTJ},{k:'支神意象',fn:startZS},{k:'旺相断法',fn:startWSD},
+  {k:'干支关系',fn:startGZ},{k:'毕法赋',fn:startBF}
+];
+function fxStart(i){FX_CATS[i].fn();}
+function fxInit(){
+  let d={};try{d=JSON.parse(localStorage.getItem('lr_weak')||'{}');}catch{}
+  const rows=FX_CATS.map((c,i)=>{
+    const r=d[c.k]||{q:0,w:0};
+    const rate=r.q?Math.round(r.w/r.q*100):-1;
+    return{...c,i,q:r.q,w:r.w,rate};
+  }).sort((a,b)=>b.rate-a.rate);
+  const worst=rows.find(r=>r.q>=5&&r.rate>=20);
+  let html='<div class="card" style="padding:12px;font-size:13px;color:#5A4A38;line-height:1.7">各练习模块错误率排序（练满5题才计入薄弱判定）。<b style="color:var(--acc)">错误率越高越该重点复习</b>，点「去练习」直接进入对应练习。</div><div style="margin-top:10px">';
+  html+=rows.map(r=>{
+    const done=r.q>0;
+    const rateTxt=done?`${r.rate}% 错　<span style="color:#9B8570">(${r.w}/${r.q})</span>`:'<span style="color:#9B8570">未练习</span>';
+    const isWorst=worst&&worst.k===r.k;
+    return `<div class="fx-row${isWorst?' fx-worst':''}">
+      <div class="fx-info"><div class="fx-nm">${r.k}${isWorst?' 🔺最弱':''}</div>
+        <div class="fx-st">${rateTxt}</div>
+        ${done?`<div class="fx-bar"><i style="width:${Math.max(3,r.rate)}%"></i></div>`:''}</div>
+      <button class="fx-go" onclick="fxStart(${r.i})">去练习 →</button></div>`;
+  }).join('')+'</div>';
+  document.getElementById('pfx-body').innerHTML=html;
+}
 
 function _renderBoard(targetEl){
   const{rg,rz,ri,yj,zs,day,tp,sk,cc,zc,mc,gr,xi}=kcState;
