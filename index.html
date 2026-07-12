@@ -8235,7 +8235,7 @@ function _xfRender(t){
   const el=document.getElementById('xfp-'+t);
   const WS=['旺','相','休','囚','死'];
   if(t==='fa'||t==='lei'||t==='bf'){
-    el.innerHTML=data.map((d,i)=>`<div class="xfsym-card xfop" id="xfc-${t}-${i}">
+    el.innerHTML=data.map((d,i)=>`<div class="xfsym-card xfop" id="xfc-${t}-${i}" data-group="${d.group||''}">
 <div class="xfsym-hd" onclick="xfToggle('${t}',${i})">
 <div><div class="xfsym-nm">${d.name}</div><div class="xfsym-sub">${d.group} · ${d.src}</div></div>
 <span class="tag-m" style="margin-left:auto">${t==='fa'?'法':t==='lei'?'类':'毕'}</span>
@@ -8284,7 +8284,7 @@ function xfSearch(){
   panel.querySelectorAll('.xfsym-card').forEach(card=>{
     total++;
     const okQ=!q||card.textContent.toLowerCase().includes(q);
-    const okG=!group||card.textContent.includes(group);
+    const okG=!group||card.dataset.group===group;
     const show=okQ&&okG;
     card.style.display=show?'':'none';
     if(show)shown++;
