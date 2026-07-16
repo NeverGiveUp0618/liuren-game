@@ -3647,7 +3647,29 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function show(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}}
+function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}}
+/* ===== 浏览器返回键/全面屏手势 → App内逐屏后退（套壳iframe/独立打开均适用） =====
+   包装 show()：前进 pushState；目标已在栈中(上层)则 history.go(-n) 折叠后退；
+   popstate 幂等重放对应屏。所有 show()/goHome() 调用点无需改动。 */
+var _scrStack=['ph'],_navApplying=false;
+function show(id){
+  if(!document.getElementById(id))return;
+  _applyScreen(id);
+  if(_navApplying)return;
+  var topId=_scrStack[_scrStack.length-1];
+  if(id===topId)return;
+  var idx=_scrStack.lastIndexOf(id);
+  if(idx>=0){var back=_scrStack.length-1-idx;_scrStack.length=idx+1;try{history.go(-back);}catch(e){}return;}
+  _scrStack.push(id);
+  try{history.pushState({i:_scrStack.length-1},'');}catch(e){}
+}
+window.addEventListener('popstate',function(e){
+  var i=(e.state&&typeof e.state.i==='number')?e.state.i:0;
+  if(i<0)i=0; if(i>_scrStack.length-1)i=_scrStack.length-1;
+  _scrStack.length=i+1;
+  _navApplying=true; _applyScreen(_scrStack[i]); _navApplying=false;
+});
+try{history.replaceState({i:0},'');}catch(e){}
 function goHome(){show('ph')}
 const DAILY_QUOTES=[
   '不积跬步，无以至千里；不积小流，无以成江海。',
