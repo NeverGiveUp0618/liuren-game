@@ -148,6 +148,21 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .qz-opt:disabled{cursor:default;opacity:1}
 .qz-score{text-align:center;font-size:36px;font-weight:bold;color:var(--acc);margin:24px 0 4px;letter-spacing:4px}
 .qz-lv{text-align:center;font-size:14px;color:#6B5040;margin-bottom:20px;letter-spacing:3px}
+/* 综合题库训练 */
+.train-counts,.train-modes{display:flex;gap:7px;margin:8px 0 12px}
+.train-chip{flex:1;padding:9px 4px;border:1px solid var(--bd1);border-radius:9px;background:var(--bg2);color:#6B5040;font-size:12px;cursor:pointer}
+.train-chip.active{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:bold}
+.train-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:8px 0 14px}
+.train-cat{padding:11px 8px;border:2px solid var(--bd1);border-radius:11px;background:var(--bg2);color:#6B5040;text-align:left;cursor:pointer;font-size:13px}
+.train-cat.active{border-color:var(--acc);background:var(--bg3);color:var(--acc);font-weight:bold}
+.train-cat small{display:block;color:#9B8570;font-size:10px;margin-top:3px;font-weight:normal}
+.train-q{font-size:18px;line-height:1.8;text-align:center;white-space:pre-line;color:#1C0A00;padding:18px 10px}
+.train-meta{text-align:center;font-size:11px;color:#9B8570;letter-spacing:1px}
+.train-explain{display:none;background:var(--bg3);border-left:4px solid var(--acc);border-radius:9px;padding:11px 13px;margin:10px 0;font-size:13px;line-height:1.8;color:#6B5040;white-space:pre-line}
+.train-actions{display:flex;gap:8px;margin-top:10px}
+.master-row{margin:9px 0}.master-head{display:flex;font-size:12px;color:#6B5040;margin-bottom:4px}.master-head span:last-child{margin-left:auto}
+.master-bar{height:8px;background:var(--bg2);border:1px solid var(--bd1);border-radius:5px;overflow:hidden}.master-fill{height:100%;background:var(--acc)}
+.nb-item{background:var(--bg2);border:1px solid var(--bd1);border-radius:11px;padding:10px 12px;margin:7px 0;font-size:12px;line-height:1.7}
 /* p5 chapter nav */
 .p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:var(--bg2);border:1px solid var(--bd1);border-radius:12px}
 .p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:var(--bg1);border:1px solid var(--bd1);border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
@@ -365,6 +380,17 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div class="hmap-label">近35天练习记录</div>
   <div class="hmap" id="el-hmap"></div>
+  <div class="mcard" style="border-color:var(--acc)">
+    <div class="mcard-head"><div class="mcard-icon">🏆</div><div><div class="mcard-name">综合题库训练 <span style="font-size:10px;background:var(--acc);color:#fff;border-radius:4px;padding:1px 5px">新</span></div><div class="mcard-desc" id="train-home-sub">每日挑战 · 自选专题 · 错题复习 · 自适应加强</div></div></div>
+    <div class="mcard-btns">
+      <button class="btn btn-r" onclick="openTrainSetup('daily')">今日挑战</button>
+      <button class="btn btn-d" onclick="openTrainSetup('free')">自由训练</button>
+    </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-d" onclick="openTrainNotebook()">📚 错题本</button>
+      <button class="btn btn-d" onclick="openTrainReport()">📊 掌握度</button>
+    </div>
+  </div>
   <div class="mcard">
     <div class="mcard-head"><div class="mcard-icon">🀄</div><div><div class="mcard-name">口诀闪卡</div><div class="mcard-desc">月将 · 贵人 · 遁干 · 天将 · 九宗门 · 格局</div></div></div>
     <div class="mcard-btns"><button class="btn btn-r" onclick="show('pkj-sel')">选择类别 →</button></div>
@@ -479,6 +505,57 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <button class="bk-btn" onclick="exportBackup()">📦 导出备份</button>
     <button class="bk-btn" onclick="importBackup()">📂 导入恢复</button>
   </div>
+</div>
+
+<!-- ======== 综合题库设置 ======== -->
+<div id="ptrain-set" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">综合题库训练</div></div>
+  <div class="card">
+    <div style="font-size:13px;color:#9B8570;letter-spacing:2px">题目数量</div>
+    <div class="train-counts" id="train-counts">
+      <button class="train-chip active" data-n="10" onclick="trainSetCount(10)">10题</button>
+      <button class="train-chip" data-n="30" onclick="trainSetCount(30)">30题</button>
+      <button class="train-chip" data-n="50" onclick="trainSetCount(50)">50题</button>
+    </div>
+    <div style="font-size:13px;color:#9B8570;letter-spacing:2px">选择专题</div>
+    <div class="train-cats" id="train-cats"></div>
+    <button class="btn btn-r" onclick="startUnifiedTrain()">开始训练 →</button>
+  </div>
+</div>
+
+<!-- ======== 综合题库答题 ======== -->
+<div id="ptrain" class="screen">
+  <div class="tbar"><button class="tbk" onclick="openTrainSetup('free')">✕</button><div class="tbtitle" id="train-title">综合训练</div><div class="tbr" id="train-prog"></div></div>
+  <div class="prog-row"><div class="prog-wrap"><div class="prog-bar" id="train-pb"></div></div><div class="prog-txt" id="train-score">0分</div></div>
+  <div id="train-main">
+    <div class="card">
+      <div class="train-meta" id="train-meta"></div>
+      <div class="train-q" id="train-q"></div>
+      <div id="train-opts"></div>
+      <div class="train-explain" id="train-explain"></div>
+    </div>
+    <div class="train-actions"><button class="btn btn-a" id="train-nb-add" style="display:none" onclick="trainAddCurrentNB()">＋ 加入错题本</button><button class="btn btn-g" id="train-next" style="display:none" onclick="trainNext()">下一题 →</button></div>
+  </div>
+  <div id="train-result" style="display:none">
+    <div class="qz-score" id="train-res-score"></div><div class="qz-lv" id="train-res-lv"></div>
+    <div class="card" id="train-res-detail"></div>
+    <button class="btn btn-r" onclick="startUnifiedTrain()">再练一组</button>
+    <button class="btn btn-d" style="margin-top:8px" onclick="openTrainReport()">查看掌握度</button>
+  </div>
+</div>
+
+<!-- ======== 综合题库错题本/报告 ======== -->
+<div id="ptrain-nb" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">错题本</div><div class="tbr" id="train-nb-count"></div></div>
+  <div id="train-nb-list"></div>
+  <button class="btn btn-r" id="train-nb-practice" onclick="startNotebookTrain()">开始重练</button>
+  <button class="btn btn-d" style="margin-top:8px" onclick="clearTrainNotebook()">清空全部错题</button>
+</div>
+<div id="ptrain-report" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">学习报告</div></div>
+  <div class="card" id="train-report-summary"></div>
+  <div class="card"><div style="font-size:14px;font-weight:bold;margin-bottom:10px">专题掌握度</div><div id="train-master-list"></div></div>
+  <button class="btn btn-r" id="train-weak-btn" onclick="startWeakTrain()">加强最薄弱专题</button>
 </div>
 
 <!-- ======== 知识速查 ======== -->
@@ -3647,7 +3724,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 const _scrollPos = {};
 const LR_KEY='lr_data',LR_BK_KEY='lr_bk_date';
 const BK_DATE_KEY=LR_BK_KEY;
-function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}}
+function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');window.scrollTo(0,_scrollPos[id]||0);if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}}
 /* ===== 浏览器返回键/全面屏手势 → App内逐屏后退（套壳iframe/独立打开均适用） =====
    包装 show()：前进 pushState；目标已在栈中(上层)则 history.go(-n) 折叠后退；
    popstate 幂等重放对应屏。所有 show()/goHome() 调用点无需改动。 */
@@ -8372,6 +8449,131 @@ function _wsdEnd(){
 }
 
 // ══ 主题切换 ══
+// ══ 综合题库训练（统一题库 / 错题本 / 自适应） ══
+const TRAIN_KEY='lr_train_v1',TRAIN_NB_KEY='lr_train_nb_v1';
+const TRAIN_CATS={
+  yj:{name:'月将节气',desc:'月将、月令与节气'},
+  gr:{name:'昼夜贵人',desc:'日干与贵人定位'},
+  tj:{name:'十二天将',desc:'名称、主象与吉凶'},
+  zs:{name:'十二支神',desc:'支神名称与核心类象'},
+  zm:{name:'九宗门',desc:'看四课识别发用法'},
+  sc:{name:'三传推演',desc:'初传、中传、末传'}
+};
+const TRAIN_ZS=[
+  ['子','神后','妇女·阴私·水液'],['丑','大吉','田宅·长者·财帛'],['寅','功曹','官吏·文书·道路'],['卯','太冲','门户·舟车·林木'],
+  ['辰','天罡','争斗·牢狱·田土'],['巳','太乙','文书·炉灶·惊怪'],['午','胜光','文书·光明·道路'],['未','小吉','酒食·婚姻·庭院'],
+  ['申','传送','道路·行人·金铁'],['酉','从魁','门户·酒食·妇女'],['戌','河魁','奴仆·牢狱·坟墓'],['亥','登明','阴私·幼儿·水道']
+];
+let trainCfg={mode:'daily',count:10,cats:new Set(Object.keys(TRAIN_CATS))};
+let trainState={qs:[],idx:0,correct:0,wrong:[],answered:false,sessionCats:{}};
+function trainData(){try{return JSON.parse(localStorage.getItem(TRAIN_KEY)||'{}')}catch{return{}}}
+function saveTrainData(d){localStorage.setItem(TRAIN_KEY,JSON.stringify(d))}
+function trainNB(){try{return JSON.parse(localStorage.getItem(TRAIN_NB_KEY)||'[]')}catch{return[]}}
+function saveTrainNB(d){localStorage.setItem(TRAIN_NB_KEY,JSON.stringify(d))}
+function trainShuffle(a){return shuffleArr(a)}
+function trainPick(arr,n){return trainShuffle([...arr]).slice(0,n)}
+function trainQuestion(cat,q,a,opts,ex,id,extra={}){return{cat,q,a,opts:trainShuffle([...new Set([a,...opts])]).slice(0,4),ex,id:id||cat+'_'+q,...extra}}
+function trainStaticPool(cat){
+  if(cat==='yj')return QZ_YJ.map((x,i)=>trainQuestion(cat,x.q,x.a,trainPick(ZHI_ALL.filter(z=>z!==x.a),3),x.hint,`yj_${i}`));
+  if(cat==='gr')return QZ_GR.map((x,i)=>trainQuestion(cat,x.q,x.a,trainPick(ZHI_ALL.filter(z=>z!==x.a),3),x.hint,`gr_${i}`));
+  if(cat==='tj')return TJ_QUIZ.flatMap((x,i)=>[
+    trainQuestion(cat,`“${x.name}”的核心主象是？`,x.sx,trainPick(TJ_QUIZ.filter(y=>y.name!==x.name).map(y=>y.sx),3),`${x.name}属${x.wx}，${x.ji}将。${x.ex}`,`tj_sx_${i}`),
+    trainQuestion(cat,`主象“${x.sx}”对应哪位天将？`,x.name,trainPick(TJ_QUIZ.filter(y=>y.name!==x.name).map(y=>y.name),3),`${x.name}：${x.ex}`,`tj_nm_${i}`)
+  ]);
+  if(cat==='zs')return TRAIN_ZS.flatMap((x,i)=>[
+    trainQuestion(cat,`地支“${x[0]}”的六壬神名是？`,x[1],trainPick(TRAIN_ZS.filter(y=>y[0]!==x[0]).map(y=>y[1]),3),`${x[0]}为${x[1]}，主${x[2]}。`,`zs_nm_${i}`),
+    trainQuestion(cat,`“${x[1]}”对应哪个地支？`,x[0],trainPick(ZHI_ALL.filter(y=>y!==x[0]),3),`${x[1]}即${x[0]}，主${x[2]}。`,`zs_di_${i}`)
+  ]);
+  return[];
+}
+function trainDynamic(cat){
+  _genKC3();
+  const s=JSON.parse(JSON.stringify(kcState));
+  const fact=`${s.rg}${s.rz}日 · 月将${s.yj.yj} · ${s.zs}时`;
+  if(cat==='zm'){
+    const a=_detectMethod(s),others=ZM_METHODS.filter(x=>x!==a);
+    return trainQuestion(cat,`${fact}\n根据四课关系，本课应取何宗门？`,a,trainPick(others,3),`正确为${a}课。发传依据：${s.mt}`,`zm_${Date.now()}_${Math.random()}`,{fact,sk:s.sk});
+  }
+  const step=Math.floor(Math.random()*3),a=[s.cc,s.zc,s.mc][step],labels=['初传','中传','末传'];
+  return trainQuestion(cat,`${fact}\n本课${labels[step]}为何支？`,a,trainPick(ZHI_ALL.filter(x=>x!==a),3),`三传为：初${s.cc} → 中${s.zc} → 末${s.mc}。发用依据：${s.mt}`,`sc_${Date.now()}_${Math.random()}`,{fact,sk:s.sk});
+}
+function openTrainSetup(mode){
+  trainCfg.mode=mode||'free';
+  document.getElementById('train-title').textContent=trainCfg.mode==='daily'?'今日挑战':'自由训练';
+  renderTrainSetup();show('ptrain-set');
+}
+function renderTrainSetup(){
+  document.querySelectorAll('#train-counts .train-chip').forEach(b=>b.classList.toggle('active',+b.dataset.n===trainCfg.count));
+  document.getElementById('train-cats').innerHTML=Object.entries(TRAIN_CATS).map(([k,v])=>`<button class="train-cat ${trainCfg.cats.has(k)?'active':''}" onclick="trainToggleCat('${k}')">${v.name}<small>${v.desc}</small></button>`).join('');
+}
+function trainSetCount(n){trainCfg.count=n;renderTrainSetup()}
+function trainToggleCat(k){trainCfg.cats.has(k)?trainCfg.cats.delete(k):trainCfg.cats.add(k);renderTrainSetup()}
+function buildTrainQuestions(count,cats){
+  const out=[],keys=[...cats];if(!keys.length)return out;
+  const staticPools={};keys.forEach(k=>staticPools[k]=trainStaticPool(k));
+  for(let i=0;i<count;i++){
+    let k=keys[i%keys.length];
+    // 每轮有约三分之一题优先投向历史薄弱专题
+    const stats=trainData().cats||{},weak=keys.filter(x=>stats[x]&&stats[x].q>=3).sort((a,b)=>(stats[b].w/stats[b].q)-(stats[a].w/stats[a].q))[0];
+    if(weak&&i%3===0)k=weak;
+    const pool=staticPools[k];out.push((k==='zm'||k==='sc')?trainDynamic(k):pool[Math.floor(Math.random()*pool.length)]);
+  }
+  return trainShuffle(out);
+}
+function startUnifiedTrain(qs){
+  if(!qs&&trainCfg.cats.size===0){showToast('请至少选择一个专题');return;}
+  const list=qs||buildTrainQuestions(trainCfg.count,trainCfg.cats);
+  trainState={qs:list,idx:0,correct:0,wrong:[],answered:false,sessionCats:{}};
+  document.getElementById('train-main').style.display='';document.getElementById('train-result').style.display='none';
+  show('ptrain');trainRender();
+}
+function trainRender(){
+  const q=trainState.qs[trainState.idx],n=trainState.qs.length;
+  document.getElementById('train-prog').textContent=`${trainState.idx+1}/${n}`;document.getElementById('train-pb').style.width=`${trainState.idx/n*100}%`;
+  document.getElementById('train-score').textContent=`${trainState.correct}分`;document.getElementById('train-meta').textContent=TRAIN_CATS[q.cat].name;
+  document.getElementById('train-q').textContent=q.q;
+  document.getElementById('train-opts').innerHTML=q.opts.map((o,i)=>`<button class="qz-opt" onclick="trainAnswer(${i},this)" style="font-size:15px;letter-spacing:1px">${o}</button>`).join('');
+  document.getElementById('train-explain').style.display='none';document.getElementById('train-next').style.display='none';document.getElementById('train-nb-add').style.display='none';trainState.answered=false;
+}
+function trainAnswer(i,btn){
+  if(trainState.answered)return;trainState.answered=true;
+  const q=trainState.qs[trainState.idx],chosen=q.opts[i],ok=chosen===q.a,rec=trainState.sessionCats[q.cat]||(trainState.sessionCats[q.cat]={q:0,w:0});rec.q++;if(!ok)rec.w++;
+  document.querySelectorAll('#train-opts .qz-opt').forEach((b,j)=>{b.disabled=true;if(q.opts[j]===q.a)b.classList.add('correct')});
+  if(ok)trainState.correct++;else{btn.classList.add('wrong');trainState.wrong.push(q);trainStoreNB(q)}
+  const ex=document.getElementById('train-explain');ex.textContent=(ok?'✓ 回答正确':'✗ 正确答案：'+q.a)+'\n'+q.ex;ex.style.display='block';
+  document.getElementById('train-score').textContent=`${trainState.correct}分`;document.getElementById('train-next').textContent=trainState.idx===trainState.qs.length-1?'查看结果 ✓':'下一题 →';document.getElementById('train-next').style.display='';
+  document.getElementById('train-nb-add').style.display=ok?'':'none';
+}
+function trainNext(){trainState.idx++;if(trainState.idx>=trainState.qs.length){trainEnd();return}trainRender();window.scrollTo(0,0)}
+function trainStoreNB(q){const nb=trainNB();if(!nb.some(x=>x.id===q.id)){nb.unshift({...q,added:Date.now()});saveTrainNB(nb.slice(0,300))}}
+function trainAddCurrentNB(){trainStoreNB(trainState.qs[trainState.idx]);showToast('已收入错题本')}
+function trainEnd(){
+  const total=trainState.qs.length,pct=Math.round(trainState.correct/total*100),d=trainData();d.cats=d.cats||{};
+  Object.entries(trainState.sessionCats).forEach(([k,v])=>{const r=d.cats[k]||(d.cats[k]={q:0,w:0});r.q+=v.q;r.w+=v.w});
+  d.total=(d.total||0)+total;d.correct=(d.correct||0)+trainState.correct;d.sessions=(d.sessions||0)+1;d.days=d.days||{};const day=todayStr();const dr=d.days[day]||(d.days[day]={q:0,c:0});dr.q+=total;dr.c+=trainState.correct;saveTrainData(d);
+  document.getElementById('train-main').style.display='none';document.getElementById('train-result').style.display='';document.getElementById('train-res-score').textContent=`${trainState.correct}/${total}`;
+  document.getElementById('train-res-lv').textContent=pct>=90?'掌握扎实 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续巩固 💪':'建议专项复习 📚';
+  document.getElementById('train-res-detail').innerHTML=`正确率 <b>${pct}%</b><br>答错 <b>${total-trainState.correct}</b> 题，已自动收入错题本。`;
+}
+function openTrainNotebook(){
+  const nb=trainNB();document.getElementById('train-nb-count').textContent=`${nb.length}题`;
+  document.getElementById('train-nb-list').innerHTML=nb.length?nb.map((q,i)=>`<div class="nb-item"><b>${TRAIN_CATS[q.cat]?.name||q.cat}</b>　${q.q.replace(/\n/g,' ')}<br><span style="color:var(--acc)">答案：${q.a}</span><button class="theme-tog" style="float:right" onclick="removeTrainNB(${i})">移除</button></div>`).join(''):'<div class="card" style="text-align:center;color:#9B8570">错题本是空的，先去挑战一组吧。</div>';
+  document.getElementById('train-nb-practice').style.display=nb.length?'':'none';show('ptrain-nb');
+}
+function removeTrainNB(i){const nb=trainNB();nb.splice(i,1);saveTrainNB(nb);openTrainNotebook()}
+function clearTrainNotebook(){if(!trainNB().length)return;if(!confirm('确定清空全部错题吗？此操作无法撤销。'))return;saveTrainNB([]);openTrainNotebook();showToast('错题本已清空')}
+function startNotebookTrain(){const nb=trainNB();if(!nb.length)return;startUnifiedTrain(trainShuffle([...nb]).slice(0,Math.min(30,nb.length)))}
+function openTrainReport(){
+  const d=trainData(),cats=d.cats||{},total=d.total||0,c=d.correct||0,pct=total?Math.round(c/total*100):0;
+  document.getElementById('train-report-summary').innerHTML=`累计训练 <b>${total}</b> 题　·　答对 <b>${c}</b> 题<br>综合正确率 <b style="font-size:22px;color:var(--acc)">${pct}%</b>　·　错题本 ${trainNB().length} 题`;
+  document.getElementById('train-master-list').innerHTML=Object.entries(TRAIN_CATS).map(([k,v])=>{const r=cats[k]||{q:0,w:0},p=r.q?Math.round((r.q-r.w)/r.q*100):0;return`<div class="master-row"><div class="master-head"><span>${v.name}</span><span>${r.q?`${p}% · ${r.q}题`:'未测试'}</span></div><div class="master-bar"><div class="master-fill" style="width:${p}%"></div></div></div>`}).join('');
+  show('ptrain-report');
+}
+function weakestTrainCat(){const cats=trainData().cats||{};return Object.keys(TRAIN_CATS).sort((a,b)=>{const x=cats[a]||{q:0,w:1},y=cats[b]||{q:0,w:1};return (x.q?(x.q-x.w)/x.q:0)-(y.q?(y.q-y.w)/y.q:0)})[0]}
+function startWeakTrain(){const k=weakestTrainCat();trainCfg.cats=new Set([k]);trainCfg.count=10;startUnifiedTrain()}
+function updateTrainHome(){const d=trainData(),sub=document.getElementById('train-home-sub');if(!sub)return;const due=trainNB().length;sub.textContent=d.total?`累计${d.total}题 · 正确率${Math.round((d.correct||0)/d.total*100)}%${due?' · '+due+'道错题待复习':''}`:'每日挑战 · 自选专题 · 错题复习 · 自适应加强'}
+updateTrainHome();
+
 function toggleTheme(){
   const rd=document.body.classList.toggle('theme-red');
   localStorage.setItem('lr_theme',rd?'red':'lav');
