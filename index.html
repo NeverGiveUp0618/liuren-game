@@ -498,7 +498,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div id="kh-trans" class="hub-panel">
     <div class="hub-intro">理解四课的主客结构，并按九宗门算法推出三传。</div>
-    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧭</div><div><div class="hub-item-name">九宗门完整体系</div><div class="hub-item-desc">逐门条件、发用规则、流程图和推导案例</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p9z')">逐门详解</button><button class="btn btn-d" onclick="show('pzfl')">流程图</button></div></div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧭</div><div><div class="hub-item-name">九宗门完整体系</div><div class="hub-item-desc">逐门条件、课名由来、发用规则、流程图和推导案例</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openZ9Names()">课名由来</button><button class="btn btn-d" onclick="show('p9z')">逐门详解</button><button class="btn btn-d" onclick="show('pzfl')">流程图</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔬</div><div><div class="hub-item-name">算法逻辑梳理·进阶</div><div class="hub-item-desc">从边界测试、九宗门到应期的五阶段完整拆解</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pllj')">阅读进阶</button><button class="btn btn-r" onclick="openTrainTopic('zm','sc')">宗门三传训练</button></div></div>
   </div>
   <div id="kh-gods" class="hub-panel">
@@ -1912,7 +1912,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="z9-num">1</div>
     <div class="z9-sc">
       <b>先看是否特殊课型</b><br>
-      · 日干支同宫（如甲寅/壬子）→ 四课变两课 → <span class="hit">八专课</span><br>
+      · 日干支同宫（八专五日：甲寅、庚申、丁未、己未、癸丑）→ 四课变两课 → <span class="hit">八专课</span><br>
       · 月将 = 占时支 → 天地盘完全重合 → <span class="hit">伏吟课</span><br>
       · 天地盘各居对冲（子午换位…） → <span class="hit">返吟课</span>
     </div>
@@ -1946,8 +1946,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     </div>
   </div>
 
-  <div class="sec-t">九宗门详解</div>
-  <div class="z9-mn" style="margin:0 0 10px">为什么叫“九宗门”，下面却有十个课名？因为第一宗“贼克法”分成<strong>元首、重审</strong>两种基本课体；二者合计仍只算一宗。</div>
+  <div class="sec-t" id="z9-name-guide">九宗门详解 · 含课名由来</div>
+  <div class="z9-mn" style="margin:0 0 10px">每张课体卡展开后的第一块，就是“为什么叫这个名字”。为什么九宗门下面有十个课名？因为第一宗“贼克法”分成<strong>元首、重审</strong>两种基本课体；二者合计仍只算一宗。<button class="btn btn-r" style="width:100%;margin-top:8px;font-size:12px" onclick="openZ9Names(true)">一次展开全部课名由来 ↓</button></div>
 
   <!-- 元首 -->
   <div class="z9-card">
@@ -4609,6 +4609,11 @@ function z9Tog(h){
       body.appendChild(btn);
     }
   }
+}
+function openZ9Names(alreadyHere=false){
+  if(!alreadyHere) show('p9z');
+  document.querySelectorAll('#p9z .z9-hdr').forEach(h=>{if(!h.classList.contains('open'))z9Tog(h)});
+  requestAnimationFrame(()=>document.getElementById('z9-name-guide')?.scrollIntoView({behavior:'smooth',block:'start'}));
 }
 function _detectMethod(st){
   const{rg,rz,yj,zs,tp,sk}=st;
