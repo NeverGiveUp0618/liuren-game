@@ -7196,11 +7196,25 @@ const BF_STORY_SEEDS=[
  {n:91,g:0,title:'白虎带着日鬼直奔日干',scene:'日干之鬼乘白虎，又直接临到日干。鬼负责克我，白虎又主急猛，两种信号叠在同一处。',ask:'这类凶象最大的特点是什么？',clue:'先看信号叠加：克我的日鬼 + 急猛的白虎 + 直接临身。'},
  {n:100,g:2,title:'两个凶神相遇，反而解围',scene:'墓鬼克日已经很凶，末传又来一重白虎冲破墓鬼。不是吉神救援，而是另一股凶力把原来的凶局打散。',ask:'这种“以凶制凶”应怎样理解？',clue:'不要只数凶神多少，要看它们彼此是联手，还是互相冲破。'}
 ];
-/* 十二个重点案手工设计；其余八十八法直接复用足本首格，保证百法全部进入同一学习闭环。 */
+const BF_STORY_CONTEXT={
+ 官贵:['一位任职多年的人来问：这次能不能得到提拔？','一份任命迟迟没有落定，当事人担心贵人只是口头答应。','考试与仕途都到了关键节点，他想知道眼前的机会是真是假。'],
+ 财运:['一笔期待已久的钱款正在路上，但各方说法并不一致。','有人准备投入积蓄做一笔生意，最怕表面有利、实际被套。','账面看似有财，现实却总差一步落袋，当事人来问症结。'],
+ 婚孕:['两个人关系已经走近，却在是否继续的问题上反复迟疑。','一家人为婚姻或添丁之事来问，表面和气之下仍藏着顾虑。','双方都有心，但人物关系并不简单，需要辨清谁在推动、谁在退缩。'],
+ 交易:['合作已经谈到最后一步，合同能不能真正落定仍是未知。','买卖双方条件看似谈拢，却都担心对方临时改变主意。','一件谋合之事牵涉多人，当事人来问究竟能成还是会散。'],
+ 家宅:['家里最近诸事不顺，当事人想知道问题在人还是在宅。','一处房屋面临迁修、买卖或居住变化，家人意见并不统一。','宅中出现反复的小事，看似偶然，却可能有一条共同线索。'],
+ 疾病:['病情表面平稳，家人却担心真正的危险仍藏在后面。','治疗已经开始，但好转与反复交替出现，需要分清救神是否有力。','患者最关心的不是一句吉凶，而是病势接下来会向哪里转。'],
+ 鬼贼:['一件失物、争讼或暗中侵害之事发生后，各方都在互相猜疑。','事情里像有看不见的对手，当事人想知道凶手或阻力是否坐实。','口舌官非已经露头，最要紧的是判断灾祸会扩大还是被制住。'],
+ 刑墓:['事情并非没人推动，却像被困在看不见的门槛里，始终走不出去。','当事人反复努力仍觉受制，需要辨清是刑、冲、害还是墓在作梗。','盘中关系彼此牵制，表面的小阻力可能正是全局关键。'],
+ 伏返:['局面一会儿停住、一会儿反复，当事人最想知道究竟动不动。','人和事不断往返，却迟迟没有最终结果，需要辨清动象是否落实。','看起来应当变化的事情仍伏在原处，盘中可能另藏真正的启动信号。'],
+ 总纲:['眼前吉凶信号同时出现，若只数吉神凶神，很容易得出相反结论。','这是一盘不能套口诀的综合案，必须先问清人物身份与所占之事。','同一盘象放在不同问题里可能完全相反，关键在于类神是否对应。']
+};
+const BF_STORY_ASK={官贵:'这次机会更接近升进、受阻，还是有名无实？',财运:'这笔财最终能落袋，还是会闭塞、耗散？',婚孕:'这段关系的真实走向更接近哪一种？',交易:'这件合作最终更可能成、散，还是成中有破？',家宅:'人宅关系所指向的核心结果是什么？',疾病:'病势与救应的关键结论是什么？',鬼贼:'这场暗害、失盗或争讼最可能怎样发展？',刑墓:'这股牵制最后会造成什么结果？',伏返:'盘里的动静最终应当怎样落断？',总纲:'结合所问之事，哪一种判断才真正对应此课？'};
+/* 每一法都绑定独立古典譬喻、现实案情、关键格和断语；十二案另作更细的现代叙事。 */
 const BF_STORIES=BF_KU.map(law=>{
  const seed=BF_STORY_SEEDS.find(x=>x.n===law.n);if(seed)return seed;
- const gi=Math.max(0,law.ge.findIndex(x=>x.board)),g=law.ge[gi];
- return{n:law.n,g:gi,title:`${law.pian}：这一课该怎么断`,scene:`来人所问正落在“${law.pian}”这一类事情上。课中出现一个决定走向的关键结构。古人用“${law.zhu||law.ju}”提示它的画面，但先不告诉你法诀名称。`,ask:'只看这一法的核心结构，下面哪一种判断最接近？',clue:`先辨主旨，不要同时追所有神煞：本案只训练“${law.pian}”这一条判断线。`};
+ const gi=Math.max(0,law.ge.findIndex(x=>x.board)),g=law.ge[gi],fa=BF_FA.find(x=>x.f===law.ju),cat=fa?.c||'总纲',contexts=BF_STORY_CONTEXT[cat]||BF_STORY_CONTEXT.总纲;
+ const image=(law.zhu||law.ju).replace(/[。；]$/,'');
+ return{n:law.n,g:gi,title:`${image}`,scene:`${contexts[(law.n-1)%contexts.length]} 古人把这一法写成一幅画：“${image}”。现在先把法诀藏起来，只凭案情和盘中结构作判断。`,ask:BF_STORY_ASK[cat]||BF_STORY_ASK.总纲,clue:`本案只聚焦「${g.name}」：${g.bh.split(/[。；]/)[0]}。其余信息先放到一边。`};
 });
 let _bfStoryIndex=0;
 function bfStoryDone(){try{return new Set(JSON.parse(localStorage.getItem('bfStoryDone_v1')||'[]'))}catch(e){return new Set()}}
@@ -7208,7 +7222,7 @@ function bfStoryData(i){const c=BF_STORIES[i],law=BF_KU.find(x=>x.n===c.n),g=law
 function bfStoryHome(){
  const el=document.getElementById('bf-story-home');if(!el)return;const done=bfStoryDone(),today=(new Date().getDate()-1)%BF_STORIES.length,d=bfStoryData(today);
  const groups=Array.from({length:10},(_,gi)=>{const from=gi*10,to=from+10,items=BF_STORIES.slice(from,to),dn=items.filter((_,j)=>done.has(from+j)).length;return `<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${gi+1} · 第${from+1}—${to}法 <span style="color:#9B8570;font-size:11px;margin-left:5px">${dn}/10</span><span class="m5-tog-arrow">›</span></button><div class="m5-body"><div class="bf-case-grid">${items.map((x,j)=>{const i=from+j;return `<button class="bf-case-card ${done.has(i)?'done':''}" onclick="openBFStory(${i})"><em>${done.has(i)?'✓ 已解':'第'+x.n+'法'}</em><b>${x.title}</b><small>${BF_KU[i].ju}</small></button>`}).join('')}</div></div></div>`}).join('');
- el.innerHTML=`<div class="bf-learn-hero"><small>先断案，后读书 · 每次只抓一个关键信号</small><div class="bf-learn-title">今日一案：${d.c.title}</div><small>${d.c.scene}</small><div class="bf-learn-progress"><i style="width:${done.size/BF_STORIES.length*100}%"></i></div><small>百法已看懂 ${done.size}/${BF_STORIES.length}</small><button class="btn btn-r" style="width:100%;margin-top:10px" onclick="openBFStory(${today})">开始判断 →</button></div><div style="font-size:13px;font-weight:bold;color:#6B5040;margin-bottom:7px">🕵️ 百法断案 · 按十组逐步学习</div>${groups}`;
+ el.innerHTML=`<div class="bf-learn-hero"><small>100法全部精编成案 · 先断案，后读书</small><div class="bf-learn-title">今日一案：${d.c.title}</div><small>${d.c.scene}</small><div class="bf-learn-progress"><i style="width:${done.size/BF_STORIES.length*100}%"></i></div><small>百法已看懂 ${done.size}/${BF_STORIES.length}</small><button class="btn btn-r" style="width:100%;margin-top:10px" onclick="openBFStory(${today})">开始判断 →</button></div><div style="font-size:13px;font-weight:bold;color:#6B5040;margin-bottom:7px">🕵️ 百法精编断案 · 按十组折叠学习</div>${groups}`;
 }
 function openBFStory(i){_bfStoryIndex=i;show('pbflearn');bfStoryRender()}
 function bfStoryRender(){
