@@ -173,6 +173,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .hub-item-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}.hub-item-icon{font-size:22px;line-height:1}
 .hub-item-name{font-size:15px;font-weight:bold;color:#1C0A00}.hub-item-desc{font-size:11px;color:#9B8570;line-height:1.6;margin-top:3px}
 .hub-actions{display:flex;gap:7px}.hub-actions .btn{padding:9px 6px;font-size:12px}
+/* 毕法赋·十二断案入门 */
+.bf-learn-hero{background:linear-gradient(135deg,#3D2010,#78502E);color:#FFF8E8;border-radius:16px;padding:17px 16px;margin-bottom:12px;box-shadow:0 8px 22px #3D201022}.bf-learn-hero small{display:block;color:#E8D4AE;font-size:11px;line-height:1.7}.bf-learn-title{font-size:18px;font-weight:bold;margin:4px 0 6px}.bf-learn-progress{height:6px;background:#FFFFFF25;border-radius:5px;overflow:hidden;margin:10px 0 5px}.bf-learn-progress i{display:block;height:100%;background:#E8B95F;border-radius:5px}
+.bf-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0 14px}.bf-case-card{border:1px solid var(--bd1);background:var(--bg3);border-radius:12px;padding:11px;text-align:left;color:#4A3520;cursor:pointer;min-height:86px}.bf-case-card.done{border-color:#B88A2B;background:#FFF8E8}.bf-case-card b{display:block;font-size:13px;line-height:1.5}.bf-case-card small{display:block;color:#9B8570;font-size:10px;line-height:1.5;margin-top:4px}.bf-case-card em{font-style:normal;font-size:10px;color:#B88A2B}
+.bf-story-scene{background:linear-gradient(145deg,#FFF8E8,#FFF);border:1px solid #E7D19A;border-radius:15px;padding:16px;margin:10px 0}.bf-story-kicker{font-size:10px;color:#B88A2B;letter-spacing:2px;font-weight:bold}.bf-story-scene h3{font-size:18px;color:#3D2010;margin:7px 0}.bf-story-scene p{font-size:13px;color:#6B5040;line-height:1.9;margin:0}.bf-story-clue{margin-top:11px;padding:9px 11px;background:#F0F7F4;border-left:3px solid #2E7D5A;border-radius:7px;font-size:12px;color:#315D49;line-height:1.75}.bf-story-ask{font-size:14px;font-weight:bold;color:#3D2010;margin:14px 2px 7px}.bf-story-opt{width:100%;border:1px solid var(--bd1);background:var(--bg2);border-radius:11px;padding:11px 12px;margin:6px 0;text-align:left;color:#4A3520;font-size:13px;line-height:1.6}.bf-story-opt.correct{border-color:#2E7D5A;background:#EAF6EF;color:#246147}.bf-story-opt.wrong{border-color:var(--acc);background:#FFF0ED;color:var(--acc)}.bf-reveal{margin-top:12px}.bf-reveal-step{background:var(--bg3);border-radius:11px;padding:11px 12px;margin:7px 0;font-size:12px;line-height:1.85;color:#6B5040;border-left:3px solid #B88A2B}.bf-reveal-step b{color:#3D2010}
 /* p5 chapter nav */
 .p5-nav{display:flex;gap:4px;margin-bottom:10px;padding:7px;background:var(--bg2);border:1px solid var(--bd1);border-radius:12px}
 .p5-nav-btn{flex:1;padding:5px 2px;font-size:12px;background:var(--bg1);border:1px solid var(--bd1);border-radius:7px;cursor:pointer;color:#6B5040;text-align:center;font-weight:bold}
@@ -2529,6 +2533,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <div id="pbf" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">毕法赋</div></div>
   <div style="padding-bottom:28px">
+    <div id="bf-story-home"></div>
+    <div style="margin:16px 0 8px;border-top:1px dashed var(--bd1);padding-top:14px;font-size:12px;color:#9B8570;text-align:center">以下是完整资料库 · 想查原典时再展开</div>
     <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">《毕法赋》宋·凌福之据邵彦和断案整理而成，为大六壬断法总纲，凡一百法。正文以<b>四库足本</b>为准，含逐格原文、白话和可核对课盘；索引仅作快速定位与练习辅助。</div>
     <div style="margin-top:14px;font-size:13px;font-weight:bold;color:#6B5040;letter-spacing:1px;padding:0 2px">🗂 百法速记索引</div>
     <div class="m5-text" style="font-size:12px;color:#9B8570">按十大主题折叠，只列法诀与简释；完整原文、白话和课盘请看下方四库足本正文。</div>
@@ -2537,6 +2543,12 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div style="font-size:11px;color:#9B8570;padding:2px 2px 6px;line-height:1.6">依《图解六壬大全·第三部》(明)郭载骙原著。两级「法 → 格」，每格含原文、白话、可核对课盘；原书无图例或条件不足的格目会显示无盘说明。</div>
     <div id="bfku-sec"></div>
   </div>
+</div>
+
+<!-- ======== 毕法赋·十二断案 ======== -->
+<div id="pbflearn" class="screen">
+  <div class="tbar"><button class="tbk" onclick="show('pbf')">‹</button><div class="tbtitle">毕法赋 · 十二断案</div><div class="tbr" id="bf-story-count"></div></div>
+  <div id="bf-story-main"></div>
 </div>
 
 <!-- ======== 毕法赋练习 ======== -->
@@ -7170,6 +7182,39 @@ const BF_KU=[
    board:bfp('癸未',10,['辰','未','戌'],'以凶制凶格 · 六癸日辰加丑，破墓冲鬼',false,'原文例课')},
 ]},
 ];
+const BF_STORIES=[
+ {n:1,g:1,title:'两位贵人都在帮他',scene:'一个人正谋求升迁。盘里昼贵、夜贵分居初末传，像两个人一前一后把日干护在中间。',ask:'这幅“前引后从”的结构，最可能说明什么？',clue:'只看一个信号：初传在前引，末传在后从，而且两端都见贵人。'},
+ {n:2,g:0,title:'事情绕了一圈又回来',scene:'所问之事已经推进过一次，却又回到原来的关系中。盘中旬首与旬尾相见，形成首尾闭合。',ask:'这种“周而复始”更适合怎样判断？',clue:'首尾相接表示事情不容易脱落，但也不利于主动求散。'},
+ {n:3,g:5,title:'考试前出现两贵夹拱',scene:'临近考试，当事人的年命正被昼夜两贵从两侧夹拱。眼前最关心的不是所有神煞，而是贵人是否真正护住年命。',ask:'单看这个关键结构，考试趋势如何？',clue:'先找类神：考试看帘幕、朱雀与贵人；本案两贵共同护住年命。'},
+ {n:77,g:0,title:'我帮你，你也帮我',scene:'合作双方各有所长。干上神去生支，支上神又反过来生干，彼此都把力量送给对方。',ask:'这种“互生”关系对合作意味着什么？',clue:'干代表我，支代表对方；两边不是单向索取，而是交互相生。'},
+ {n:82,g:0,title:'三传走到一半断了',scene:'一件事看似已经启动，但中传、末传同时空亡，后续力量接不上，只剩初传坐实。',ask:'判断时应把注意力放在哪里？',clue:'中末皆空，事情没有完整走完三传，只能重点审初传的类神与吉凶。'},
+ {n:84,g:0,title:'表面合作，里面藏刀',scene:'三传已经成合，看起来双方能够合作；但干支上又出现冲、刑或害，合局内部埋着破坏力量。',ask:'面对这种“合中犯杀”，应该怎样看？',clue:'不要见合就直接断吉，要检查合局内部是否同时藏着冲刑害。'},
+ {n:85,g:0,title:'为什么总是身不由己',scene:'初传一面被下方所克，上面所乘天将又来克它，像一个人上下同时受制。',ask:'这个夹克结构最核心的感受是什么？',clue:'先不急着断具体事件，只观察初传是否有自主活动的空间。'},
+ {n:86,g:0,title:'事情快成时被内部搅乱',scene:'原本象征合作的六合已经发用，却在自身内部发生克战。外面没有明显敌人，问题反而从合作关系内部生起。',ask:'事情的发展最可能卡在哪里？',clue:'“内战”不是外人来破坏，而是所乘天将与乘神之间自己冲突。'},
+ {n:89,g:0,title:'伏吟真的一定不动吗',scene:'天地盘伏吟，看上去万物都伏在原位；但课传中同时出现旬丁、天马或驿马。',ask:'还应该简单断成“完全不动”吗？',clue:'伏吟给出静态背景，丁马却是启动信号；要看静中是否藏着动因。'},
+ {n:90,g:0,title:'返吟很动，为何人没走',scene:'返吟本来主往来反复，可这一课三传皆空亡。盘面看起来动得厉害，现实却迟迟没有行动。',ask:'动象与空亡同时出现，应以什么为关键？',clue:'有“想动”的结构，不等于有能落实的力量；三传空亡会抽掉行动实体。'},
+ {n:91,g:0,title:'白虎带着日鬼直奔日干',scene:'日干之鬼乘白虎，又直接临到日干。鬼负责克我，白虎又主急猛，两种信号叠在同一处。',ask:'这类凶象最大的特点是什么？',clue:'先看信号叠加：克我的日鬼 + 急猛的白虎 + 直接临身。'},
+ {n:100,g:2,title:'两个凶神相遇，反而解围',scene:'墓鬼克日已经很凶，末传又来一重白虎冲破墓鬼。不是吉神救援，而是另一股凶力把原来的凶局打散。',ask:'这种“以凶制凶”应怎样理解？',clue:'不要只数凶神多少，要看它们彼此是联手，还是互相冲破。'}
+];
+let _bfStoryIndex=0;
+function bfStoryDone(){try{return new Set(JSON.parse(localStorage.getItem('bfStoryDone_v1')||'[]'))}catch(e){return new Set()}}
+function bfStoryData(i){const c=BF_STORIES[i],law=BF_KU.find(x=>x.n===c.n),g=law.ge[c.g];return{c,law,g}}
+function bfStoryHome(){
+ const el=document.getElementById('bf-story-home');if(!el)return;const done=bfStoryDone(),today=(new Date().getDate()-1)%BF_STORIES.length,d=bfStoryData(today);
+ el.innerHTML=`<div class="bf-learn-hero"><small>先断案，后读书 · 每次只抓一个关键信号</small><div class="bf-learn-title">今日一案：${d.c.title}</div><small>${d.c.scene}</small><div class="bf-learn-progress"><i style="width:${done.size/BF_STORIES.length*100}%"></i></div><small>十二案已看懂 ${done.size}/${BF_STORIES.length}</small><button class="btn btn-r" style="width:100%;margin-top:10px" onclick="openBFStory(${today})">开始判断 →</button></div><div style="font-size:13px;font-weight:bold;color:#6B5040">🕵️ 十二个断案故事</div><div class="bf-case-grid">${BF_STORIES.map((x,i)=>`<button class="bf-case-card ${done.has(i)?'done':''}" onclick="openBFStory(${i})"><em>${done.has(i)?'✓ 已解':'第'+(i+1)+'案'}</em><b>${x.title}</b><small>第${x.n}法 · ${BF_KU.find(y=>y.n===x.n).ju}</small></button>`).join('')}</div>`;
+}
+function openBFStory(i){_bfStoryIndex=i;show('pbflearn');bfStoryRender()}
+function bfStoryRender(){
+ const {c,law,g}=bfStoryData(_bfStoryIndex),others=BF_STORIES.map((_,i)=>bfStoryData(i).g.duan).filter(x=>x!==g.duan),opts=shuffleArr([g.duan,...shuffleArr(others).slice(0,2)]);
+ document.getElementById('bf-story-count').textContent=`${_bfStoryIndex+1}/12`;
+ document.getElementById('bf-story-main').innerHTML=`<div class="bf-story-scene"><div class="bf-story-kicker">第${_bfStoryIndex+1}案 · 先别看法诀</div><h3>${c.title}</h3><p>${c.scene}</p><div class="bf-story-clue">🔍 今日只看一个关键点：${c.clue}</div></div><div class="bf-story-ask">${c.ask}</div><div id="bf-story-opts">${opts.map(x=>`<button class="bf-story-opt" onclick="answerBFStory(this,'${x.replace(/'/g,"&#39;")}')">${x}</button>`).join('')}</div><div id="bf-story-reveal"></div>`;
+}
+function answerBFStory(btn,ans){
+ const {c,law,g}=bfStoryData(_bfStoryIndex),ok=ans===g.duan;document.querySelectorAll('.bf-story-opt').forEach(b=>{b.disabled=true;if(b.textContent===g.duan)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');
+ const done=bfStoryDone();done.add(_bfStoryIndex);localStorage.setItem('bfStoryDone_v1',JSON.stringify([...done]));
+ document.getElementById('bf-story-reveal').innerHTML=`<div class="bf-reveal"><div class="bf-reveal-step"><b>① 先看结果</b><br>${ok?'你抓到了关键。':'这次没关系，关键不在背答案，而在看清结构。'}本案应取：<b>${g.duan}</b>。</div><div class="bf-reveal-step"><b>② 盘面为什么这样断</b><br>${g.bh}</div><div class="bf-reveal-step"><b>③ 最后才记毕法</b><br>第${law.n}法：<b>${law.ju}</b><br><span style="color:#9B8570">${law.pian} · ${g.name}</span></div><details class="bf-reveal-step"><summary><b>④ 查看古籍原文</b></summary><div style="margin-top:7px">${g.yw}</div></details>${g.board?`<button class="btn btn-d" style="width:100%;margin-top:8px" onclick="bfStoryBoard(this)">📐 查看完整课盘</button>`:''}<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-d" style="flex:1" onclick="show('pbf');bfStoryHome()">返回十二案</button><button class="btn btn-r" style="flex:1" onclick="openBFStory(${(_bfStoryIndex+1)%BF_STORIES.length})">下一案 →</button></div></div>`;
+}
+function bfStoryBoard(btn){_bfToggleBoard(bfStoryData(_bfStoryIndex).g.board,btn)}
 let _bfkRendered=false;
 function bfKuInit(){
   if(_bfkRendered)return;_bfkRendered=true;
@@ -7194,7 +7239,7 @@ function bfKuInit(){
 }
 let _bfRendered=false;
 function bfInit(){
-  if(_bfRendered)return;_bfRendered=true;
+  bfStoryHome();if(_bfRendered)return;_bfRendered=true;
   let html='';
   const kuByJu=new Map(BF_KU.map(x=>[x.ju,x]));
   BF_CATS.forEach(c=>{
