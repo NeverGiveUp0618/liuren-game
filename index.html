@@ -2545,9 +2545,9 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
-<!-- ======== 毕法赋·十二断案 ======== -->
+<!-- ======== 毕法赋·百法断案 ======== -->
 <div id="pbflearn" class="screen">
-  <div class="tbar"><button class="tbk" onclick="show('pbf')">‹</button><div class="tbtitle">毕法赋 · 十二断案</div><div class="tbr" id="bf-story-count"></div></div>
+  <div class="tbar"><button class="tbk" onclick="show('pbf')">‹</button><div class="tbtitle">毕法赋 · 百法断案</div><div class="tbr" id="bf-story-count"></div></div>
   <div id="bf-story-main"></div>
 </div>
 
@@ -7182,7 +7182,7 @@ const BF_KU=[
    board:bfp('癸未',10,['辰','未','戌'],'以凶制凶格 · 六癸日辰加丑，破墓冲鬼',false,'原文例课')},
 ]},
 ];
-const BF_STORIES=[
+const BF_STORY_SEEDS=[
  {n:1,g:1,title:'两位贵人都在帮他',scene:'一个人正谋求升迁。盘里昼贵、夜贵分居初末传，像两个人一前一后把日干护在中间。',ask:'这幅“前引后从”的结构，最可能说明什么？',clue:'只看一个信号：初传在前引，末传在后从，而且两端都见贵人。'},
  {n:2,g:0,title:'事情绕了一圈又回来',scene:'所问之事已经推进过一次，却又回到原来的关系中。盘中旬首与旬尾相见，形成首尾闭合。',ask:'这种“周而复始”更适合怎样判断？',clue:'首尾相接表示事情不容易脱落，但也不利于主动求散。'},
  {n:3,g:5,title:'考试前出现两贵夹拱',scene:'临近考试，当事人的年命正被昼夜两贵从两侧夹拱。眼前最关心的不是所有神煞，而是贵人是否真正护住年命。',ask:'单看这个关键结构，考试趋势如何？',clue:'先找类神：考试看帘幕、朱雀与贵人；本案两贵共同护住年命。'},
@@ -7196,23 +7196,30 @@ const BF_STORIES=[
  {n:91,g:0,title:'白虎带着日鬼直奔日干',scene:'日干之鬼乘白虎，又直接临到日干。鬼负责克我，白虎又主急猛，两种信号叠在同一处。',ask:'这类凶象最大的特点是什么？',clue:'先看信号叠加：克我的日鬼 + 急猛的白虎 + 直接临身。'},
  {n:100,g:2,title:'两个凶神相遇，反而解围',scene:'墓鬼克日已经很凶，末传又来一重白虎冲破墓鬼。不是吉神救援，而是另一股凶力把原来的凶局打散。',ask:'这种“以凶制凶”应怎样理解？',clue:'不要只数凶神多少，要看它们彼此是联手，还是互相冲破。'}
 ];
+/* 十二个重点案手工设计；其余八十八法直接复用足本首格，保证百法全部进入同一学习闭环。 */
+const BF_STORIES=BF_KU.map(law=>{
+ const seed=BF_STORY_SEEDS.find(x=>x.n===law.n);if(seed)return seed;
+ const gi=Math.max(0,law.ge.findIndex(x=>x.board)),g=law.ge[gi];
+ return{n:law.n,g:gi,title:`${law.pian}：这一课该怎么断`,scene:`来人所问正落在“${law.pian}”这一类事情上。课中出现一个决定走向的关键结构。古人用“${law.zhu||law.ju}”提示它的画面，但先不告诉你法诀名称。`,ask:'只看这一法的核心结构，下面哪一种判断最接近？',clue:`先辨主旨，不要同时追所有神煞：本案只训练“${law.pian}”这一条判断线。`};
+});
 let _bfStoryIndex=0;
 function bfStoryDone(){try{return new Set(JSON.parse(localStorage.getItem('bfStoryDone_v1')||'[]'))}catch(e){return new Set()}}
 function bfStoryData(i){const c=BF_STORIES[i],law=BF_KU.find(x=>x.n===c.n),g=law.ge[c.g];return{c,law,g}}
 function bfStoryHome(){
  const el=document.getElementById('bf-story-home');if(!el)return;const done=bfStoryDone(),today=(new Date().getDate()-1)%BF_STORIES.length,d=bfStoryData(today);
- el.innerHTML=`<div class="bf-learn-hero"><small>先断案，后读书 · 每次只抓一个关键信号</small><div class="bf-learn-title">今日一案：${d.c.title}</div><small>${d.c.scene}</small><div class="bf-learn-progress"><i style="width:${done.size/BF_STORIES.length*100}%"></i></div><small>十二案已看懂 ${done.size}/${BF_STORIES.length}</small><button class="btn btn-r" style="width:100%;margin-top:10px" onclick="openBFStory(${today})">开始判断 →</button></div><div style="font-size:13px;font-weight:bold;color:#6B5040">🕵️ 十二个断案故事</div><div class="bf-case-grid">${BF_STORIES.map((x,i)=>`<button class="bf-case-card ${done.has(i)?'done':''}" onclick="openBFStory(${i})"><em>${done.has(i)?'✓ 已解':'第'+(i+1)+'案'}</em><b>${x.title}</b><small>第${x.n}法 · ${BF_KU.find(y=>y.n===x.n).ju}</small></button>`).join('')}</div>`;
+ const groups=Array.from({length:10},(_,gi)=>{const from=gi*10,to=from+10,items=BF_STORIES.slice(from,to),dn=items.filter((_,j)=>done.has(from+j)).length;return `<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${gi+1} · 第${from+1}—${to}法 <span style="color:#9B8570;font-size:11px;margin-left:5px">${dn}/10</span><span class="m5-tog-arrow">›</span></button><div class="m5-body"><div class="bf-case-grid">${items.map((x,j)=>{const i=from+j;return `<button class="bf-case-card ${done.has(i)?'done':''}" onclick="openBFStory(${i})"><em>${done.has(i)?'✓ 已解':'第'+x.n+'法'}</em><b>${x.title}</b><small>${BF_KU[i].ju}</small></button>`}).join('')}</div></div></div>`}).join('');
+ el.innerHTML=`<div class="bf-learn-hero"><small>先断案，后读书 · 每次只抓一个关键信号</small><div class="bf-learn-title">今日一案：${d.c.title}</div><small>${d.c.scene}</small><div class="bf-learn-progress"><i style="width:${done.size/BF_STORIES.length*100}%"></i></div><small>百法已看懂 ${done.size}/${BF_STORIES.length}</small><button class="btn btn-r" style="width:100%;margin-top:10px" onclick="openBFStory(${today})">开始判断 →</button></div><div style="font-size:13px;font-weight:bold;color:#6B5040;margin-bottom:7px">🕵️ 百法断案 · 按十组逐步学习</div>${groups}`;
 }
 function openBFStory(i){_bfStoryIndex=i;show('pbflearn');bfStoryRender()}
 function bfStoryRender(){
- const {c,law,g}=bfStoryData(_bfStoryIndex),others=BF_STORIES.map((_,i)=>bfStoryData(i).g.duan).filter(x=>x!==g.duan),opts=shuffleArr([g.duan,...shuffleArr(others).slice(0,2)]);
- document.getElementById('bf-story-count').textContent=`${_bfStoryIndex+1}/12`;
+ const {c,law,g}=bfStoryData(_bfStoryIndex),others=[...new Set(BF_STORIES.map((_,i)=>bfStoryData(i).g.duan).filter(x=>x!==g.duan))],opts=shuffleArr([g.duan,...shuffleArr(others).slice(0,2)]);
+ document.getElementById('bf-story-count').textContent=`${_bfStoryIndex+1}/100`;
  document.getElementById('bf-story-main').innerHTML=`<div class="bf-story-scene"><div class="bf-story-kicker">第${_bfStoryIndex+1}案 · 先别看法诀</div><h3>${c.title}</h3><p>${c.scene}</p><div class="bf-story-clue">🔍 今日只看一个关键点：${c.clue}</div></div><div class="bf-story-ask">${c.ask}</div><div id="bf-story-opts">${opts.map(x=>`<button class="bf-story-opt" onclick="answerBFStory(this,'${x.replace(/'/g,"&#39;")}')">${x}</button>`).join('')}</div><div id="bf-story-reveal"></div>`;
 }
 function answerBFStory(btn,ans){
  const {c,law,g}=bfStoryData(_bfStoryIndex),ok=ans===g.duan;document.querySelectorAll('.bf-story-opt').forEach(b=>{b.disabled=true;if(b.textContent===g.duan)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');
  const done=bfStoryDone();done.add(_bfStoryIndex);localStorage.setItem('bfStoryDone_v1',JSON.stringify([...done]));
- document.getElementById('bf-story-reveal').innerHTML=`<div class="bf-reveal"><div class="bf-reveal-step"><b>① 先看结果</b><br>${ok?'你抓到了关键。':'这次没关系，关键不在背答案，而在看清结构。'}本案应取：<b>${g.duan}</b>。</div><div class="bf-reveal-step"><b>② 盘面为什么这样断</b><br>${g.bh}</div><div class="bf-reveal-step"><b>③ 最后才记毕法</b><br>第${law.n}法：<b>${law.ju}</b><br><span style="color:#9B8570">${law.pian} · ${g.name}</span></div><details class="bf-reveal-step"><summary><b>④ 查看古籍原文</b></summary><div style="margin-top:7px">${g.yw}</div></details>${g.board?`<button class="btn btn-d" style="width:100%;margin-top:8px" onclick="bfStoryBoard(this)">📐 查看完整课盘</button>`:''}<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-d" style="flex:1" onclick="show('pbf');bfStoryHome()">返回十二案</button><button class="btn btn-r" style="flex:1" onclick="openBFStory(${(_bfStoryIndex+1)%BF_STORIES.length})">下一案 →</button></div></div>`;
+ document.getElementById('bf-story-reveal').innerHTML=`<div class="bf-reveal"><div class="bf-reveal-step"><b>① 先看结果</b><br>${ok?'你抓到了关键。':'这次没关系，关键不在背答案，而在看清结构。'}本案应取：<b>${g.duan}</b>。</div><div class="bf-reveal-step"><b>② 盘面为什么这样断</b><br>${g.bh}</div><div class="bf-reveal-step"><b>③ 最后才记毕法</b><br>第${law.n}法：<b>${law.ju}</b><br><span style="color:#9B8570">${law.pian} · ${g.name}</span></div><details class="bf-reveal-step"><summary><b>④ 查看古籍原文</b></summary><div style="margin-top:7px">${g.yw}</div></details>${g.board?`<button class="btn btn-d" style="width:100%;margin-top:8px" onclick="bfStoryBoard(this)">📐 查看完整课盘</button>`:''}<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-d" style="flex:1" onclick="show('pbf');bfStoryHome()">返回百法目录</button><button class="btn btn-r" style="flex:1" onclick="openBFStory(${(_bfStoryIndex+1)%BF_STORIES.length})">下一案 →</button></div></div>`;
 }
 function bfStoryBoard(btn){_bfToggleBoard(bfStoryData(_bfStoryIndex).g.board,btn)}
 let _bfkRendered=false;
