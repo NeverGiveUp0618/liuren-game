@@ -399,6 +399,10 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div class="hmap-label">近35天练习记录</div>
   <div class="hmap" id="el-hmap"></div>
+  <div class="mcard" style="border-color:#B88A2B;background:#FFF8E8">
+    <div class="mcard-head"><div class="mcard-icon">🧠</div><div><div class="mcard-name">十二月将 · 逻辑记忆宫</div><div class="mcard-desc">节气 + 地支 + 月将，12组画面串联 · 默认折叠</div></div></div>
+    <button class="btn btn-r" style="width:100%" onclick="openYjMemory()">直接进入记忆宫 →</button>
+  </div>
   <div class="mcard" style="border-color:var(--acc)">
     <div class="mcard-head"><div class="mcard-icon">🏆</div><div><div class="mcard-name">综合训练</div><div class="mcard-desc" id="train-home-sub">今日挑战 · 自选专题 · 错题复习 · 自适应加强</div></div></div>
     <div class="mcard-btns">
@@ -499,6 +503,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div id="kh-start" class="hub-panel">
     <div class="hub-intro">集中掌握月将、贵人、寄宫、遁干与天地盘的起课规则。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧮</div><div><div class="hub-item-name">起课规则与查表</div><div class="hub-item-desc">月将节气、昼夜贵人、十干寄宫、空亡及起课步骤</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pqk')">查看速查</button><button class="btn btn-r" onclick="openTrainTopic('yj','gr')">专题训练</button></div></div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧠</div><div><div class="hub-item-name">十二月将逻辑记忆宫</div><div class="hub-item-desc">12组节气、地支、月将画面串联，展开一条学一条</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openYjMemory()">打开记忆宫</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🀄</div><div><div class="hub-item-name">起课口诀闪卡</div><div class="hub-item-desc">月将、贵人、遁干等基础规则的翻卡记忆</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pkj-sel')">进入闪卡</button></div></div>
   </div>
   <div id="kh-trans" class="hub-panel">
@@ -649,8 +654,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 霜降后卯（太冲）　小雪后寅（功曹）
 冬至后丑（大吉）　大寒后子（神后）</div>
       </div>
-      <button class="m5-sub-tog" onclick="m5SubToggle(this)">节气 · 地支 · 月将｜12组逻辑记忆宫</button>
-      <div class="m5-sub-body">
+      <button class="m5-sub-tog" id="yj-memory-toggle" onclick="m5SubToggle(this)">节气 · 地支 · 月将｜12组逻辑记忆宫</button>
+      <div class="m5-sub-body" id="yj-memory-palace">
         <div class="yj-memory-intro"><b>使用方法：</b>先读标题三联，再闭眼复述画面，最后只看三个关键词回忆。谐音只负责钩住名称，正式起课仍以“中气后换将”的月将表为准。</div>
         <details class="yj-memory"><summary><i>01</i><span>雨水 · 亥猪 · 登明</span><em>登高照明</em></summary><div class="yj-memory-body"><div class="yj-memory-scene">连日雨水淹了低洼猪圈，怕水的猪赶紧登上屋顶，打开极明亮的探照灯向外呼救。</div><div class="yj-memory-chain">雨水淹低处 → 猪登高避险 → 天黑雨大要照明</div><div class="yj-memory-key"><span>雨水</span><span>亥猪</span><span>登高 + 明灯</span></div></div></details>
         <details class="yj-memory"><summary><i>02</i><span>春分 · 戌狗 · 河魁</span><em>河中头盔</em></summary><div class="yj-memory-body"><div class="yj-memory-scene">春分回暖、河冰融化，猎狗跳进河里游泳，从水底叼起一顶古代将军的铁头盔。</div><div class="yj-memory-chain">春暖冰化 → 狗下河爱叼东西 → 河中叼盔，联到河魁</div><div class="yj-memory-key"><span>春分</span><span>戌狗</span><span>河盔 → 河魁</span></div></div></details>
@@ -3923,6 +3928,14 @@ const DAILY_QUOTES=[
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function zflTog(h){h.parentElement.classList.toggle('open');}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+function openYjMemory(){
+  show('pbdl');
+  const toggle=document.getElementById('yj-memory-toggle'),palace=document.getElementById('yj-memory-palace');if(!toggle||!palace)return;
+  const chapter=toggle.closest('.m5-body'),chapterToggle=chapter&&chapter.previousElementSibling;
+  if(chapter){chapter.classList.add('open');if(chapterToggle)chapterToggle.classList.add('open')}
+  toggle.classList.add('open');palace.classList.add('open');
+  setTimeout(()=>toggle.scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
 function p5GoChap(n){const secs=document.querySelectorAll('#p5 .m5-sec');if(secs[n])secs[n].scrollIntoView({behavior:'smooth',block:'start'})}
 function shuffleArr(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
