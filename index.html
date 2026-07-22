@@ -4023,7 +4023,8 @@ const KJ_DATA = {
 function getLRData(){try{return JSON.parse(localStorage.getItem(LR_KEY)||'{}')}catch{return{}}}
 function saveLRData(d){localStorage.setItem(LR_KEY,JSON.stringify(d))}
 function todayStr(){const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`}
-function getPrevDay(s){const d=new Date(s);d.setDate(d.getDate()-1);return d.toISOString().slice(0,10)}
+function localDateStr(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function getPrevDay(s){const [y,m,d]=s.split('-').map(Number),n=new Date(y,m-1,d);n.setDate(n.getDate()-1);return localDateStr(n)}
 
 // ══ 保存练习记录 ══
 function saveSessionRecord(cat,cards,known){
@@ -4060,7 +4061,7 @@ function renderHeatmap(d){
   let cells='';
   for(let i=34;i>=0;i--){
     const dt=new Date(today);dt.setDate(dt.getDate()-i);
-    const k=dt.toISOString().slice(0,10);
+    const k=localDateStr(dt);
     const v=dayMap[k]||0;
     const lv=v===0?'':v<5?'lv1':v<15?'lv2':v<30?'lv3':'lv4';
     const td=k===todayKey?'today':'';
@@ -8687,6 +8688,8 @@ function weakestTrainCat(){const cats=trainData().cats||{};return Object.keys(TR
 function startWeakTrain(){const k=weakestTrainCat();trainCfg.cats=new Set([k]);trainCfg.count=10;startUnifiedTrain()}
 function updateTrainHome(){const d=trainData(),sub=document.getElementById('train-home-sub');if(!sub)return;const due=trainNB().length;sub.textContent=d.total?`累计${d.total}题 · 正确率${Math.round((d.correct||0)/d.total*100)}%${due?' · '+due+'道错题待复习':''}`:'每日挑战 · 自选专题 · 错题复习 · 自适应加强'}
 updateTrainHome();
+function sendYstProgress(){try{const d=trainData(),lr=getLRData(),parts=[];if(d.total)parts.push(`已练 ${d.total} 题 · 正确率 ${Math.round((d.correct||0)/d.total*100)}%`);if(lr.totalCards)parts.push(`已背 ${lr.totalCards} 条`);parent.postMessage({type:'yst-progress',app:'liuren',text:parts.join(' · ')||'尚未开始练习'},'https://nevergiveup0618.github.io')}catch(e){}}
+sendYstProgress();
 
 function toggleTheme(){
   const rd=document.body.classList.toggle('theme-red');
