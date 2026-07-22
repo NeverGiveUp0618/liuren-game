@@ -493,7 +493,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div id="kh-intro" class="hub-panel active">
     <div class="hub-intro">从整体原理和学习路线入手，先建立六壬的完整框架。</div>
-    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">💡</div><div><div class="hub-item-name">六壬运作原理·白话入门</div><div class="hub-item-desc">用六层结构理解月将、天地盘、四课三传与判断流程</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pbdl')">开始阅读</button></div></div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">💡</div><div><div class="hub-item-name">六壬运作原理·白话入门</div><div class="hub-item-desc">用六层结构理解月将、天地盘、四课三传与判断流程</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openPbdl()">开始阅读</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📜</div><div><div class="hub-item-name">壬学心法</div><div class="hub-item-desc">学习次序、取象原则和实战总纲</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p-xf')">查看心法</button><button class="btn btn-d" onclick="show('p5')">完整十章速查</button></div></div>
   </div>
   <div id="kh-start" class="hub-panel">
@@ -3043,7 +3043,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <!-- ======== 底层逻辑·大白话 ======== -->
 <div id="pbdl" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">六壬运作原理·白话入门</div></div>
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle" id="pbdl-title">六壬运作原理·白话入门</div></div>
 
   <div class="m5-jue">你告诉它「哪天、几点」起的念头，它先摆出一张盘，再从盘里找出「导火索」，顺着导火索推出「起因→经过→结果」，最后给每个字贴上含义，读出吉凶成败。就这么一条流水线。</div>
 
@@ -3924,7 +3924,9 @@ const DAILY_QUOTES=[
 function m5Toggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function zflTog(h){h.parentElement.classList.toggle('open');}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+function openPbdl(){document.getElementById('pbdl-title').textContent='六壬运作原理·白话入门';show('pbdl')}
 function openYjMemory(){
+  document.getElementById('pbdl-title').textContent='十二月将 · 逻辑记忆宫';
   show('pbdl');
   const toggle=document.getElementById('yj-memory-toggle'),palace=document.getElementById('yj-memory-palace');if(!toggle||!palace)return;
   const chapter=toggle.closest('.m5-body'),chapterToggle=chapter&&chapter.previousElementSibling;
