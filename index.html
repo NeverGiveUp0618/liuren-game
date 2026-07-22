@@ -3041,6 +3041,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 </div>
 
+<!-- ======== 十二月将·逻辑记忆宫（独立学习页） ======== -->
+<div id="pyj-memory" class="screen">
+  <div class="tbar"><button class="tbk" onclick="backYjMemory()">← 起课基础</button><div class="tbtitle">十二月将 · 逻辑记忆宫</div></div>
+  <div class="sec-t">节气 + 地支 + 月将 · 12组串联</div>
+  <div id="yj-memory-standalone"></div>
+</div>
+
 <!-- ======== 底层逻辑·大白话 ======== -->
 <div id="pbdl" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle" id="pbdl-title">六壬运作原理·白话入门</div></div>
@@ -3926,14 +3933,10 @@ function zflTog(h){h.parentElement.classList.toggle('open');}
 function m5SubToggle(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 function openPbdl(){document.getElementById('pbdl-title').textContent='六壬运作原理·白话入门';show('pbdl')}
 function openYjMemory(){
-  document.getElementById('pbdl-title').textContent='十二月将 · 逻辑记忆宫';
-  show('pbdl');
-  const toggle=document.getElementById('yj-memory-toggle'),palace=document.getElementById('yj-memory-palace');if(!toggle||!palace)return;
-  const chapter=toggle.closest('.m5-body'),chapterToggle=chapter&&chapter.previousElementSibling;
-  if(chapter){chapter.classList.add('open');if(chapterToggle)chapterToggle.classList.add('open')}
-  toggle.classList.add('open');palace.classList.add('open');
-  setTimeout(()=>toggle.scrollIntoView({behavior:'smooth',block:'start'}),60);
+  const source=document.getElementById('yj-memory-palace'),target=document.getElementById('yj-memory-standalone');if(!source||!target)return;
+  target.innerHTML=source.innerHTML;show('pyj-memory');
 }
+function backYjMemory(){show('phub-knowledge');switchKnowledgeTab('start')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
 function p5GoChap(n){const secs=document.querySelectorAll('#p5 .m5-sec');if(secs[n])secs[n].scrollIntoView({behavior:'smooth',block:'start'})}
 function shuffleArr(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
