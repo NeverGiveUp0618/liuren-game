@@ -515,6 +515,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div id="kh-judge" class="hub-panel">
     <div class="hub-intro">从旺衰、生克、干支关系进入类神取用和吉凶判断。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚛</div><div><div class="hub-item-name">干支关系</div><div class="hub-item-desc">六合、三合、六冲、三刑、相破、六害与制化</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pgz')">查看速查</button><button class="btn btn-r" onclick="startGZ()">专项练习</button></div></div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎯</div><div><div class="hub-item-name">取用神·六亲类神</div><div class="hub-item-desc">占什么取什么：六亲定义、人事类神歌诀与取用方法（叶飘然·类神系统）</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pyus')">查看速查</button><button class="btn btn-r" onclick="startKJ('取用神·六亲')">闪卡记忆</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚡</div><div><div class="hub-item-name">旺相与断法</div><div class="hub-item-desc">旺相休囚、空墓进退、类神取断与应期思路</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p5')">查看断法</button><button class="btn btn-r" onclick="startWSD()">旺相练习</button></div></div>
   </div>
 </div>
@@ -1719,6 +1720,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="kj-grp">
     <div class="kj-grp-lbl">📜 综合占断</div>
     <div class="kj-grid">
+      <button class="kj-btn" onclick="startKJ('取用神·六亲')"><div class="kj-btn-name">取用神·六亲</div><div class="kj-btn-n">类神取用 · 10条</div></button>
       <button class="kj-btn" onclick="startKJ('三传断法')"><div class="kj-btn-name">三传断法</div><div class="kj-btn-n">初中末传 · 6条</div></button>
       <button class="kj-btn" onclick="startKJ('行年法')"><div class="kj-btn-name">行年法</div><div class="kj-btn-n">流年推算 · 4条</div></button>
       <button class="kj-btn" onclick="startKJ('空亡断诀')"><div class="kj-btn-name">空亡断诀</div><div class="kj-btn-n">逐将空亡 · 12条</div></button>
@@ -1727,8 +1729,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="kj-grp" style="margin-top:4px">
     <div class="kj-grp-lbl">⚡ 混合练习</div>
     <div class="kj-grid">
-      <button class="kj-btn" onclick="startKJAll(false)"><div class="kj-btn-name">全部顺序</div><div class="kj-btn-n">共86条 · 顺序</div></button>
-      <button class="kj-btn clr-r" onclick="startKJAll(true)"><div class="kj-btn-name">全部随机</div><div class="kj-btn-n">共86条 · 打乱</div></button>
+      <button class="kj-btn" onclick="startKJAll(false)"><div class="kj-btn-name">全部顺序</div><div class="kj-btn-n">共96条 · 顺序</div></button>
+      <button class="kj-btn clr-r" onclick="startKJAll(true)"><div class="kj-btn-name">全部随机</div><div class="kj-btn-n">共96条 · 打乱</div></button>
     </div>
   </div>
   <button class="btn btn-d" onclick="goHome()" style="margin-top:8px">← 首页</button>
@@ -1835,6 +1837,64 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <tr><td class="c-a">戊</td><td class="c-r">巳</td><td>土</td><td class="c-a">癸</td><td class="c-r">丑</td><td>水</td></tr>
     </table></div>
   </div>
+</div>
+
+<!-- ======== 取用神·六亲类神 速查 ======== -->
+<div id="pyus" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">取用神 · 六亲类神</div></div>
+  <div style="font-size:12px;color:#9B8570;padding:4px 4px 10px;line-height:1.9">读案例的第一把钥匙：先分清"占的是谁、什么事"，再定<b>用神</b>。九宗门辨的是"课体"，这里定的是"用神"——把课盘落到具体问题上。源：叶飘然《大六壬通解》上册·六亲与遁干、中册·类神系统。</div>
+
+  <div class="qk-sec-title">一、六亲总纲（以日干为"我"，按五行生克认名分）</div>
+  <div class="qk-tbl-wrap"><table class="qk-tbl">
+    <tr><th>关系</th><th>六亲</th><th>常主人事</th></tr>
+    <tr><td class="c-a">生我者</td><td class="c-r">父母</td><td>庇护、文书、房宅、长辈、师长</td></tr>
+    <tr><td class="c-a">我生者</td><td class="c-r">子孙</td><td>子女、下属、医药、僧道、六畜</td></tr>
+    <tr><td class="c-a">克我者</td><td class="c-r">官鬼</td><td>官职、官司、疾患、盗贼、丈夫</td></tr>
+    <tr><td class="c-a">我克者</td><td class="c-r">妻财</td><td>钱财、妻妾、食物、田产</td></tr>
+    <tr><td class="c-a">同我者</td><td class="c-r">兄弟</td><td>兄弟、朋友、同辈、竞争、破财</td></tr>
+  </table></div>
+  <div style="font-size:11px;color:#9B8570;padding:6px 4px;line-height:1.8">※ 六亲定"名分"；占具体人事，还须并看下列"人事类神"与所乘天将。</div>
+
+  <div class="qk-sec-title">二、人之类神（占某人，取谁）</div>
+  <div class="qk-tbl-wrap"><table class="qk-tbl">
+    <tr><th>占谁</th><th>取用类神</th></tr>
+    <tr><td class="c-a">父母</td><td class="c-r">生气爻、日干本气；父兼日德，母兼天后</td></tr>
+    <tr><td class="c-a">妻</td><td class="c-r">天后、财爻、神后（子）</td></tr>
+    <tr><td class="c-a">兄弟姊妹</td><td class="c-r">太阴，兼兄弟爻</td></tr>
+    <tr><td class="c-a">子孙</td><td class="c-r">六合、子孙爻，太冲（卯）、登明（亥）</td></tr>
+    <tr><td class="c-a">奴仆</td><td class="c-r">河魁（戌）、天空</td></tr>
+    <tr><td class="c-a">婢女</td><td class="c-r">从魁（酉）、太阴</td></tr>
+    <tr><td class="c-a">朋友</td><td class="c-r">六合</td></tr>
+  </table></div>
+  <div style="font-size:11px;color:#9B8570;padding:6px 4px;line-height:1.85">【原文】父母生气与日本，父兼德神母天后。妻责天后并财爻，神后之神亦为取。兄弟姊妹责太阴，及兼兄弟之爻神。子孙六合子孙爻，太冲登明亦可寻。奴责河魁及天空，婢责从魁太阴中。朋友单来责六合，以上人之类神从。</div>
+
+  <div class="qk-sec-title">三、事之类神（占某事，取谁）</div>
+  <div class="qk-tbl-wrap"><table class="qk-tbl">
+    <tr><th>占何事</th><th>取用类神</th></tr>
+    <tr><td class="c-a">求官职</td><td class="c-r">青龙、太常，兼官星（官鬼爻）</td></tr>
+    <tr><td class="c-a">求名·文书</td><td class="c-r">文书爻、朱雀</td></tr>
+    <tr><td class="c-a">谒见·干贵</td><td class="c-r">贵人</td></tr>
+    <tr><td class="c-a">婚姻</td><td class="c-r">天后（兼六合为媒）</td></tr>
+    <tr><td class="c-a">求财</td><td class="c-r">青龙、财爻</td></tr>
+    <tr><td class="c-a">衣服酒食</td><td class="c-r">太常</td></tr>
+    <tr><td class="c-a">占雨 / 占晴</td><td class="c-r">青龙 / 天空</td></tr>
+    <tr><td class="c-a">田土 / 道路</td><td class="c-r">勾陈 / 白虎</td></tr>
+  </table></div>
+  <div style="font-size:11px;color:#9B8570;padding:6px 4px;line-height:1.85">【原文】求官龙常及官星，求名文书朱雀中。干贵贵人婚天后，求财青龙财交通。衣服酒食责太常，雨责青龙晴天空。田土勾陈路白虎，以上事之类神名。</div>
+
+  <div class="qk-sec-title">四、取用方法（歌诀断法·最关键）</div>
+  <div class="qk-tbl-wrap"><table class="qk-tbl">
+    <tr><th>情形</th><th>如何取用</th></tr>
+    <tr><td class="c-a">类神有二三</td><td class="c-r">优先取已入三传/四课者为用神</td></tr>
+    <tr><td class="c-a">皆入或皆不入</td><td class="c-r">不用兼神，直取本将（如占妻只取天后）</td></tr>
+    <tr><td class="c-a">不在课传</td><td class="c-r">为"局外"，看所临地盘定原因</td></tr>
+    <tr><td class="c-a">用神旺衰</td><td class="c-r">有气虽远可成、无气难；旺相德合终可亲</td></tr>
+  </table></div>
+  <div style="font-size:11px;color:#9B8570;padding:6px 4px;line-height:1.85">【原文】人事类神兼二三，以入传课为取用。若是皆入皆不入，不用兼神责将神。如妻止去责天后，财爻神后不须论。不在课传为局外，所临地位看原因。有气亦远无气难，旺相德合终可亲。</div>
+
+  <div style="height:8px"></div>
+  <button class="btn btn-r" onclick="startKJ('取用神·六亲')" style="width:100%;margin-bottom:8px">🎯 进入闪卡记忆（10 条）</button>
+  <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回</button>
 </div>
 
 <!-- ======== 起课练习 ======== -->
@@ -4005,6 +4065,18 @@ const KJ_DATA = {
   {title:'天网格（凶）',body:'特征：三传皆空，或辰戌加临\n天狱格：三传皆刑，或墓神加日\n天网：虚无落空，百事成空\n天狱：牢狱官司，身陷囹圄'},
   {title:'天寇格（凶）',body:'特征：三传皆贼克日干，或初传为鬼乘白虎\n断法：盗贼侵扰，意外灾祸，外来之凶\n注意：主防盗防灾，不宜出行'},
   {title:'魄化格（凶）',body:'特征：白虎乘死神（绝神）加临\n断法：主死亡丧亡，血光之灾\n地位：六壬最重凶格之一，白虎与死气同临'},
+],
+'取用神·六亲':[
+  {title:'六亲总纲·以日干为我',body:'取用第一步：定日干为"我"，按五行生克认六亲：\n生我者 → 父母（庇护、文书、房宅、长辈）\n我生者 → 子孙（子女、下属、医药、僧道）\n克我者 → 官鬼（官职、官司、疾患、盗贼、夫）\n我克者 → 妻财（钱财、妻妾、食物、田产）\n同我者 → 兄弟（兄弟、朋友、同辈、竞争）\n\n※ 六亲只定"名分"，占具体人事还须并看类神与天将（见下）。'},
+  {title:'人类神·父母与妻',body:'【原文】父母生气与日本，父兼德神母天后；妻责天后并财爻，神后之神亦为取。\n【解】\n占父母 → 取"生我"之爻（生气）与日干本气；父再看日德，母再看天后。\n占妻 → 取天后、财爻、神后（子）三者。'},
+  {title:'人类神·兄弟与子孙',body:'【原文】兄弟姊妹责太阴，及兼兄弟之爻神；子孙六合子孙爻，太冲登明亦可寻。\n【解】\n占兄弟姊妹 → 取太阴，并看"同我"之兄弟爻。\n占子孙 → 取六合、子孙爻，太冲（卯）、登明（亥）亦可取。'},
+  {title:'人类神·奴婢与朋友',body:'【原文】奴责河魁及天空，婢责从魁太阴中；朋友单来责六合。\n【解】\n占奴仆 → 河魁（戌）、天空。\n占婢女 → 从魁（酉）、太阴。\n占朋友 → 六合。\n※ 以上为"人之类神"：占某人，先定其类神落在盘中何处。'},
+  {title:'事类神·求官与求名',body:'【原文】求官龙常及官星，求名文书朱雀中。\n【解】\n求官职 → 取青龙、太常，并看官星（官鬼爻）。\n求功名文书 → 取文书爻、朱雀。\n※ 案例中"青龙乘官""朱雀发用"即由此断。'},
+  {title:'事类神·婚姻求财谒见',body:'【原文】干贵贵人婚天后，求财青龙财交通。\n【解】\n谒见贵人／求人 → 取贵人。\n占婚姻 → 取天后（并看六合为媒）。\n求财 → 取青龙与财爻。'},
+  {title:'事类神·衣食雨晴田土路',body:'【原文】衣服酒食责太常，雨责青龙晴天空；田土勾陈路白虎。\n【解】\n衣服酒食 → 太常。\n占雨 → 青龙；占晴 → 天空。\n田土 → 勾陈；道路 → 白虎。\n※ 以上为"事之类神"：占某事，先认取该事之神。'},
+  {title:'取用总法·兼二三以入传课',body:'【原文】人事类神兼二三，以入传课为取用。若是皆入皆不入，不用兼神责将神。如妻止去责天后，财爻神后不须论。\n【解·最关键】\n一事的类神常有两三个，优先取"已入三传/四课"者为用神；\n若几个都入或都不入，则不用兼神，直取本将（如占妻只取天后，财爻神后可不论）。'},
+  {title:'用神旺衰定成败',body:'【原文】不在课传为局外，所临地位看原因。有气亦远无气难，旺相德合终可亲。\n【解】\n类神不入课传 → 属"局外"，看它所临地盘定缘由；\n用神有气 → 事虽远亦可成；无气 → 难成；\n旺相＋逢德合 → 终究可成。\n※ 这一句是"取用神之后如何定吉凶"的总纲。'},
+  {title:'遁干起法与旬空',body:'【原文】遁干采旬遁法，据日干所属甲子旬排三传天干。\n【解】\n三传只有地支，须"遁"出天干才能论六亲：\n以日所在旬（甲子/甲戌…甲寅），用五鼠遁起子时干，顺数到三传各支，得其遁干。\n遁干与日干的生克 → 定该传的六亲属性；旬中所缺二支即旬空。'},
 ],
 '三传断法':[
   {title:'初传',body:'象意：事之始，发端，来意\n别名：先锋门\n断法：定事件起点与来因；断来意关键\n生日干→事吉，主动有利\n克日干→事凶，被动不利\n入空→事无头绪，虚头'},
