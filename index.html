@@ -6028,14 +6028,16 @@ const DR_CASES=[
 const DR_CAT_ICON={'求财':'💰','求官':'🎓','占病':'🏥','占婚':'💗','失物':'🔍'};
 function drMenu(){
   var cats={};DR_CASES.forEach(function(c){(cats[c.cat]=cats[c.cat]||[]).push(c);});
-  var h='';
+  var h='';var first=true;
   Object.keys(cats).forEach(function(cat){
-    h+='<div class="sec-t">'+(DR_CAT_ICON[cat]||'📖')+' '+cat+'篇</div>';
+    var op=first?' open':'';first=false;
+    h+='<div class="m5-sec"><button class="m5-tog'+op+'" onclick="m5Toggle(this)">'+(DR_CAT_ICON[cat]||'📖')+' '+cat+'篇 · '+cats[cat].length+'例<span class="m5-tog-arrow">›</span></button><div class="m5-body'+op+'">';
     cats[cat].forEach(function(c,i){
       h+='<div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">'+(i+1)+'</div><div><div class="hub-item-name">'+c.name+'</div><div class="hub-item-desc">'+c.desc+'</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="drOpen(\''+c.id+'\')">开始精讲 →</button></div></div>';
     });
+    h+='</div></div>';
   });
-  h+='<div class="hub-item" style="opacity:.55"><div class="hub-item-head"><div class="hub-item-icon">⏳</div><div><div class="hub-item-name">更多案例陆续补充</div><div class="hub-item-desc">求财篇续例、求官篇、占病篇…按同样方式一例一例讲</div></div></div></div>';
+  h+='<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">⏳ 更多篇目陆续补充<span class="m5-tog-arrow">›</span></button><div class="m5-body"><div class="hub-item" style="opacity:.7"><div class="hub-item-head"><div class="hub-item-icon">…</div><div><div class="hub-item-name">词讼 / 出行行人 …</div><div class="hub-item-desc">按同样方式一篇篇补上</div></div></div></div></div></div>';
   document.getElementById('dru-list').innerHTML=h;
   show('pdru');
 }
