@@ -514,6 +514,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div id="kh-judge" class="hub-panel">
     <div class="hub-intro">从旺衰、生克、干支关系进入类神取用和吉凶判断。</div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎓</div><div><div class="hub-item-name">断案入门 · 案例精讲</div><div class="hub-item-desc">跟着真实课例一步步学"怎么读案例"，用到哪个知识点就讲哪个（零基础从这里开始）</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pdru')">进入学习 →</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚛</div><div><div class="hub-item-name">干支关系</div><div class="hub-item-desc">六合、三合、六冲、三刑、相破、六害与制化</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pgz')">查看速查</button><button class="btn btn-r" onclick="startGZ()">专项练习</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎯</div><div><div class="hub-item-name">取用神·六亲类神</div><div class="hub-item-desc">占什么取什么：六亲定义、人事类神歌诀与取用方法（叶飘然·类神系统）</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pyus')">查看速查</button><button class="btn btn-r" onclick="startKJ('取用神·六亲')">闪卡记忆</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚡</div><div><div class="hub-item-name">旺相与断法</div><div class="hub-item-desc">旺相休囚、空墓进退、类神取断与应期思路</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p5')">查看断法</button><button class="btn btn-r" onclick="startWSD()">旺相练习</button></div></div>
@@ -1895,6 +1896,53 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div style="height:8px"></div>
   <button class="btn btn-r" onclick="startKJ('取用神·六亲')" style="width:100%;margin-bottom:8px">🎯 进入闪卡记忆（10 条）</button>
   <button class="btn btn-d" onclick="goHome()" style="width:100%">← 返回</button>
+</div>
+
+<!-- ======== 断案入门 · 案例精讲 目录 ======== -->
+<div id="pdru" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">断案入门 · 案例精讲</div></div>
+  <div class="m5-jue">不背规则、跟着真实课例一步步读。每一例都手把手拆：<b>占什么 → 取用神 → 看旺衰 → 读三传 → 得结论</b>，用到哪个知识点就讲哪个。走完一例，既学会知识点，也学会"怎么读案例"。</div>
+  <div class="sec-t">💰 求财篇</div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">①</div><div><div class="hub-item-name">庚辰日 · 求财大获</div><div class="hub-item-desc">三传寅未子，财气流转。带出：取用神 / 妻财 / 发用 / 三传递克</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openDRCase()">开始精讲 →</button></div></div>
+  <div class="hub-item" style="opacity:.55"><div class="hub-item-head"><div class="hub-item-icon">⏳</div><div><div class="hub-item-name">更多案例陆续补充</div><div class="hub-item-desc">求财篇续例、求官篇、占病篇…按同样方式一例一例讲</div></div></div></div>
+  <button class="btn btn-d" onclick="goHome()" style="margin-top:8px;width:100%">← 首页</button>
+</div>
+
+<!-- ======== 案例精讲 · 求财第1例 庚辰日 ======== -->
+<div id="pdr1" class="screen">
+  <div class="tbar"><button class="tbk" onclick="show('pdru')">‹</button><div class="tbtitle">求财 · 第1例 庚辰日</div></div>
+  <div class="m5-jue"><b>【占问】</b>有人在<b>庚辰日</b>来问：我这趟财，能不能得、能得多少？<br>起出来的盘如下——我们不急着背规则，跟着它一步步读。</div>
+
+  <div class="sec-t">先看盘</div>
+  <div id="dr1-board"></div>
+  <div class="m5-text" style="font-size:12px;color:#9B8570;padding:4px 2px 12px;line-height:1.8">👆 <b>三传</b>（盘中「初/中/末」）是 <b class="c-r">寅 → 未 → 子</b>，<b>日干</b>是 <b class="c-r">庚</b>。下面一步步拆。</div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="sec-t" style="margin-top:0">第①步　先找"财"在哪 —— 这就是"取用神"</div>
+    <div class="m5-jue" style="margin:6px 0">📖 <b>知识点</b>：占求财，第一件事是找"钱"在盘里是哪个字——这个代表所占之事的字叫<b>用神</b>。求财的用神是<b>妻财</b>。口诀"<b>我克者妻财</b>"：我能管住、拿得住的，就是我的财。</div>
+    <div class="m5-text" style="font-size:13px;line-height:1.95">套到这个盘：庚是<b>金</b>，金克<b>木</b>，所以对庚日，<b class="c-r">木就是财</b>。看三传 <b class="c-r">寅</b>未子——<b>寅属木，寅就是这盘里的"财"</b>！而且它站在<b>初传（发用）</b>，是全盘的当头炮。财一上来就当头，说明<b>这事的核心就是钱、财还主动冒出来</b>——好兆头。</div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="sec-t" style="margin-top:0">第②步　这财我拿得住吗 —— 看"生克"</div>
+    <div class="m5-jue" style="margin:6px 0">📖 <b>知识点</b>：找到财，还要看<b>你和财的关系</b>。财被你克住（我克者），说明<b>财归你管、拿得住</b>；若财反来克你、或你克不动它，就未必到手。</div>
+    <div class="m5-text" style="font-size:13px;line-height:1.95">这盘里庚（金）正好克寅（木）——<b class="c-r">财被你牢牢克住、攥在手里</b>，这叫"财为我所用"。</div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="sec-t" style="margin-top:0">第③步　这事怎么发展 —— 读"三传"</div>
+    <div class="m5-jue" style="margin:6px 0">📖 <b>知识点</b>：三传是事情的"剧本"——<b>初传</b>=起因/现在，<b>中传</b>=经过，<b>末传</b>=结果；还要看三传之间<b>相生还是相克</b>。</div>
+    <div class="m5-text" style="font-size:13px;line-height:1.95">看这盘：<b class="c-r">寅 → 未 → 子</b>，而且<b>庚克寅、寅克未、未克子</b>，一路克下去。叶飘然管这叫"<b>财气流转</b>"——财从头到尾被一层层克住、层层归拢到你手里，没漏出去。</div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px;border-color:var(--acc-dk)">
+    <div class="sec-t" style="margin-top:0">第④步　下结论</div>
+    <div class="m5-text" style="font-size:13px;line-height:1.95">财当头发用（想得财）＋ 财被我克住（拿得住）＋ 三传递克流转（层层归我）——</div>
+    <div class="m5-text red" style="margin-top:8px;font-size:13px;line-height:1.9">✅ <b>叶飘然原文断语：「求财可以大获」</b>。这趟财，能得，而且得得多。</div>
+  </div>
+
+  <div class="m5-jue">🎯 <b>这一例你学会了 4 个反复能用的知识点</b>：① 求财取妻财　② 妻财=我克者（庚日财是木）　③ 发用/初传的意义　④ 三传递克"流转"。下次自己读求财案例，就照这四步走。</div>
+  <button class="btn btn-r" onclick="show('pdru')" style="width:100%;margin:8px 0">← 返回案例目录</button>
 </div>
 
 <!-- ======== 起课练习 ======== -->
@@ -5651,6 +5699,14 @@ function _bfToggleBoard(sp,btn){
 }
 function bfBoard(fa,btn){_bfToggleBoard(BF_BOARD[fa],btn);}
 function bfkBoard(li,gi,btn){_bfToggleBoard(BF_KU[li].ge[gi].board,btn);}
+// 断案入门·案例精讲：进入案例即排盘（复用毕法赋起盘引擎，参数取自已验证课例）
+function openDRCase(){
+  show('pdr1');
+  var el=document.getElementById('dr1-board');
+  if(el && !el.hasChildNodes()){
+    _bfBuildAndRender({r:'庚辰',yj:'亥',zs:'午',sc:['寅','未','子'],mt:'求财大获 · 庚辰日第八局，三传寅未子（皆作日财）'}, el);
+  }
+}
 
 // ══ 毕法赋·四库足本（卷九《毕法赋》上）逐格详解＋排盘 ══
 // 依《图解六壬大全·第三部毕法赋》(明)郭载骙原著，两级结构：法→格；盘面参数经引擎复现书中四课验证
