@@ -6026,12 +6026,16 @@ const DR_CASES=[
  src:'飘《大六壬通解》中册·太阳照武格（一）'}
 ];
 const DR_CAT_ICON={'求财':'💰','求官':'🎓','占病':'🏥','占婚':'💗','失物':'🔍'};
+function drTogSec(btn,cat){m5Toggle(btn);if(btn.classList.contains('open')){try{localStorage.setItem('dr_last_cat',cat);}catch(e){}}}
 function drMenu(){
   var cats={};DR_CASES.forEach(function(c){(cats[c.cat]=cats[c.cat]||[]).push(c);});
-  var h='';var first=true;
-  Object.keys(cats).forEach(function(cat){
-    var op=first?' open':'';first=false;
-    h+='<div class="m5-sec"><button class="m5-tog'+op+'" onclick="m5Toggle(this)">'+(DR_CAT_ICON[cat]||'📖')+' '+cat+'篇 · '+cats[cat].length+'例<span class="m5-tog-arrow">›</span></button><div class="m5-body'+op+'">';
+  var keys=Object.keys(cats);
+  var last='';try{last=localStorage.getItem('dr_last_cat')||'';}catch(e){}
+  if(keys.indexOf(last)<0)last=keys[0];
+  var h='';
+  keys.forEach(function(cat){
+    var op=(cat===last)?' open':'';
+    h+='<div class="m5-sec"><button class="m5-tog'+op+'" onclick="drTogSec(this,\''+cat+'\')">'+(DR_CAT_ICON[cat]||'📖')+' '+cat+'篇 · '+cats[cat].length+'例<span class="m5-tog-arrow">›</span></button><div class="m5-body'+op+'">';
     cats[cat].forEach(function(c,i){
       h+='<div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">'+(i+1)+'</div><div><div class="hub-item-name">'+c.name+'</div><div class="hub-item-desc">'+c.desc+'</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="drOpen(\''+c.id+'\')">开始精讲 →</button></div></div>';
     });
@@ -6044,11 +6048,13 @@ function drMenu(){
 function drOpen(id){
   var c=null;for(var i=0;i<DR_CASES.length;i++){if(DR_CASES[i].id===id){c=DR_CASES[i];break;}}
   if(!c)return;
+  try{localStorage.setItem('dr_last_cat',c.cat);}catch(e){}
   document.getElementById('pdr1-title').textContent=c.cat+' · '+c.name.split('·').pop().trim();
   var h='';
   h+='<div class="m5-jue"><b>【占问】</b>'+c.bg+'<br>起出来的盘如下——我们不急着背规则，跟着它一步步读。</div>';
   h+='<div class="sec-t">先看盘</div><div id="dr-board"></div>';
-  h+='<div class="m5-text" style="font-size:12px;color:#9B8570;padding:4px 2px 12px;line-height:1.8">👆 '+c.bnote+'</div>';
+  h+='<div class="m5-text" style="font-size:12px;color:#9B8570;padding:4px 2px 8px;line-height:1.8">👆 '+c.bnote+'</div>';
+  h+='<div id="dr-keti" class="m5-text" style="font-size:11.5px;color:#7B6250;background:var(--bg2);border:1px solid var(--bd1);border-radius:8px;padding:8px 11px;margin:0 0 12px;line-height:1.75"></div>';
   c.steps.forEach(function(s){
     h+='<div class="card" style="margin-bottom:10px"><div class="sec-t" style="margin-top:0">'+s.h+'</div><div class="m5-jue" style="margin:6px 0">📖 <b>知识点</b>：'+s.p+'</div><div class="m5-text" style="font-size:13px;line-height:1.95">'+s.a+'</div></div>';
   });
@@ -6059,6 +6065,9 @@ function drOpen(id){
   document.getElementById('pdr1-body').innerHTML=h;
   show('pdr1');
   _bfBuildAndRender(c.board,document.getElementById('dr-board'));
+  var kt='';try{kt=_detectMethod(kcState);}catch(e){}
+  var ke=document.getElementById('dr-keti');
+  if(ke)ke.innerHTML='📜 <b>九宗门课体：</b>'+(kt||'—')+'　·　<b>原著称：</b>'+(c.board.mt||c.src);
 }
 
 // ══ 毕法赋·四库足本（卷九《毕法赋》上）逐格详解＋排盘 ══
