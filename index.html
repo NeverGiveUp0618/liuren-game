@@ -514,7 +514,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div id="kh-judge" class="hub-panel">
     <div class="hub-intro">从旺衰、生克、干支关系进入类神取用和吉凶判断。</div>
-    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎓</div><div><div class="hub-item-name">断案入门 · 案例精讲</div><div class="hub-item-desc">跟着真实课例一步步学"怎么读案例"，用到哪个知识点就讲哪个（零基础从这里开始）</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="drMenu()">进入学习 →</button></div></div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎓</div><div><div class="hub-item-name">断案入门 · 案例精讲（入门课）</div><div class="hub-item-desc">跟着真实课例一步步学"怎么读案例"，用到哪个知识点就讲哪个（零基础从这里开始）</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="_caseSrc='intro';drMenu()">进入学习 →</button></div></div>
+    <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">案例库 · 按占类查全</div><div class="hub-item-desc">把每一类占断的案例尽量收全，供查阅（入门课的进阶补充；当前先纵向收求财）</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="_caseSrc='lib';drMenu()">进入案例库 →</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚛</div><div><div class="hub-item-name">干支关系</div><div class="hub-item-desc">六合、三合、六冲、三刑、相破、六害与制化</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pgz')">查看速查</button><button class="btn btn-r" onclick="startGZ()">专项练习</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎯</div><div><div class="hub-item-name">取用神·六亲类神</div><div class="hub-item-desc">占什么取什么：六亲定义、人事类神歌诀与取用方法（飘·类神系统）</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pyus')">查看速查</button><button class="btn btn-r" onclick="startKJ('取用神·六亲')">闪卡记忆</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚡</div><div><div class="hub-item-name">旺相与断法</div><div class="hub-item-desc">旺相休囚、空墓进退、类神取断与应期思路</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p5')">查看断法</button><button class="btn btn-r" onclick="startWSD()">旺相练习</button></div></div>
@@ -1900,7 +1901,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <!-- ======== 断案入门 · 案例精讲 目录 ======== -->
 <div id="pdru" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">断案入门 · 案例精讲</div></div>
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle" id="pdru-title">断案入门 · 案例精讲</div></div>
   <div class="m5-jue">不背规则、跟着真实课例一步步读。每一例都手把手拆：<b>占什么 → 取用神 → 看旺衰 → 读三传 → 得结论</b>，用到哪个知识点就讲哪个。走完一例，既学会知识点，也学会"怎么读案例"。</div>
   <div id="dru-list"></div>
   <button class="btn btn-d" onclick="goHome()" style="margin-top:8px;width:100%">← 首页</button>
@@ -6592,30 +6593,57 @@ const DR_CASES=[
  recap:'① 三传全土＝财旺　② 财生官鬼本是因财致祸　③ 但官鬼即"官"，以财纳粟求官则财生官反成功名　④ 财生鬼：硬取则祸、用对（捐官／打点）则成——财要用对地方',
  src:'《图解六壬大全·毕法赋》四库足本·传财化鬼格'}
 ];
+const DR_CASELIB=[
+{id:'lcai1',cat:'求财',name:'丙子日 · 土将助财',
+ desc:'三传合金局皆财，一排土的天将齐生财。带出：天将成排生财、同盘异占',
+ bg:'<b>丙子日</b>夜里来占求财。',
+ board:{r:'丙子',yj:'寅',zs:'戌',sc:['酉','丑','巳'],mt:'土将助财格 · 丙子日第九局（夜占·酉加巳），三传酉丑巳合金局皆财、夜将皆土神生财'},
+ bnote:'<b>三传</b> <b class="c-r">酉 → 丑 → 巳</b>，<b>日干</b> <b class="c-r">丙</b>，夜占。',
+ steps:[
+  {h:'第①步　先找财',p:'求财取<b>妻财</b>，"我克者妻财"。',a:'丙是<b>火</b>、火克<b>金</b>，金是财。三传 <b class="c-r">巳酉丑三合金局</b>(巳酉丑合金)，整条三传作财。'},
+  {h:'第②步　看天将——一排土将都在生财',p:'天将会生克脚下的字。<b>土能生金</b>，土的天将(贵人/太常/勾陈，五行属土)乘在财上，就等于给财添力。',a:'这盘夜占，三传的财上所乘天将都是<b>土神</b>——土生金，<b class="c-r">一排天将齐齐生财</b>，财势格外旺。'},
+  {h:'第③步　这财能不能大取',p:'财旺、又被天将成排生助，取财顺遂；但同一张盘，换个占问事，结论未必相同。',a:'原文"大宜求财、尤宜成合事"。但要留意：这盘<b>不利父母、占病则凶</b>(火泄于金、金反被土生而旺克丙)——<b class="c-r">同一盘，占财大吉、占病却不吉</b>，别拿一盘通断百事。'}
+ ],
+ clogic:'三传合金局作财 ＋ 一排土的天将齐生财(土生金、财势更旺)——',
+ duan:'大宜求财、尤宜成合事',dgood:true,
+ recap:'① 巳酉丑三合金局作财　② 土将(贵人/太常/勾陈)土生金＝成排助财　③ 财得众将生助则势旺　④ 同一盘占财吉、占病凶——别一盘通断百事',
+ src:'飘《图解六壬大全·毕法赋》·土将助财格'}
+];
 const DR_CAT_ICON={'求财':'💰','求官':'🎓','占病':'🏥','占婚':'💗','失物':'🔍','词讼':'⚖','占宅':'🏠','占产':'🤰','趋谒':'🤝','买卖':'💱','迁移':'🚚','逃亡':'🏃','谋事':'🎯','进退':'🚦','因财致祸':'💸'};
-function drTogSec(btn,cat){m5Toggle(btn);if(btn.classList.contains('open')){try{localStorage.setItem('dr_last_cat',cat);}catch(e){}}}
+var _caseSrc='intro';
+function drTogSec(btn,cat){m5Toggle(btn);if(btn.classList.contains('open')){try{localStorage.setItem(_caseSrc==='lib'?'lib_last_cat':'dr_last_cat',cat);}catch(e){}}}
 function drMenu(){
-  var cats={};DR_CASES.forEach(function(c){(cats[c.cat]=cats[c.cat]||[]).push(c);});
+  var LIST=(_caseSrc==='lib')?DR_CASELIB:DR_CASES;
+  var lastKey=(_caseSrc==='lib')?'lib_last_cat':'dr_last_cat';
+  var btnLbl=(_caseSrc==='lib')?'查看案例 →':'开始精讲 →';
+  var cats={};LIST.forEach(function(c){(cats[c.cat]=cats[c.cat]||[]).push(c);});
   var keys=Object.keys(cats);
-  var last='';try{last=localStorage.getItem('dr_last_cat')||'';}catch(e){}
+  var last='';try{last=localStorage.getItem(lastKey)||'';}catch(e){}
   if(keys.indexOf(last)<0)last=keys[0];
   var h='';
   keys.forEach(function(cat){
     var op=(cat===last)?' open':'';
     h+='<div class="m5-sec"><button class="m5-tog'+op+'" onclick="drTogSec(this,\''+cat+'\')">'+(DR_CAT_ICON[cat]||'📖')+' '+cat+'篇 · '+cats[cat].length+'例<span class="m5-tog-arrow">›</span></button><div class="m5-body'+op+'">';
     cats[cat].forEach(function(c,i){
-      h+='<div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">'+(i+1)+'</div><div><div class="hub-item-name">'+c.name+'</div><div class="hub-item-desc">'+c.desc+'</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="drOpen(\''+c.id+'\')">开始精讲 →</button></div></div>';
+      h+='<div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">'+(i+1)+'</div><div><div class="hub-item-name">'+c.name+'</div><div class="hub-item-desc">'+c.desc+'</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="drOpen(\''+c.id+'\')">'+btnLbl+'</button></div></div>';
     });
     h+='</div></div>';
   });
-  h+='<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">⏳ 更多篇目陆续补充<span class="m5-tog-arrow">›</span></button><div class="m5-body"><div class="hub-item" style="opacity:.7"><div class="hub-item-head"><div class="hub-item-icon">…</div><div><div class="hub-item-name">词讼 / 出行行人 …</div><div class="hub-item-desc">按同样方式一篇篇补上</div></div></div></div></div></div>';
+  var moreN=(_caseSrc==='lib')?'其余占类逐步收录':'词讼 / 出行行人 …';
+  var moreD=(_caseSrc==='lib')?'把每一类的案例尽量收全（当前先纵向收求财）':'按同样方式一篇篇补上';
+  h+='<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">⏳ 更多陆续补充<span class="m5-tog-arrow">›</span></button><div class="m5-body"><div class="hub-item" style="opacity:.7"><div class="hub-item-head"><div class="hub-item-icon">…</div><div><div class="hub-item-name">'+moreN+'</div><div class="hub-item-desc">'+moreD+'</div></div></div></div></div></div>';
+  h+='<div class="hub-item" style="opacity:.9;margin-top:8px;border-top:1px dashed var(--bd1);padding-top:10px"><div class="hub-item-head"><div class="hub-item-icon">'+(_caseSrc==='lib'?'🎓':'📚')+'</div><div><div class="hub-item-name">'+(_caseSrc==='lib'?'← 去「入门课」跟着学':'去「案例库」按类查全 →')+'</div><div class="hub-item-desc">'+(_caseSrc==='lib'?'零基础精选路径、带你一步步读':'某类案例尽量收全、供查阅')+'</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="'+(_caseSrc==='lib'?'_caseSrc=\'intro\';drMenu()':'_caseSrc=\'lib\';drMenu()')+'">切换</button></div></div>';
   document.getElementById('dru-list').innerHTML=h;
+  var t=document.getElementById('pdru-title');if(t)t.textContent=(_caseSrc==='lib')?'案例库 · 按占类查全':'断案入门 · 案例精讲（入门课）';
   show('pdru');
 }
 function drOpen(id){
-  var c=null;for(var i=0;i<DR_CASES.length;i++){if(DR_CASES[i].id===id){c=DR_CASES[i];break;}}
+  var c=null,src='intro';
+  for(var i=0;i<DR_CASES.length;i++){if(DR_CASES[i].id===id){c=DR_CASES[i];break;}}
+  if(!c){for(var j=0;j<DR_CASELIB.length;j++){if(DR_CASELIB[j].id===id){c=DR_CASELIB[j];src='lib';break;}}}
   if(!c)return;
-  try{localStorage.setItem('dr_last_cat',c.cat);}catch(e){}
+  _caseSrc=src;
+  try{localStorage.setItem(src==='lib'?'lib_last_cat':'dr_last_cat',c.cat);}catch(e){}
   document.getElementById('pdr1-title').textContent=c.cat+' · '+c.name.split('·').pop().trim();
   var h='';
   h+='<div class="m5-jue"><b>【占问】</b>'+c.bg+'<br>起出来的盘如下——我们不急着背规则，跟着它一步步读。</div>';
