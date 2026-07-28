@@ -529,6 +529,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">六十四课经</div><div class="hub-item-desc">六十四项主课体索引、成格定义与来源定位</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('p64')">查看课经</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📜</div><div><div class="hub-item-name">毕法赋</div><div class="hub-item-desc">百法原文、逐格详解、原著课盘与专项测验</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pbf')">查看资料</button><button class="btn btn-r" onclick="startBF()">专项练习</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔮</div><div><div class="hub-item-name">象法速查库</div><div class="hub-item-desc">类神、神煞、应期及财官病宅等实用断法规则</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pxf-sym')">查看象法</button><button class="btn btn-r" onclick="startWSD()">断法练习</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🌦️</div><div><div class="hub-item-name">天时 · 晴雨速查</div><div class="hub-item-desc">占天气：气象类神表（主雨/晴/风/雷雪）+ 雨量应期断诀</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('ptw')">查看速查</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📂</div><div><div class="hub-item-name">历代课例库</div><div class="hub-item-desc">按占类检索课盘、断法抓手、验应反馈与出处</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pcase')">查看课例</button></div></div>
 </div>
 
@@ -2574,6 +2575,85 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
         <div class="m5-text red">「凶神吉将不可一例而推，旺相休囚不可一途而泥」——不可只凭月令定五行强弱。</div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ======== 天时·晴雨速查 ======== -->
+<div id="ptw" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">天时 · 晴雨速查</div></div>
+  <div style="padding-bottom:28px">
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">占天气·总则（先看这里）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <div class="m5-text red">占晴雨的核心：看<b>发用、日辰上神、三传</b>乘的是什么"象"——水神主雨、火神主晴、金主风、土主尘雾。</div>
+        <div class="m5-text">再看<b>天将</b>定性质：青龙(甘雨)、玄武(苦雨)、天后(霖雨)、太阴(水)主雨；朱雀(火)、午(晴)主晴；勾陈两面——<b>制玄武则主晴、乘子则主连雨</b>。综合权衡，不是一神定断。</div>
+        <div class="m5-text">起课：<b>月将加占时</b>立四课三传，即看当日阴晴。（年时预测另有"大吉加元旦""岁朔月将加岁干"等特殊起法，此处只讲短期占天气。）</div>
+        <div class="m5-text">三个总纲：<b>天罡(辰)</b>是云雨气流的原动力(北斗)；<b>贵人</b>是发号施令者(如玉帝)；<b>青龙</b>是行雨龙王(奉旨行雨，加辰巳午未为"龙神升天"、主行雨)。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">气象类神 · 十二支<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th>支</th><th>气象类象</th></tr>
+        <tr><td>子</td><td>阴云、云雨、江河水神、华盖</td></tr>
+        <tr><td>丑</td><td>雨师、牵牛星</td></tr>
+        <tr><td>寅</td><td>风伯、三台星</td></tr>
+        <tr><td>卯</td><td>雷、雪</td></tr>
+        <tr><td>辰</td><td>雾、水库、海、哭星</td></tr>
+        <tr><td>巳</td><td>虹霓、风门</td></tr>
+        <tr><td>午</td><td>电、晴</td></tr>
+        <tr><td>未</td><td>风伯、酒星</td></tr>
+        <tr><td>申</td><td>主风、水母（白虎）</td></tr>
+        <tr><td>酉</td><td>阴、霜、虹、文星</td></tr>
+        <tr><td>戌</td><td>云、尘霾</td></tr>
+        <tr><td>亥</td><td>雨水、天河</td></tr></table>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">气象类神 · 十二天将<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <table class="m5-tbl"><tr><th>将</th><th>气象类象</th></tr>
+        <tr><td>贵人</td><td>阴</td></tr>
+        <tr><td>螣蛇</td><td>电、霓虹</td></tr>
+        <tr><td>朱雀</td><td>行火招风之神（主晴、主风）</td></tr>
+        <tr><td>六合</td><td>雨师、电</td></tr>
+        <tr><td>勾陈</td><td>兴云之师；乘子为连雨、积雪；制玄武则主晴</td></tr>
+        <tr><td>青龙</td><td>甘雨之师（升天行雨）</td></tr>
+        <tr><td>天空</td><td>尘雾之神</td></tr>
+        <tr><td>白虎</td><td>大风、霰雪、雹、冻、雷</td></tr>
+        <tr><td>太常</td><td>和风</td></tr>
+        <tr><td>玄武</td><td>苦雨之师</td></tr>
+        <tr><td>太阴</td><td>霜雪、水</td></tr>
+        <tr><td>天后</td><td>阴、雾、霖雨</td></tr></table>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">主雨 / 主晴 · 断诀<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <div class="m5-text red">主雨：亥子(水)、丑(雨师)、辰(水库·海)；青龙(甘雨)、玄武(苦雨)、天后(霖雨)、太阴(水)、六合(雨师)；勾陈乘子主连雨。水神登明(亥)加申尤主雨；青龙升天(加辰巳午未)行雨。</div>
+        <div class="m5-text">主晴：午(晴·电)；勾陈制玄武主晴、三传纯土制水主晴；月将(太阳)发用乘朱雀主出太阳；四课三传全阴、阴极阳生、必有日色。</div>
+        <div class="m5-text">口诀：<b>青龙甘雨、玄武苦雨、勾陈兴云、朱雀招风；亥子为雨、午为晴</b>。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">主风 / 主雷电雪 · 断诀<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <div class="m5-text red">主风：寅、未(风伯)、巳(风门)、申(主风)；白虎(大风)、天空(尘雾)、太常(和风)。风伯乘白虎劫杀，主拔木大风。（"箕宿好风"——寅中有箕宿，风伯临干支或会寅主有风。）</div>
+        <div class="m5-text">主雷电：卯(雷)、巳(电)；螣蛇(电)、六合(电)、白虎(雷)。卯乘勾陈主雷、巳附丁神主电；风雷电俱大＝未乘白虎劫杀＋卯雷＋巳电齐现。</div>
+        <div class="m5-text">主雪：卯、太阴(霜雪)、白虎(霰雪·雹)、勾陈乘子(积雪)；冬月无雷则雷气化雪；天罡临巳、冬月巳为花象主雪花。</div>
+      </div>
+    </div>
+    <div class="m5-sec">
+      <button class="m5-tog" onclick="m5Toggle(this)">雨量 · 应期（何日晴/连雨）<span class="m5-tog-arrow">›</span></button>
+      <div class="m5-body">
+        <div class="m5-text red">雨量：<b>水旺克日主大雨、水空亡生日主小雨、五行空亡无气则晴雨不久</b>。青龙升天＋海(辰)水空地，主久雨又大。</div>
+        <div class="m5-text">连阴雨：亥水引雨、支上戌亥子相连主连雨；金水相生(亥加戊、子加亥)主连阴雨，应期多在六天后的辛、壬日。</div>
+        <div class="m5-text">久雨何日晴：看雨神(水)的<b>空、绝日</b>；或看干支五行克制——如乙卯日干支皆木为"雨头"，至辛酉日干支皆金、金克木则雨止天晴；卯酉为日月之门，酉冲卯推散云雨主晴。</div>
+        <div class="m5-text">昼夜分断：<b>干为日间、支为夜间</b>——干上勾陈宜日晴、支上青龙宜夜雨。</div>
+        <div class="m5-text">星宿口诀："箕宿好风，毕星好雨"；《诗》"月离于毕，俾滂沱矣"（月宿到毕/酉，主大雨）。</div>
+      </div>
+    </div>
+    <div class="m5-txt-src" style="opacity:.6;font-size:12px;padding:6px 4px">源：叶飘然《大六壬通解》天时占章 · 气象类神表与断诀</div>
   </div>
 </div>
 
