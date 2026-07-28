@@ -529,7 +529,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">六十四课经</div><div class="hub-item-desc">六十四项主课体索引、成格定义与来源定位</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('p64')">查看课经</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📜</div><div><div class="hub-item-name">毕法赋</div><div class="hub-item-desc">百法原文、逐格详解、原著课盘与专项测验</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pbf')">查看资料</button><button class="btn btn-r" onclick="startBF()">专项练习</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔮</div><div><div class="hub-item-name">象法速查库</div><div class="hub-item-desc">类神、神煞、应期及财官病宅等实用断法规则</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pxf-sym')">查看象法</button><button class="btn btn-r" onclick="startWSD()">断法练习</button></div></div>
-  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🌦️</div><div><div class="hub-item-name">天时 · 晴雨速查</div><div class="hub-item-desc">占天气：气象类神表（主雨/晴/风/雷雪）+ 雨量应期断诀</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('ptw')">查看速查</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🌦️</div><div><div class="hub-item-name">天时 · 晴雨速查</div><div class="hub-item-desc">占天气：气象类神表（主雨/晴/风/雷雪）+ 雨量应期断诀</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('ptw')">查看速查</button><button class="btn btn-r" onclick="startTW()">晴雨自测</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📂</div><div><div class="hub-item-name">历代课例库</div><div class="hub-item-desc">按占类检索课盘、断法抓手、验应反馈与出处</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pcase')">查看课例</button></div></div>
 </div>
 
@@ -2455,6 +2455,24 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="qz-lv" id="zs-res-lv"></div>
     <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="zs-res-detail"></div>
     <button class="btn btn-r" onclick="startZS()" style="margin-bottom:10px">再来一轮 ↺</button>
+    <button class="btn btn-d" onclick="goHome()">← 首页</button>
+  </div>
+</div>
+
+<!-- ======== 天时·晴雨类神自测 ======== -->
+<div id="pztw" class="screen">
+  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">晴雨类神自测</div><div class="tbr" id="tw-prog-r"></div></div>
+  <div id="ptw-q-main">
+    <div class="prog-row"><span class="prog-txt" id="el-tw-prog"></span><div class="prog-wrap"><div class="prog-bar" id="el-tw-pb" style="width:0%"></div></div></div>
+    <div class="tj-card" id="tw-card"></div>
+    <div id="tw-opts"></div>
+    <div id="tw-explain" style="display:none;margin-top:8px;font-size:12px;color:#6B5040;background:var(--bg3);border-radius:8px;padding:10px 12px;border-left:3px solid var(--acc);line-height:1.8"></div>
+  </div>
+  <div id="ptw-q-result" style="display:none;flex-direction:column;align-items:center;padding:20px 0">
+    <div class="qz-score" id="tw-res-score"></div>
+    <div class="qz-lv" id="tw-res-lv"></div>
+    <div style="font-size:13px;color:#6B5040;text-align:center;margin-bottom:20px" id="tw-res-detail"></div>
+    <button class="btn btn-r" onclick="startTW()" style="margin-bottom:10px">再来一轮 ↺</button>
     <button class="btn btn-d" onclick="goHome()">← 首页</button>
   </div>
 </div>
@@ -4641,7 +4659,7 @@ function qiCast(){
 const FX_CATS=[
   {k:'宗门识别',fn:startZM},{k:'三传推演',fn:startSC},{k:'宗门流程',fn:startZL},
   {k:'天将联想',fn:startTJ},{k:'支神意象',fn:startZS},{k:'旺相断法',fn:startWSD},
-  {k:'干支关系',fn:startGZ},{k:'毕法赋',fn:startBF}
+  {k:'干支关系',fn:startGZ},{k:'毕法赋',fn:startBF},{k:'天时晴雨',fn:startTW}
 ];
 function fxStart(i){FX_CATS[i].fn();}
 function fxInit(){
@@ -5352,6 +5370,79 @@ function _zsEnd(){
   document.getElementById('zs-res-score').textContent=`${correct}/${total}`;
   document.getElementById('zs-res-lv').textContent=pct>=90?'支神已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
   document.getElementById('zs-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
+}
+
+// ══ 天时·晴雨类神自测 ══
+const TW_QUIZ=[
+ {n:'亥',c:'支',sx:'雨水、天河（主雨）',ex:'亥为雨水、天河，水神主雨；登明(亥)加申尤主雨。'},
+ {n:'子',c:'支',sx:'阴云、云雨（主雨）',ex:'子为阴云、云雨、江河水神；作勾陈主连雨、积雪。'},
+ {n:'丑',c:'支',sx:'雨师、牵牛（主雨）',ex:'丑为雨师、牵牛星，主雨。'},
+ {n:'辰',c:'支',sx:'雾、水库、海',ex:'辰为雾、水库、海；青龙升天、海(辰)水空地主久雨又大。'},
+ {n:'午',c:'支',sx:'电、晴',ex:'午为电、为晴，火神主晴。'},
+ {n:'卯',c:'支',sx:'雷、雪',ex:'卯为雷、为雪；卯乘勾陈主雷，冬月无雷则雷气化雪。'},
+ {n:'巳',c:'支',sx:'虹霓、风门（电）',ex:'巳为虹霓、风门；附丁神主电。'},
+ {n:'寅',c:'支',sx:'风伯、三台（主风）',ex:'寅为风伯、三台星，主风；寅中有箕宿，"箕宿好风"。'},
+ {n:'未',c:'支',sx:'风伯、酒星（主风）',ex:'未为风伯、酒星；乘白虎劫杀主拔木大风。'},
+ {n:'申',c:'支',sx:'主风、水母',ex:'申为主风、水母，又为白虎之位。'},
+ {n:'青龙',c:'将',sx:'甘雨之师（主雨）',ex:'青龙为甘雨之师、行雨龙王；加辰巳午未为龙神升天、主行雨。'},
+ {n:'玄武',c:'将',sx:'苦雨之师（主雨）',ex:'玄武为苦雨之师、主雨；勾陈制玄武则转晴。'},
+ {n:'天后',c:'将',sx:'阴、雾、霖雨（主雨）',ex:'天后主阴、雾、霖雨。'},
+ {n:'太阴',c:'将',sx:'霜雪、水（主雨雪）',ex:'太阴主霜雪、水。'},
+ {n:'勾陈',c:'将',sx:'兴云之师（乘子连雨）',ex:'勾陈为兴云之师，乘子主连雨、积雪；制玄武则主晴。'},
+ {n:'朱雀',c:'将',sx:'行火招风（主晴/风）',ex:'朱雀为行火招风之神，主晴、主风；月将发用乘朱雀主出太阳。'},
+ {n:'白虎',c:'将',sx:'大风、霰雪、雷',ex:'白虎主大风、霰雪、雹、冻、雷。'},
+ {n:'太常',c:'将',sx:'和风',ex:'太常主和风。'},
+ {n:'天空',c:'将',sx:'尘雾之神',ex:'天空为尘雾之神。'},
+ {n:'螣蛇',c:'将',sx:'电、霓虹',ex:'螣蛇主电、霓虹。'}
+];
+let twState=null;
+function startTW(){
+  const pool=shuffleArr([...TW_QUIZ]);
+  const qs=pool.map((t,i)=>({...t,typeA:i%2===0}));
+  twState={qs,idx:0,correct:0,answered:false};
+  document.getElementById('ptw-q-main').style.display='';
+  document.getElementById('ptw-q-result').style.display='none';
+  _scrollPos['pztw']=0;show('pztw');twRender();
+}
+function twRender(){
+  const{qs,idx}=twState,q=qs[idx],total=qs.length;
+  document.getElementById('tw-prog-r').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-tw-prog').textContent=`${idx+1}/${total}`;
+  document.getElementById('el-tw-pb').style.width=`${idx/total*100}%`;
+  const card=document.getElementById('tw-card');
+  let opts,ans;
+  if(q.typeA){
+    card.innerHTML=`<div class="tj-name">${q.n}</div><div class="tj-attr">${q.c==='支'?'支神':'天将'}</div><div class="tj-attr" style="margin-top:4px">主什么气象？</div>`;
+    ans=q.sx;
+    opts=shuffleArr([ans,...shuffleArr(TW_QUIZ.filter(t=>t.sx!==q.sx)).slice(0,3).map(t=>t.sx)]);
+  } else {
+    card.innerHTML=`<div class="tj-attr" style="margin-top:8px;font-size:11px">主象：</div><div class="tj-sx">${q.sx}</div><div class="tj-attr" style="margin-top:10px">这是哪个类神？</div>`;
+    ans=q.n;
+    opts=shuffleArr([ans,...shuffleArr(TW_QUIZ.filter(t=>t.n!==q.n)).slice(0,3).map(t=>t.n)]);
+  }
+  document.getElementById('tw-opts').innerHTML=opts.map(o=>`<button class="qz-opt" data-opt="${o}" onclick="twAnswer(this)" style="font-size:15px">${o}</button>`).join('');
+  document.getElementById('tw-explain').style.display='none';
+  twState.answered=false;
+}
+function twAnswer(btn){
+  if(twState.answered)return;twState.answered=true;
+  const q=twState.qs[twState.idx];
+  const ans=q.typeA?q.sx:q.n,chosen=btn.dataset.opt;
+  document.querySelectorAll('#tw-opts .qz-opt').forEach(b=>{b.disabled=true;if(b.dataset.opt===ans)b.classList.add('correct');});
+  if(chosen===ans)twState.correct++;else btn.classList.add('wrong');
+  const ex=document.getElementById('tw-explain');
+  ex.innerHTML=`${chosen===ans?'✓ ':'✗ '}<b>${q.n}</b>（${q.c==='支'?'支神':'天将'}）<br>主象：${q.sx}<br>${q.ex}`;
+  ex.style.display='block';
+  setTimeout(()=>{twState.idx++;if(twState.idx>=twState.qs.length){_twEnd();return;}twRender();window.scrollTo(0,0);},1600);
+}
+function _twEnd(){
+  const{correct,qs}=twState,total=qs.length,pct=Math.round(correct/total*100);
+  saveWeakRecord('天时晴雨',total,total-correct);
+  document.getElementById('ptw-q-main').style.display='none';
+  document.getElementById('ptw-q-result').style.display='flex';
+  document.getElementById('tw-res-score').textContent=`${correct}/${total}`;
+  document.getElementById('tw-res-lv').textContent=pct>=90?'晴雨类神已熟 🎉':pct>=70?'基本掌握 👍':pct>=50?'继续加油 💪':'需多练习 📚';
+  document.getElementById('tw-res-detail').innerHTML=`答对 <b>${correct}</b> 题 / 共 <b>${total}</b> 题<br>正确率 <b>${pct}%</b>`;
 }
 
 // ══ 历代课例库 ══
