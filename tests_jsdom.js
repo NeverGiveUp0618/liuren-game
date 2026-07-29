@@ -164,6 +164,22 @@ setTimeout(()=>{
   });
   t('可从训练分类生成题',()=>{const q=w.eval("buildTrainQuestions(12,new Set(['bj']))");return (q.length===12&&q.every(x=>x.cat==='bj'))||'生成失败';});
 
+
+  // ════ 收尾补全项 ════
+  t('支神总口诀闪卡6条',()=>w.eval("KJ_DATA['支神总口诀'].length")===6||w.eval("KJ_DATA['支神总口诀'].length"));
+  t('总口诀闪卡入口存在',()=>d.querySelector('button[onclick*="支神总口诀"]')!==null||'缺入口');
+  t('总口诀闪卡可启动',()=>{w.startKJ('支神总口诀');return d.getElementById('pkj-g').classList.contains('active')||'未进入'});
+  t('闪卡无非中文残字',()=>!/[Ѐ-ӿ]/.test(w.eval("JSON.stringify(KJ_DATA)"))||'有西里尔字符');
+  t('薄弱点复习含八煞九宝',()=>{w.show('pfx');return d.getElementById('pfx-body').textContent.includes('八煞九宝')||'缺'});
+  t('薄弱点八煞九宝可启动',()=>{const i=w.eval("FX_CATS.findIndex(c=>c.k==='八煞九宝')");w.fxStart(i);return d.getElementById('ptrain').classList.contains('active')||'未进入训练'});
+  w.show('p5');
+  const p5b=d.getElementById('p5').textContent;
+  t('地支阴阳分层一阳至六阴',()=>(p5b.includes('一阳')&&p5b.includes('六阴')&&p5b.includes('进展程度'))||'缺');
+  t('天干七杀',()=>p5b.includes('七杀')||'缺');
+  t('天干方位',()=>p5b.includes('甲乙东')||'缺');
+  t('五行生成次序',()=>(p5b.includes('太易生水')&&p5b.includes('太极生土'))||'缺');
+  t('六壬根本阴阳=日干日支',()=>p5b.includes('日干为阳，日支为阴')||'缺');
+
   console.log('\n'+(errs.length?'❌ 失败 '+errs.length+' 项':'✅ 全部通过'));
   process.exit(errs.length?1:0);
 },1200);
