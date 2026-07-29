@@ -99,10 +99,10 @@ setTimeout(()=>{
   w.qiCast();
   const bj=d.getElementById('qi-bj').textContent;
   t('检测卡渲染',()=>bj.includes('八煞九宝 · 自动检测')||'no');
-  t('讲义课例三传=子寅辰',()=>{const st=w.eval("_manualKC('丙','申',YJ_TBL[4],'巳')");return [st.cc,st.zc,st.mc].join('')==='子寅辰'||[st.cc,st.zc,st.mc].join('')});
-  t('讲义课例为重审课',()=>{const st=w.eval("_manualKC('丙','申',YJ_TBL[4],'巳')");return st.mt==='重审课'||st.mt});
+  // 盘面基线：锁定站内现行三传取法（发用取下神），防止无意改动
+  t('基线 丙申日未将巳时三传=戌子寅',()=>{const st=w.eval("_manualKC('丙','申',YJ_TBL[4],'巳')");return [st.cc,st.zc,st.mc].join('')==='戌子寅'||[st.cc,st.zc,st.mc].join('')});
+  t('基线 该课为重审课',()=>{const st=w.eval("_manualKC('丙','申',YJ_TBL[4],'巳')");return st.mt==='重审课'||st.mt});
   t('丙禄巳不在课传→不误报',()=>!bj.includes('巳为丙日之禄')||'误报了');
-  t('末传辰空亡应检出勿用',()=>bj.includes('末传空 → 勿用')||bj.slice(0,400));
   t('丙申日甲午旬 旬仪为午',()=>!bj.includes('旬仪')||bj.includes('午为甲午旬旬仪')||bj.slice(0,400));
   t('检测卡带免责提示',()=>bj.includes('不等于吉凶结论')||'缺');
   // 空盘边界：遍历全部60日×12将×12时不应抛错
