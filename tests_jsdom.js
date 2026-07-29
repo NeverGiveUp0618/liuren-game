@@ -148,6 +148,22 @@ setTimeout(()=>{
   t('寄宫·为何避四正',()=>(p5.includes('四正')||'缺'));
   t('起课速查·寄宫原理已补',()=>{const x=d.getElementById('tab-jg').textContent;return x.includes('超行一宫')||'缺'});
 
+
+  // ════ 八煞九宝训练题库 ════
+  t('训练分类含八煞九宝',()=>w.eval("TRAIN_CATS.bj&&TRAIN_CATS.bj.name")==='八煞九宝'||'缺');
+  const bjp=w.trainBJPool('bj');
+  t('题库题量>=150',()=>bjp.length>=150||bjp.length);
+  t('每题4选项且含正解',()=>bjp.every(q=>q.opts.length===4&&q.opts.includes(q.a))||'有异常题');
+  t('题目id唯一',()=>bjp.length===new Set(bjp.map(x=>x.id)).size||'有重复id');
+  t('每题都有解析',()=>bjp.every(q=>q.ex&&q.ex.length>10)||'有缺解析');
+  t('题库答案与BJ_TBL一致(抽样)',()=>{
+    const T=w.eval('BJ_TBL');
+    const f=(kw,ans)=>bjp.some(q=>q.q.includes(kw)&&q.a===ans);
+    return (f('甲 日的「日德」',T.riDe['甲'])&&f('庚 日的「禄」',T.lu['庚'])&&
+            f('子 日的「支德」',T.zhiDe['子'])&&f('甲子旬的「旬丁」',T.dingShen['甲子']))||'不一致';
+  });
+  t('可从训练分类生成题',()=>{const q=w.eval("buildTrainQuestions(12,new Set(['bj']))");return (q.length===12&&q.every(x=>x.cat==='bj'))||'生成失败';});
+
   console.log('\n'+(errs.length?'❌ 失败 '+errs.length+' 项':'✅ 全部通过'));
   process.exit(errs.length?1:0);
 },1200);

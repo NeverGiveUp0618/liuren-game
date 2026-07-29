@@ -502,6 +502,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">🎯 综合训练新增「八煞九宝」专题：168 道查表题（四德/三奇/旬仪/禄马丁神/五行墓十干墓/沐浴帝旺长生/六害加临/三刑分类/干合五合/三传逢空），接入今日挑战、错题本与掌握度</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">⚖️ 新增「八煞九宝」完整章：刑冲破害墓鬼败空＋德合奇仪禄马生旺贵逐条详解，含六害逐条加临断语、四德（日/天/月/支）全表、干合五合本义、旬奇干奇遁奇、旬仪、驿马丁神等查表；自选起课同步加「八煞九宝·自动检测」</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">🧾 新增「课式八要素」：太岁·月建·日辰·占时·月将·空亡·本命·行年逐项应用条，含日辰十二占类分工表、占时正时/活时、空亡游天空/落地空/全空</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">🗂️ 新增「神将类象·白话」：十二地支（形象/天象/人物/身体/物品/姓氏）＋十二天将（临十二支状态逐条白话解读），与原有古籍歌诀类象并存对照</span></div>
@@ -12434,7 +12435,8 @@ const TRAIN_CATS={
   tj:{name:'十二天将',desc:'名称、主象与吉凶'},
   zs:{name:'十二支神',desc:'支神名称与核心类象'},
   zm:{name:'九宗门',desc:'看四课识别发用法'},
-  sc:{name:'三传推演',desc:'初传、中传、末传'}
+  sc:{name:'三传推演',desc:'初传、中传、末传'},
+  bj:{name:'八煞九宝',desc:'四德三奇禄马与刑冲破害墓'}
 };
 const TRAIN_ZS=[
   ['子','神后','妇女·阴私·水液'],['丑','大吉','田宅·长者·财帛'],['寅','功曹','官吏·文书·道路'],['卯','太冲','门户·舟车·林木'],
@@ -12450,6 +12452,59 @@ function saveTrainNB(d){localStorage.setItem(TRAIN_NB_KEY,JSON.stringify(d))}
 function trainShuffle(a){return shuffleArr(a)}
 function trainPick(arr,n){return trainShuffle([...arr]).slice(0,n)}
 function trainQuestion(cat,q,a,opts,ex,id,extra={}){return{cat,q,a,opts:trainShuffle([...new Set([a,...opts])]).slice(0,4),ex,id:id||cat+'_'+q,...extra}}
+const BJ_MONTH=['正月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+function trainBJPool(cat){
+  const T=BJ_TBL,Q=[],zOth=a=>trainPick(ZHI_ALL.filter(z=>z!==a),3),gOth=a=>trainPick(GAN_ALL.filter(g=>g!==a),3);
+  const add=(q,a,opts,ex,id)=>Q.push(trainQuestion(cat,q,a,opts,ex,id));
+  // 九宝查表
+  GAN_ALL.forEach((g,i)=>{
+    add(`${g} 日的「日德」在哪个地支？`,T.riDe[g],zOth(T.riDe[g]),`日德：甲己在寅·乙庚在申·丙辛在巳·丁壬在亥·戊癸在巳。日德能转祸为福，宜旺相忌落空。`,`bj_ride_${i}`);
+    add(`${g} 日的「禄」在哪个地支？`,T.lu[g],zOth(T.lu[g]),`日禄：甲寅·乙卯·丙戊巳·丁己午·庚申·辛酉·壬亥·癸子。禄宜旺不宜衰，旺禄落空则改谋别为。`,`bj_lu_${i}`);
+    add(`${g} 日的「干奇」是哪个地支？`,T.ganQi[g],zOth(T.ganQi[g]),`干奇：甲午·乙巳·丙辰·丁卯·戊寅·己丑·庚未·辛申·壬酉·癸戌。干奇须与旬奇并临为上，只见干奇不可为奇。`,`bj_ganqi_${i}`);
+    add(`${g} 日的「干墓」在哪个地支？`,T.muGan[g],zOth(T.muGan[g]),`十干墓：未为甲癸墓·戌为丙戊乙墓·丑为庚丁己墓·辰为壬辛墓。阳干死地即阴干生地。`,`bj_mugan_${i}`);
+    add(`${g} 日的「败」（沐浴）在哪个地支？`,T.bai[g],zOth(T.bai[g]),`败即十二长生之沐浴：甲乙子·丙丁卯·戊己酉·庚辛午·壬癸酉。占身主血气衰败，占宅主屋宅崩颓。`,`bj_bai_${i}`);
+    add(`${g} 日的「帝旺」在哪个地支？`,T.diwang[g],zOth(T.diwang[g]),`十干帝旺：甲乙卯·丙丁午·戊己壬癸子·庚辛酉。注意甲旺卯、丙旺午同时也是羊刃，过旺是双刃剑。`,`bj_dw_${i}`);
+  });
+  ZHI_ALL.forEach((z,i)=>{
+    add(`${z} 日的「支德」在哪个地支？`,T.zhiDe[z],zOth(T.zhiDe[z]),`支德从日支顺数第六位（子日在巳、丑日在午…）。支德临支或入传，主宅舍安稳、家道和顺、内助得力。`,`bj_zhide_${i}`);
+    add(`${z} 月，「月德」在哪个天干？`,T.yueDe[z],gOth(T.yueDe[z]),`月德按月令三合：寅午戌月（火局）丙·亥卯未月（木局）甲·申子辰月（水局）壬·巳酉丑月（金局）庚。`,`bj_yuede_${i}`);
+    const ma=Object.entries(T.ma).find(([k])=>k.includes(z));
+    add(`${z} 日的「驿马」在哪个地支？`,ma[1],zOth(ma[1]),`驿马按三合局取：申子辰马在寅·巳酉丑马在亥·亥卯未马在巳·寅午戌马在申。马忌逢空落空，宜结合禄看。`,`bj_ma_${i}`);
+  });
+  BJ_MONTH.forEach((m,i)=>{
+    const a=T.tianDe[i];
+    add(`${m}的「天德」在？`,a,(GAN_ALL.includes(a)?gOth(a):zOth(a)),`天德按十二月建：正丁·二申·三壬·四辛·五亥·六甲·七癸·八寅·九丙·十乙·十一巳·十二庚。天德力宏，能解重大灾祸。`,`bj_tiande_${i}`);
+  });
+  Object.entries(T.xunQi).forEach(([x,a],i)=>
+    add(`${x}旬的「旬奇」是哪个地支？`,a,zOth(a),`旬奇：甲子/甲戌旬丑（日精）·甲申/甲午旬亥（星精）·甲辰/甲寅旬子（月精）。奇入课主逢凶化吉，落空则福减半。`,`bj_xunqi_${i}`));
+  Object.entries(T.dingShen).forEach(([x,a],i)=>
+    add(`${x}旬的「旬丁」（丁神）是哪个地支？`,a,zOth(a),`旬丁即本旬中丁所配之支：甲子旬丁卯·甲戌旬丁丑·甲申旬丁亥·甲午旬丁酉·甲辰旬丁未·甲寅旬丁巳。丁神是变动之神，见之主迅速。`,`bj_ding_${i}`));
+  ['甲子','甲戌','甲申','甲午','甲辰','甲寅'].forEach((x,i)=>
+    add(`${x}旬的「旬仪」是哪个地支？`,x[1],zOth(x[1]),`旬仪即旬首之支。凡占主喜气吉庆、逢凶化吉。仪有旬仪与支仪，以旬仪为主。`,`bj_yi_${i}`));
+  Object.entries(T.changsheng).forEach(([w,a],i)=>
+    add(`「${w}」的长生在哪个地支？`,a,zOth(a),`五行长生：木亥·火寅·金巳·水土申。长生为气之始，主事有根基、谋为有续。`,`bj_cs_${i}`));
+  Object.entries(T.muWx).forEach(([w,a],i)=>
+    add(`「${w}」的五行墓在哪个地支？`,a,zOth(a),`五行墓：未为木墓·戌为火墓·丑为金墓·辰为水土墓。实占一般以五行墓为主，墓逢冲则吉、逢合则凶。`,`bj_muwx_${i}`));
+  Object.entries(T.ganhe).forEach(([k,a],i)=>{
+    const oth=Object.values(T.ganhe).filter(v=>v!==a);
+    add(`天干「${k[0]}${k[1]}」相合，名为？`,a,trainPick(oth,3),`五合：甲己中正合（合土）·乙庚仁义合（合金）·丙辛威权合（合水）·丁壬淫泆合（合木）·戊癸无情合（合火）。`,`bj_ganhe_${i}`);
+  });
+  // 八煞
+  T.po.forEach((p,i)=>add(`地支「${p[0]}」与哪个地支相破？`,p[1],zOth(p[1]),`六破：子酉·丑辰·寅亥·卯午·巳申·未戌。凡事见破大多不成，但破却可以解冤。`,`bj_po_${i}`));
+  Object.entries(T.xingType).forEach(([k,a],i)=>{
+    const oth=['无恩之刑','恃势之刑','无礼之刑','自刑'].filter(v=>v!==a);
+    add(`「${k[0]}刑${k[1]}」属于哪一种刑？`,a,oth,`四刑：自刑辰午酉亥；无礼之刑子卯互刑；无恩之刑寅巳申顺刑；恃势之刑丑戌未逆刑。有刑不宜占病，却利于捕捉。`,`bj_xing_${i}`);
+  });
+  T.haiDuan.forEach(([k,v],i)=>{
+    const oth=T.haiDuan.filter(x=>x[0]!==k).map(x=>x[1]);
+    add(`六害加临：「${k}」主什么？`,v,trainPick(oth,3),`六害上下加临方向不同则断语不同，这是害与冲最大的区别。凡害必无和气，只宜守旧，动即有失。`,`bj_hai_${i}`);
+  });
+  [['初传','斩首','若末传实，先虽无着，后却有成'],['中传','折腰','事将成而中止'],['末传','勿用','事终无结果']].forEach(([p,a,e],i)=>{
+    const oth=['斩首','折腰','勿用'].filter(v=>v!==a);
+    add(`三传逢空：「${p}」落空亡称为？`,a,oth.concat('全空'),`初传空为斩首（${p==='初传'?e:'…'}）、中传空为折腰、末传空为勿用。${e}`,`bj_kong_${i}`);
+  });
+  return Q;
+}
 function trainStaticPool(cat){
   if(cat==='yj')return QZ_YJ.map((x,i)=>trainQuestion(cat,x.q,x.a,trainPick(ZHI_ALL.filter(z=>z!==x.a),3),x.hint,`yj_${i}`));
   if(cat==='gr')return QZ_GR.map((x,i)=>trainQuestion(cat,x.q,x.a,trainPick(ZHI_ALL.filter(z=>z!==x.a),3),x.hint,`gr_${i}`));
@@ -12457,6 +12512,7 @@ function trainStaticPool(cat){
     trainQuestion(cat,`“${x.name}”的核心主象是？`,x.sx,trainPick(TJ_QUIZ.filter(y=>y.name!==x.name).map(y=>y.sx),3),`${x.name}属${x.wx}，${x.ji}将。${x.ex}`,`tj_sx_${i}`),
     trainQuestion(cat,`主象“${x.sx}”对应哪位天将？`,x.name,trainPick(TJ_QUIZ.filter(y=>y.name!==x.name).map(y=>y.name),3),`${x.name}：${x.ex}`,`tj_nm_${i}`)
   ]);
+  if(cat==='bj')return trainBJPool(cat);
   if(cat==='zs')return TRAIN_ZS.flatMap((x,i)=>[
     trainQuestion(cat,`地支“${x[0]}”的六壬神名是？`,x[1],trainPick(TRAIN_ZS.filter(y=>y[0]!==x[0]).map(y=>y[1]),3),`${x[0]}为${x[1]}，主${x[2]}。`,`zs_nm_${i}`),
     trainQuestion(cat,`“${x[1]}”对应哪个地支？`,x[0],trainPick(ZHI_ALL.filter(y=>y!==x[0]),3),`${x[1]}即${x[0]}，主${x[2]}。`,`zs_di_${i}`)
