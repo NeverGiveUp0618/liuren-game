@@ -354,6 +354,27 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .qi-f label{font-size:11px;color:#9B8570;letter-spacing:1px}
 .qi-sel{padding:10px 6px;border:1px solid var(--bd1);border-radius:9px;background:var(--bg3);font-size:15px;color:#1C0A00;font-family:inherit;text-align:center;text-align-last:center;-webkit-appearance:none;appearance:none}
 .qi-sel:focus{outline:none;border-color:var(--acc)}
+.mn-calc{padding:2px 4px 4px}
+.mn-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.mn-f{display:flex;flex-direction:column;gap:3px}
+.mn-f label{font-size:11px;color:#9B8570;letter-spacing:1px}
+.mn-res{margin-top:11px;border:1px solid var(--bd1);border-radius:10px;background:var(--bg3);padding:11px}
+.mn-res-row{display:flex;gap:10px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--bd1)}
+.mn-res-row:last-child{border-bottom:none}
+.mn-res-k{font-size:11px;color:#9B8570;letter-spacing:1px;flex-shrink:0;width:64px}
+.mn-res-v{font-size:19px;color:var(--acc);font-weight:bold;letter-spacing:3px}
+.mn-res-n{font-size:11px;color:#6B5040;line-height:1.6}
+.nm-row{display:grid;grid-template-columns:38px 46px 1fr;grid-template-areas:"lb gz ss" "lb gz rel" "note note note";gap:2px 8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--bd1)}
+.nm-row:last-of-type{border-bottom:none}
+.nm-lb{grid-area:lb;font-size:11px;color:#9B8570;letter-spacing:2px;writing-mode:vertical-rl;justify-self:center}
+.nm-gz{grid-area:gz;font-size:17px;color:var(--acc);font-weight:bold;text-align:center;letter-spacing:1px}
+.nm-ss{grid-area:ss;display:flex;align-items:baseline;gap:5px}
+.nm-ss-t{font-size:10px;color:#9B8570}
+.nm-ss b{font-size:16px;color:#1C0A00}
+.nm-ss-j{font-size:11px;color:#8B6914;border:1px solid var(--bd1);border-radius:4px;padding:0 4px}
+.nm-rel{grid-area:rel;font-size:12px;font-weight:bold}
+.nm-note{grid-area:note;font-size:11px;color:#6B5040;line-height:1.6;padding-top:2px}
+.nm-tip{margin-top:9px;padding-top:9px;border-top:1px solid var(--bd1);font-size:11px;color:#6B5040;line-height:1.8}
 .bf-note{font-size:12px;color:var(--acc-dk);letter-spacing:1px;margin:14px 2px 8px;font-weight:600}
 .bf-hit{background:var(--bg2);border:1px solid var(--bd1);border-radius:11px;padding:10px 13px;margin-bottom:7px}
 .bf-hit b{color:var(--acc)}
@@ -1725,7 +1746,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="kj-grid">
       <button class="kj-btn" onclick="startKJ('取用神·六亲')"><div class="kj-btn-name">取用神·六亲</div><div class="kj-btn-n">类神取用 · 10条</div></button>
       <button class="kj-btn" onclick="startKJ('三传断法')"><div class="kj-btn-name">三传断法</div><div class="kj-btn-n">初中末传 · 6条</div></button>
-      <button class="kj-btn" onclick="startKJ('行年法')"><div class="kj-btn-name">行年法</div><div class="kj-btn-n">流年推算 · 4条</div></button>
+      <button class="kj-btn" onclick="startKJ('行年法')"><div class="kj-btn-name">本命·行年</div><div class="kj-btn-n">丙寅顺·壬申逆 · 8条</div></button>
       <button class="kj-btn" onclick="startKJ('空亡断诀')"><div class="kj-btn-name">空亡断诀</div><div class="kj-btn-n">逐将空亡 · 12条</div></button>
     </div>
   </div>
@@ -1782,10 +1803,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <div id="pqk" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">起课速查</div></div>
   <div class="qk-tabs">
-    <button class="qk-tab active" onclick="switchQKTab(this,'tab-yj')">月将表</button>
-    <button class="qk-tab" onclick="switchQKTab(this,'tab-gr')">贵人表</button>
-    <button class="qk-tab" onclick="switchQKTab(this,'tab-xk')">旬空表</button>
-    <button class="qk-tab" onclick="switchQKTab(this,'tab-jg')">十干寄宫</button>
+    <button class="qk-tab active" data-qk="tab-yj" onclick="switchQKTab(this,'tab-yj')">月将表</button>
+    <button class="qk-tab" data-qk="tab-gr" onclick="switchQKTab(this,'tab-gr')">贵人表</button>
+    <button class="qk-tab" data-qk="tab-xk" onclick="switchQKTab(this,'tab-xk')">旬空表</button>
+    <button class="qk-tab" data-qk="tab-jg" onclick="switchQKTab(this,'tab-jg')">十干寄宫</button>
+    <button class="qk-tab" data-qk="tab-mn" onclick="switchQKTab(this,'tab-mn')">本命·行年</button>
   </div>
   <div class="qk-panel active" id="tab-yj">
     <div class="qk-sec-title">月将对照表（中气后换将，与月建相冲）</div>
@@ -1839,6 +1861,28 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <tr><td class="c-a">丁</td><td class="c-r">未</td><td>火</td><td class="c-a">壬</td><td class="c-r">亥</td><td>水</td></tr>
       <tr><td class="c-a">戊</td><td class="c-r">巳</td><td>土</td><td class="c-a">癸</td><td class="c-r">丑</td><td>水</td></tr>
     </table></div>
+    <div style="font-size:11px;color:#9B8570;padding:6px 4px;line-height:1.8">口诀：甲课寅兮乙课辰，丙戊课巳不需论。丁己课未庚申上，辛戌壬亥是其真。癸课原来丑宫坐，分明不用四正神。<br><b>为何避四正</b>：子午卯酉为二十八宿中日月的四日度、四月度正位，六壬以太阳起课，故避开天之阴阳（日月）不寄天干。其余天干皆寄于本干禄位（禄位为天干本位）；凡天干禄宫恰为四正者，顺前超行一宫而寄之——乙禄卯超寄辰、丁己禄午超寄未、辛禄酉超寄戌、癸禄子超寄丑。</div>
+  </div>
+  <div class="qk-panel" id="tab-mn">
+    <div class="qk-sec-title">本命·行年 计算器</div>
+    <div class="mn-calc">
+      <div class="mn-row">
+        <div class="mn-f"><label>性别</label>
+          <select id="mn-sex" class="qi-sel"><option value="m">男（丙寅顺行）</option><option value="f">女（壬申逆行）</option></select></div>
+        <div class="mn-f"><label>出生年（公历）</label>
+          <input id="mn-by" class="qi-sel" type="number" inputmode="numeric" placeholder="如 1978"></div>
+        <div class="mn-f"><label>占断年（公历）</label>
+          <input id="mn-ny" class="qi-sel" type="number" inputmode="numeric" placeholder="如 2007"></div>
+      </div>
+      <button class="btn btn-r" style="width:100%;margin-top:10px" onclick="mnCalc()">推 算 →</button>
+      <div id="mn-out"></div>
+      <div style="font-size:11px;color:#9B8570;padding:8px 2px 0;line-height:1.8">⚠️ 出生年干支以<b>立春</b>换年，不以元旦或农历初一。若出生在立春之前，本命应取<b>上一年</b>干支，请自行核对万年历后修正。虚岁按「占断年 − 出生年 + 1」计。</div>
+    </div>
+    <div class="qk-sec-title" style="margin-top:14px">男命行年表（一岁丙寅顺行，六十一岁复起丙寅）</div>
+    <div class="qk-tbl-wrap"><table class="qk-tbl" id="mn-tbl-m"></table></div>
+    <div class="qk-sec-title" style="margin-top:14px">女命行年表（一岁壬申逆行，六十一岁复起壬申）</div>
+    <div class="qk-tbl-wrap"><table class="qk-tbl" id="mn-tbl-f"></table></div>
+    <div style="font-size:11px;color:#9B8570;padding:8px 4px;line-height:1.8"><b>本命为体，行年为用</b>；课式为体，本命行年为用。年命称「变体门」——课吉而年命凶则吉象被制，课凶而年命吉则凶象被解。<br>讲义课例校验：丁亥年（2007）占，占人戊午命 → 虚岁30 → 行年<b>乙未</b>。</div>
   </div>
 </div>
 
@@ -1989,8 +2033,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <div class="qi-f"><label>月将（节气）</label><select id="qi-yj" class="qi-sel"></select></div>
       <div class="qi-f"><label>占 时</label><select id="qi-zs" class="qi-sel"></select></div>
     </div>
+    <div class="mn-row" style="margin-top:9px">
+      <div class="qi-f"><label>性别·选填</label><select id="qi-sex" class="qi-sel"><option value="">不加年命</option><option value="m">男</option><option value="f">女</option></select></div>
+      <div class="qi-f"><label>出生年</label><input id="qi-by" class="qi-sel" type="number" inputmode="numeric" placeholder="1978"></div>
+      <div class="qi-f"><label>占断年</label><input id="qi-ny" class="qi-sel" type="number" inputmode="numeric" placeholder="2007"></div>
+    </div>
     <button class="btn btn-r" style="width:100%;margin-top:12px" onclick="qiCast()">起 课 →</button>
-    <div id="qi-tip" style="font-size:11px;color:#9B8570;text-align:center;margin-top:7px;line-height:1.6">选日干支＋月将＋占时，自动排全盘·判宗门·列适用毕法。昼夜由占时定（卯~申为昼）。</div>
+    <div id="qi-tip" style="font-size:11px;color:#9B8570;text-align:center;margin-top:7px;line-height:1.6">选日干支＋月将＋占时，自动排全盘·判宗门·列适用毕法。昼夜由占时定（卯~申为昼）。<br>填性别与年份则加断年命（太岁·本命·行年上神），不填则只看课式本身。</div>
   </div>
   <div id="qi-out"></div>
 </div>
@@ -3851,19 +3900,22 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
         <div class="m5-wrap">
           <table class="m5-tbl">
             <tr><th>参数</th><th>数据来源</th><th>物理意义</th><th>类比</th></tr>
-            <tr><td><strong>本命</strong></td><td>求测者出生那年的农历地支</td><td>物理肉身、先天根基、底线与最终承受力（终身不变）</td><td>硬件MAC地址/静态属性</td></tr>
-            <tr><td><strong>行年</strong></td><td>当年虚岁对应的动态地支</td><td>当前这一年的运势环境、正在经历的核心事件（每年更新）</td><td>动态Session ID/运行时环境</td></tr>
+            <tr><td><strong>本命</strong></td><td>求测者出生那年的干支（年柱）</td><td>物理肉身、先天根基、底线与最终承受力（终身不变）</td><td>硬件MAC地址/静态属性</td></tr>
+            <tr><td><strong>行年</strong></td><td>当年虚岁对应的动态干支</td><td>当前这一年的运势环境、正在经历的核心事件（每年更新）</td><td>动态Session ID/运行时环境</td></tr>
           </table>
         </div>
 
         <div class="xf-step">行年推算算法</div>
+        <p class="xf-p">讲义定法：<b>天开于子、地辟于丑、人生于寅</b>，故男命一岁起<b>丙寅</b>顺行；女命取阴阳对待之义，一岁起<b>壬申</b>逆行。推的是<b>干支</b>，不是单地支，起点也不是本命年支。</p>
         <div class="m5-wrap">
           <table class="m5-tbl">
-            <tr><th>性别</th><th>起算点</th><th>方向</th><th>算法</th></tr>
-            <tr><td>男命（阳顺）</td><td>寅（1岁起）</td><td>顺时针</td><td>(寅位 + 虚岁 - 1) % 12 → 对应地支</td></tr>
-            <tr><td>女命（阴逆）</td><td>申（1岁起）</td><td>逆时针</td><td>(申位 - 虚岁 + 1 + N×12) % 12 → 对应地支</td></tr>
+            <tr><th>性别</th><th>起算点</th><th>方向</th><th>算法（六十甲子，甲子记为第0位）</th></tr>
+            <tr><td>男命（阳顺）</td><td>丙寅（1岁）</td><td>顺推六十甲子</td><td>idx = (虚岁 + 1) % 60</td></tr>
+            <tr><td>女命（阴逆）</td><td>壬申（1岁）</td><td>逆推六十甲子</td><td>idx = (9 − 虚岁) % 60（负数加60）</td></tr>
           </table>
         </div>
+        <p class="xf-p">六十一岁复归起点，周而复始。校验用讲义课例：丁亥年（2007）占，占人<b>戊午命</b>，虚岁30 → (30+1)=31 → <b>乙未</b>，与讲义所标行年一致。</p>
+        <div class="m5-wrap"><button class="btn btn-r" style="width:100%" onclick="show('pqk');switchQKTabById('tab-mn')">🧮 打开本命·行年计算器</button></div>
 
         <div class="xf-step">密钥注入与交叉结算</div>
         <p class="xf-p">将本命与行年这两个地支投射到天地盘中，看其"上神"（头顶盖着的天盘地支）——</p>
@@ -3967,7 +4019,7 @@ function _restoreScreenScroll(id){
   const y=_scrollPos[id]||0,restore=()=>window.scrollTo(0,y);
   restore();requestAnimationFrame(()=>{restore();requestAnimationFrame(restore)});
 }
-function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}_restoreScreenScroll(id);}
+function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}if(id==='pqk'){qkInit();}_restoreScreenScroll(id);}
 /* ===== 浏览器返回键/全面屏手势 → App内逐屏后退（套壳iframe/独立打开均适用） =====
    包装 show()：前进 pushState；目标已在栈中(上层)则 history.go(-n) 折叠后退；
    popstate 幂等重放对应屏。所有 show()/goHome() 调用点无需改动。 */
@@ -4112,6 +4164,61 @@ function openYjMemory(){
 }
 function backYjMemory(){show('phub-knowledge');switchKnowledgeTab('start')}
 function switchQKTab(btn,pid){document.querySelectorAll('.qk-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.qk-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(pid).classList.add('active')}
+function switchQKTabById(pid){const btn=document.querySelector(`.qk-tab[data-qk="${pid}"]`);if(btn)switchQKTab(btn,pid);}
+
+/* ════ 本命 · 行年（讲义：男一岁丙寅顺行，女一岁壬申逆行） ════ */
+const JIAZI=(()=>{const G='甲乙丙丁戊己庚辛壬癸',Z='子丑寅卯辰巳午未申酉戌亥',a=[];
+  for(let i=0;i<60;i++)a.push(G[i%10]+Z[i%12]);return a;})();
+// 公历年 → 年柱干支（立春前需自行回退一年）
+function jzOfYear(y){return JIAZI[((y-4)%60+60)%60];}
+// 虚岁 → 行年干支：男 丙寅(idx2) 顺，女 壬申(idx8) 逆
+function xingnianOf(sex,age){
+  if(!(age>=1))return null;
+  const idx=sex==='f'?(9-age):(age+1);
+  return JIAZI[((idx%60)+60)%60];
+}
+let _qkInited=false;
+function qkInit(){
+  if(_qkInited)return;_qkInited=true;
+  mnRenderTables();
+  const ny=document.getElementById('mn-ny');
+  if(ny&&!ny.value)ny.placeholder='默认 '+new Date().getFullYear();
+}
+function mnRenderTables(){
+  const build=sex=>{
+    let h='<tr><th>虚岁</th>'+Array.from({length:10},(_,i)=>`<th>${i+1}</th>`).join('')+'</tr>';
+    for(let band=0;band<6;band++){
+      const lo=band*10+1;
+      h+=`<tr><td class="c-a">${lo}–${lo+9}</td>`;
+      for(let j=0;j<10;j++)h+=`<td class="c-r">${xingnianOf(sex,lo+j)}</td>`;
+      h+='</tr>';
+    }
+    return h;
+  };
+  const tm=document.getElementById('mn-tbl-m'),tf=document.getElementById('mn-tbl-f');
+  if(tm)tm.innerHTML=build('m');
+  if(tf)tf.innerHTML=build('f');
+}
+function mnCalc(){
+  const sex=document.getElementById('mn-sex').value;
+  const by=parseInt(document.getElementById('mn-by').value,10);
+  const nyRaw=document.getElementById('mn-ny').value;
+  const ny=nyRaw?parseInt(nyRaw,10):new Date().getFullYear();
+  const out=document.getElementById('mn-out');
+  if(!by||by<1900||by>2200){out.innerHTML='<div class="mn-res" style="color:#C41230;font-size:13px">请填写有效的出生年（公历四位数）</div>';return;}
+  if(!ny||ny<by){out.innerHTML='<div class="mn-res" style="color:#C41230;font-size:13px">占断年不能早于出生年</div>';return;}
+  const age=ny-by+1;
+  const bm=jzOfYear(by),xn=xingnianOf(sex,age),ts=jzOfYear(ny);
+  const start=sex==='f'?'壬申逆行':'丙寅顺行';
+  const idx=sex==='f'?`(9 − ${age})`:`(${age} + 1)`;
+  out.innerHTML=`<div class="mn-res">
+    <div class="mn-res-row"><div class="mn-res-k">本 命</div><div><div class="mn-res-v">${bm}</div><div class="mn-res-n">${by} 年年柱 · 为体，终身不变</div></div></div>
+    <div class="mn-res-row"><div class="mn-res-k">虚 岁</div><div><div class="mn-res-v">${age}</div><div class="mn-res-n">${ny} − ${by} + 1</div></div></div>
+    <div class="mn-res-row"><div class="mn-res-k">行 年</div><div><div class="mn-res-v">${xn}</div><div class="mn-res-n">${sex==='f'?'女':'男'}命${start} · 六十甲子第 ${idx} 位 → ${xn}</div></div></div>
+    <div class="mn-res-row"><div class="mn-res-k">太 岁</div><div><div class="mn-res-v">${ts}</div><div class="mn-res-n">${ny} 年年柱 · 起课时一并列出</div></div></div>
+  </div>
+  <div style="font-size:11px;color:#6B5040;padding:8px 2px 0;line-height:1.8">把本命支「${bm[1]}」与行年支「${xn[1]}」投到地盘，看其上神与所乘天将，即为年命断法的入手处。可到「自选起课」填入性别与虚岁，自动标注年命上神。</div>`;
+}
 function p5GoChap(n){const secs=document.querySelectorAll('#p5 .m5-sec');if(secs[n])secs[n].scrollIntoView({behavior:'smooth',block:'start'})}
 function shuffleArr(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 
@@ -4201,9 +4308,13 @@ const KJ_DATA = {
   {title:'回头生克',body:'回头生：末传生初传\n→首尾呼应，始终有成，到底成事\n回头克：末传克初传\n→虽起点好，终受克制，始吉终凶\n断诀：回头生，到底成；回头克，始吉终凶'},
 ],
 '行年法':[
-  {title:'行年定义',body:'行年：流年运程，以本命年支为起点，每年推进一步\n本命：出生年干支，为体（静）\n行年：当年行至之支，为用（动）\n作用：参行年可知当年运势走向，与课传结合断吉凶轻重'},
-  {title:'男命行年（顺数）',body:'男命行年顺数（顺时针）：\n从本命年支起，每年向前推一步\n例：本命戌年\n当年行亥，次年行子，后年行丑……\n口诀：男命顺行，岁岁向前'},
-  {title:'女命行年（逆数）',body:'女命行年逆数（逆时针）：\n从本命年支起，每年向后退一步\n例：本命戌年\n当年行酉，次年行申，后年行未……\n口诀：女命逆行，周而复始'},
+  {title:'本命定义',body:'本命：求占者的出生年干支。\n例：1984 年生，查万年历为甲子年，甲子即其本命。\n\n本命为体（静），终身不变。\n六壬判断有时需加入本命合参，但这不是固定步骤——预测以预测者本身为太极，要素取舍在于自己，不可被课式拘泥。\n\n年命称「变体门」：课吉而年命凶，吉象被制化为凶；课凶而年命吉，凶象被制化为吉。'},
+  {title:'行年定义',body:'行年：求测者当年所处的流年干支，也叫「岁运」「小运」。\n\n本命是体，行年是用；课式是体，本命行年是用。\n\n古人认为天开于子、地辟于丑、而人生于寅，所以——\n男子行年：一岁从丙寅开始，顺行；\n女子取阴阳对待之义：一岁从壬申开始，逆行。\n\n注意：起点是干支（丙寅/壬申），不是本命年支。'},
+  {title:'男命行年（丙寅顺行）',body:'男命：一岁丙寅，此后按六十甲子顺推。\n一岁丙寅 · 二岁丁卯 · 三岁戊辰 · 四岁己巳 · 五岁庚午\n六岁辛未 · 七岁壬申 · 八岁癸酉 · 九岁甲戌 · 十岁乙亥\n十一岁丙子 · 十二岁丁丑……\n六十一岁又从丙寅起，周而复始。\n\n速算：虚岁 n 的行年 = 六十甲子第 (n+1) 位（甲子记为第 0 位）。'},
+  {title:'女命行年（壬申逆行）',body:'女命：一岁壬申，此后按六十甲子逆推。\n一岁壬申 · 二岁辛未 · 三岁庚午 · 四岁己巳 · 五岁戊辰\n六岁丁卯 · 七岁丙寅 · 八岁乙丑 · 九岁甲子 · 十岁癸亥\n十一岁壬戌 · 十二岁辛酉……\n六十一岁又从壬申起，周而复始。\n\n速算：虚岁 n 的行年 = 六十甲子第 (9 − n) 位（不足则加 60）。'},
+  {title:'行年推算·课例验算',body:'讲义课例：丁亥年（2007）占，占人戊午命，行年乙未。\n\n验算（男命）：\n戊午年生 = 1978 年\n虚岁 = 2007 − 1978 + 1 = 30\n六十甲子第 (30+1) = 第 31 位 → 乙未 ✓\n\n提示：若按「本命年支起、每年推一步」推算，午支推 29 步得亥，与讲义不符——起点必须是丙寅/壬申。'},
+  {title:'行年应用（讲义）',body:'行年上神旺相为吉，得吉将更妙；带休囚全都转凶，遇凶将尤甚。\n日干克行年上神为大凶；行年克日干上神也不是吉兆。\n年与日相合比德皆吉，但谋求文书之事主迟滞不快意。\n行年与日生合亦吉，带吉神更好；行年与日相刑克反凶。\n行年与用传相生合则吉，相克则大凶。\n行年落空亡不利：旺相尚可，休囚则主凶。'},
+  {title:'本命应用（讲义）',body:'命克日干→凡事都不顺。\n日干克命→只适宜求官。\n命克用神→凡事都不能成功。\n用神克命→主会有灾祸悔恨。\n命上神与日上神相生→主有喜事；逢旺相而克制→主有忧愁之事。\n命上见吉将则吉，见凶将则凶。\n命上见太岁相生→主一年中吉利；相刑→主中等凶险，常人主官府带来的忧虑猜疑。'},
   {title:'行年断诀',body:'日上神克命上神→求财速成，带喜马德禄主功名\n命上神克日上神→官符灾讼，病厄临身\n日上神合命上神→喜事自生，好事连连\n日克年神→行人病在中途\n年神克日→诸事受阻，骨肉灾伤\n贵带吉神临命→解忧转运，否极泰来\n螣蛇生年→有人扶翼；克年→惊恐多'},
 ],
 '十二支神':[
@@ -4650,9 +4761,61 @@ function qiCast(){
   const st=_manualKC(rg,rz,yj,zs);
   if(!st){out.innerHTML=`<div class="card" style="text-align:center;color:#C41230;padding:14px">「${rg}${rz}」非六十甲子（干支阴阳需一致，如甲子·乙丑…），请重选日支</div>`;return;}
   kcState=st;
-  out.innerHTML='<div class="card" id="qi-board" style="padding:12px"></div><div id="qi-bf"></div>';
+  out.innerHTML='<div class="card" id="qi-board" style="padding:12px"></div><div id="qi-nm"></div><div id="qi-bf"></div>';
   _renderBoard(document.getElementById('qi-board'));
+  document.getElementById('qi-nm').innerHTML=_nianmingHTML(st);
   document.getElementById('qi-bf').innerHTML=_bfDetectHTML(st);
+}
+
+/* ════ 年命断法：太岁 · 本命 · 行年 上神 ════ */
+// 由课式还原十二天将分布：天盘支 → 天将简称
+function _tjMapOf(st){
+  const grIdx=ZHI_ALL.indexOf(st.gr),grEi=st.tp.indexOf(st.gr);
+  const dir=[11,0,1,2,3,4].includes(grEi)?1:-1,m={};
+  TJ_NAMES.forEach((t,i)=>{m[ZHI_ALL[((grIdx+i*dir)%12+12)%12]]=t;});
+  return m;
+}
+// 上神：某地支所在地盘位上顶着的天盘支
+function _shangshen(st,zhi){return st.tp[ZHI_ALL.indexOf(zhi)];}
+// 上神与日干的生克关系（以日干为我）
+function _relToRi(rg,z){
+  const rw=WX_GAN[rg],zw=WX_ZHI_M[z];
+  if(rw===zw)return{t:'比和',c:'#8B6914'};
+  if(KE_M[zw]===rw)return{t:'克日干',c:'#C41230'};
+  if(KE_M[rw]===zw)return{t:'日干所克（财）',c:'#8B6914'};
+  if(SHENG_M[zw]===rw)return{t:'生日干',c:'#1B7A3E'};
+  return{t:'日干所生（脱）',c:'#8B6914'};
+}
+function _nianmingHTML(st){
+  const sex=document.getElementById('qi-sex').value;
+  const by=parseInt(document.getElementById('qi-by').value,10);
+  const ny=parseInt(document.getElementById('qi-ny').value,10);
+  if(!sex)return '';
+  if(!by||!ny||ny<by)return '<div class="card" style="padding:12px;font-size:12px;color:#9B8570;line-height:1.7">已选性别但年份不全（或占断年早于出生年），本次未加年命。填「出生年 + 占断年」即可自动推本命与行年。</div>';
+  const age=ny-by+1,bm=jzOfYear(by),xn=xingnianOf(sex,age),ts=jzOfYear(ny);
+  const tjMap=_tjMapOf(st),kong=new Set(st.xi.k);
+  const scSet=new Set([st.cc,st.zc,st.mc]);
+  const row=(lb,gz,note)=>{
+    const z=gz[1],ss=_shangshen(st,z),rel=_relToRi(st.rg,ss),tj=tjMap[ss]||'';
+    const flags=[];
+    if(kong.has(ss))flags.push('<span style="color:#C41230">上神空亡</span>');
+    if(scSet.has(z))flags.push('<span style="color:var(--acc)">本支入三传</span>');
+    if(scSet.has(ss))flags.push('<span style="color:var(--acc)">上神入三传</span>');
+    return `<div class="nm-row">
+      <div class="nm-lb">${lb}</div>
+      <div class="nm-gz">${gz}</div>
+      <div class="nm-ss"><span class="nm-ss-t">${z}上神</span><b>${ss}</b><span class="nm-ss-j">${tj}</span></div>
+      <div class="nm-rel" style="color:${rel.c}">${rel.t}</div>
+      <div class="nm-note">${note}${flags.length?'　'+flags.join('　'):''}</div>
+    </div>`;
+  };
+  return `<div class="card" style="padding:12px">
+    <div class="sec-t">年 命（${sex==='f'?'女':'男'}命 · 虚岁 ${age}）</div>
+    ${row('太岁',ts,`${ny} 年 · 统管全年吉凶`)}
+    ${row('本命',bm,`${by} 年生 · 为体，终身不变`)}
+    ${row('行年',xn,`${sex==='f'?'壬申逆行':'丙寅顺行'}第 ${age} 位 · 为用，逐年更新`)}
+    <div class="nm-tip">断法要点：年命上神旺相得吉将则吉，休囚逢凶将转凶；<b>日干克行年上神为大凶</b>，行年克日干上神亦非吉。课吉而年命凶则吉象被制，课凶而年命吉则凶象得解，故年命称「变体门」。太岁与日干相生可化课传之克；太岁克日干名「太岁下堂」，太岁临日支名「太岁入宅」。<br><span style="color:#9B8570">⚠️ 出生年干支以立春换年，生于立春前请按上一年干支自行修正。</span></div>
+  </div>`;
 }
 
 /* ========= 薄弱点复习中心 ========= */
