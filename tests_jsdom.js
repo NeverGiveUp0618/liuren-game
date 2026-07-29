@@ -115,6 +115,39 @@ setTimeout(()=>{
     return c>500?true:'仅测'+c+'组';
   });
 
+
+  // ════ 课式八要素 ════
+  w.show('pbys');
+  t('八要素8项',()=>{const n=d.querySelectorAll('#pbys .bj-sec').length;return n===8||'得'+n});
+  t('八要素顺序',()=>{const a=[...d.querySelectorAll('#pbys .bj-nm')].map(e=>e.textContent).join('');return a==='太岁月建日辰占时月将空亡本命行年'||a});
+  t('太岁下堂/太岁入宅',()=>{const x=d.getElementById('bys-body').textContent;return (x.includes('太岁下堂')&&x.includes('太岁入宅'))||'缺'});
+  t('日辰十二占类表',()=>{const x=d.getElementById('bys-body').textContent;return (x.includes('占求医')&&x.includes('占博弈')&&x.includes('占怀孕生产'))||'缺'});
+  t('占时正时活时',()=>{const x=d.getElementById('bys-body').textContent;return (x.includes('正时')&&x.includes('活时')&&x.includes('随机就是天机'))||'缺'});
+  t('空亡游天空/落地空/全空',()=>{const x=d.getElementById('bys-body').textContent;return (x.includes('游天空')&&x.includes('落地空')&&x.includes('全空'))||'缺'});
+  t('月建二十四节气表',()=>{const x=d.getElementById('bys-body').textContent;return (x.includes('立春')&&x.includes('大寒')&&x.includes('气后太阳躔宫'))||'缺'});
+
+  // ════ 神将类象·白话 ════
+  w.show('plx');
+  t('十二地支12项',()=>{const n=d.querySelectorAll('#plx .bj-sec').length;return n===12||'得'+n});
+  t('地支顺序',()=>{const a=[...d.querySelectorAll('#plx .bj-nm')].map(e=>e.textContent).join('');return a==='子丑寅卯辰巳午未申酉戌亥'||a});
+  t('地支含姓氏类象',()=>d.getElementById('lx-body').textContent.includes('凡带水字旁')||'缺');
+  t('十二地支总口诀',()=>{const x=d.getElementById('lx-body').textContent;return (x.includes('天门地户')&&x.includes('天牢地狱')&&x.includes('天厨'))||'缺'});
+  w.lxTab(d.querySelectorAll('#plx .qk-tab')[1],'tj');
+  t('十二天将12项',()=>{const n=d.querySelectorAll('#plx .bj-sec').length;return n===12||'得'+n});
+  t('天将顺序',()=>{const a=[...d.querySelectorAll('#plx .bj-nm')].map(e=>e.textContent).join('');return a==='贵人螣蛇朱雀六合勾陈青龙天空白虎太常玄武太阴天后'||a});
+  t('天将加临白话解读',()=>{const x=d.getElementById('lx-body').textContent;return (x.includes('迫魂')&&x.includes('衔剑')&&x.includes('真朱雀'))||'缺'});
+  t('加临歌冲突已标注两说并存',()=>{const x=d.getElementById('lx-body').textContent;return (x.includes('两说并存')&&x.includes('坠水')&&x.includes('掩目'))||'缺'});
+
+  // ════ 十章速查新增段 ════
+  w.show('p5');
+  const p5=d.getElementById('p5').textContent;
+  t('历史章·汝阴侯墓实物铁证',()=>(p5.includes('汝阴侯墓')&&p5.includes('徐道符')&&p5.includes('唐六典'))||'缺');
+  t('历史章·传说与实证分层',()=>(p5.includes('仅传说')&&p5.includes('九天玄女'))||'缺');
+  t('四课·阴不备阳不备',()=>(p5.includes('阴不备')&&p5.includes('阳不备'))||'缺');
+  t('三传·发端门移易门归计门',()=>(p5.includes('发端门')&&p5.includes('移易门')&&p5.includes('归计门'))||'缺');
+  t('寄宫·为何避四正',()=>(p5.includes('四正')||'缺'));
+  t('起课速查·寄宫原理已补',()=>{const x=d.getElementById('tab-jg').textContent;return x.includes('超行一宫')||'缺'});
+
   console.log('\n'+(errs.length?'❌ 失败 '+errs.length+' 项':'✅ 全部通过'));
   process.exit(errs.length?1:0);
 },1200);
