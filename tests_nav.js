@@ -102,6 +102,25 @@ setTimeout(()=>{
    if(/function caseInit|function caseRender|CASE_CATS/.test(src))bad.push('孤立代码残留');
    return bad.length?bad.join(','):true});
 
+
+ console.log('\n【DOM 结构 · 防「左侧大片空白」回归】');
+ t('全部 screen 都在 .app 内（逃逸会导致 body flex 横排、左边露出空 .app）',()=>{
+   const app=d.querySelector('.app');
+   if(!app)return '.app 不存在';
+   const all=[...d.querySelectorAll('.screen')];
+   const out=all.filter(x=>!app.contains(x));
+   return out.length?`${out.length} 个逃逸: ${out.map(x=>'#'+x.id).join(',')}`:true});
+ t('body 直接子元素只有 .app / toast / script / 门户链接',()=>{
+   const bad=[...d.body.children].filter(c=>{
+     const tag=c.tagName.toLowerCase();
+     if(tag==='script')return false;
+     if(c.classList.contains('app')||c.id==='toast'||c.id==='wst-home-portal')return false;
+     return true;});
+   return bad.length?bad.map(c=>'<'+c.tagName.toLowerCase()+(c.id?'#'+c.id:'')+'>').join(','):true});
+ t('无 case-tabs / case-sec 等已删页面的残片',()=>{
+   const bad=['case-tabs','case-sec'].filter(id=>d.getElementById(id));
+   return bad.length?'残留: '+bad.join(','):true});
+
  console.log('\n未通过明细:',errs);
  console.log('\n'+(errs.length?'❌ '+errs.length+' 项未通过':'✅ 全部通过'));
  process.exit(errs.length?1:0);
