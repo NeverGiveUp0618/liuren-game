@@ -502,6 +502,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.31</span><span style="color:#9B8570;font-size:12px">📜 历代课例库并入案例库：16例名家实证（苗公/楚衍等，带真实验应）按占类并入，标「历代实证」徽章；原书未给全排盘参数故不排盘、附出处可回查；独立入口与 pcase 页移除，全站案例只剩一个入口</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.31</span><span style="color:#9B8570;font-size:12px">🗂 案例入口归位：「案例库·按占类查全」由知识库·断法移入经典与案例，与历代课例库并排（两者描述点明区别：案例库82例带完整课盘、历代课例库16例为讲义索引卡不含课盘）；「断案入门」作为零基础入口留在知识库，并加指路</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">☯️ 基础干支章补入讲义第三章：六壬最根本的阴阳＝日干日支、地支一阳～六阳/一阴～六阴分层（占病看深浅）、天干六项（方位/五合本质/七杀）、五行生成次序；新增「支神总口诀」闪卡6条；薄弱点复习中心接入八煞九宝</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">🎯 综合训练新增「八煞九宝」专题：168 道查表题（四德/三奇/旬仪/禄马丁神/五行墓十干墓/沐浴帝旺长生/六害加临/三刑分类/干合五合/三传逢空），接入今日挑战、错题本与掌握度</span></div>
@@ -605,8 +606,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📜</div><div><div class="hub-item-name">毕法赋</div><div class="hub-item-desc">百法原文、逐格详解、原著课盘与专项测验</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pbf')">查看资料</button><button class="btn btn-r" onclick="startBF()">专项练习</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔮</div><div><div class="hub-item-name">象法速查库</div><div class="hub-item-desc">类神、神煞、应期及财官病宅等实用断法规则</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pxf-sym')">查看象法</button><button class="btn btn-r" onclick="startWSD()">断法练习</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🌦️</div><div><div class="hub-item-name">天时 · 晴雨速查</div><div class="hub-item-desc">占天气：气象类神表（主雨/晴/风/雷雪）+ 雨量应期断诀</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('ptw')">查看速查</button><button class="btn btn-r" onclick="startTW()">晴雨自测</button></div></div>
-  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">案例库 · 按占类查全</div><div class="hub-item-desc">11 类 82 例，每例<b>带完整课盘</b>与逐步推导、复盘：占什么 → 取用神 → 看旺衰 → 读三传 → 得结论。断案入门的进阶补充，供按类查阅</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="_caseSrc='lib';drMenu()">进入案例库 →</button></div></div>
-  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📂</div><div><div class="hub-item-name">历代课例库</div><div class="hub-item-desc">讲义原书课例的<b>索引卡</b>（天时/胎产/疾病/失盗 4 类 16 例）：只列断法抓手、验应反馈与出处页码，<b>不含课盘</b>，用于回查原书</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pcase')">查看课例</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">案例库 · 按占类查全</div><div class="hub-item-desc">按占类查全。教学案例 82 例<b>带完整课盘</b>与逐步推导复盘；另含<b>历代名家实证</b> 16 例（苗公、楚衍等，带真实验应反馈，原书无全参数故不排盘、附出处可回查）</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="_caseSrc='lib';drMenu()">进入案例库 →</button></div></div>
 </div>
 
 <!-- ======== 综合题库设置 ======== -->
@@ -2961,15 +2961,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 </div>
 
 <!-- ======== 历代课例库 ======== -->
-<div id="pcase" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">历代课例库</div></div>
-  <div style="padding-bottom:28px">
-    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">依《大六壬通解》第六章分类案例整理。当前先做<b>天时、胎产、疾病、失盗</b>四类轻量索引，每条保留原题、断法抓手、验应反馈和来源位置；完整课盘与隐藏答案训练后续逐步接入。</div>
-    <div style="display:flex;gap:8px;margin:10px 0 8px">
-      <input id="case-q" oninput="caseRender()" placeholder="搜索分类、原题、断法抓手、验应" style="flex:1;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 10px;color:#4A3520;font-size:13px;outline:none">
-      <button class="btn btn-d" style="width:74px" onclick="document.getElementById('case-q').value='';caseRender()">清空</button>
-    </div>
-    <div id="case-tabs" class="xfsym-tab-bar"></div>
+<div id="case-tabs" class="xfsym-tab-bar"></div>
     <div id="case-sec" style="margin-top:8px"></div>
   </div>
 </div>
@@ -4223,7 +4215,7 @@ function _restoreScreenScroll(id){
   const y=_scrollPos[id]||0,restore=()=>window.scrollTo(0,y);
   restore();requestAnimationFrame(()=>{restore();requestAnimationFrame(restore)});
 }
-function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pcase'){caseInit();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}if(id==='pqk'){qkInit();}if(id==='pbjb'){bjRender();}if(id==='pbys'){bysRender();}if(id==='plx'){lxRender();}_restoreScreenScroll(id);}
+function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}if(id==='pqk'){qkInit();}if(id==='pbjb'){bjRender();}if(id==='pbys'){bysRender();}if(id==='plx'){lxRender();}_restoreScreenScroll(id);}
 /* ===== 浏览器返回键/全面屏手势 → App内逐屏后退（套壳iframe/独立打开均适用） =====
    包装 show()：前进 pushState；目标已在栈中(上层)则 history.go(-n) 折叠后退；
    popstate 幂等重放对应屏。所有 show()/goHome() 调用点无需改动。 */
@@ -6803,8 +6795,8 @@ function _twEnd(){
 }
 
 // ══ 历代课例库 ══
-const CASE_CATS=['全部','天时','胎产','疾病','失盗'];
-let caseCat='全部',caseDone=false;
+/* 历代课例库的独立页面已移除：这 16 条现并入 DR_CASELIB（见下方转入代码），
+   统一由「案例库」一个入口按占类查阅。CASE_LIB 仍是这批内容的唯一数据源，勿删。 */
 const CASE_LIB=[
 {cat:'天时',title:'庚寅年公历七月十九日，占断当日天气变化',catch:'天罡临玄武且为正时；辰为水库；酉金毕宿发用；三传酉子卯；庚日丁鬼临卯主雷电。',result:'巳时云层变化，午时小雨后太阳出，申酉风雷雨至，酉时大雨。',src:'讲义中册·第六章·天时，约5980-6005行。'},
 {cat:'天时',title:'明道二年癸酉，京城三月至六月不雨，仁宗召苗公占',catch:'发用青龙跨虎有风云微雨；中传朱雀临亥为水火交战发雷；日上巳火乘太常故当日不雨；登明水神加申定庚申日雨；甲子日卯加子云雷相加大雨。',result:'申时风雷无雨，庚申午时雨，甲子日雷电大雨。',src:'讲义中册·第六章·天时，约6006-6025行。'},
@@ -6823,25 +6815,7 @@ const CASE_LIB=[
 {cat:'失盗',title:'己酉年十月癸卯日寅将辰时，占捕逃有罪人',catch:'干来加支并发用，退归西北；亥中壬加水取汪姓；酉加亥为酒器，酉为婢，太常为丧服；勾陈克日，追逃必获。',result:'断逃往买卖人汪家后空猪圈，丑日可问着孝衣洗酒器之婢，或在崩败东厕内擒。',src:'讲义下册·失盗，约1103-1116行。'},
 {cat:'失盗',title:'三月辛卯日酉将辰时，僧占失度牒',catch:'度牒以朱雀为类神；申为僧人；玄武乘卯合辛为亲人；朱雀乘申遁丙火，为火焚象。',result:'外弟偷去并火焚，手足有疾。',src:'讲义下册·失盗，约1128-1140行。'}
 ];
-function caseInit(){
-  if(!caseDone){
-    document.getElementById('case-tabs').innerHTML=CASE_CATS.map(c=>`<button class="xfsym-tab-btn ${c===caseCat?'act':''}" onclick="caseSetCat('${c}')">${c}</button>`).join('');
-    caseDone=true;
-  }
-  caseRender();
-}
-function caseSetCat(c){caseCat=c;document.querySelectorAll('#case-tabs .xfsym-tab-btn').forEach(b=>b.classList.toggle('act',b.textContent===c));caseRender();}
-function caseRender(){
-  const el=document.getElementById('case-sec');if(!el)return;
-  const q=(document.getElementById('case-q')?.value||'').trim();
-  const list=CASE_LIB.filter(x=>(caseCat==='全部'||x.cat===caseCat)&&(!q||`${x.cat}${x.title}${x.catch}${x.result}${x.src}`.includes(q)));
-  const cats=CASE_CATS.filter(c=>c!=='全部'&&list.some(x=>x.cat===c));
-  el.innerHTML=cats.map(c=>{
-    const sub=list.filter(x=>x.cat===c);
-    const items=sub.map((x,i)=>`<button class="m5-sub-tog" onclick="m5SubToggle(this)">${i+1}. ${x.title}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">原题</b>　${x.title}</div><div class="m5-text"><b style="color:var(--acc)">抓手</b>　${x.catch}</div><div class="m5-text"><b style="color:var(--acc)">验应</b>　${x.result}</div><div class="m5-text" style="font-size:11px;color:#9B8570">来源：${x.src}</div></div>`).join('');
-    return `<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${c}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${sub.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${items}</div></div>`;
-  }).join('')||'<div class="tj-card" style="font-size:13px;color:#9B8570">没有匹配的课例。</div>';
-}
+
 
 // ══ 六十四课经格局库 ══
 const K64_GROUPS=['全部','发用九宗','吉庆贵显','动阻隐伏','凶厄刑害','综合取象'];
@@ -9397,7 +9371,24 @@ const DR_CASELIB=[
  recap:'① 占病看凶将白虎、更看它乘的神是生地还是死地　② 白虎乘申、申＝戊之长生　③ 凶将踩长生＝不幸中幸　④ 凶中有吉、藏转机、有生有救',
  src:'飘《图解六壬大全·毕法赋》·不幸中幸格'}
 ];
-const DR_CAT_ICON={'求财':'💰','求官':'🎓','占病':'🏥','占婚':'💗','失物':'🔍','词讼':'⚖','占宅':'🏠','占产':'🤰','趋谒':'🤝','买卖':'💱','迁移':'🚚','逃亡':'🏃','谋事':'🎯','进退':'🚦','因财致祸':'💸'};
+/* ── 历代名家实证：由 CASE_LIB 并入案例库，统一为一个案例入口 ──
+   这批条目源自讲义原书课例（苗公、楚衍等历代名家实占，带真实验应反馈），
+   但原书未给全「日干支＋月将＋占时」，无法可靠复现盘面 —— 曾试算过 6 条
+   参数齐备的，只有 2 条能与原文抓手对上，其余会算出与原文矛盾的盘。
+   故一律标 noBoard，详情页走「实证卡」渲染：只列断法抓手、验应、出处，
+   不假装有盘。占类名与案例库对齐（疾病→占病、失盗→失物）。 */
+const LIDAI_CAT_MAP={'疾病':'占病','失盗':'失物'};
+CASE_LIB.forEach(function(c,i){
+  DR_CASELIB.push({
+    id:'ld'+(i+1),
+    cat:LIDAI_CAT_MAP[c.cat]||c.cat,
+    name:c.title,
+    desc:'历代名家实证 · 原书附验应，无盘可回查出处',
+    lidai:true,
+    ccatch:c.catch, cresult:c.result, src:c.src
+  });
+});
+const DR_CAT_ICON={'天时':'🌦️','胎产':'🤱','求财':'💰','求官':'🎓','占病':'🏥','占婚':'💗','失物':'🔍','词讼':'⚖','占宅':'🏠','占产':'🤰','趋谒':'🤝','买卖':'💱','迁移':'🚚','逃亡':'🏃','谋事':'🎯','进退':'🚦','因财致祸':'💸'};
 var _caseSrc='intro';
 function drTogSec(btn,cat){m5Toggle(btn);if(btn.classList.contains('open')){try{localStorage.setItem(_caseSrc==='lib'?'lib_last_cat':'dr_last_cat',cat);}catch(e){}}}
 function drMenu(){
@@ -9413,7 +9404,8 @@ function drMenu(){
     var op=(cat===last)?' open':'';
     h+='<div class="m5-sec"><button class="m5-tog'+op+'" onclick="drTogSec(this,\''+cat+'\')">'+(DR_CAT_ICON[cat]||'📖')+' '+cat+'篇 · '+cats[cat].length+'例<span class="m5-tog-arrow">›</span></button><div class="m5-body'+op+'">';
     cats[cat].forEach(function(c,i){
-      h+='<div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">'+(i+1)+'</div><div><div class="hub-item-name">'+c.name+'</div><div class="hub-item-desc">'+c.desc+'</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="drOpen(\''+c.id+'\')">'+btnLbl+'</button></div></div>';
+      var isLd=!!c.lidai;
+      h+='<div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">'+(isLd?'📜':(i+1))+'</div><div><div class="hub-item-name">'+(isLd?'<span style="font-size:10px;background:#6B5040;color:#fff;border-radius:4px;padding:1px 5px;margin-right:5px;vertical-align:middle">历代实证</span>':'')+c.name+'</div><div class="hub-item-desc">'+c.desc+'</div></div></div><div class="hub-actions"><button class="btn '+(isLd?'btn-d':'btn-r')+'" onclick="drOpen(\''+c.id+'\')">'+(isLd?'查看实证 →':btnLbl)+'</button></div></div>';
     });
     h+='</div></div>';
   });
@@ -9425,6 +9417,19 @@ function drMenu(){
   var t=document.getElementById('pdru-title');if(t)t.textContent=(_caseSrc==='lib')?'案例库 · 按占类查全':'断案入门 · 案例精讲（入门课）';
   show('pdru');
 }
+/* 历代名家实证卡：原书未给全排盘参数，只呈现抓手/验应/出处，不臆造盘面 */
+function drOpenLidai(c){
+  var h='';
+  h+='<div class="m5-jue"><b>【课例】</b>'+c.name+'</div>';
+  h+='<div class="card" style="margin-bottom:10px"><div class="sec-t" style="margin-top:0">断法抓手</div><div class="m5-text" style="font-size:13px;line-height:1.95">'+c.ccatch+'</div></div>';
+  h+='<div class="card" style="margin-bottom:10px;border-color:var(--acc-dk)"><div class="sec-t" style="margin-top:0">验应反馈</div><div class="m5-text red" style="font-size:13px;line-height:1.95">'+c.cresult+'</div></div>';
+  h+='<div class="m5-jue" style="font-size:12px;line-height:1.85">📜 这是<b>历代名家实占记录</b>，价值在于<b>真实验应</b>——事后发生了什么，原书都记了下来。<br>⚠️ 原书未给全「日干支＋月将＋占时」，<b>无法可靠复现盘面</b>，故此处不排盘、也不臆造。要看完整课盘请按下方出处回查讲义原文。</div>';
+  h+='<div class="m5-text" style="font-size:12px;color:#9B8570;padding:8px 2px;line-height:1.8"><b>出处：</b>'+c.src+'</div>';
+  h+='<button class="btn btn-r" onclick="drMenu()" style="width:100%;margin:8px 0">← 返回案例目录</button>';
+  document.getElementById('pdr1-body').innerHTML=h;
+  _scrollPos['pdr1']=0;
+  show('pdr1');
+}
 function drOpen(id){
   var c=null,src='intro';
   for(var i=0;i<DR_CASES.length;i++){if(DR_CASES[i].id===id){c=DR_CASES[i];break;}}
@@ -9433,6 +9438,7 @@ function drOpen(id){
   _caseSrc=src;
   try{localStorage.setItem(src==='lib'?'lib_last_cat':'dr_last_cat',c.cat);}catch(e){}
   document.getElementById('pdr1-title').textContent=c.cat+' · '+c.name.split('·').pop().trim();
+  if(c.lidai){drOpenLidai(c);return;}
   var h='';
   h+='<div class="m5-jue"><b>【占问】</b>'+c.bg+'<br>起出来的盘如下——我们不急着背规则，跟着它一步步读。</div>';
   h+='<div class="sec-t">先看盘</div><div id="dr-board"></div>';
