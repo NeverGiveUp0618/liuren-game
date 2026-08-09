@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大六壬日学</title>
+<title>六壬神课日学</title>
 <style>
 :root{--acc:#8878C0;--acc-dk:#7060B0;--acc-dkk:#5A4890;--acc-tB0:#8878C0B0;--acc-t80:#8878C080;--acc-t50:#8878C050;--acc-t40:#8878C040;--acc-t20:#8878C020;--bg1:#F3F0F9;--bg2:#EAE5F5;--bg3:#F5F2FC;--bg-hov:#DDD8F0;--bd1:#CEC7E8;--bd2:#DED8F4;--bd3:#C0B8E0}
 body.theme-red{--acc:#C41230;--acc-dk:#A30F28;--acc-dkk:#8B0020;--acc-tB0:#C41230B0;--acc-t80:#C4123080;--acc-t50:#C4123050;--acc-t40:#C4123040;--acc-t20:#C4123020;--bg1:#F5F0E6;--bg2:#EDE7D8;--bg3:#FDF8F2;--bg-hov:#E0D9C8;--bd1:#D4C4A0;--bd2:#E8D5B0;--bd3:#C4B49A}
@@ -451,7 +451,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <span class="update-bar-btn">点击刷新 ↻</span>
   </div>
   <div class="hlogo">
-    <div class="hlogo-t">大六壬</div>
+    <div class="hlogo-t">六壬神课</div>
     <div class="hlogo-s">壬式神煞 · 日学精进</div>
     <div class="hlogo-dec"></div>
   </div>
@@ -502,6 +502,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏷 App 名由「大六壬日学」改为「六壬神课日学」（顶部标识、页面标题、备份文件名）；正文讲解与《大六壬通解》等书名、"三式"并称的学术表述一律保留原称</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.31</span><span style="color:#9B8570;font-size:12px">📜 历代课例库并入案例库：16例名家实证（苗公/楚衍等，带真实验应）按占类并入，标「历代实证」徽章；原书未给全排盘参数故不排盘、附出处可回查；独立入口与 pcase 页移除，全站案例只剩一个入口</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.31</span><span style="color:#9B8570;font-size:12px">🗂 案例入口归位：「案例库·按占类查全」由知识库·断法移入经典与案例，与历代课例库并排（两者描述点明区别：案例库82例带完整课盘、历代课例库16例为讲义索引卡不含课盘）；「断案入门」作为零基础入口留在知识库，并加指路</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.29</span><span style="color:#9B8570;font-size:12px">☯️ 基础干支章补入讲义第三章：六壬最根本的阴阳＝日干日支、地支一阳～六阳/一阴～六阴分层（占病看深浅）、天干六项（方位/五合本质/七杀）、五行生成次序；新增「支神总口诀」闪卡6条；薄弱点复习中心接入八煞九宝</span></div>
@@ -4610,7 +4611,7 @@ function exportBackup(){
   const data={v:1,date:todayStr(),lr:getLRData()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download=`大六壬备份_${todayStr()}.json`;a.click();
+  a.href=url;a.download=`六壬神课备份_${todayStr()}.json`;a.click();
   URL.revokeObjectURL(url);
   localStorage.setItem(BK_DATE_KEY,todayStr());
   checkBkRemind();
