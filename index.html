@@ -513,6 +513,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">📜 象法速查库新增「百章歌断诀」46 条（李九万六壬百章歌·核心断诀，〔通解 p110-111〕）：失猫看功曹·六畜问太冲·议亲问勾陈·白虎递牒人等实用断法，按失脱/疾病/婚宅/讼斗/财物/神将/课体分组可检索；只录原文不编白话解</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏷 「本盘成格」铺到独立看盘屏、毕法赋课盘与九宗门例盘（起完盘直接看出成什么课体，点标签直达该格断诀）；⚠️ 看盘认格练习的题面刻意不加，否则等于把答案印在题上</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🎯 课体格局接入综合训练与薄弱点复习中心：新增「课体格局」专题，看盘认格，题目按格出题、id 用格名，错题本与掌握度直接落到「哪个格没认出来」；一盘多格时选中同样成立的格也算对</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">📖 回原书核实存疑：龙战·三阴找到原文条目(p81/p174)回填，不再是推测；迎福课讹字破解(「八迊」实为「八迍/迯」，即八运藏对五福，吉凶参驳)；九丑·繁昌由 p77 简明定义与 p113 课目总歌补全；铸印「戊/戌」以术理定谳(天盘只有地支，「戊」上不了盘)；芜淫据 p77 补判定，覆盖 56/64</span></div>
@@ -3029,6 +3030,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
       <button class="xfsym-tab-btn" id="xft-fa" onclick="xfTab('fa')">取象法则</button>
       <button class="xfsym-tab-btn" id="xft-lei" onclick="xfTab('lei')">分类类神</button>
       <button class="xfsym-tab-btn" id="xft-bf" onclick="xfTab('bf')">毕法象义</button>
+      <button class="xfsym-tab-btn" id="xft-bzg" onclick="xfTab('bzg')">百章歌断诀</button>
     </div>
     <input class="xfsym-search" id="xf-search" placeholder="搜索象法、类神、断法关键词" oninput="xfSearch()">
     <div class="xfsym-tools"><select class="xfsym-filter" id="xf-filter" onchange="xfSearch()"><option value="">全部分类</option></select><span class="xfsym-count" id="xf-count"></span></div>
@@ -3037,6 +3039,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div id="xfp-fa" style="display:none"></div>
     <div id="xfp-lei" style="display:none"></div>
     <div id="xfp-bf" style="display:none"></div>
+    <div id="xfp-bzg" style="display:none"></div>
   </div>
 </div>
 
@@ -13284,13 +13287,69 @@ const BF_XIANG=[
   {name:'已灾凶逃',group:'问事语境',src:'第100法·已灾凶逃返无疑',key:'凶灾已经发生后再占，课中凶象可为已应，不必再断一次。',use:'要区分“将发”与“已应”；凶神退、空、入墓可主灾后渐解。'}
 ];
 
+// ══ 李九万六壬百章歌·核心断诀〔通解 p110-111〕══
+// 讲义第四章列了《心印赋》《指掌赋》《玉成歌》《百章歌》四篇，
+// ⚠️ 但这份是「核心笔记」不是原著：玉成歌只有目录无正文，心印赋与指掌赋
+//    是拆开的分散讲解，只有百章歌留了成段的「核心断诀」——故先收这一篇。
+//    要收四篇全文须另找原书，本资料里没有。
+// ⚠️ 只录原文＋出处，不加白话解——269 条断语逐条写解读有出错风险，
+//    与本站「原文有歧义就标存疑、不擅自推断」的规矩一致。
+const XF_BZG=[
+{name:'来意与类神',group:'课体·空亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'“课体已定诀来意，日辰年命三传记。”来克日干无差异，参合天官为真议。'},
+{name:'命上推演',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'命上见财财吉昌，逢鬼官病见乖张。兄弟父母妻子各推本位。'},
+{name:'空亡与信辰',group:'课体·空亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'类落空亡不可寻，却来类上致神明。上神降下是信辰。'},
+{name:'儿孙逃亡',group:'失脱·逃亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'看天上卯，还地下卯上推。天罡乘害蛇惊危。'},
+{name:'舟车遗亡',group:'失脱·逃亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'卯加巳上地户当，丑日信无妨。'},
+{name:'克应',group:'其他断诀',src:'通解 p110-111 · 李九万六壬百章歌',key:'类应本神日上知。文书看午，妻妾看酉。'},
+{name:'逃亡奴婢',group:'失脱·逃亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'天空图，传阴为婢传阳奴。天空加支事最殊。'},
+{name:'失物（猫/犬）',group:'失脱·逃亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'失猫看天上功曹，临支自归，临干不离人。壬日失犬戌加壬，次日寻回。'},
+{name:'六畜灾屯',group:'其他断诀',src:'通解 p110-111 · 李九万六壬百章歌',key:'问太冲，上来子巳酉申同，刀砧汤火屠杀凶。'},
+{name:'六亲类神',group:'婚姻·家宅',src:'通解 p110-111 · 李九万六壬百章歌',key:'兄弟太阴，父太常。'},
+{name:'家宅器物',group:'婚姻·家宅',src:'通解 p110-111 · 李九万六壬百章歌',key:'梯子灯架床桌从卯字作加临。'},
+{name:'天目鬼',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'每日两个，四时居重辰上二。重克干上便是祟。'},
+{name:'妇人病',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'午加戊字作三传，妇人劳瘵血来缠。'},
+{name:'宅不安',group:'婚姻·家宅',src:'通解 p110-111 · 李九万六壬百章歌',key:'辰加午字床帐惊，上乘螣蛇蛇来侵，堂前有孕人。'},
+{name:'婢妾/婚姻',group:'婚姻·家宅',src:'通解 p110-111 · 李九万六壬百章歌',key:'酉加午上婢登堂或议婚姻。勾陈不可陈，事不成。'},
+{name:'议亲',group:'婚姻·家宅',src:'通解 p110-111 · 李九万六壬百章歌',key:'问勾陈，辰戌丑未事真诚，余外及空俱不成。'},
+{name:'斗讼/田畋',group:'讼斗·官非',src:'通解 p110-111 · 李九万六壬百章歌',key:'天罡加卯上勾陈，上门寻斗或争田。'},
+{name:'天罡主权',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'天罡为部领，主权出人事多端。天罡加临虎斩关，欲去不去。'},
+{name:'托人/避差',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'传有太阴主托人，辰戌丑未有诚心。太阴官员拟避差，传无刑克定和谐。'},
+{name:'贵人执拗',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'贵人加未莫相论，事难明，宜随顺。'},
+{name:'勾陈阻事',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'干用初传见勾陈，事不成。先立玄武后勾陈，徒用心。'},
+{name:'玄武阻事',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'玄武来加申子辰，百般阻难。'},
+{name:'讼诉',group:'讼斗·官非',src:'通解 p110-111 · 李九万六壬百章歌',key:'白虎原是递牒人。末传见者被人论，中传互状，初传我讼他人。'},
+{name:'凶煞',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'月厌天罡六甲辰，加卯上鬼来寻，哭声频，命倾。'},
+{name:'台土当门',group:'讼斗·官非',src:'通解 p110-111 · 李九万六壬百章歌',key:'辰戌丑未卯上加，台土当门，空勾常贵更来揠，万般阻阂。'},
+{name:'进退/生死',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'子加卯上天后临，进一阴人退一人。生死气交侵，一生一死。'},
+{name:'覆日',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'滞难通，四十九日身家蒙。占病气逆，夜惺日慵。'},
+{name:'临支',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'宅不宁，只堪望信行人。病人昏沉，宅暗人衰。'},
+{name:'覆命年',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'病人难痊，官方牢狱，出行万里自回还。'},
+{name:'九个无头课',group:'课体·空亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'丁癸亥辛乙未推。官员禄难移，常人往事难为。 初传空亡虚事起，末若祯祥有终始。 末传空亡无结果，反将实事作虚诡。 空亡不可便为空，空中喜恶最难工。天上机巧宜变通，地下只言旬内空。'},
+{name:'天空',group:'失脱·逃亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'加空少诚实，托人虚诈。 岁月破临支，宅破人离。 加卯土地隳，病者悲。 加恶人造作，以天空方位捉。 本是奏书神，常人官府事相侵。 加巳灶口破，人口屯蒙，咒诅奴婢。'},
+{name:'天倾地陷',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'天倾西北水之源，地陷东南水府宽。占人进退不能前。'},
+{name:'阴干病',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'五个阴干卯酉辰，病人服药斗相争。乙辛九丑又相并，不利阴人。'},
+{name:'赘婿',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'乱首日同量，天网罡魁本命伤。见贵求财皆不遂。'},
+{name:'天罡胜光',group:'失脱·逃亡',src:'通解 p110-111 · 李九万六壬百章歌',key:'天罡课中有胜光，外盗在眼前，大寇获全。占病不久安。'},
+{name:'三合课',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'杂神，两姓公婆异亲，干事转手托人。'},
+{name:'六甲日',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'贵天门逢，斩关六合次青龙。中传阴生阳位空，未传冲破不相容。'},
+{name:'六壬六癸',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'用天罡，鲸鱼立涧，否极泰来。'},
+{name:'六合初传',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'六甲之日六合初，上逼下迫，风气不顺，被人煎逼。'},
+{name:'六癸午天后武',group:'神将断法',src:'通解 p110-111 · 李九万六壬百章歌',key:'心血不宁，堂上尊长苦。'},
+{name:'三传传递',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'自家进退不伸舒，公人退职。望行人不日便相亲。'},
+{name:'财星',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'命上见财及用财，日上见财财自排。传财入空空手来。'},
+{name:'出行方向',group:'财物·谋望',src:'通解 p110-111 · 李九万六壬百章歌',key:'看发用在何厢，东西南北细推详。'},
+{name:'堕胎',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'玄武天空主堕胎，死符死气死神裁。 月日未足尚胎云，触病胎惊取天官验。 日月已足，支辰为母日干儿。克辰伤母，克干伤儿。 六合临支儿便真，不克辰干母子无虞。 不要见三合，必蹉跎或过月。 不要逆连珠，孩儿不顺母伤躯。 孕母行年上见阳生男，阴将生女。 天目鬼克母身为祸祟。 胜光为女太冲儿。 子午卯酉入传来，…'},
+{name:'久病/飞魂',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'久病人身怕斫轮（驿马），本命对冲曰飞魂，十损九。'},
+{name:'四废定义',group:'疾病·生死',src:'通解 p110-111 · 李九万六壬百章歌',key:'春庚辛，夏壬癸，秋甲乙，冬丙丁。 “死气入传莫占病，忽然生气来加命。临危不死只重症，得入空亡尤更定。” “未加卯上曲直名，东司壁破见人身。老妇久病病难醒，乙日更乖官事频。” “玄武来加入浴盆，丰都使者号追魂。病人十日内须倾，出入须防溺水惊。” “文官驿马禄青龙，武职太常白虎通。文龙武虎皆不从，官星不…'},
+];
+
 // ══ 象法速查库 ══
-let _xfInited={tj:false,zs:false,fa:false,lei:false,bf:false};
+let _xfInited={tj:false,zs:false,fa:false,lei:false,bf:false,bzg:false};
 let _xfTab='tj';
 function xfInit(){if(!_xfInited.tj)_xfRender('tj');xfGroupOptions();xfSearch();}
 function xfTab(t){
   _xfTab=t;
-  ['tj','zs','fa','lei','bf'].forEach(k=>{
+  ['tj','zs','fa','lei','bf','bzg'].forEach(k=>{
     document.getElementById('xfp-'+k).style.display=t===k?'':'none';
     document.getElementById('xft-'+k).className='xfsym-tab-btn'+(t===k?' act':'');
   });
@@ -13301,25 +13360,25 @@ function xfTab(t){
 function xfGroupOptions(){
   const sel=document.getElementById('xf-filter');
   if(!sel)return;
-  const data=_xfTab==='fa'?XF_FA:_xfTab==='lei'?XF_LEI:_xfTab==='bf'?BF_XIANG:[];
+  const data=_xfTab==='fa'?XF_FA:_xfTab==='lei'?XF_LEI:_xfTab==='bf'?BF_XIANG:_xfTab==='bzg'?XF_BZG:[];
   const groups=[...new Set(data.map(d=>d.group).filter(Boolean))];
   sel.innerHTML='<option value="">全部分类</option>'+groups.map(g=>`<option value="${g}">${g}</option>`).join('');
   sel.disabled=!groups.length;
 }
 function _xfRender(t){
-  const data=t==='tj'?TJ_XIANG:t==='zs'?ZS_XIANG:t==='fa'?XF_FA:t==='lei'?XF_LEI:BF_XIANG;
+  const data=t==='tj'?TJ_XIANG:t==='zs'?ZS_XIANG:t==='fa'?XF_FA:t==='lei'?XF_LEI:t==='bzg'?XF_BZG:BF_XIANG;
   const el=document.getElementById('xfp-'+t);
   const WS=['旺','相','休','囚','死'];
-  if(t==='fa'||t==='lei'||t==='bf'){
+  if(t==='fa'||t==='lei'||t==='bf'||t==='bzg'){
     el.innerHTML=data.map((d,i)=>`<div class="xfsym-card xfop" id="xfc-${t}-${i}" data-group="${d.group||''}">
 <div class="xfsym-hd" onclick="xfToggle('${t}',${i})">
 <div><div class="xfsym-nm">${d.name}</div><div class="xfsym-sub">${d.group} · ${d.src}</div></div>
-<span class="tag-m" style="margin-left:auto">${t==='fa'?'法':t==='lei'?'类':'毕'}</span>
+<span class="tag-m" style="margin-left:auto">${t==='fa'?'法':t==='lei'?'类':t==='bzg'?'歌':'毕'}</span>
 <span class="xfsym-arr">›</span>
 </div>
 <div class="xfsym-bd">
-<div class="xfsym-row"><span class="xfsym-lbl">要点</span><span class="xfsym-v">${d.key}</span></div>
-<div class="xfsym-row"><span class="xfsym-lbl">用法</span><span class="xfsym-v">${d.use}</span></div>
+<div class="xfsym-row"><span class="xfsym-lbl">${d.use?'要点':'原文'}</span><span class="xfsym-v">${d.key}</span></div>
+${d.use?`<div class="xfsym-row"><span class="xfsym-lbl">用法</span><span class="xfsym-v">${d.use}</span></div>`:''}
 <div class="xfsym-note">来源：${d.src}</div>
 </div>
 </div>`).join('');
