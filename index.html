@@ -502,6 +502,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">📐 六十四课经第一批深化：铸印·轩盖·斩关·九丑·励德·全局·玄胎·连珠·间传·六纯·斫轮·天网·度厄·淫泆·龙战 15 格补齐象曰·术语·断诀·变格（源〔通解〕，原文有歧义处标存疑不擅改）；新增判定器与「🎲 看一个真盘」自动搜盘、「看盘认格」练习（一盘常同时成多格，干扰项只从不成格的里抽，避免两选项都对）</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏷 App 名由「大六壬日学」改为「六壬神课日学」（顶部标识、页面标题、备份文件名）；正文讲解与《大六壬通解》等书名、"三式"并称的学术表述一律保留原称</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.31</span><span style="color:#9B8570;font-size:12px">📜 历代课例库并入案例库：16例名家实证（苗公/楚衍等，带真实验应）按占类并入，标「历代实证」徽章；原书未给全排盘参数故不排盘、附出处可回查；独立入口与 pcase 页移除，全站案例只剩一个入口</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.7.31</span><span style="color:#9B8570;font-size:12px">🗂 案例入口归位：「案例库·按占类查全」由知识库·断法移入经典与案例，与历代课例库并排（两者描述点明区别：案例库82例带完整课盘、历代课例库16例为讲义索引卡不含课盘）；「断案入门」作为零基础入口留在知识库，并加指路</span></div>
@@ -2951,7 +2952,8 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <div id="p64" class="screen">
   <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">六十四课经</div></div>
   <div style="padding-bottom:28px">
-    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">依《大六壬通解》第五章「六壬格局汇总」整理。当前先做<b>64项主课体索引</b>，每项只录一条经讲义核对的成格定义；案例盘和专项练习后续逐步接入。</div>
+    <div class="tj-card" style="line-height:1.7;font-size:13px;color:#6B5040">依《大六壬通解》第五章「六壬格局汇总」整理，共 <b>64 项主课体</b>。其中 <b>15 项已深化</b>（象曰·术语·断诀·变格 + 可随机搜出的真盘），标「已深化」；其余仍是成格定义索引，逐步补入。</div>
+    <div class="tj-card" id="k64-quiz" style="padding:12px"></div>
     <div style="display:flex;gap:8px;margin:10px 0 8px">
       <input id="k64-q" oninput="k64Render()" placeholder="搜索课名、成格条件、分组" style="flex:1;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 10px;color:#4A3520;font-size:13px;outline:none">
       <button class="btn btn-d" style="width:74px" onclick="document.getElementById('k64-q').value='';k64Render()">清空</button>
@@ -6363,6 +6365,68 @@ function _z9DeriveHTML(st){
   return`<div class="z9-derive"><div class="z9-derive-hd">📐 本案推导（${m}课）</div>${s}</div>`;
 }
 
+// 六十四课经·自动例盘：随机起课直到本格成立，渲染真盘。
+// 与 z9Example 同一套路，区别是判定走 k64Detect（且三传已纠正）。
+// 看盘认格：随机出一个真盘，问它成什么格。
+// ⚠️ 一盘常同时成好几格（实测 53%），所以正解从「本盘命中的格」里抽，
+//    干扰项只从「本盘不命中的格」里抽，避免出现两个选项都对的坏题
+//    （象义站踩过一模一样的坑：干扰池没排除同栏答案）。
+let _k64q=null;
+function k64QuizNew(){
+  let st=null,hits=[];
+  for(let i=0;i<400;i++){ st=k64GenOnce(); hits=k64Detect(st); if(hits.length) break; }
+  if(!hits.length){document.getElementById('k64-quiz').innerHTML='<div style="font-size:12px;color:#9B8570">没抽到成格的盘，再点一次。</div>';return}
+  const right=hits[Math.floor(Math.random()*hits.length)];
+  const pool=Object.keys(K64_RULES).filter(k=>!hits.includes(k));
+  const opts=shuffleArr([right,...shuffleArr(pool).slice(0,3)]);
+  _k64q={right,hits,st:{rg:st.rg,rz:st.rz,yj:st.yj.yj,zs:st.zs,day:st.day,cc:st.cc,zc:st.zc,mc:st.mc}};
+  const q=document.getElementById('k64-quiz');
+  q.innerHTML=`<div style="font-size:13px;color:#6B5040;margin-bottom:8px"><b style="color:var(--acc)">看盘认格</b>　下面这个盘成什么格？</div>
+    <div class="k64-quiz-board"></div>
+    <div style="font-size:12.5px;color:#4A3520;margin:8px 0 4px"><b>${_k64q.st.rg}${_k64q.st.rz}日 · ${_k64q.st.yj}将 · ${_k64q.st.zs}时</b>（${_k64q.st.day?'昼':'夜'}占）　三传 <b>${_k64q.st.cc}→${_k64q.st.zc}→${_k64q.st.mc}</b></div>
+    <div id="k64-opts" style="display:grid;gap:6px;margin-top:8px">${opts.map(o=>`<button class="btn btn-d" style="text-align:left;font-size:13px;padding:9px 12px" onclick="k64QuizAns('${o}',this)">${o}</button>`).join('')}</div>
+    <div id="k64-fb" style="margin-top:8px"></div>`;
+  _renderBoard(q.querySelector('.k64-quiz-board'));
+}
+function k64QuizAns(pick,btn){
+  if(!_k64q)return;
+  const ok=_k64q.hits.includes(pick);   // 一盘多格：命中列表里的都算对
+  document.querySelectorAll('#k64-opts button').forEach(b=>b.disabled=true);
+  btn.style.borderColor=ok?'#6B8E5A':'#C98A6B';
+  btn.style.background=ok?'rgba(107,142,90,.12)':'rgba(201,138,107,.12)';
+  const X=K64X[ok?pick:_k64q.right];
+  const fb=document.getElementById('k64-fb');
+  fb.innerHTML=`<div style="font-size:12.5px;line-height:1.8;color:#4A3520;background:rgba(217,184,119,.08);padding:10px;border-radius:8px">
+    ${ok?'<b style="color:#6B8E5A">对</b>':'<b style="color:#C98A6B">不对</b>，本盘成的是 <b>'+_k64q.hits.join('、')+'</b>'}
+    ${_k64q.hits.length>1?'<br><span style="color:#9B8570">本盘同时成 '+_k64q.hits.length+' 格：'+_k64q.hits.join('、')+'</span>':''}
+    <br><b style="color:var(--acc)">成格</b>　${(K64.find(x=>x.name===(ok?pick:_k64q.right))||{}).key||''}
+    ${X&&X.xiang?'<br><b style="color:var(--acc)">象曰</b>　'+X.xiang:''}
+  </div>
+  <button class="btn btn-r" style="width:100%;margin-top:8px;font-size:13px" onclick="k64QuizNew()">下一盘 →</button>`;
+}
+
+function k64Example(name,btn){
+  const box=btn.closest('.m5-sub-body').querySelector('.k64-ex');
+  box.innerHTML='<div style="text-align:center;font-size:11px;color:#9B8570;padding:8px 0">随机起课中…</div>';
+  setTimeout(()=>{
+    if(!k64FindPan(name,4000)){
+      box.innerHTML='<div style="font-size:11.5px;color:#C98A6B;padding:8px 0">4000 次内没搜到，再点一次试试（本格较稀有）。</div>';
+      return;
+    }
+    const st=kcState;
+    const also=k64Detect(st).filter(k=>k!==name);
+    box.innerHTML='';
+    _renderBoard(box);
+    const info=document.createElement('div');
+    info.className='m5-text';
+    info.style.cssText='font-size:11.5px;margin-top:6px';
+    info.innerHTML=`<b style="color:var(--acc)">${st.rg}${st.rz}日 · ${st.yj.yj}将 · ${st.zs}时</b>（${st.day?'昼':'夜'}占）　三传 <b>${st.cc}→${st.zc}→${st.mc}</b>`
+      +(also.length?`<br><span style="color:#9B8570">本盘同时成：${also.join('、')}</span>`:'')
+      +`<br><span style="color:#9B8570">随机盘，仅供对照成格条件；非讲义原案例。</span>`;
+    box.appendChild(info);
+  },0);
+}
+
 function z9Example(key,btn){
   const body=btn.closest('.z9-body');
   let ex=body.querySelector('.z9-ex');
@@ -6812,6 +6876,207 @@ const CASE_LIB=[
 ];
 
 
+// ══ 六十四课经·第一批深化（2026-08-09）══
+// 站里原本每格只有一句成格定义(平均86字)，讲义原文还有 象曰/断诀/变格/术语。
+// 这里先补 15 个「条件全在盘内、可精确判定」的格局，并给出判定器，
+// 让「定义 → 自动例盘 → 看盘认格」整条竖线跑通；其余 49 格待续。
+// ⚠️ 出处一律标〔通解 pN〕，原文有歧义的用 warn 字段标出，不擅自替他选。
+const K64X={
+ '铸印课':{p:140,
+  xiang:'顽金铸篆，藉火功全，官职高擢，诏命重宣，产孕大吉，干谒良缘，庶人不吉，疾病官愆。',
+  shu:'戌为天魁(印)、巳为太乙(炉)、卯为太冲(印模/轩车)、太常为绶。',
+  duan:['统「颐」类革故鼎新之意；核心原理是金火相济，全凭火炼方铸成贵器(符印)。',
+        '吉：占科举、求官、见君王、进策，主官爵高迁、符命入手。需得驿马、太阳、六合为真体。',
+        '凶：春夏巳午日时火旺，或印神值空亡、月破，为「破印损模」，事终不济。',
+        '庶人占之反主官灾刑害；末传见天后、玄武临水乡破日，名「铸印不成」，主望官中阻。',
+        '占病大忌：卯戌合为棺入土，子巳合为死字，主疫病、速死。'],
+  bian:['破印损模：火太旺或印神空破，事终不济。','铸印不成：末传天后/玄武临水乡破日，望官中阻。','乘日墓：主退失，或旧事再新。'],
+  warn:'讲义此条写作「戊加巳中传」，但同页象意又释为「戌：印」、并说三传巳戌卯——「戊」疑为「戌」之误。本站判定按三传含巳戌卯（并存戌加巳），原文两说都列，未替你选。'},
+ '轩盖课':{p:139,
+  xiang:'课遇高轩，车马皆全，朱轮稳上，诏用荣宣，求财大获，疾病难延，干贵欢会，行者必旋。',
+  shu:'神后(子)＝紫微华盖；太冲(卯)＝天驷天车；胜光(午)＝天马。',
+  duan:['统「升」之体，乃士子发达之课，加官荣显、凡事吉庆。',
+        '胜光作月内天马、太冲作月内天车(正七月内)，车马既动，出者必行，闻贼必来。',
+        '论讼换司易衙；病者魂游千里；年命有龙，出行大雨；车马作财，财自外来。',
+        '日用旺相又为太岁月将，德神上乘贵人、龙常后合吉将，主出入见君、拜官驿马、宠禄十全。'],
+  bian:['落马：三传带杀、乘蛇虎死气、克年命日辰，或空亡，或卯作丧车 → 轩盖变三交，身弱人衰、望事无成。'],
+  warn:'定义作「胜光(午)为用，遇太冲、神后」，但讲义所附案例是「甲子日卯时子将，三传卯午子」，初传为卯而非午。本站按「三传见午卯子」判，兼容两说。'},
+ '斩关课':{p:147,
+  xiang:'关梁逾越，最利逃亡，捉贼难获，出行自强，病讼凶祸，厌祷吉祥，书符合药，方法最良。',
+  shu:'辰为天罡、戌为天魁，合称魁罡＝天关；日辰为人。魁罡加日辰，如人遇重土闭塞，须斩开关门。',
+  duan:['统「遁」之体，乃豹隐南山课，利阴私、行藏隐避。',
+        '寅卯以木克土，三天俱动，利于逃亡出行。',
+        '未(玉女)护身、子(华盖)掩形、太阴(地户)潜藏、六合(私门)阴匿、天乙(神光)庇佑、青龙(万里骥)至远——传遇此数神更验。',
+        '甲戊庚日丑贵登天门、辰罡塞鬼户，六神藏四杀没，为四大吉时，利出行逃走、避罪隐形、合药书符、祈祷。'],
+  bian:['魁罡作罗网：官鬼作直符，罡塞鬼户(寅)、魁度天门(亥)，乘凶将 → 关梁闭塞，不利隐匿、病讼、出行。',
+        '加四仲为天地关隔；子(天关)卯(天格)事因天时格，午(地关)酉(地格)事因地理格。']},
+ '九丑课':{p:178,
+  xiang:'（讲义此条为片段，未录象曰）',
+  shu:'九丑日＝戊子、戊午、壬子、壬午、乙卯、乙酉、己卯、己酉、辛卯、辛酉十日。',
+  duan:['主凶险、刑伤、破败之事。',
+        '九丑日丧魄发用，干支受脱，亥子俱乘死神死气，天井逢丑，为势穷力竭而投于井之象。',
+        '岁刑加命、破碎加年，主争讼之事。'],
+  bian:[],
+  warn:'讲义此条原文被截断，仅存十日名与零星断语；断诀待其他资料补全。'},
+ '励德课':{p:179,
+  xiang:'阳神前引，阴神后随。君子则吉，小人则危。阴神前立，阳神后居。小人得意，君子失机。',
+  shu:'卯酉为阴阳交易之位、日月之门，贵人由之而迁易。所谓前后指天将，非论日辰；天乙居中，后六前五。',
+  duan:['统「随」之体，乃反复不定之课。',
+        '阳神前引、阴神后随：君子进用，吉。',
+        '阴神前立、阳神后居：小人得意，君子失机，凶。',
+        '阳在阴位(天乙后)今当进上；阴在阳位(天乙前)今当黜下。占人贵者将迁、下吏罢退；庶人居宅不安，宜谢土神。'],
+  bian:['微服格：日辰阴阳俱在天乙后 → 君子迁官、小人退职，事体稍迟，大干可、小处不可。',
+        '蹉跎格：日辰阴阳俱在天乙前 → 小人进职、君子退位，小处可、大干不可。']},
+ '全局课':{p:180,
+  xiang:'三方会合，得成秀气。吉事必成，凶事难弃。尊长恩荣，常人财喜。利合婚姻，谋为大利。',
+  shu:'三传成三合局：申子辰润下(水)、寅午戌炎上(火)、巳酉丑从革(金)、亥卯未曲直(木)。',
+  duan:['统「大畜」之体，乃同类欢会之课。',
+        '求财传有财则财易得，有官则官易就；日用旺气相生、神将吉则大利。',
+        '日用衰则事迟逆；火并火鬼主火灾；金并血支忌行兵；木并木怪主土木压。',
+        '戊己日用丑未主田宅事；丑戌未乘虎主病死讼狱。'],
+  bian:['三合犯杀：一传与支干上神作刑冲破害 → 合如不合，人情美中有恶。']},
+ '玄胎课':{p:185,
+  xiang:'三传长生，胎孕成形。官加恩爵，婚获娉婷。病讼淹滞，财利迭兴。行人敌贼，恋生不行。',
+  shu:'四孟(寅申巳亥)＝四生之局，又为五行受气之位。玄中有胎，故名玄胎。',
+  duan:['统「家人」之体，开花结子之课，所占百事皆新意。',
+        '最宜于产；求官、求财、求婚皆以长生大利。',
+        '病讼淹滞、行人不来、捕贼不获——恋生故也。',
+        '⚠️ 老幼占病为后世投胎之兆，最凶。'],
+  bian:['生胎(进步长生)：寅加巳、巳加申、申加亥、亥加寅，主事速，又名病胎(上生下为五行病处，怀胎有忧)。',
+        '退步长生：寅加亥、亥加申、申加巳、巳加寅，主事迟。',
+        '玄胎不育：日用休囚、天后落空 → 家招干儿女接续。']},
+ '连珠课':{p:186,
+  xiang:'阴阳拱夹，奇偶有主。凶则重重，吉当累累。孕必连胎，事获交举。时旱多晴，天阴久雨。',
+  shu:'又名连茹。三传在一方相连若贯珠，如寅卯辰之类。',
+  duan:['统「复」之体，乃山外青山之课。吉事占之若连珠可爱，凶则似连茹可恶。',
+        '占主吉凶各重迭不已：进连珠事顺，退连珠事逆。',
+        '传进宜进，贵顺事顺速成；值空亡则宜退，可以全身远害。',
+        '传退宜退，贵逆迟阻；遇空亡则宜进，可以消灾避祸。'],
+  bian:['退连茹(失友格)：主事欲行不行，人情欠美。',
+        '三奇联珠：三传亥子丑，日月星奇全 → 万事合和，乘吉将尤吉。']},
+ '间传课':{p:189,
+  xiang:'间位相传，事多间阻。顺有登天，向阳出户。逆有回阳，励明顾祖。占者逢之，皆为吉课。',
+  shu:'间一位递作三传，故名间传。统「巽」之体，乃阴阳升降之课。',
+  duan:['占者顺主事顺，逆主事逆。',
+        '日用旺相、神将吉则凡事吉利；日用休囚、神将凶则应上九「丧其资斧，贞凶」。',
+        '顺间传十二格各有专名，如登三天(辰午申)、出三天(午申戌)、涉三渊(申戌子)、向阳(子寅辰)、出户(丑卯巳)等。'],
+  bian:['登三天格(辰午申)：官登天位主迁转，惟忌空脱；争讼转大，占病症候弥深。',
+        '涉三渊格(申戌子)：龙涉三渊不雨，病讼危险，占官不吉、谋望不成。',
+        '入三渊格(亥子寅)：凡举皆凶，如履春冰、蹈虎尾；末传乘蛇虎为鬼煞，病必死。',
+        '向阳格(子寅辰)：自暗入明，初凶后吉，病愈讼解。']},
+ '六纯课':{p:190,
+  xiang:'六阳动达，如登三天。私凶公吉，官遇升迁。六阴朦昧，似涉重渊。公凶私利，病患缠延。',
+  shu:'四课三传俱阳为六阳课，俱阴为六阴课。统「革」之体，乃天渊悬隔之象。',
+  duan:['六阳课：宜尊贵占天庭高尊事。初中空则君子畏之减力、常人赖之省力，末事得理。',
+        '六阴课：宜卑下占阴谋奸私事，病者死。',
+        '占孕：阳男阴女。'],
+  bian:['倒拔蛇(悖戾)：六阳遇退间传，兼初传财引入中末鬼乡 → 凡事艰辛不免功劳。',
+        '六阴遇昼将入夜：昏迷尤甚，问病必死、求望虚耗。']},
+ '斫轮课':{p:141,
+  xiang:'木欲成器，须假金斫，孕病凶险，财喜欢跃，禄位加增，官职超擢，戊印常绶，遇之犹乐。',
+  shu:'卯为车轮(木)，庚辛申酉为斤斧(金)，木就金斫。卯加申为上、加酉次之。',
+  duan:['统「颐」之体，革故鼎新。占官禄、谋望先历艰难后有成；求财大获。喜龙、常、阴、合吉将。',
+        '⚠️ 占孕、病、讼大忌：木休囚乘白虎为棺椁，值空亡为朽木难雕。',
+        '五行日断：木日艰难；火日灾疾；金日获福(成器)；水日变易艰难中遂意；土日流转。'],
+  bian:['旧轮再斫：传见本日墓神 → 主退官失职，再谋复兴。',
+        '斫轮伤斧：秋三月庚辛日得之，将乘阴、虎，金太过。',
+        '朽木难雕：卯木坐空 → 宜弃业别作生理营运。']},
+ '天网课':{p:172,
+  xiang:'天网四张，万物尽伤。产孕损子，逃亡遭殃。战有埋伏，病人膏肓。先凶有救，后获吉祥。',
+  shu:'时为目前、用为事始；时与用既俱为日鬼，如人举目见天网。统「蒙」之体，罗网在头之课。',
+  duan:['凡事不能踊跃登高致远；入传凶甚，主官灾口舌难消、出军被围难出。',
+        '金鬼主斗讼疾病；水鬼忧女子病或讼；木鬼斗讼钱财毁伤；火鬼主火灾惊恐经官；土鬼争讼田地坟墓。',
+        '旺相克囚死，谓之天网四张、万物尽伤。',
+        '惟利田猎、行刑、追逃、捕盗。'],
+  bian:['天罗地网：日前一辰为天罗、对冲为地网，发用或行年支干上见之，主官灾病厄。',
+        '解网：末传及年命有救神(子孙、冲破克鬼者)克初传 → 反凶为吉。']},
+ '度厄课':{p:162,
+  xiang:'事忧老幼，患病重来。家门不吉，骨肉尤乖。出军失利，行者多灾。类神旺相，祸去福来。',
+  shu:'四课内三上克下为幼度厄(长欺幼)，三下贼上为长度厄(幼凌长)。',
+  duan:['统「剥」之体，六亲冰炭，家宅欠利、老幼见灾。',
+        '发用阳神乘凶将主伯叔尊长有灾；阴神主姑姨幼小有灾。',
+        '幼度厄：子孙发用、凶神入墓，卑者更凶；长度厄：父母发用、凶神入墓，尊者更凶。',
+        '日用旺相乘吉将，主幼得长力、长得幼力，应上九「君子得舆」。'],
+  bian:['有救不以凶断：此二课俱以比者为用，然有救神(如火克金则水为救)则不凶。']},
+ '淫泆课':{p:159,
+  xiang:'男子就室，女妇有家。阴私莫禁，淫欲转加。嫁娶不吉，逃亡可嘉。捕捉难获，访人自差。',
+  shu:'卯酉为阴私之门；天后、六合为淫欲之神。统「既济」之体，乃阴阳配合之课。',
+  duan:['主淫奔泆欲，利私谋而不利公谋。',
+        '与三交并：浊滥淫泆，所私非一人一处。',
+        '加天罗地网甚凶，主恶声；并天烦男遭杀伤、并地烦女遭杀伤、并二烦九丑男女皆遭杀伤。',
+        '后合临日辰、男女行年并：占婚不用媒，先奸后娶；值空亡则虚意。'],
+  bian:['泆女格：用起天后、终传六合 → 女随于男，通私奔走，自嫁之女。',
+        '狡童格：用起六合、终于天后 → 男诱乎女，有逃亡之事，不顾廉耻。'],
+  warn:'本站现按「初传卯酉」判基本成格；「乘天后/六合」及泆女·狡童的分格需读天将盘，天将口径待核后再接。'},
+ '龙战课':{p:0,
+  xiang:'（讲义中册第五章，未检到独立象曰条目）',
+  shu:'卯酉为日月之门、阴阳交战之地。凡卯酉日占，卯酉为用，人年立卯酉。',
+  duan:['主阴阳交战、进退狐疑、事多反复。','与励德课同以卯酉立义，可对看：励德论天乙立卯酉，龙战论日与用俱在卯酉。'],
+  bian:[],
+  warn:'⚠️ 本条讲义未检到「定义/象曰/断诀」式条目，上列断语系据卯酉交战之义与相邻条目推得，**非原文照录**，待补正。'}
+};
+
+// ── 判定器：只判「条件全在盘内」的，不依赖天将与年命 ──
+// 复用 z9Example 的思路：随机起课直到命中，即可给每格配真实例盘。
+const _ZH=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const _MENG=['寅','申','巳','亥'], _KUILUO=['辰','戌'];
+const _SANHE=[['申','子','辰'],['寅','午','戌'],['巳','酉','丑'],['亥','卯','未']];
+const _JIUCHOU=['戊子','戊午','壬子','壬午','乙卯','乙酉','己卯','己酉','辛卯','辛酉'];
+const _YANGZ=['子','寅','辰','午','申','戌'];
+function _zi(z){return _ZH.indexOf(z)}
+function _k64Chuan(st){return [st.cc,st.zc,st.mc]}
+// 天盘 tp[i] = 地盘第 i 支上所乘的天盘神；「A加B」＝天盘A落在地盘B上
+function _jiaOn(st,tian,di){return st.tp[_zi(di)]===tian}
+const K64_RULES={
+ '九丑课':st=>_JIUCHOU.includes(st.rg+st.rz),
+ '龙战课':st=>['卯','酉'].includes(st.rz)&&['卯','酉'].includes(st.cc),
+ '励德课':st=>['卯','酉'].includes(st.gr),
+ '斩关课':st=>_KUILUO.includes(st.cc)&&(_KUILUO.includes(st.tp[_zi(st.jg)])||_KUILUO.includes(st.tp[_zi(st.rz)])),
+ '全局课':st=>{const c=_k64Chuan(st);return _SANHE.some(g=>g.every(z=>c.includes(z)))},
+ '玄胎课':st=>_k64Chuan(st).every(z=>_MENG.includes(z))&&_MENG.includes(st.cc),
+ '连珠课':st=>{const[a,b,c]=_k64Chuan(st).map(_zi);const d1=(b-a+12)%12,d2=(c-b+12)%12;
+   return (d1===1&&d2===1)||(d1===11&&d2===11)},
+ '间传课':st=>{const[a,b,c]=_k64Chuan(st).map(_zi);const d1=(b-a+12)%12,d2=(c-b+12)%12;
+   return (d1===2&&d2===2)||(d1===10&&d2===10)},
+ '六纯课':st=>{const all=[...st.sk.map(k=>k.s),...st.sk.map(k=>k.x),..._k64Chuan(st)]
+     .filter(z=>_ZH.includes(z));
+   return all.every(z=>_YANGZ.includes(z))||all.every(z=>!_YANGZ.includes(z))},
+ '度厄课':st=>{const ske=st.sk.filter(k=>_isKe(k.s,k.x)),xke=st.sk.filter(k=>_isKe(k.x,k.s));
+   return ske.length===3||xke.length===3},
+ '天网课':st=>_isKe(st.zs,st.rg)&&_isKe(st.cc,st.rg),
+ '斫轮课':st=>st.cc==='卯'&&(_jiaOn(st,'卯','申')||_jiaOn(st,'卯','酉')),
+ '淫泆课':st=>['卯','酉'].includes(st.cc),
+ '轩盖课':st=>{const c=_k64Chuan(st);return ['午','卯','子'].every(z=>c.includes(z))},
+ // ⚠️ 原文「得戌(戊)加巳中传」——「加巳」是限定该神落在巳上，且须**作中传**。
+ // 初版漏了中传这层，变成只要天盘戌在巳位就算，三传毫不相干也命中（庚辰日→酉寅未 曾被误判）。
+ '铸印课':st=>{const c=_k64Chuan(st);
+   return ['巳','戌','卯'].every(z=>c.includes(z))||(st.zc==='戌'&&_jiaOn(st,'戌','巳'))}
+};
+// ⚠️ 别把错误静默吞掉：规则写错时 catch 会让它变成「永远不命中」的哑规则，
+//    看着没报错其实一格都判不出（本次开发就这么栽过一次）。
+//    线上仍不让单条规则崩掉整页，但把错误记到 k64Detect.errs 供测试断言。
+// ⚠️ 判定必须用「纠正后」的三传：_genKC 内部是简化算法，
+//    站里正式三传要经 _compute3chuan 纠正，不纠正就判，搜到的盘纠正后可能不成格。
+function k64GenOnce(){
+  _genKC();
+  const c=_compute3chuan(kcState);
+  kcState.cc=c.cc;kcState.zc=c.zc;kcState.mc=c.mc;
+  return kcState;
+}
+function k64FindPan(name,tries){
+  for(let i=0;i<(tries||4000);i++){ if(k64Detect(k64GenOnce()).includes(name)) return true; }
+  return false;
+}
+function k64Detect(st){
+  const hit=[]; k64Detect.errs=[];
+  if(!st||!st.tp||!st.sk){k64Detect.errs.push('kcState 不完整');return hit}
+  for(const k in K64_RULES){
+    try{if(K64_RULES[k](st))hit.push(k)}
+    catch(e){k64Detect.errs.push(k+': '+e.message)}
+  }
+  return hit;
+}
+
 // ══ 六十四课经格局库 ══
 const K64_GROUPS=['全部','发用九宗','吉庆贵显','动阻隐伏','凶厄刑害','综合取象'];
 let k64Group='全部',k64Done=false;
@@ -6882,6 +7147,7 @@ const K64=[
 {n:64,name:'杂状课',group:'综合取象',src:'讲义中册·第五章',line:2206,key:'凡课俱取初传动爻，以别五行纯杂、数目、物色为用，曰杂状课。'},
 ];
 function k64Init(){
+  k64QuizNew();
   if(!k64Done){
     document.getElementById('k64-tabs').innerHTML=K64_GROUPS.map(g=>`<button class="xfsym-tab-btn ${g===k64Group?'act':''}" onclick="k64SetGroup('${g}')">${g}</button>`).join('');
     k64Done=true;
@@ -6896,7 +7162,22 @@ function k64Render(){
   const groups=[...new Set(list.map(x=>x.group))];
   el.innerHTML=groups.map(g=>{
     const sub=list.filter(x=>x.group===g);
-    const items=sub.map(x=>`<button class="m5-sub-tog" onclick="m5SubToggle(this)">第${x.n}课 · ${x.name}</button><div class="m5-sub-body"><div class="m5-text"><b style="color:var(--acc)">成格</b>　${x.key}</div><div class="m5-text" style="font-size:11px;color:#9B8570">来源：${x.src}，抽取行 ${x.line}。当前仅作课体索引；逐课案例与排盘训练后续补入。</div></div>`).join('');
+    const items=sub.map(x=>{
+      const X=K64X[x.name];
+      let body=`<div class="m5-text"><b style="color:var(--acc)">成格</b>　${x.key}</div>`;
+      if(X){
+        if(X.shu)   body+=`<div class="m5-text"><b style="color:var(--acc)">术语</b>　${X.shu}</div>`;
+        if(X.xiang) body+=`<div class="m5-text" style="background:rgba(217,184,119,.07);border-left:2px solid var(--acc);padding:7px 10px;border-radius:0 6px 6px 0"><b style="color:var(--acc)">象曰</b>　${X.xiang}</div>`;
+        if(X.duan&&X.duan.length) body+=`<div class="m5-text"><b style="color:var(--acc)">断诀</b><br>${X.duan.map((d,i)=>`<span style="color:#9B8570">${i+1}.</span> ${d}`).join('<br>')}</div>`;
+        if(X.bian&&X.bian.length) body+=`<div class="m5-text"><b style="color:var(--acc)">变格</b><br>${X.bian.map(d=>`· ${d}`).join('<br>')}</div>`;
+        if(X.warn)  body+=`<div class="m5-text" style="color:#C98A6B;font-size:11.5px;background:rgba(201,138,107,.08);padding:7px 10px;border-radius:6px">⚠️ ${X.warn}</div>`;
+        if(K64_RULES[x.name]) body+=`<div style="padding:4px 0 2px"><button class="btn btn-r" style="font-size:12px;padding:6px 12px" onclick="k64Example('${x.name}',this)">🎲 看一个真盘</button></div><div class="k64-ex"></div>`;
+        body+=`<div class="m5-text" style="font-size:11px;color:#9B8570">来源：${X.p?'〔通解 p'+X.p+'〕':'出处待补'}｜${x.src}</div>`;
+      }else{
+        body+=`<div class="m5-text" style="font-size:11px;color:#9B8570">来源：${x.src}，抽取行 ${x.line}。<b>本格尚未深化</b>：象曰/断诀/变格与例盘待补。</div>`;
+      }
+      return `<button class="m5-sub-tog" onclick="m5SubToggle(this)">第${x.n}课 · ${x.name}${X?'<span style="color:var(--acc);font-size:10px;margin-left:6px">已深化</span>':''}</button><div class="m5-sub-body">${body}</div>`;
+    }).join('');
     return `<div class="m5-sec"><button class="m5-tog" onclick="m5Toggle(this)">${g}<span style="color:#9B8570;font-size:11px;margin-left:5px">(${sub.length})</span><span class="m5-tog-arrow">›</span></button><div class="m5-body">${items}</div></div>`;
   }).join('')||'<div class="tj-card" style="font-size:13px;color:#9B8570">没有匹配的课体。</div>';
 }
