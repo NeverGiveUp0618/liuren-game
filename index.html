@@ -435,6 +435,17 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .fx-go{flex:none;padding:8px 14px;font-size:13px;border-radius:9px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer;font-family:inherit}
 .fx-go:active{opacity:.8}
 .hw-weak{cursor:pointer}
+
+/* 盘下「本盘成格」 */
+.k64-pan{background:#FFFDF8;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px}
+.k64-pan-hd{font-size:12.5px;color:#6B5040;font-weight:600;margin-bottom:7px}
+.k64-pan-hd span{color:var(--acc);font-weight:400;font-size:11px;margin-left:4px}
+.k64-pan-row{display:flex;flex-wrap:wrap;gap:6px}
+.k64-chip{font-size:12px;padding:5px 10px;border-radius:14px;border:1px solid var(--line);
+  background:#fff;color:#6B5040;cursor:pointer;font-family:inherit}
+.k64-chip.deep{border-color:var(--acc);color:#8B6914;background:rgba(217,184,119,.1)}
+.k64-chip i{font-style:normal;font-size:10px;margin-left:3px;color:var(--acc)}
+.k64-pan-tip{font-size:10.5px;color:#9B8570;margin-top:6px}
 </style>
 </head>
 <body>
@@ -4962,8 +4973,9 @@ function qiCast(){
   const st=_manualKC(rg,rz,yj,zs);
   if(!st){out.innerHTML=`<div class="card" style="text-align:center;color:#C41230;padding:14px">「${rg}${rz}」非六十甲子（干支阴阳需一致，如甲子·乙丑…），请重选日支</div>`;return;}
   kcState=st;
-  out.innerHTML='<div class="card" id="qi-board" style="padding:12px"></div><div id="qi-nm"></div><div id="qi-bj"></div><div id="qi-bf"></div>';
+  out.innerHTML='<div class="card" id="qi-board" style="padding:12px"></div><div id="qi-k64"></div><div id="qi-nm"></div><div id="qi-bj"></div><div id="qi-bf"></div>';
   _renderBoard(document.getElementById('qi-board'));
+  document.getElementById('qi-k64').innerHTML=k64PanTags(st);
   document.getElementById('qi-nm').innerHTML=_nianmingHTML(st);
   document.getElementById('qi-bj').innerHTML=_bjDetectHTML(st);
   document.getElementById('qi-bf').innerHTML=_bfDetectHTML(st);
@@ -7045,7 +7057,10 @@ const K64_RULES={
    return ske.length===3||xke.length===3},
  '天网课':st=>_isKe(st.zs,st.rg)&&_isKe(st.cc,st.rg),
  '斫轮课':st=>st.cc==='卯'&&(_jiaOn(st,'卯','申')||_jiaOn(st,'卯','酉')),
- '淫泆课':st=>['卯','酉'].includes(st.cc),
+ // 天将口径＝_tjMapOf（天盘支→天将，贵人顺逆看其所临地盘位），与 _renderBoard 同一套算法。
+ // 原文要求「初传卯酉，将乘天后或六合」，两条都判。
+ '淫泆课':st=>{if(!['卯','酉'].includes(st.cc))return false;
+   try{const tj=_tjMapOf(st);return ['后','合'].includes(tj[st.cc])}catch(e){return false}},
  '轩盖课':st=>{const c=_k64Chuan(st);return ['午','卯','子'].every(z=>c.includes(z))},
  // ⚠️ 原文「得戌(戊)加巳中传」——「加巳」是限定该神落在巳上，且须**作中传**。
  // 初版漏了中传这层，变成只要天盘戌在巳位就算，三传毫不相干也命中（庚辰日→酉寅未 曾被误判）。
@@ -7070,11 +7085,45 @@ function k64FindPan(name,tries){
 function k64Detect(st){
   const hit=[]; k64Detect.errs=[];
   if(!st||!st.tp||!st.sk){k64Detect.errs.push('kcState 不完整');return hit}
+  // 九宗门(前10课)站里早有 _detectMethod，直接并进来，不重复造判定。
+  // ⚠️ 它返回的是不带「课」字的名(如'元首')，K64 里叫「元首课」，须补字后比对。
+  try{
+    const m=_detectMethod(st);
+    if(m&&K64.some(x=>x.name===m+'课')) hit.push(m+'课');
+  }catch(e){k64Detect.errs.push('_detectMethod: '+e.message)}
   for(const k in K64_RULES){
-    try{if(K64_RULES[k](st))hit.push(k)}
+    try{if(K64_RULES[k](st)&&hit.indexOf(k)<0)hit.push(k)}
     catch(e){k64Detect.errs.push(k+': '+e.message)}
   }
   return hit;
+}
+
+// 盘下的「本盘命中的格局」——起完盘第一件事就是定课体，
+// 以前这里只显示九宗门一个课体，现在把全部命中的格局都列出来（一盘常成好几格）。
+function k64PanTags(st,opt){
+  const hits=k64Detect(st);
+  if(!hits.length)return '';
+  const deep=hits.filter(h=>K64X[h]), plain=hits.filter(h=>!K64X[h]);
+  const chip=(h,on)=>`<button class="k64-chip${on?' deep':''}" onclick="k64OpenFrom('${h}')">${h}${on?'<i>▸</i>':''}</button>`;
+  return `<div class="k64-pan">
+    <div class="k64-pan-hd">本盘成格 <span>${hits.length} 项</span></div>
+    <div class="k64-pan-row">${deep.map(h=>chip(h,1)).join('')}${plain.map(h=>chip(h,0)).join('')}</div>
+    ${deep.length?`<div class="k64-pan-tip">带 ▸ 的可点开看象曰与断诀</div>`:''}
+  </div>`;
+}
+// 从盘上点格局 → 跳到六十四课经并展开那一格
+function k64OpenFrom(name){
+  show('p64');
+  setTimeout(()=>{
+    const el=document.getElementById('k64-sec');if(!el)return;
+    const btns=[...el.querySelectorAll('.m5-sub-tog')];
+    const b=btns.find(x=>x.textContent.includes(name));
+    if(!b)return;
+    const sec=b.closest('.m5-sec');
+    if(sec){const tog=sec.querySelector('.m5-tog');if(tog&&!sec.querySelector('.m5-body').classList.contains('open'))m5Toggle(tog);}
+    if(!b.nextElementSibling.classList.contains('open'))m5SubToggle(b);
+    b.scrollIntoView({block:'center'});
+  },60);
 }
 
 // ══ 六十四课经格局库 ══
