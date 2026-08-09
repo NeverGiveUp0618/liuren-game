@@ -29,7 +29,16 @@ setTimeout(()=>{
   t('象曰渲染出来',()=>/象曰/.test(html)?true:'没有象曰');
   t('断诀渲染出来',()=>/断诀/.test(html)?true:'没有断诀');
   t('存疑标注可见',()=>(html.match(/⚠️/g)||[]).length>=5?true:'存疑标注太少');
-  t('未深化的说明还缺什么',()=>/本格尚未深化/.test(html)?true:'没写清楚');
+  // 64 格已全部深化，「尚未深化」分支不再出现；改验每格都真的渲染了内容
+  t('64 格全部渲染出深化内容',()=>{
+    const n=(html.match(/成格/g)||[]).length;
+    return n>=64?true:`只有 ${n} 格渲染了成格条目`});
+  t('不自动判的格不给「看一个真盘」按钮',()=>{
+    const R=w.eval('Object.keys(K64_RULES)');
+    const nine=['元首课','重审课','知一课','涉害课','遥克课','昴星课','别责课','八专课','伏吟课','返吟课'];
+    const noRule=w.eval('K64.map(x=>x.name)').filter(n=>!R.includes(n)&&!nine.includes(n));
+    const bad=noRule.filter(n=>new RegExp(`k64Example\\('${n}'`).test(html));
+    return bad.length?'这些格判不了却给了搜盘按钮: '+bad.join('、'):true});
 
   console.log('\n— 自动例盘 —');
   const names=w.eval('Object.keys(K64_RULES)');
@@ -47,6 +56,35 @@ setTimeout(()=>{
     const s1=w.eval('k64GenOnce(); [kcState.cc,kcState.zc,kcState.mc].join("")');
     const s2=w.eval('_compute3chuan(kcState); [_compute3chuan(kcState).cc,_compute3chuan(kcState).zc,_compute3chuan(kcState).mc].join("")');
     return s1===s2?true:`起课后${s1} 纠正后${s2}`});
+
+  console.log('\n— 全书覆盖 —');
+  t('64 格内容全部补齐',()=>{
+    const K=w.eval('K64.map(x=>x.name)'), X=w.eval('Object.keys(K64X)');
+    const miss=K.filter(n=>!X.includes(n));
+    return miss.length?'缺内容: '+miss.join('、'):true});
+  t('每格都标了出处或存疑',()=>{
+    const bad=w.eval('Object.entries(K64X).filter(([k,v])=>!v.p&&!v.warn).map(([k])=>k)');
+    return bad.length?'既无出处也无存疑标注: '+bad.join('、'):true});
+  t('不判的格必须写明原因',()=>{
+    const R=w.eval('Object.keys(K64_RULES)');
+    const nine=['元首课','重审课','知一课','涉害课','遥克课','昴星课','别责课','八专课','伏吟课','返吟课'];
+    const noRule=w.eval('K64.map(x=>x.name)').filter(n=>!R.includes(n)&&!nine.includes(n));
+    const bad=noRule.filter(n=>!w.eval(`(K64X[${JSON.stringify(n)}]||{}).warn`));
+    console.log('   不自动判的 '+noRule.length+' 格：'+noRule.join('、'));
+    return bad.length?'未说明原因: '+bad.join('、'):true});
+  t('由月将推月建：须与月将成六合',()=>{
+    const bad=[];
+    for(let i=0;i<12;i++){
+      w.eval(`(k64GenOnce(), kcState.yj=YJ_TBL[${i}])`);
+      const yj=w.eval('kcState.yj.yj'), jian=w.eval('_yueJian(kcState)');
+      if(w.eval(`_LIUHE[${JSON.stringify(yj)}]`)!==jian) bad.push(yj+'将→'+jian+'建');
+    }
+    return bad.length?bad.join(' '):true});
+  t('正月建寅·天马午·天德丁·月德丙',()=>{
+    w.eval('(k64GenOnce(), kcState.yj=YJ_TBL[0])');
+    const r=[w.eval('_yueJian(kcState)'),w.eval('_yueNum(kcState)'),
+             w.eval('_tianMa(kcState)'),w.eval('_tianDe(kcState)'),w.eval('_yueDe(kcState)')];
+    return (r[0]==='寅'&&r[1]===1&&r[2]==='午'&&r[3]==='丁'&&r[4]==='丙')?true:JSON.stringify(r)});
 
   console.log('\n— 分路判定不能有半边是死的 —');
   // ⚠️ 三奇课有「旬奇」「日奇」两条路，游子课靠「旬丁」。
