@@ -513,6 +513,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏷 「本盘成格」铺到独立看盘屏、毕法赋课盘与九宗门例盘（起完盘直接看出成什么课体，点标签直达该格断诀）；⚠️ 看盘认格练习的题面刻意不加，否则等于把答案印在题上</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🎯 课体格局接入综合训练与薄弱点复习中心：新增「课体格局」专题，看盘认格，题目按格出题、id 用格名，错题本与掌握度直接落到「哪个格没认出来」；一盘多格时选中同样成立的格也算对</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">📖 回原书核实存疑：龙战·三阴找到原文条目(p81/p174)回填，不再是推测；迎福课讹字破解(「八迊」实为「八迍/迯」，即八运藏对五福，吉凶参驳)；九丑·繁昌由 p77 简明定义与 p113 课目总歌补全；铸印「戊/戌」以术理定谳(天盘只有地支，「戊」上不了盘)；芜淫据 p77 补判定，覆盖 56/64</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏛 六十四课经全部补齐：64 格象曰·术语·断诀·变格逐条录入〔通解〕，判定覆盖 55/64（由月将推出月建·月份，解锁旺相·天德月德·天马，一举打通三光·三阳·德庆·富贵·灾厄等格）；余 9 格因需年命/节气/月宿或原文有多解，只给内容不自动判</span></div>
@@ -6101,7 +6102,10 @@ function _renderBoard(targetEl){
   }else{
     document.getElementById('pkb-title').textContent=`${rg}${rz}日 · ${yj.yj}将 · ${zs}时`;
     document.getElementById('pkb-mt').textContent=`发传法：${kcState.mt}`;
-    document.getElementById('pkb-content').innerHTML=lpH+skH+scH;
+    // 「本盘成格」——起完盘第一件事就是定课体。
+    // ⚠️ 只在独立看盘屏(无 targetEl)自动加：内嵌场景里有「看盘认格」练习，
+    //    那里盘下若列出成格就等于直接把答案印在题面上。
+    document.getElementById('pkb-content').innerHTML=lpH+skH+scH+k64PanTags(kcState);
   }
 }
 
@@ -6458,6 +6462,7 @@ function z9Example(key,btn){
     _renderBoard(ex);
     const dh=_z9DeriveHTML(kcState);
     if(dh){const dd=document.createElement('div');dd.innerHTML=dh;ex.appendChild(dd);}
+    try{const tg=k64PanTags(kcState); if(tg)ex.insertAdjacentHTML('beforeend',tg);}catch(e){}
   },0);
 }
 let _tt;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
@@ -8068,6 +8073,7 @@ function _bfBuildAndRender(sp,ex){
   kcState.cc=s3.cc;kcState.zc=s3.zc;kcState.mc=s3.mc;
   kcState.mt=sp.mt||_detectMethod(kcState);
   _renderBoard(ex);
+  try{const tg=k64PanTags(kcState); if(tg)ex.insertAdjacentHTML('beforeend',tg);}catch(e){}
 }
 function _bfToggleBoard(sp,btn){
   if(!sp)return;

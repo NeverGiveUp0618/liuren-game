@@ -105,6 +105,12 @@ setTimeout(()=>{
     for(let i=0;i<20000;i++) if(w.k64Detect(w.eval('k64GenOnce()')).includes('游子课')) return true;
     return '20000 次未触发'});
 
+  console.log('\n— 盘下「本盘成格」标签条 —');
+  w.eval('k64GenOnce()'); w.showKCBoard();
+  t('独立看盘屏列出本盘成格',()=>/k64-pan/.test(d.getElementById('pkb-content').innerHTML)?true:'没有标签条');
+  t('至少列出一格（九宗门保底）',()=>
+    d.querySelectorAll('#pkb-content .k64-chip').length>0?true:'0 个');
+
   console.log('\n— 看盘认格练习 —');
   t('进页面即出题',()=>{const h=d.getElementById('k64-quiz').innerHTML;return /看盘认格/.test(h)?true:'没出题'});
   t('给出 4 个选项',()=>{const n=d.querySelectorAll('#k64-opts button').length;return n===4?true:'实为'+n});
@@ -127,6 +133,14 @@ setTimeout(()=>{
     const btn=[...d.querySelectorAll('#k64-opts button')].find(b=>b.textContent===q.right);
     w.k64QuizAns(q.right,btn);
     return /对/.test(d.getElementById('k64-fb').textContent)?true:'反馈不对'});
+  // ⚠️ 最要紧的一条：题面里的盘绝不能带成格标签，否则等于把答案印在题面上。
+  //    这也是为什么「本盘成格」只在独立看盘屏自动加、内嵌场景逐个点名加。
+  t('⭐ 题面的盘不剧透成格',()=>{
+    w.k64QuizNew();
+    const qb=d.getElementById('k64-quiz'), q=w.eval('_k64q');
+    if(/k64-pan/.test(qb.innerHTML))return '❌ 题面带了成格标签条';
+    const board=qb.querySelector('.k64-quiz-board');
+    return !board.innerHTML.includes(q.right)?true:'盘里出现了正解「'+q.right+'」'});
   t('答错时告知本盘实际成的格',()=>{
     w.k64QuizNew();
     const q=w.eval('_k64q');
