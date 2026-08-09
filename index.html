@@ -513,6 +513,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🎯 课体格局接入综合训练与薄弱点复习中心：新增「课体格局」专题，看盘认格，题目按格出题、id 用格名，错题本与掌握度直接落到「哪个格没认出来」；一盘多格时选中同样成立的格也算对</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">📖 回原书核实存疑：龙战·三阴找到原文条目(p81/p174)回填，不再是推测；迎福课讹字破解(「八迊」实为「八迍/迯」，即八运藏对五福，吉凶参驳)；九丑·繁昌由 p77 简明定义与 p113 课目总歌补全；铸印「戊/戌」以术理定谳(天盘只有地支，「戊」上不了盘)；芜淫据 p77 补判定，覆盖 56/64</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏛 六十四课经全部补齐：64 格象曰·术语·断诀·变格逐条录入〔通解〕，判定覆盖 55/64（由月将推出月建·月份，解锁旺相·天德月德·天马，一举打通三光·三阳·德庆·富贵·灾厄等格）；余 9 格因需年命/节气/月宿或原文有多解，只给内容不自动判</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🧭 课格第二批：三奇·六仪·游子·三交·乱首·赘婿·无禄绝嗣·殃咎·鬼墓·亨通 等 13 格补齐象曰断诀（引从/冲破/芜淫 原文口径宽，只补内容不硬判）；九宗门并入判定，盘下新增「本盘成格」标签条，判定覆盖 34/64</span></div>
@@ -6019,7 +6020,8 @@ const FX_CATS=[
   {k:'宗门识别',fn:startZM},{k:'三传推演',fn:startSC},{k:'宗门流程',fn:startZL},
   {k:'天将联想',fn:startTJ},{k:'支神意象',fn:startZS},{k:'旺相断法',fn:startWSD},
   {k:'干支关系',fn:startGZ},{k:'毕法赋',fn:startBF},{k:'天时晴雨',fn:startTW},
-  {k:'八煞九宝',fn:()=>{trainCfg.cats=new Set(['bj']);trainCfg.count=10;startUnifiedTrain()},src:'train',tk:'bj'}
+  {k:'八煞九宝',fn:()=>{trainCfg.cats=new Set(['bj']);trainCfg.count=10;startUnifiedTrain()},src:'train',tk:'bj'},
+  {k:'课体格局',fn:()=>{trainCfg.cats=new Set(['k64']);trainCfg.count=10;startUnifiedTrain()},src:'train',tk:'k64'}
 ];
 function fxStart(i){FX_CATS[i].fn();}
 function fxInit(){
@@ -13393,7 +13395,8 @@ const TRAIN_CATS={
   zs:{name:'十二支神',desc:'支神名称与核心类象'},
   zm:{name:'九宗门',desc:'看四课识别发用法'},
   sc:{name:'三传推演',desc:'初传、中传、末传'},
-  bj:{name:'八煞九宝',desc:'四德三奇禄马与刑冲破害墓'}
+  bj:{name:'八煞九宝',desc:'四德三奇禄马与刑冲破害墓'},
+  k64:{name:'课体格局',desc:'看盘识别六十四课经格局'}
 };
 const TRAIN_ZS=[
   ['子','神后','妇女·阴私·水液'],['丑','大吉','田宅·长者·财帛'],['寅','功曹','官吏·文书·道路'],['卯','太冲','门户·舟车·林木'],
@@ -13410,6 +13413,34 @@ function trainShuffle(a){return shuffleArr(a)}
 function trainPick(arr,n){return trainShuffle([...arr]).slice(0,n)}
 function trainQuestion(cat,q,a,opts,ex,id,extra={}){return{cat,q,a,opts:trainShuffle([...new Set([a,...opts])]).slice(0,4),ex,id:id||cat+'_'+q,...extra}}
 const BJ_MONTH=['正月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+// ── 课体格局题库：看盘识别六十四课经 ──
+// ⚠️ 题目按「格」出、id 用格名，这样错题本与掌握度落到的是"哪个格没认出来"，
+//    而不是"哪个随机盘做错了"——随机盘的 id 不稳定，记了也没意义。
+// ⚠️ 一盘常同时成好几格，故正解取本盘命中的格，干扰项只从不成格的里抽，
+//    否则会出现两个选项都对的坏题。
+const _K64_NINE=['元首课','重审课','知一课','涉害课','遥克课','昴星课','别责课','八专课','伏吟课','返吟课'];
+function _k64AllNames(){return Object.keys(K64_RULES).concat(_K64_NINE)}
+function trainK64Pool(cat){
+  const all=_k64AllNames(), Q=[];
+  const pick=trainShuffle([...all]).slice(0, Math.max(10, trainCfg.count*2));
+  pick.forEach(nm=>{
+    let ok=false;
+    for(let i=0;i<2500;i++){ if(k64Detect(k64GenOnce()).includes(nm)){ok=true;break} }
+    if(!ok)return;                       // 太稀有搜不到就跳过，不出半截题
+    const st=kcState, hits=k64Detect(st);
+    const others=all.filter(n=>!hits.includes(n));
+    if(others.length<3)return;
+    const up=st.sk.map(k=>k.s).join(' ');
+    const q=`${st.rg}${st.rz}日 · ${st.yj.yj}将 · ${st.zs}时（${st.day?'昼':'夜'}占）\n`
+           +`四课上神：${up}\n三传：${st.cc} → ${st.zc} → ${st.mc}\n\n本盘成什么格？`;
+    const X=K64X[nm]||{}, K=K64.find(x=>x.name===nm)||{};
+    let ex=`成格：${K.key||''}`;
+    if(X.xiang&&!/^（/.test(X.xiang)) ex+=`\n象曰：${X.xiang}`;
+    if(hits.length>1) ex+=`\n本盘同时成：${hits.join('、')}（答其中任一个都算对）`;
+    Q.push(trainQuestion(cat,q,nm,trainPick(others,3),ex,'k64_'+nm,{k64hits:hits}));
+  });
+  return Q;
+}
 function trainBJPool(cat){
   const T=BJ_TBL,Q=[],zOth=a=>trainPick(ZHI_ALL.filter(z=>z!==a),3),gOth=a=>trainPick(GAN_ALL.filter(g=>g!==a),3);
   const add=(q,a,opts,ex,id)=>Q.push(trainQuestion(cat,q,a,opts,ex,id));
@@ -13470,6 +13501,7 @@ function trainStaticPool(cat){
     trainQuestion(cat,`主象“${x.sx}”对应哪位天将？`,x.name,trainPick(TJ_QUIZ.filter(y=>y.name!==x.name).map(y=>y.name),3),`${x.name}：${x.ex}`,`tj_nm_${i}`)
   ]);
   if(cat==='bj')return trainBJPool(cat);
+  if(cat==='k64')return trainK64Pool(cat);
   if(cat==='zs')return TRAIN_ZS.flatMap((x,i)=>[
     trainQuestion(cat,`地支“${x[0]}”的六壬神名是？`,x[1],trainPick(TRAIN_ZS.filter(y=>y[0]!==x[0]).map(y=>y[1]),3),`${x[0]}为${x[1]}，主${x[2]}。`,`zs_nm_${i}`),
     trainQuestion(cat,`“${x[1]}”对应哪个地支？`,x[0],trainPick(ZHI_ALL.filter(y=>y!==x[0]),3),`${x[1]}即${x[0]}，主${x[2]}。`,`zs_di_${i}`)
@@ -13527,8 +13559,12 @@ function trainRender(){
 }
 function trainAnswer(i,btn){
   if(trainState.answered)return;trainState.answered=true;
-  const q=trainState.qs[trainState.idx],chosen=q.opts[i],ok=chosen===q.a,rec=trainState.sessionCats[q.cat]||(trainState.sessionCats[q.cat]={q:0,w:0});rec.q++;if(!ok)rec.w++;
-  document.querySelectorAll('#train-opts .qz-opt').forEach((b,j)=>{b.disabled=true;if(q.opts[j]===q.a)b.classList.add('correct')});
+  const q=trainState.qs[trainState.idx],chosen=q.opts[i];
+  // ⚠️ 课体格局题：一盘常同时成好几格，选中本盘同样成立的格也算对
+  const ok=chosen===q.a||!!(q.k64hits&&q.k64hits.indexOf(chosen)>=0);
+  const rec=trainState.sessionCats[q.cat]||(trainState.sessionCats[q.cat]={q:0,w:0});rec.q++;if(!ok)rec.w++;
+  document.querySelectorAll('#train-opts .qz-opt').forEach((b,j)=>{b.disabled=true;
+    if(q.opts[j]===q.a||(q.k64hits&&q.k64hits.indexOf(q.opts[j])>=0))b.classList.add('correct')});
   if(ok)trainState.correct++;else{btn.classList.add('wrong');trainState.wrong.push(q);trainStoreNB(q)}
   const ex=document.getElementById('train-explain');ex.textContent=(ok?'✓ 回答正确':'✗ 正确答案：'+q.a)+'\n'+q.ex;ex.style.display='block';
   document.getElementById('train-score').textContent=`${trainState.correct}分`;document.getElementById('train-next').textContent=trainState.idx===trainState.qs.length-1?'查看结果 ✓':'下一题 →';document.getElementById('train-next').style.display='';
