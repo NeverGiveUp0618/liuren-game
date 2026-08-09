@@ -25,7 +25,7 @@ setTimeout(()=>{
   console.log('\n— 详情页深化 —');
   const html=d.getElementById('k64-sec').innerHTML;
   t('64 格全部列出',()=>{const n=(html.match(/第\d+课 · /g)||[]).length;return n===64?true:'实为'+n});
-  t('已深化的标出徽章',()=>{const n=(html.match(/已深化/g)||[]).length;return n===15?true:'实为'+n});
+  t('已深化的标出徽章',()=>{const n=(html.match(/已深化/g)||[]).length;const k=w.eval('Object.keys(K64X).length');return n===k?true:`徽章${n} 数据${k}`});
   t('象曰渲染出来',()=>/象曰/.test(html)?true:'没有象曰');
   t('断诀渲染出来',()=>/断诀/.test(html)?true:'没有断诀');
   t('存疑标注可见',()=>(html.match(/⚠️/g)||[]).length>=5?true:'存疑标注太少');
@@ -35,7 +35,7 @@ setTimeout(()=>{
   const names=w.eval('Object.keys(K64_RULES)');
   let panOK=0,panBad=[];
   names.forEach(nm=>{ if(w.eval(`k64FindPan(${JSON.stringify(nm)},4000)`)) panOK++; else panBad.push(nm); });
-  t('15 格都能搜到真盘',()=>panBad.length===0?true:'搜不到: '+panBad.join('、'));
+  t(`${names.length} 格都能搜到真盘`,()=>panBad.length===0?true:'搜不到: '+panBad.join('、'));
   t('搜到的盘确实成该格',()=>{
     const bad=[];
     names.forEach(nm=>{ if(w.eval(`k64FindPan(${JSON.stringify(nm)},4000)`)){
@@ -47,6 +47,25 @@ setTimeout(()=>{
     const s1=w.eval('k64GenOnce(); [kcState.cc,kcState.zc,kcState.mc].join("")');
     const s2=w.eval('_compute3chuan(kcState); [_compute3chuan(kcState).cc,_compute3chuan(kcState).zc,_compute3chuan(kcState).mc].join("")');
     return s1===s2?true:`起课后${s1} 纠正后${s2}`});
+
+  console.log('\n— 分路判定不能有半边是死的 —');
+  // ⚠️ 三奇课有「旬奇」「日奇」两条路，游子课靠「旬丁」。
+  //    KONG_TBL 的 xun 是「甲子旬」带旬字，而查表键是「甲子」——
+  //    键对不上会让旬奇/旬丁静默失效，而三奇因日奇兜底，命中率看着还正常。
+  t('旬名解析成「甲X」不带旬字',()=>{
+    const x=w.eval('(k64GenOnce(), _xunOf(kcState))');
+    return /^甲[子戌申午辰寅]$/.test(x)?true:'实为 '+x});
+  t('三奇课两条路都活着（旬奇 / 日奇）',()=>{
+    let xq=0,rq=0;
+    for(let i=0;i<20000;i++){
+      const st=w.eval('k64GenOnce()'), c=[st.cc,st.zc,st.mc];
+      const a=w.eval('_XUNQI[_xunOf(kcState)]'), b=w.eval(`_RIQI[${JSON.stringify(st.rg)}]`);
+      if(a&&c.includes(a))xq++; if(b&&c.includes(b))rq++;
+    }
+    return (xq>0&&rq>0)?true:`旬奇${xq}次 日奇${rq}次，有一路是死的`});
+  t('游子课能被触发（旬丁路）',()=>{
+    for(let i=0;i<20000;i++) if(w.k64Detect(w.eval('k64GenOnce()')).includes('游子课')) return true;
+    return '20000 次未触发'});
 
   console.log('\n— 看盘认格练习 —');
   t('进页面即出题',()=>{const h=d.getElementById('k64-quiz').innerHTML;return /看盘认格/.test(h)?true:'没出题'});
