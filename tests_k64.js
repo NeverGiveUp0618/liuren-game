@@ -111,6 +111,34 @@ setTimeout(()=>{
   t('至少列出一格（九宗门保底）',()=>
     d.querySelectorAll('#pkb-content .k64-chip').length>0?true:'0 个');
 
+  t('盘下分「主课体／附加格局」两层',()=>{
+    const t2=w.eval('(k64GenOnce(), k64PanTags(kcState))');
+    return (/主课体/.test(t2)&&/附加格局/.test(t2))?true:'没分层'});
+  t('主课体恰为一个（九宗门每盘必有且只有一个）',()=>{
+    const NINE=w.eval('K64_NINE_SET');
+    for(let i=0;i<300;i++){
+      const hits=w.k64Detect(w.eval('k64GenOnce()'));
+      const m=hits.filter(h=>NINE.indexOf(h)>=0);
+      if(m.length!==1)return `有盘的主课体为 ${m.length} 个：${m.join('、')}`;
+    }
+    return true});
+  t('只判了部分条件的格要标出来',()=>{
+    const part=w.eval('Object.keys(k64PartialSet())');
+    if(!part.length)return '一个都没标，可疑';
+    for(let i=0;i<200;i++){
+      const st=w.eval('k64GenOnce()');
+      const hits=w.k64Detect(st);
+      if(hits.some(h=>part.indexOf(h)>=0)){
+        const t2=w.eval('k64PanTags(kcState)');
+        return /k64-part/.test(t2)?true:'命中了部分判定的格却没标记';
+      }
+    }
+    return true});
+  t('德庆·合欢已收紧到「发用」（原文限定，非入传即可）',()=>{
+    const src=fs.readFileSync(P,'utf8');
+    const ok=/'德庆课':st=>\{[\s\S]{0,300}?st\.cc/.test(src)&&/'合欢课':st=>\{[\s\S]{0,400}?st\.cc/.test(src);
+    return ok?true:'仍是入传即判'});
+
   console.log('\n— 看盘认格练习 —');
   t('进页面即出题',()=>{const h=d.getElementById('k64-quiz').innerHTML;return /看盘认格/.test(h)?true:'没出题'});
   t('给出 4 个选项',()=>{const n=d.querySelectorAll('#k64-opts button').length;return n===4?true:'实为'+n});

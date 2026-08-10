@@ -446,6 +446,11 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .k64-chip.deep{border-color:var(--acc);color:#8B6914;background:rgba(217,184,119,.1)}
 .k64-chip i{font-style:normal;font-size:10px;margin-left:3px;color:var(--acc)}
 .k64-pan-tip{font-size:10.5px;color:#9B8570;margin-top:6px}
+
+.k64-pan-line{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
+.k64-pan-lb{flex:0 0 46px;font-size:11px;color:#9B8570;padding-top:6px}
+.k64-chip.main{border-color:#8B6914;background:rgba(139,105,20,.12);font-weight:600;color:#6B5040}
+.k64-part{color:#C98A6B;font-weight:700;margin-left:2px}
 </style>
 </head>
 <body>
@@ -513,6 +518,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
     <div style="max-height:130px;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:6px;margin-top:2px;padding-right:2px">
+      <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.10</span><span style="color:#9B8570;font-size:12px">🔧 课格设计复盘：德庆·合欢原文限定「发用」却被判成「入传即可」，命中率虚高到 1/3，已收紧并补「乘吉将」；盘下成格改为「主课体／附加格局」两层（实测平均每盘成 5 格，平铺就没了区分度）；缺年命·太岁而只判部分条件的 12 格加「·」标记，不再与完整成格混同</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">📜 象法速查库新增「百章歌断诀」46 条（李九万六壬百章歌·核心断诀，〔通解 p110-111〕）：失猫看功曹·六畜问太冲·议亲问勾陈·白虎递牒人等实用断法，按失脱/疾病/婚宅/讼斗/财物/神将/课体分组可检索；只录原文不编白话解</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🏷 「本盘成格」铺到独立看盘屏、毕法赋课盘与九宗门例盘（起完盘直接看出成什么课体，点标签直达该格断诀）；⚠️ 看盘认格练习的题面刻意不加，否则等于把答案印在题上</span></div>
       <div style="display:flex;gap:8px;align-items:baseline"><span style="color:#6B5040;font-size:11px;flex-shrink:0">26.8.9</span><span style="color:#9B8570;font-size:12px">🎯 课体格局接入综合训练与薄弱点复习中心：新增「课体格局」专题，看盘认格，题目按格出题、id 用格名，错题本与掌握度直接落到「哪个格没认出来」；一盘多格时选中同样成立的格也算对</span></div>
@@ -7538,15 +7544,22 @@ Object.assign(K64_RULES,{
    const dg=_shang(st,st.jg),dz=_shang(st,st.rz);
    const hit=[dg,dz].some(z=>z===lu||z===ma||z===st.gr);
    return hit&&_isWangXiang(st,st.cc)&&['贵','龙','常','合','阴','后'].includes(_tjOf(st,st.cc))},
- '德庆课':st=>{const c=_k64Chuan(st);
-   const gd=_GANDE[st.rg], zd=_ZH[(_zi(st.rz)+5)%12];   // 支德：子日起巳顺行
+ // ⚠️ 原文「日辰干支德神，及天月二德**发用**，并在年命乘吉将」——
+ //    「发用」是限定(初传)，不是「入传即可」。初版判成入传，命中率虚高到 1/3。
+ //    年命判不了，「乘吉将」可判，一并加上。
+ '德庆课':st=>{const gd=_GANDE[st.rg], zd=_ZH[(_zi(st.rz)+5)%12];   // 支德：子日起巳顺行
    const td=_tianDe(st), yd=_yueDe(st);
-   return [gd,zd,td,yd].filter(Boolean).some(x=>c.includes(x))},
+   if(![gd,zd,td,yd].filter(Boolean).includes(st.cc))return false;
+   return ['贵','龙','常','合','阴','后'].includes(_tjOf(st,st.cc))},
+ // ⚠️ 同德庆：原文「支三合、六合**发用**，并占人年命俱乘吉将」，发用是限定。
+ //    初版判「三传含合」，命中率虚高到 1/3。现要求合神作初传且乘吉将。
  '合欢课':st=>{const c=_k64Chuan(st);
-   if(_SANHE.some(g=>g.every(z=>c.includes(z))))return true;
-   if(c.some(z=>_LIUHE[z]&&c.includes(_LIUHE[z])))return true;
+   const sanIn=_SANHE.some(g=>g.every(z=>c.includes(z))&&g.includes(st.cc));
+   const liuIn=!!_LIUHE[st.cc]&&c.includes(_LIUHE[st.cc]);
    const dg=_shang(st,st.jg);
-   return _WUHE[st.rg]&&GAN_JI[_WUHE[st.rg]]===dg},
+   const ganHe=!!_WUHE[st.rg]&&GAN_JI[_WUHE[st.rg]]===dg;
+   if(!(sanIn||liuIn||ganHe))return false;
+   return ['贵','龙','常','合','阴','后'].includes(_tjOf(st,st.cc))},
  '和美课':st=>{const dg=_shang(st,st.jg),dz=_shang(st,st.rz);
    const he=_LIUHE[dg]===dz;
    const c=_k64Chuan(st);
@@ -7735,15 +7748,37 @@ function k64Detect(st){
 
 // 盘下的「本盘命中的格局」——起完盘第一件事就是定课体，
 // 以前这里只显示九宗门一个课体，现在把全部命中的格局都列出来（一盘常成好几格）。
+// ⚠️ 实测平均每盘成 5 格上下，若把所有命中平铺，「成格」就没了区分度。
+//    故分两层：主课体(九宗门，每盘必有且只有一个，是断课的起点) 与 附加格局。
+//    另：有 12 格因缺年命/太岁/月宿而只判了部分条件，必须标出来——
+//    显示得跟完整成格一模一样会误导（例：九丑课原文还要求四仲相并、大吉加仲上）。
+const K64_NINE_SET=['元首课','重审课','知一课','涉害课','遥克课','昴星课','别责课','八专课','伏吟课','返吟课'];
+let _k64PartialCache=null;
+function k64PartialSet(){
+  if(_k64PartialCache)return _k64PartialCache;
+  _k64PartialCache={};
+  Object.entries(K64X).forEach(([k,v])=>{
+    if(v.warn&&/需年命|需两人|太岁需|需月份|漏判|只判|未纳入|进阶条件/.test(v.warn))_k64PartialCache[k]=1;
+  });
+  return _k64PartialCache;
+}
 function k64PanTags(st,opt){
   const hits=k64Detect(st);
   if(!hits.length)return '';
-  const deep=hits.filter(h=>K64X[h]), plain=hits.filter(h=>!K64X[h]);
-  const chip=(h,on)=>`<button class="k64-chip${on?' deep':''}" onclick="k64OpenFrom('${h}')">${h}${on?'<i>▸</i>':''}</button>`;
+  const part=k64PartialSet();
+  const main=hits.filter(h=>K64_NINE_SET.indexOf(h)>=0);
+  const extra=hits.filter(h=>K64_NINE_SET.indexOf(h)<0)
+                  .sort((a,b)=>(part[a]?1:0)-(part[b]?1:0));   // 完整判定的排前面
+  const chip=(h,cls)=>`<button class="k64-chip${cls}" onclick="k64OpenFrom('${h}')">${h}`
+    +`${part[h]?'<b class="k64-part" title="本站只判了部分条件">·</b>':''}`
+    +`${K64X[h]?'<i>▸</i>':''}</button>`;
   return `<div class="k64-pan">
     <div class="k64-pan-hd">本盘成格 <span>${hits.length} 项</span></div>
-    <div class="k64-pan-row">${deep.map(h=>chip(h,1)).join('')}${plain.map(h=>chip(h,0)).join('')}</div>
-    ${deep.length?`<div class="k64-pan-tip">带 ▸ 的可点开看象曰与断诀</div>`:''}
+    ${main.length?`<div class="k64-pan-line"><span class="k64-pan-lb">主课体</span>
+      <div class="k64-pan-row">${main.map(h=>chip(h,' main')).join('')}</div></div>`:''}
+    ${extra.length?`<div class="k64-pan-line"><span class="k64-pan-lb">附加格局</span>
+      <div class="k64-pan-row">${extra.map(h=>chip(h,' deep')).join('')}</div></div>`:''}
+    <div class="k64-pan-tip">▸ 可点开看象曰断诀${extra.some(h=>part[h])||main.some(h=>part[h])?'；带 · 的因缺年命/太岁等，本站只判了部分条件':''}</div>
   </div>`;
 }
 // 从盘上点格局 → 跳到六十四课经并展开那一格
