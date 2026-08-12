@@ -128,23 +128,33 @@ setTimeout(()=>{
  t('排盘与推演卡已搬进 phub-pan',()=>{
    const h=d.getElementById('phub-pan').textContent;
    return (h.includes('起课步骤')&&h.includes('三传推演')&&h.includes('自选起课'))||'内容没搬全'});
- // ⚠️ 2026-08-12 回归守卫：加底栏那版把四张卡整个搬走、首页只剩统计和更新
- //    日志，用户反馈「打开啥也没有」。首页必须留得住能干活的入口。
+ // ⚠️ 两条互相拉扯的回归，两边都要守：
+ //   ① 加底栏那版把四张入口卡全搬进 tab，首页只剩统计 → 用户「打开啥也没有」
+ //   ② 补回四个快捷入口后，与底栏重复 → 用户「首页也分格底部也分栏，太繁琐」
+ // 定论：导航只留底栏一处；首页＝今日页，有主操作、无分类入口。
  t('首页有「今日挑战」主操作',()=>{
    const b=[...d.querySelectorAll('#ph .htoday button')].map(x=>x.textContent.trim());
    return b.includes('今日挑战')||'实为：'+b.join('/')});
- t('首页四个快捷入口都指向真实根屏',()=>{
-   const q=[...d.querySelectorAll('#ph .hquick button')];
-   if(q.length!==4)return '实为'+q.length+'个';
-   const bad=q.map(x=>(x.getAttribute('onclick')||'').match(/show\('([^']+)'\)/))
-     .map(m=>m&&m[1]).filter(id=>!id||!d.getElementById(id));
-   return bad.length===0||'指向不存在的屏：'+bad.join(',')});
+ t('首页没有与底栏重复的分类入口',()=>{
+   const tabs=[...d.querySelectorAll('#tabbar [data-tab]')].map(x=>x.dataset.tab);
+   const dup=[...d.querySelectorAll('#ph button[onclick]')]
+     .map(x=>(x.getAttribute('onclick')||'').match(/show\('([^']+)'\)/))
+     .map(m=>m&&m[1]).filter(id=>id&&tabs.includes(id));
+   return dup.length===0||'首页又摆了底栏同款入口：'+dup.join(',')});
  t('首页不重复那四张大卡（ID 会串）',()=>{
    const n=d.querySelectorAll('#ph .mcard').length;
    return n===0||'首页又有 '+n+' 张 mcard 了'});
  t('唯一 ID 没被复制',()=>{
    const dup=['train-home-sub','hw-weak-tip'].filter(id=>d.querySelectorAll('#'+id).length>1);
    return dup.length===0||'重复：'+dup.join(',')});
+
+ // ⚠️ 改 CSS 时曾从自己的注释一路切到 .hmap{，把中间上百行样式一起抹了，
+ //    页面「能渲染但全是裸文字」。这条守住首页赖以成形的那几条规则。
+ t('首页样式规则一条没丢',()=>{
+   const css=[...d.querySelectorAll('style')].map(x=>x.textContent).join('');
+   const miss=['.hstat{','.hquote{','.hmap{','.update-bar{','.bk-row{','.mcard{','.htoday{']
+     .filter(r=>!css.includes(r));
+   return miss.length===0||'被删掉了：'+miss.join(' ')});
 
  t('点「练习」能切过去，且底栏跟着高亮',()=>{
    TABS.find(b=>b.dataset.tab==='phub-train').click();
