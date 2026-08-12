@@ -110,11 +110,50 @@ setTimeout(()=>{
    const all=[...d.querySelectorAll('.screen')];
    const out=all.filter(x=>!app.contains(x));
    return out.length?`${out.length} 个逃逸: ${out.map(x=>'#'+x.id).join(',')}`:true});
- t('body 直接子元素只有 .app / toast / script / 门户链接',()=>{
+ console.log('\n【底栏：五个根屏】');
+ const TABS=[...d.querySelectorAll('#tabbar [data-tab]')];
+ t('底栏 5 格',()=>TABS.length===5||'实为'+TABS.length);
+ t('底栏没有图标，只有文字',()=>{
+   // ⚠️ 用码点判断，别拿正则数 emoji
+   const bad=TABS.filter(b=>[...b.textContent.trim()].some(ch=>{
+     const c=ch.codePointAt(0);return !(c<0x2000||(c>=0x3000&&c<=0x9fff));}));
+   return bad.length===0||'含图标：'+bad.map(b=>b.textContent).join(',')});
+ t('每格都对得上一个真实的 screen',()=>{
+   const miss=TABS.map(b=>b.dataset.tab).filter(id=>{
+     const el=d.getElementById(id);return !el||!el.classList.contains('screen')});
+   return miss.length===0||'缺屏：'+miss.join(',')});
+ t('综合训练卡已搬进 phub-train',()=>{
+   const h=d.getElementById('phub-train').textContent;
+   return (h.includes('今日挑战')&&h.includes('错题本')&&h.includes('掌握度'))||'内容没搬全'});
+ t('排盘与推演卡已搬进 phub-pan',()=>{
+   const h=d.getElementById('phub-pan').textContent;
+   return (h.includes('起课步骤')&&h.includes('三传推演')&&h.includes('自选起课'))||'内容没搬全'});
+ t('首页不再重复这四条路径的入口卡',()=>{
+   // ⚠️ 只能看真按钮：「开发时间节点」那段历史文字里也有「起课步骤」等字样，
+   //    拿 textContent 去匹配会误判。
+   const btns=[...d.querySelectorAll('#ph .mcard button, #ph .mcard')].map(x=>x.textContent);
+   return btns.length===0||'首页还留着 '+btns.length+' 个入口卡'});
+ t('点「练习」能切过去，且底栏跟着高亮',()=>{
+   TABS.find(b=>b.dataset.tab==='phub-train').click();
+   const on=d.querySelector('.screen.active').id;
+   const lit=TABS.filter(b=>b.classList.contains('on')).map(b=>b.dataset.tab);
+   return (on==='phub-train'&&lit.length===1&&lit[0]==='phub-train')
+     ||('屏='+on+' 亮='+lit.join(','));});
+ t('进子屏时父 tab 保持亮着',()=>{
+   w.show('ptrain-report');
+   const lit=TABS.filter(b=>b.classList.contains('on')).map(b=>b.dataset.tab);
+   return (lit.length===1&&lit[0]==='phub-train')||'亮的是 '+lit.join(',');});
+ t('子屏的 ✕ 退回所属根屏，不是一律回首页',()=>{
+   w.goHome();
+   const on=d.querySelector('.screen.active').id;
+   return on==='phub-train'||'退到了 '+on;});
+ TABS.find(b=>b.dataset.tab==='ph').click();
+
+ t('body 直接子元素只有 .app / toast / 底栏 / script / 门户链接',()=>{
    const bad=[...d.body.children].filter(c=>{
      const tag=c.tagName.toLowerCase();
      if(tag==='script')return false;
-     if(c.classList.contains('app')||c.id==='toast'||c.id==='wst-home-portal')return false;
+     if(c.classList.contains('app')||c.id==='toast'||c.id==='wst-home-portal'||c.id==='tabbar')return false;
      return true;});
    return bad.length?bad.map(c=>'<'+c.tagName.toLowerCase()+(c.id?'#'+c.id:'')+'>').join(','):true});
  t('无 case-tabs / case-sec 等已删页面的残片',()=>{

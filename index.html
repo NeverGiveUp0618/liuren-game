@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>六壬神课日学</title>
 <style>
-:root{--acc:#8878C0;--acc-dk:#7060B0;--acc-dkk:#5A4890;--acc-tB0:#8878C0B0;--acc-t80:#8878C080;--acc-t50:#8878C050;--acc-t40:#8878C040;--acc-t20:#8878C020;--bg1:#F3F0F9;--bg2:#EAE5F5;--bg3:#F5F2FC;--bg-hov:#DDD8F0;--bd1:#CEC7E8;--bd2:#DED8F4;--bd3:#C0B8E0}
+:root{--tabh:54px;--acc:#8878C0;--acc-dk:#7060B0;--acc-dkk:#5A4890;--acc-tB0:#8878C0B0;--acc-t80:#8878C080;--acc-t50:#8878C050;--acc-t40:#8878C040;--acc-t20:#8878C020;--bg1:#F3F0F9;--bg2:#EAE5F5;--bg3:#F5F2FC;--bg-hov:#DDD8F0;--bd1:#CEC7E8;--bd2:#DED8F4;--bd3:#C0B8E0}
 body.theme-red{--acc:#C41230;--acc-dk:#A30F28;--acc-dkk:#8B0020;--acc-tB0:#C41230B0;--acc-t80:#C4123080;--acc-t50:#C4123050;--acc-t40:#C4123040;--acc-t20:#C4123020;--bg1:#F5F0E6;--bg2:#EDE7D8;--bg3:#FDF8F2;--bg-hov:#E0D9C8;--bd1:#D4C4A0;--bd2:#E8D5B0;--bd3:#C4B49A}
 .theme-tog{background:none;border:1px solid var(--bd1);border-radius:12px;padding:3px 11px;font-size:11px;color:#9B8570;cursor:pointer;transition:all .15s;letter-spacing:1px}
 .theme-tog:hover{background:var(--bg2)}
@@ -20,7 +20,26 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   .app{max-width:none}
 }
 @media(min-width:600px){body{background:var(--bg2);padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
-.screen{display:none;flex-direction:column;padding:14px 14px 28px;min-height:100vh}
+.screen{display:none;flex-direction:column;padding:14px 14px calc(var(--tabh) + 26px);min-height:100vh}
+/* ⭐ 2026-08-12 底栏：首页原本把四条学习路径一路铺在一屏，改成五个根屏。
+   纯文字，不用图标——与命理精讲同一路子。
+   ⚠️ letter-spacing 会在末字后面也留一份空，纯居中整体偏左，
+      用 padding-left 补回来，否则五个词看着都没对齐。 */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:200;display:grid;grid-template-columns:repeat(5,1fr);
+  width:100%;max-width:480px;margin:0 auto;height:var(--tabh);
+  padding-bottom:env(safe-area-inset-bottom);
+  background:color-mix(in srgb,var(--bg1) 94%, transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--bd1)}
+.tabbar button{position:relative;border:0;background:none;cursor:pointer;
+  display:grid;place-items:center;padding-left:.24em;
+  font-family:STKaiti,KaiTi,'Songti SC',serif;
+  font-size:15px;letter-spacing:.24em;color:#9B8570;transition:color .18s}
+.tabbar button + button::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:1px;height:15px;background:var(--bd1)}
+.tabbar button.on{color:var(--acc);font-weight:bold}
+.tabbar button.on::after{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  width:24px;height:2px;background:var(--acc)}
+@media(min-width:900px){.tabbar{max-width:none}}
 .screen.active{display:flex}
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
 .tbk{background:none;border:none;color:#9B8570;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px}
@@ -34,7 +53,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .btn-d{background:var(--bg2);color:#6B5040;border:1px solid var(--bd1)}.btn-d:hover{background:var(--bg-hov)}
 .btn-a{background:#8B6914;color:var(--bg1)}.btn-a:hover{background:#6E520F}
 .card{background:var(--bg2);border-radius:14px;padding:13px 15px;margin:5px 0;border:1px solid var(--bd1)}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1C0A00;color:var(--bg1);padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.toast{position:fixed;bottom:calc(var(--tabh) + 18px);left:50%;transform:translateX(-50%);background:#1C0A00;color:var(--bg1);padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;z-index:300;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .toast.show{opacity:1}
 .hlogo{text-align:center;padding:26px 0 12px}
 .hlogo-t{font-size:29px;font-weight:bold;color:var(--acc);letter-spacing:8px}
@@ -487,40 +506,6 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
   <div class="hmap-label">近35天练习记录</div>
   <div class="hmap" id="el-hmap"></div>
-  <div class="mcard" style="border-color:var(--acc)">
-    <div class="mcard-head"><div class="mcard-icon">🏆</div><div><div class="mcard-name">综合训练</div><div class="mcard-desc" id="train-home-sub">今日挑战 · 自选专题 · 错题复习 · 自适应加强</div></div></div>
-    <div class="mcard-btns">
-      <button class="btn btn-r" onclick="openTrainSetup('daily')">今日挑战</button>
-      <button class="btn btn-d" onclick="openTrainSetup('free')">自由训练</button>
-    </div>
-    <div class="mcard-btns" style="margin-top:6px">
-      <button class="btn btn-d" onclick="openTrainNotebook()">📚 错题本</button>
-      <button class="btn btn-d" onclick="openTrainReport()">📊 掌握度</button>
-    </div>
-    <div id="hw-weak-tip" class="hw-weak" style="display:none;margin-top:8px" onclick="show('pfx')"></div>
-  </div>
-  <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">⚙️</div><div><div class="mcard-name">排盘与推演</div><div class="mcard-desc">起课步骤 · 排盘实操 · 流程互动 · 完整三传</div></div></div>
-    <div class="mcard-btns">
-      <button class="btn btn-d" onclick="startKC()">🔮 起课步骤</button>
-      <button class="btn btn-d" onclick="startKCBoard()">🗺 起课排盘</button>
-    </div>
-    <div class="mcard-btns" style="margin-top:6px">
-      <button class="btn btn-d" onclick="startZL()">🧩 流程互动</button>
-      <button class="btn btn-d" onclick="startSC()">🔗 三传推演</button>
-    </div>
-    <div class="mcard-btns" style="margin-top:6px">
-      <button class="btn btn-r" onclick="show('pqi')">🧮 自选起课 · 全盘与断案</button>
-    </div>
-  </div>
-  <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">📖</div><div><div class="mcard-name">知识库</div><div class="mcard-desc">入门 · 起课 · 四课三传 · 神将神煞 · 断法</div></div></div>
-    <div class="mcard-btns"><button class="btn btn-r" onclick="openKnowledgeHub('intro')">进入知识库 →</button></div>
-  </div>
-  <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">🏛️</div><div><div class="mcard-name">经典与案例</div><div class="mcard-desc">六十四课经 · 毕法赋 · 象法库 · 历代课例</div></div></div>
-    <div class="mcard-btns"><button class="btn btn-r" onclick="show('phub-classic')">进入经典与案例 →</button></div>
-  </div>
   <!-- 开发时间节点 -->
   <div class="card" style="margin-bottom:9px">
     <div class="hhist">开发时间节点</div>
@@ -587,9 +572,45 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
   </div>
 </div>
 
+<!-- ======== 综合训练（底栏「练」）======== -->
+<div id="phub-train" class="screen">
+  <div class="tbar"><div class="tbtitle">综合训练</div></div>
+  <div class="mcard" style="border-color:var(--acc)">
+    <div class="mcard-head"><div class="mcard-icon">🏆</div><div><div class="mcard-name">综合训练</div><div class="mcard-desc" id="train-home-sub">今日挑战 · 自选专题 · 错题复习 · 自适应加强</div></div></div>
+    <div class="mcard-btns">
+      <button class="btn btn-r" onclick="openTrainSetup('daily')">今日挑战</button>
+      <button class="btn btn-d" onclick="openTrainSetup('free')">自由训练</button>
+    </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-d" onclick="openTrainNotebook()">📚 错题本</button>
+      <button class="btn btn-d" onclick="openTrainReport()">📊 掌握度</button>
+    </div>
+    <div id="hw-weak-tip" class="hw-weak" style="display:none;margin-top:8px" onclick="show('pfx')"></div>
+  </div>
+</div>
+
+<!-- ======== 排盘与推演（底栏「盘」）======== -->
+<div id="phub-pan" class="screen">
+  <div class="tbar"><div class="tbtitle">排盘与推演</div></div>
+  <div class="mcard">
+    <div class="mcard-head"><div class="mcard-icon">⚙️</div><div><div class="mcard-name">排盘与推演</div><div class="mcard-desc">起课步骤 · 排盘实操 · 流程互动 · 完整三传</div></div></div>
+    <div class="mcard-btns">
+      <button class="btn btn-d" onclick="startKC()">🔮 起课步骤</button>
+      <button class="btn btn-d" onclick="startKCBoard()">🗺 起课排盘</button>
+    </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-d" onclick="startZL()">🧩 流程互动</button>
+      <button class="btn btn-d" onclick="startSC()">🔗 三传推演</button>
+    </div>
+    <div class="mcard-btns" style="margin-top:6px">
+      <button class="btn btn-r" onclick="show('pqi')">🧮 自选起课 · 全盘与断案</button>
+    </div>
+  </div>
+</div>
+
 <!-- ======== 聚合知识库 ======== -->
 <div id="phub-knowledge" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">知识库</div></div>
+  <div class="tbar"><div class="tbtitle">知识库</div></div>
   <div class="hub-tabs" id="knowledge-tabs">
     <button class="hub-tab active" data-hub="intro" onclick="switchKnowledgeTab('intro')">入门</button>
     <button class="hub-tab" data-hub="start" onclick="switchKnowledgeTab('start')">起课</button>
@@ -632,7 +653,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 
 <!-- ======== 经典与案例聚合 ======== -->
 <div id="phub-classic" class="screen">
-  <div class="tbar"><button class="tbk" onclick="goHome()">✕</button><div class="tbtitle">经典与案例</div></div>
+  <div class="tbar"><div class="tbtitle">经典与案例</div></div>
   <div class="hub-intro">经典体系分别保留，资料与专项练习集中在同一入口。</div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">六十四课经</div><div class="hub-item-desc">六十四项主课体索引、成格定义与来源定位</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('p64')">查看课经</button></div></div>
   <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📜</div><div><div class="hub-item-name">毕法赋</div><div class="hub-item-desc">百法原文、逐格详解、原著课盘与专项测验</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pbf')">查看资料</button><button class="btn btn-r" onclick="startBF()">专项练习</button></div></div>
@@ -4244,15 +4265,23 @@ function _restoreScreenScroll(id){
   const y=_scrollPos[id]||0,restore=()=>window.scrollTo(0,y);
   restore();requestAnimationFrame(()=>{restore();requestAnimationFrame(restore)});
 }
-function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');if(id==='ph'){updateHomeStats();checkBkRemind();updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}if(id==='pqk'){qkInit();}if(id==='pbjb'){bjRender();}if(id==='pbys'){bysRender();}if(id==='plx'){lxRender();}_restoreScreenScroll(id);}
+function _applyScreen(id){const c=document.querySelector('.screen.active');if(c){_scrollPos[c.id]=window.scrollY;c.classList.remove('active')}const n=document.getElementById(id);if(!n)return;n.classList.add('active');if(id==='ph'){updateHomeStats();checkBkRemind();}if(id==='phub-train'){updateWeakTip();updateTrainHome();}if(id==='p64'){k64Init();}if(id==='pbf'){bfKuInit();bfInit();}if(id==='pxf-sym'){xfInit();}if(id==='pqi'){qiInit();}if(id==='pfx'){fxInit();}if(id==='pqk'){qkInit();}if(id==='pbjb'){bjRender();}if(id==='pbys'){bysRender();}if(id==='plx'){lxRender();}
+  if(TAB_ROOTS.indexOf(id)>=0)_curTab=id;  /* 进了子屏就保持父 tab 亮着 */
+  _paintTabs();_restoreScreenScroll(id);}
 /* ===== 浏览器返回键/全面屏手势 → App内逐屏后退（套壳iframe/独立打开均适用） =====
    包装 show()：前进 pushState；目标已在栈中(上层)则 history.go(-n) 折叠后退；
    popstate 幂等重放对应屏。所有 show()/goHome() 调用点无需改动。 */
 var _scrStack=['ph'],_navApplying=false,_hubReturn={};
+/* 底栏五个根屏。show() 本来就会「目标已在栈中就 history.go(-n) 折叠」，
+   所以 tab 直接调 show() 即可，来回切不会堆历史。 */
+var TAB_ROOTS=['ph','phub-train','phub-pan','phub-knowledge','phub-classic'],_curTab='ph';
+function _paintTabs(){var bs=document.querySelectorAll('#tabbar button');
+  for(var i=0;i<bs.length;i++)bs[i].classList.toggle('on',bs[i].dataset.tab===_curTab);}
+
 function show(id){
   if(!document.getElementById(id))return;
   var from=document.querySelector('.screen.active');
-  if(from&&(from.id==='phub-knowledge'||from.id==='phub-classic'))_hubReturn[id]=from.id;
+  if(from&&from.id!=='ph'&&TAB_ROOTS.indexOf(from.id)>=0)_hubReturn[id]=from.id;
   else if(from&&from.id!==id&&!_navApplying)delete _hubReturn[id];
   _applyScreen(id);
   if(_navApplying)return;
@@ -4270,6 +4299,12 @@ window.addEventListener('popstate',function(e){
   _navApplying=true; _applyScreen(_scrStack[i]); _navApplying=false;
 });
 try{history.replaceState({i:0},'');}catch(e){}
+document.addEventListener('click',function(e){
+  var b=e.target.closest&&e.target.closest('#tabbar [data-tab]');if(!b)return;
+  var id=b.dataset.tab;
+  if(document.querySelector('.screen.active').id===id){window.scrollTo({top:0,behavior:'smooth'});return;}
+  show(id);
+});
 function goHome(){var cur=document.querySelector('.screen.active'),hub=cur&&_hubReturn[cur.id];if(hub){delete _hubReturn[cur.id];show(hub);return;}show('ph')}
 const DAILY_QUOTES=[
   '不积跬步，无以至千里；不积小流，无以成江海。',
@@ -13776,5 +13811,14 @@ document.addEventListener('keydown',e=>{
 <!-- 返回五术堂首页 · portal -->
 <a href="https://nevergiveup0618.github.io/all-project/" id="wst-home-portal" aria-label="返回首页" title="返回首页" style="position:fixed;left:8px;top:50%;transform:translateY(-50%);z-index:2147483000;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;color:#f0d9a0;text-decoration:none;background:rgba(20,16,12,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(201,167,95,.5);border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.4);opacity:.6;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.6" ontouchstart="this.style.opacity=1">&#8962;</a>
 <script>/*wst-frame-guard*/if(window.top!==window.self){var _p=document.getElementById("wst-home-portal");if(_p)_p.remove();}</script>
+
+<!-- 底栏：纯文字五格。首页＝学习概览，其余四格是四条学习路径的根屏。 -->
+<nav class="tabbar" id="tabbar" aria-label="主导航">
+  <button type="button" data-tab="ph" class="on">首页</button>
+  <button type="button" data-tab="phub-train">练习</button>
+  <button type="button" data-tab="phub-pan">排盘</button>
+  <button type="button" data-tab="phub-knowledge">知识</button>
+  <button type="button" data-tab="phub-classic">经典</button>
+</nav>
 </body>
 </html>
