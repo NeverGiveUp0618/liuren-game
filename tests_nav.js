@@ -156,6 +156,29 @@ setTimeout(()=>{
      .filter(r=>!css.includes(r));
    return miss.length===0||'被删掉了：'+miss.join(' ')});
 
+ // ⚠️ 底栏已经分好类，栏目内就不该再折叠——五组一路铺开，别退回子 tab。
+ t('知识库五组全部可见，没有再被子 tab 藏起来',()=>{
+   if(d.getElementById('knowledge-tabs'))return '子 tab 又回来了';
+   const ps=[...d.querySelectorAll('#phub-knowledge .hub-panel')];
+   if(ps.length!==5)return '分组实为'+ps.length+'个';
+   const hidden=ps.filter(x=>!x.className.split(/\s+/).every(c=>c==='hub-panel'));
+   return hidden.length===0||'有组带了额外 class（多半是又加回 active 切换）';});
+ t('五个分组标题都在',()=>{
+   const g=[...d.querySelectorAll('#phub-knowledge .hub-grp')].map(x=>x.textContent);
+   return g.length===5||'实为'+g.length+'个：'+g.join('/')});
+ t('switchKnowledgeTab 只滚动、不再隐藏别的组',()=>{
+   const src=fs.readFileSync(P,'utf8');
+   const fn=src.slice(src.indexOf('function switchKnowledgeTab'),src.indexOf('function switchKnowledgeTab')+400);
+   return (/scrollIntoView/.test(fn)&&!/classList\.toggle/.test(fn))||'又改回切换隐藏了';});
+ t('练习与排盘也是一条一行',()=>{
+   const a=d.querySelectorAll('#phub-train .hub-item').length;
+   const b=d.querySelectorAll('#phub-pan .hub-item').length;
+   const m=d.querySelectorAll('#phub-train .mcard, #phub-pan .mcard').length;
+   return (a>=4&&b>=4&&m===0)||('练习'+a+'条 排盘'+b+'条 残留mcard'+m)});
+ t('搬家后唯一 ID 还在（训练页刷新用）',()=>
+   // ⚠️ 要 !! —— 直接 && 返回的是元素，t() 只认 true
+   !!(d.getElementById('train-home-sub')&&d.getElementById('hw-weak-tip'))||'丢了');
+
  t('点「练习」能切过去，且底栏跟着高亮',()=>{
    TABS.find(b=>b.dataset.tab==='phub-train').click();
    const on=d.querySelector('.screen.active').id;

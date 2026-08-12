@@ -198,15 +198,29 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 .nb-item{background:var(--bg2);border:1px solid var(--bd1);border-radius:11px;padding:10px 12px;margin:7px 0;font-size:12px;line-height:1.7}
 .yj-memory-intro{padding:11px 12px;margin:5px 0 9px;border-left:3px solid #B88A2B;background:#FFF8E8;border-radius:8px;color:#6B5040;font-size:12px;line-height:1.8}.yj-memory{border:1px solid var(--bd1);border-radius:11px;background:var(--bg2);margin:7px 0;overflow:hidden}.yj-memory summary{list-style:none;cursor:pointer;padding:11px 12px;color:#3D2010;font-size:13px;font-weight:bold;display:grid;grid-template-columns:25px 1fr auto;gap:7px;align-items:center}.yj-memory summary::-webkit-details-marker{display:none}.yj-memory summary i{font-style:normal;color:#B88A2B;font:11px sans-serif}.yj-memory summary em{font-style:normal;color:#9B8570;font-size:10px}.yj-memory[open] summary{background:#FFF8E8;border-bottom:1px solid #E7D19A}.yj-memory-body{padding:12px}.yj-memory-scene{font-size:12px;line-height:1.9;color:#5E4633}.yj-memory-chain{margin-top:8px;padding:8px 10px;background:#F0F7F4;border-left:3px solid #2E7D5A;border-radius:7px;color:#315D49;font-size:11px;line-height:1.75}.yj-memory-key{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}.yj-memory-key span{padding:5px 8px;background:#F1E9DE;border-radius:12px;color:#8B6914;font-size:10px}
 /* 聚合知识库 / 经典案例 */
-.hub-tabs{display:flex;gap:5px;overflow-x:auto;padding:3px 0 10px;-webkit-overflow-scrolling:touch}
-.hub-tab{flex:0 0 auto;padding:8px 11px;border:1px solid var(--bd1);border-radius:9px;background:var(--bg2);color:#6B5040;font-size:12px;cursor:pointer;white-space:nowrap}
-.hub-tab.active{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:bold}
-.hub-panel{display:none}.hub-panel.active{display:block}
+/* ⭐ 2026-08-12 四个栏目一律「一条一行」：底栏已经分好类，栏目里就别再折叠。
+   知识库原来 5 个子 tab 只显示 1 组，其余藏起来——内容本来就分薄了，再藏
+   就更空（用户：「别继续收起来了，内容太少不好看，每一个放出来做成横条状」）。
+   ⚠️ .hub-item-head 用 display:contents 让图标与文字块直接成为 .hub-item 的
+      网格项——这样不用改那 37 条的标记就能变横条。 */
+.hub-panel{display:block}
+.hub-grp{font-size:11px;font-weight:bold;color:var(--acc);letter-spacing:2px;
+  padding:14px 2px 2px;border-bottom:1px solid var(--bd1);margin-bottom:2px}
 .hub-intro{font-size:12px;line-height:1.8;color:#9B8570;padding:4px 2px 8px}
-.hub-item{background:var(--bg2);border:1px solid var(--bd1);border-radius:13px;padding:13px 14px;margin:8px 0}
-.hub-item-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}.hub-item-icon{font-size:22px;line-height:1}
-.hub-item-name{font-size:15px;font-weight:bold;color:#1C0A00}.hub-item-desc{font-size:11px;color:#9B8570;line-height:1.6;margin-top:3px}
-.hub-actions{display:flex;gap:7px}.hub-actions .btn{padding:9px 6px;font-size:12px}
+.hub-item{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:3px 10px;
+  background:var(--bg2);border:1px solid var(--bd1);border-radius:13px;padding:11px 13px;margin:7px 0}
+.hub-item-head{display:contents}
+.hub-item-icon{font-size:20px;line-height:1;text-align:center}
+.hub-item-name{font-size:14.5px;font-weight:bold;color:#1C0A00}
+.hub-item-desc{font-size:11px;color:#9B8570;line-height:1.55;margin-top:2px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hub-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.hub-actions .btn{width:auto;padding:8px 12px;font-size:12px;letter-spacing:0;white-space:nowrap}
+/* 窄屏：按钮掉到第二行，仍与文字左对齐，不钻到图标下面 */
+@media(max-width:389px){
+  .hub-item{grid-template-columns:30px 1fr}
+  .hub-actions{grid-column:2;justify-content:flex-start;margin-top:5px}
+}
 /* 毕法赋·十二断案入门 */
 .bf-learn-hero{position:relative;overflow:hidden;background:#FFFCF7;color:#6B5040;border:1px solid var(--bd1);border-radius:18px;padding:19px 18px 17px;margin-bottom:14px;box-shadow:0 10px 24px rgba(61,32,16,.08),0 1px 3px rgba(61,32,16,.06);outline:1px solid rgba(255,255,255,.9);outline-offset:-4px}.bf-learn-hero::before{content:"";position:absolute;left:18px;right:18px;top:0;height:3px;background:var(--acc);border-radius:0 0 3px 3px}.bf-learn-hero::after{content:"毕";position:absolute;right:17px;top:16px;width:31px;height:31px;display:grid;place-items:center;border:1px solid var(--acc-t50);border-radius:5px;color:var(--acc);opacity:.42;font-family:STKaiti,KaiTi,serif;font-size:18px;font-weight:bold;transform:rotate(3deg)}.bf-learn-hero>small:first-child{display:inline-block;color:#8B6914;border-bottom:1px solid #D8C28F;padding:0 0 3px;font-weight:bold;letter-spacing:1px}.bf-learn-hero small{display:block;color:#8D7966;font-size:11px;line-height:1.75;padding-right:38px}.bf-learn-title{font-family:STKaiti,KaiTi,'Microsoft YaHei',sans-serif;font-size:21px;font-weight:bold;color:#3D2010;margin:10px 38px 7px 0;letter-spacing:.8px}.bf-learn-progress{height:5px;background:#EEE7DC;border-radius:5px;overflow:hidden;margin:13px 0 6px}.bf-learn-progress i{display:block;height:100%;background:var(--acc);border-radius:5px}.bf-learn-hero .btn-r{box-shadow:0 4px 10px var(--acc-t20);border:1px solid var(--acc-dk)}
 .bf-case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0 14px}.bf-case-card{border:1px solid var(--bd1);background:var(--bg3);border-radius:12px;padding:11px;text-align:left;color:#4A3520;cursor:pointer;min-height:86px}.bf-case-card.done{border-color:#B88A2B;background:#FFF8E8}.bf-case-card b{display:block;font-size:13px;line-height:1.5}.bf-case-card small{display:block;color:#9B8570;font-size:10px;line-height:1.5;margin-top:4px}.bf-case-card em{font-style:normal;font-size:10px;color:#B88A2B}
@@ -595,54 +609,36 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 <!-- ======== 综合训练（底栏「练」）======== -->
 <div id="phub-train" class="screen">
   <div class="tbar"><div class="tbtitle">综合训练</div></div>
-  <div class="mcard" style="border-color:var(--acc)">
-    <div class="mcard-head"><div class="mcard-icon">🏆</div><div><div class="mcard-name">综合训练</div><div class="mcard-desc" id="train-home-sub">今日挑战 · 自选专题 · 错题复习 · 自适应加强</div></div></div>
-    <div class="mcard-btns">
-      <button class="btn btn-r" onclick="openTrainSetup('daily')">今日挑战</button>
-      <button class="btn btn-d" onclick="openTrainSetup('free')">自由训练</button>
-    </div>
-    <div class="mcard-btns" style="margin-top:6px">
-      <button class="btn btn-d" onclick="openTrainNotebook()">📚 错题本</button>
-      <button class="btn btn-d" onclick="openTrainReport()">📊 掌握度</button>
-    </div>
-    <div id="hw-weak-tip" class="hw-weak" style="display:none;margin-top:8px" onclick="show('pfx')"></div>
-  </div>
+  <div class="hub-intro" id="train-home-sub">今日挑战 · 自选专题 · 错题复习 · 自适应加强</div>
+  <div id="hw-weak-tip" class="hw-weak" style="display:none;margin-bottom:8px" onclick="show('pfx')"></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🏆</div><div><div class="hub-item-name">今日挑战</div><div class="hub-item-desc">按今天的进度自动组卷</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openTrainSetup('daily')">开始</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎯</div><div><div class="hub-item-name">自由训练</div><div class="hub-item-desc">自选专题与题量，练哪块由你定</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="openTrainSetup('free')">选题</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📚</div><div><div class="hub-item-name">错题本</div><div class="hub-item-desc">答错的自动收进来，可整本重练</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="openTrainNotebook()">打开</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📊</div><div><div class="hub-item-name">掌握度</div><div class="hub-item-desc">各专题正确率，薄弱的排在前面</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="openTrainReport()">查看</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🩹</div><div><div class="hub-item-name">薄弱点复习中心</div><div class="hub-item-desc">把练错最多的知识点集中重来一遍</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pfx')">进入</button></div></div>
 </div>
 
 <!-- ======== 排盘与推演（底栏「盘」）======== -->
 <div id="phub-pan" class="screen">
   <div class="tbar"><div class="tbtitle">排盘与推演</div></div>
-  <div class="mcard">
-    <div class="mcard-head"><div class="mcard-icon">⚙️</div><div><div class="mcard-name">排盘与推演</div><div class="mcard-desc">起课步骤 · 排盘实操 · 流程互动 · 完整三传</div></div></div>
-    <div class="mcard-btns">
-      <button class="btn btn-d" onclick="startKC()">🔮 起课步骤</button>
-      <button class="btn btn-d" onclick="startKCBoard()">🗺 起课排盘</button>
-    </div>
-    <div class="mcard-btns" style="margin-top:6px">
-      <button class="btn btn-d" onclick="startZL()">🧩 流程互动</button>
-      <button class="btn btn-d" onclick="startSC()">🔗 三传推演</button>
-    </div>
-    <div class="mcard-btns" style="margin-top:6px">
-      <button class="btn btn-r" onclick="show('pqi')">🧮 自选起课 · 全盘与断案</button>
-    </div>
-  </div>
+  <div class="hub-intro">起课步骤 · 排盘实操 · 流程互动 · 完整三传</div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧮</div><div><div class="hub-item-name">自选起课 · 全盘与断案</div><div class="hub-item-desc">输日干支与时辰，出完整课盘、成格与八煞九宝检测</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pqi')">起课</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔮</div><div><div class="hub-item-name">起课步骤</div><div class="hub-item-desc">跟着一步步走完排盘全过程</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="startKC()">练习</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🗺</div><div><div class="hub-item-name">起课排盘</div><div class="hub-item-desc">在盘面上直接摆天地盘与四课</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="startKCBoard()">进入</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧩</div><div><div class="hub-item-name">流程互动</div><div class="hub-item-desc">分支选择式走一遍判断流程</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="startZL()">开始</button></div></div>
+  <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔗</div><div><div class="hub-item-name">三传推演</div><div class="hub-item-desc">按九宗门逐步推出初中末传</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="startSC()">推演</button></div></div>
 </div>
 
 <!-- ======== 聚合知识库 ======== -->
 <div id="phub-knowledge" class="screen">
   <div class="tbar"><div class="tbtitle">知识库</div></div>
-  <div class="hub-tabs" id="knowledge-tabs">
-    <button class="hub-tab active" data-hub="intro" onclick="switchKnowledgeTab('intro')">入门</button>
-    <button class="hub-tab" data-hub="start" onclick="switchKnowledgeTab('start')">起课</button>
-    <button class="hub-tab" data-hub="trans" onclick="switchKnowledgeTab('trans')">四课三传</button>
-    <button class="hub-tab" data-hub="gods" onclick="switchKnowledgeTab('gods')">神将神煞</button>
-    <button class="hub-tab" data-hub="judge" onclick="switchKnowledgeTab('judge')">断法</button>
-  </div>
-  <div id="kh-intro" class="hub-panel active">
+  <div class="hub-grp">一 · 入门</div>
+  <div id="kh-intro" class="hub-panel">
     <div class="hub-intro">从整体原理和学习路线入手，先建立六壬的完整框架。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">💡</div><div><div class="hub-item-name">六壬运作原理·白话入门</div><div class="hub-item-desc">用六层结构理解月将、天地盘、四课三传与判断流程</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openPbdl()">开始阅读</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">📜</div><div><div class="hub-item-name">壬学心法</div><div class="hub-item-desc">学习次序、取象原则和实战总纲</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p-xf')">查看心法</button><button class="btn btn-d" onclick="show('p5')">完整十章速查</button></div></div>
   </div>
+  <div class="hub-grp">二 · 起课</div>
   <div id="kh-start" class="hub-panel">
     <div class="hub-intro">集中掌握月将、贵人、寄宫、遁干与天地盘的起课规则。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧾</div><div><div class="hub-item-name">课式八要素</div><div class="hub-item-desc">太岁·月建·日辰·占时·月将·空亡·本命·行年：排盘前先列出来的八项，及各自的断法应用条</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pbys')">查看详解</button></div></div>
@@ -650,11 +646,13 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧠</div><div><div class="hub-item-name">十二月将逻辑记忆宫</div><div class="hub-item-desc">12组节气、地支、月将画面串联，展开一条学一条</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="openYjMemory()">打开记忆宫</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🀄</div><div><div class="hub-item-name">起课口诀闪卡</div><div class="hub-item-desc">月将、贵人、遁干等基础规则的翻卡记忆</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pkj-sel')">进入闪卡</button></div></div>
   </div>
+  <div class="hub-grp">三 · 四课三传</div>
   <div id="kh-trans" class="hub-panel">
     <div class="hub-intro">理解四课的主客结构，并按九宗门算法推出三传。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🧭</div><div><div class="hub-item-name">九宗门完整体系</div><div class="hub-item-desc">课名由来、判断条件、发用规则和逐步推导集中在同一页</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('p9z')">逐门详解 · 含课名由来</button><button class="btn btn-d" onclick="show('pzfl')">流程图</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🔬</div><div><div class="hub-item-name">算法逻辑梳理·进阶</div><div class="hub-item-desc">从边界测试、九宗门到应期的五阶段完整拆解</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pllj')">阅读进阶</button><button class="btn btn-r" onclick="openTrainTopic('zm','sc')">宗门三传训练</button></div></div>
   </div>
+  <div class="hub-grp">四 · 神将神煞</div>
   <div id="kh-gods" class="hub-panel">
     <div class="hub-intro">学习十二天将、十二支神、六亲神煞及其组合类象。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🌟</div><div><div class="hub-item-name">天将与支神</div><div class="hub-item-desc">名称、五行、吉凶属性与核心类象</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('p5')">查看资料</button><button class="btn btn-r" onclick="openTrainTopic('tj','zs')">专题训练</button></div></div>
@@ -662,6 +660,7 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">⚖️</div><div><div class="hub-item-name">八煞九宝</div><div class="hub-item-desc">刑冲破害墓鬼败空 · 德合奇仪禄马生旺贵：生克关系的主体核心，含四德/三奇/驿马丁神等全部查表</div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="show('pbjb')">查看详解</button><button class="btn btn-d" onclick="show('pqi')">真盘检测</button></div></div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🀄</div><div><div class="hub-item-name">神将神煞闪卡</div><div class="hub-item-desc">天将、支神、空亡和常用神煞集中背诵</div></div></div><div class="hub-actions"><button class="btn btn-d" onclick="show('pkj-sel')">进入闪卡</button></div></div>
   </div>
+  <div class="hub-grp">五 · 断法</div>
   <div id="kh-judge" class="hub-panel">
     <div class="hub-intro">从旺衰、生克、干支关系进入类神取用和吉凶判断。</div>
     <div class="hub-item"><div class="hub-item-head"><div class="hub-item-icon">🎓</div><div><div class="hub-item-name">断案入门 · 案例精讲（入门课）</div><div class="hub-item-desc">跟着真实课例一步步学"怎么读案例"，用到哪个知识点就讲哪个（零基础从这里开始）<br><span style="color:#9B8570">学完想按占类查全 → 去「经典与案例 · 案例库」</span></div></div></div><div class="hub-actions"><button class="btn btn-r" onclick="_caseSrc='intro';drMenu()">进入学习 →</button></div></div>
@@ -13589,9 +13588,11 @@ function _wsdEnd(){
 // ══ 主题切换 ══
 // ══ 聚合知识库 ══
 function openKnowledgeHub(tab){switchKnowledgeTab(tab||'intro');show('phub-knowledge')}
+// 知识库五组现在一路铺开、不再互相隐藏；这个函数只负责滚到指定组。
+// ⚠️ 保留函数名与签名：backYjMemory()、openKnowledgeHub() 都在调它。
 function switchKnowledgeTab(tab){
-  document.querySelectorAll('#knowledge-tabs .hub-tab').forEach(b=>b.classList.toggle('active',b.dataset.hub===tab));
-  document.querySelectorAll('#phub-knowledge .hub-panel').forEach(p=>p.classList.toggle('active',p.id===`kh-${tab}`));
+  var el=document.getElementById('kh-'+(tab||'intro'));
+  if(el)requestAnimationFrame(function(){el.scrollIntoView({block:'start',behavior:'smooth'})});
 }
 function openTrainTopic(...cats){trainCfg.cats=new Set(cats);trainCfg.count=10;openTrainSetup('free')}
 
