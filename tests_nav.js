@@ -128,11 +128,24 @@ setTimeout(()=>{
  t('排盘与推演卡已搬进 phub-pan',()=>{
    const h=d.getElementById('phub-pan').textContent;
    return (h.includes('起课步骤')&&h.includes('三传推演')&&h.includes('自选起课'))||'内容没搬全'});
- t('首页不再重复这四条路径的入口卡',()=>{
-   // ⚠️ 只能看真按钮：「开发时间节点」那段历史文字里也有「起课步骤」等字样，
-   //    拿 textContent 去匹配会误判。
-   const btns=[...d.querySelectorAll('#ph .mcard button, #ph .mcard')].map(x=>x.textContent);
-   return btns.length===0||'首页还留着 '+btns.length+' 个入口卡'});
+ // ⚠️ 2026-08-12 回归守卫：加底栏那版把四张卡整个搬走、首页只剩统计和更新
+ //    日志，用户反馈「打开啥也没有」。首页必须留得住能干活的入口。
+ t('首页有「今日挑战」主操作',()=>{
+   const b=[...d.querySelectorAll('#ph .htoday button')].map(x=>x.textContent.trim());
+   return b.includes('今日挑战')||'实为：'+b.join('/')});
+ t('首页四个快捷入口都指向真实根屏',()=>{
+   const q=[...d.querySelectorAll('#ph .hquick button')];
+   if(q.length!==4)return '实为'+q.length+'个';
+   const bad=q.map(x=>(x.getAttribute('onclick')||'').match(/show\('([^']+)'\)/))
+     .map(m=>m&&m[1]).filter(id=>!id||!d.getElementById(id));
+   return bad.length===0||'指向不存在的屏：'+bad.join(',')});
+ t('首页不重复那四张大卡（ID 会串）',()=>{
+   const n=d.querySelectorAll('#ph .mcard').length;
+   return n===0||'首页又有 '+n+' 张 mcard 了'});
+ t('唯一 ID 没被复制',()=>{
+   const dup=['train-home-sub','hw-weak-tip'].filter(id=>d.querySelectorAll('#'+id).length>1);
+   return dup.length===0||'重复：'+dup.join(',')});
+
  t('点「练习」能切过去，且底栏跟着高亮',()=>{
    TABS.find(b=>b.dataset.tab==='phub-train').click();
    const on=d.querySelector('.screen.active').id;
