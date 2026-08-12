@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>六壬神课日学</title>
 <style>
-:root{--tabh:54px;--acc:#8878C0;--acc-dk:#7060B0;--acc-dkk:#5A4890;--acc-tB0:#8878C0B0;--acc-t80:#8878C080;--acc-t50:#8878C050;--acc-t40:#8878C040;--acc-t20:#8878C020;--bg1:#F3F0F9;--bg2:#EAE5F5;--bg3:#F5F2FC;--bg-hov:#DDD8F0;--bd1:#CEC7E8;--bd2:#DED8F4;--bd3:#C0B8E0}
+:root{--tabh:60px;--acc:#8878C0;--acc-dk:#7060B0;--acc-dkk:#5A4890;--acc-tB0:#8878C0B0;--acc-t80:#8878C080;--acc-t50:#8878C050;--acc-t40:#8878C040;--acc-t20:#8878C020;--bg1:#F3F0F9;--bg2:#EAE5F5;--bg3:#F5F2FC;--bg-hov:#DDD8F0;--bd1:#CEC7E8;--bd2:#DED8F4;--bd3:#C0B8E0}
 body.theme-red{--acc:#C41230;--acc-dk:#A30F28;--acc-dkk:#8B0020;--acc-tB0:#C41230B0;--acc-t80:#C4123080;--acc-t50:#C4123050;--acc-t40:#C4123040;--acc-t20:#C4123020;--bg1:#F5F0E6;--bg2:#EDE7D8;--bg3:#FDF8F2;--bg-hov:#E0D9C8;--bd1:#D4C4A0;--bd2:#E8D5B0;--bd3:#C4B49A}
 .theme-tog{background:none;border:1px solid var(--bd1);border-radius:12px;padding:3px 11px;font-size:11px;color:#9B8570;cursor:pointer;transition:all .15s;letter-spacing:1px}
 .theme-tog:hover{background:var(--bg2)}
@@ -22,23 +22,23 @@ body{font-family:'Microsoft YaHei','微软雅黑','PingFang SC',sans-serif;backg
 @media(min-width:600px){body{background:var(--bg2);padding:20px 0}.app{border-radius:24px;overflow:hidden;box-shadow:0 8px 60px rgba(0,0,0,.15)}.screen{min-height:0!important}}
 .screen{display:none;flex-direction:column;padding:14px 14px calc(var(--tabh) + 26px);min-height:100vh}
 /* ⭐ 2026-08-12 底栏：首页原本把四条学习路径一路铺在一屏，改成五个根屏。
-   纯文字，不用图标——与命理精讲同一路子。
-   ⚠️ letter-spacing 会在末字后面也留一份空，纯居中整体偏左，
-      用 padding-left 补回来，否则五个词看着都没对齐。 */
+   样式效仿象义随身的 .bottom-nav：单字装在 30×30 圆角块里，
+   选中时块填主题色、字转白，块下面压一行小标签。
+   ⚠️ 别给 button 加 letter-spacing——字装进定宽方块后字距会把字顶偏。 */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:200;display:grid;grid-template-columns:repeat(5,1fr);
   width:100%;max-width:480px;margin:0 auto;height:var(--tabh);
   padding-bottom:env(safe-area-inset-bottom);
   background:color-mix(in srgb,var(--bg1) 94%, transparent);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--bd1)}
-.tabbar button{position:relative;border:0;background:none;cursor:pointer;
-  display:grid;place-items:center;padding-left:.24em;
-  font-family:STKaiti,KaiTi,'Songti SC',serif;
-  font-size:15px;letter-spacing:.24em;color:#9B8570;transition:color .18s}
-.tabbar button + button::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
-  width:1px;height:15px;background:var(--bd1)}
-.tabbar button.on{color:var(--acc);font-weight:bold}
-.tabbar button.on::after{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  width:24px;height:2px;background:var(--acc)}
+.tabbar button{border:0;background:none;cursor:pointer;color:#9B8570;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  transition:color .18s}
+.tabbar button b{width:30px;height:30px;line-height:30px;border-radius:9px;
+  font-family:STKaiti,KaiTi,'Kaiti SC','Songti SC',serif;font-size:19px;font-weight:500;
+  transition:background .18s,color .18s}
+.tabbar button span{font-size:11px;letter-spacing:.5px}
+.tabbar button.on{color:var(--acc)}
+.tabbar button.on b{background:var(--acc);color:#fff}
 @media(min-width:900px){.tabbar{max-width:none}}
 .screen.active{display:flex}
 .tbar{display:flex;align-items:center;padding:4px 0 10px;gap:8px;flex-shrink:0}
@@ -13812,13 +13812,13 @@ document.addEventListener('keydown',e=>{
 <a href="https://nevergiveup0618.github.io/all-project/" id="wst-home-portal" aria-label="返回首页" title="返回首页" style="position:fixed;left:8px;top:50%;transform:translateY(-50%);z-index:2147483000;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;color:#f0d9a0;text-decoration:none;background:rgba(20,16,12,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(201,167,95,.5);border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.4);opacity:.6;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.6" ontouchstart="this.style.opacity=1">&#8962;</a>
 <script>/*wst-frame-guard*/if(window.top!==window.self){var _p=document.getElementById("wst-home-portal");if(_p)_p.remove();}</script>
 
-<!-- 底栏：纯文字五格。首页＝学习概览，其余四格是四条学习路径的根屏。 -->
+<!-- 底栏：色块＋字（象义随身那种）。首页＝学习概览，其余四格是四条学习路径的根屏。 -->
 <nav class="tabbar" id="tabbar" aria-label="主导航">
-  <button type="button" data-tab="ph" class="on">首页</button>
-  <button type="button" data-tab="phub-train">练习</button>
-  <button type="button" data-tab="phub-pan">排盘</button>
-  <button type="button" data-tab="phub-knowledge">知识</button>
-  <button type="button" data-tab="phub-classic">经典</button>
+  <button type="button" data-tab="ph" class="on"><b>壬</b><span>首页</span></button>
+  <button type="button" data-tab="phub-train"><b>练</b><span>练习</span></button>
+  <button type="button" data-tab="phub-pan"><b>盘</b><span>排盘</span></button>
+  <button type="button" data-tab="phub-knowledge"><b>学</b><span>知识</span></button>
+  <button type="button" data-tab="phub-classic"><b>典</b><span>经典</span></button>
 </nav>
 </body>
 </html>
