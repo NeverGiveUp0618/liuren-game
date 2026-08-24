@@ -6134,7 +6134,11 @@ function fxInit(){
   document.getElementById('pfx-body').innerHTML=html;
 }
 
-function _renderBoard(targetEl){
+// hideMt：题面用。⚠️「本盘成格」标签当初防住了，却漏了这条**发传法**——
+//    它印的 kcState.mt 就是「涉害课→取首克上神」，正解是九宗门课体时等于把答案
+//    印在题面上。实测 3000 题剧透 421 题（14%），tests_k64 的「不剧透」断言偶发失败
+//    追到的就是这里。
+function _renderBoard(targetEl,hideMt){
   const{rg,rz,ri,yj,zs,day,tp,sk,cc,zc,mc,gr,xi}=kcState;
   const grIdx=ZHI_ALL.indexOf(gr);
   const grEi=tp.indexOf(gr);
@@ -6184,7 +6188,8 @@ function _renderBoard(targetEl){
     <tr>${skR.map(k=>`<td style="font-size:13px;color:#1C0A00">${k.x}</td>`).join('')}</tr>
   </table>`;
   if(targetEl){
-    targetEl.innerHTML=`<div class="z9-ex-hd">${rg}${rz}日 · ${yj.yj}将（${yj.zq}）· ${zs}时</div><div class="z9-ex-mt">${kcState.mt}</div>`+lpH+skH+scH;
+    targetEl.innerHTML=`<div class="z9-ex-hd">${rg}${rz}日 · ${yj.yj}将（${yj.zq}）· ${zs}时</div>`
+      +(hideMt?'':`<div class="z9-ex-mt">${kcState.mt}</div>`)+lpH+skH+scH;
   }else{
     document.getElementById('pkb-title').textContent=`${rg}${rz}日 · ${yj.yj}将 · ${zs}时`;
     document.getElementById('pkb-mt').textContent=`发传法：${kcState.mt}`;
@@ -6493,7 +6498,7 @@ function k64QuizNew(){
     <div style="font-size:12.5px;color:#4A3520;margin:8px 0 4px"><b>${_k64q.st.rg}${_k64q.st.rz}日 · ${_k64q.st.yj}将 · ${_k64q.st.zs}时</b>（${_k64q.st.day?'昼':'夜'}占）　三传 <b>${_k64q.st.cc}→${_k64q.st.zc}→${_k64q.st.mc}</b></div>
     <div id="k64-opts" style="display:grid;gap:6px;margin-top:8px">${opts.map(o=>`<button class="btn btn-d" style="text-align:left;font-size:13px;padding:9px 12px" onclick="k64QuizAns('${o}',this)">${o}</button>`).join('')}</div>
     <div id="k64-fb" style="margin-top:8px"></div>`;
-  _renderBoard(q.querySelector('.k64-quiz-board'));
+  _renderBoard(q.querySelector('.k64-quiz-board'), true);   // ⚠️ 题面必须藏发传法
 }
 function k64QuizAns(pick,btn){
   if(!_k64q)return;
