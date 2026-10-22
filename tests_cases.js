@@ -8,7 +8,7 @@
      ③ 三传的中末传是不是初传的天盘递取（伏吟/返吟/昴星等特殊课式除外，会跳过）
    ⚠️ 不验断语对错——那是学理，脚本管不了，只管盘面自洽。 */
 const fs = require('fs'), vm = require('vm'), path = require('path');
-const h = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+const h = fs.readFileSync(path.join(__dirname, 'legacy.html'), 'utf8');
 function grab(n) {
   const i = h.indexOf('const ' + n + '=');
   if (i < 0) throw new Error('找不到 ' + n);
